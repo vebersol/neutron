@@ -1,2 +1,2 @@
 # democritus
-An atomic design based system
+An atomic design based system!
