@@ -19,6 +19,7 @@
   "dependencies": {
     "fs-extra": "^0.30.0",
     "handlebars": "^4.0.5",
+    "mkdirp": "^0.5.1",
     "rimraf": "^2.5.2"
   }
 }
