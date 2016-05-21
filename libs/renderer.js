@@ -7,8 +7,10 @@ var mkdirp = require('mkdirp');
 
 var democritusRenderer = function (settings) {
 	var patternsData = {};
+	var layouts = {};
 
 	var init = function () {
+		getLayouts();
 		cleanPaths(function () {
 			getPatterns();
 		});
@@ -19,7 +21,9 @@ var democritusRenderer = function (settings) {
 			allowedPatterns: ['atoms', 'molecules'],
 			fileExtension: '.handlebars',
 			encode: 'utf8',
-			publicPatternsPath: rootPath + '/public/patterns'
+			publicPatternsPath: rootPath + '/public/patterns',
+			layoutsDir: rootPath + '/src/layouts',
+			defaultLayoutName: 'application'
 		};
 		
 		return util._extend(defaultSettings, settings);
@@ -41,7 +45,8 @@ var democritusRenderer = function (settings) {
 									var newData = getPartialsData(source, data ? data : {});
 									var partialName = getPartialName(file.path);
 									var registerPartial = setPartial(partialName, source);
-									var template = handlebars.compile(source);
+									var layout = addLayout(source, newData.layout);
+									var template = handlebars.compile(layout);
 									var result = getHtml(template, newData);
 
 									var object = {
@@ -162,8 +167,31 @@ var democritusRenderer = function (settings) {
 		return partialNames;
 	}
 
+	var getLayouts = function (source, layout) {
+		var layoutName = layout ? layout : settings.defaultLayoutName;
+
+		fse.walk(settings.layoutsDir)
+			.on('data', function(file) {
+				if (path.extname(file.path) === settings.fileExtension) {
+					fse.readFile(file.path, settings.encode, function(err, layoutSource) {
+						layouts[layoutName] = layoutSource;
+					});
+				}
+			});
+
+			return true;
+	}
+
+	var addLayout = function (source, layout) {
+		var layoutName = layout ? layout : 'application';
+		var layout = layouts[layoutName];
+
+		return layout.replace('{{> yield }}', source);
+	}
+
 	var rootPath = getRootPath();
 	var settings = getSettings(settings);
+	var layoutCache = {};
 
 	init();
 }
