@@ -6,6 +6,8 @@ var rimraf = require('rimraf');
 var mkdirp = require('mkdirp');
 
 var democritusRenderer = function (settings) {
+	var patternsData = {};
+
 	var init = function () {
 		cleanPaths(function () {
 			getPatterns();
@@ -13,7 +15,7 @@ var democritusRenderer = function (settings) {
 	};
 	var getSettings = function (settings) {
 		var defaultSettings = {
-			patternsDir: './src/patterns',
+			patternsDir: rootPath + '/src/patterns',
 			allowedPatterns: ['atoms', 'molecules'],
 			fileExtension: '.handlebars',
 			encode: 'utf8',
@@ -36,13 +38,14 @@ var democritusRenderer = function (settings) {
 						getData(file.path, function (data) {
 							fse.readFile(file.path, settings.encode, function(err, source) {
 								if (source) {
-									var helperName = getHelperName(file);
-									var registerHelper = setHelper(helperName, source);
+									var newData = getPartialsData(source, data ? data : {});
+									var partialName = getPartialName(file.path);
+									var registerPartial = setPartial(partialName, source);
 									var template = handlebars.compile(source);
-									var result = getHtml(template, data);
+									var result = getHtml(template, newData);
 
 									var object = {
-										helperName: helperName,
+										partialName: partialName,
 										html: result
 									};
 
@@ -68,18 +71,21 @@ var democritusRenderer = function (settings) {
 			if (!err) {
 				delete require.cache[require.resolve(jsonFile)];
 				jsonData = require(jsonFile);
+				patternsData[getPartialName(fileName)] = jsonData;
 			}
 
-			callback(jsonData);
+			if (callback) {
+				callback(jsonData);
+			}
 		});
 	}
 
 	var renderFile = function (fileInfo, file) {
-		var filePath = rootPath + '/public/patterns/' + fileInfo.helperName + '.html';
+		var filePath = rootPath + '/public/patterns/' + fileInfo.partialName + '.html';
 		fileArr = filePath.split('/');
 		fileName = fileArr[fileArr.length - 1];
 		fileArr.pop();
-		path = fileArr.join('/');
+		var path = fileArr.join('/');
 
 		mkdirp(path, function (err) {
 			fse.open(filePath, 'w', function(err, fd) {
@@ -92,12 +98,12 @@ var democritusRenderer = function (settings) {
 		});
 	}
 
-	var getHelperName = function (file) {
-		return file.path.replace(rootPath + '/src/patterns/', '')
+	var getPartialName = function (filePath) {
+		return filePath.replace(rootPath + '/src/patterns/', '')
 			.replace(settings.fileExtension, '');
 	}
 
-	var setHelper = function (name, source) {
+	var setPartial = function (name, source) {
 		handlebars.registerPartial(name, source);
 	}
 
@@ -122,6 +128,38 @@ var democritusRenderer = function (settings) {
 				callback();
 			});
 		});
+	}
+
+	var getPartialsData = function (source, data) {
+		var regex = /{{>(.*?)}}/g,
+			match = source.match(regex),
+			newData = data;
+
+		var partialNames = getPartialsNames(match);
+		var totalPartials = partialNames.length;
+
+		for (var i = 0; i < totalPartials; i++) {
+			if (patternsData.hasOwnProperty(partialNames[i])) {
+				newData = Object.assign(patternsData[partialNames[i]], newData);
+			}
+		}
+
+		return newData;
+	}
+
+	var getPartialsNames = function (match) {
+		var partialNames = [];
+
+		if (match) {
+			match.forEach(function (k, v) {
+				var cleanString = k.replace('{{>', '').replace('}}').trim();
+				var partialName = cleanString.split(' ')[0];
+
+				partialNames.push(partialName);
+			});
+		}
+
+		return partialNames;
 	}
 
 	var rootPath = getRootPath();
