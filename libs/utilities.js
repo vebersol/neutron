@@ -2,25 +2,26 @@ var path = require('path');
 var util = require('util');
 var userSettings = require('../democritus.json');
 
-var log = function (message, type) {
-	var types = {
-			error: '\x1b[41m',
-			success: '\x1b[42m'
-		},
-		reset = '\x1b[0m',
-		color = reset;
+module.exports = {
+	log: function (message, type) {
+		var types = {
+				error: '\x1b[41m',
+				success: '\x1b[42m'
+			},
+			reset = '\x1b[0m',
+			color = reset;
 
-	if (type) {
-		color = types[type];
+		if (type) {
+			color = types[type];
+		}
+
+		console.log(color, message, reset);
 	}
-
-	console.log(color, message, reset);
 }
 
-module.exports.log = log;
 
 var getRootPath = function () {
-	var rootPath = path.dirname(require.main.filename).replace('/libs', '');
+	var rootPath = path.dirname(require.main.filename).replace(path.sep + 'libs', '');
 	return rootPath;
 }
 
@@ -44,6 +45,7 @@ var getSettings = function (settings) {
 	Object.keys(settings).forEach(function (k) {
 		if (typeof(settings[k]) === 'string') {
 			settings[k] = settings[k].replace('#{rootPath}', rootPath);
+				//.replace(/\//g, path.sep);
 		}
 	});
 
