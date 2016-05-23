@@ -18,29 +18,29 @@ var democritus = function () {
 	};
 
 	this.getPatterns = function () {
-		fse.walk(u.settings.patternsDir)
-			.on('data', function(file) {
-				if (path.extname(file.path) === u.settings.fileExtension) {
-					try {
-						_self.getData(file.path, function (data) {
-							fse.readFile(file.path, u.settings.encode, function(err, source) {
-								if (source) {
-									_self.handlePattern({
-										file: file,
-										source: source,
-										data: data
-									});
-								}
+		return fse.walk(u.settings.patternsDir)
+			.on('data', _self.openPattern)
+			.on('end', _self.walkEnded);
+	}
+
+	this.openPattern = function (file) {
+		if (path.extname(file.path) === u.settings.fileExtension) {
+			try {
+				_self.getData(file.path, function (data) {
+					fse.readFile(file.path, u.settings.encode, function(err, source) {
+						if (source) {
+							_self.handlePattern({
+								file: file,
+								source: source,
+								data: data
 							});
-						});
-					} catch (e) {
-						u.log(e, 'error');
-					}
-				}
-			})
-			.on('end', function () {
-				u.log('Files rendered', 'success');
-			});
+						}
+					});
+				});
+			} catch (e) {
+				u.log(e, 'error');
+			}
+		}
 	}
 
 	this.handlePattern = function (pattern) {
@@ -65,6 +65,10 @@ var democritus = function () {
 		};
 
 		_self.renderFile(output);
+	}
+
+	this.walkEnded = function () {
+		u.log('Files rendered', 'success');
 	}
 
 	this.buildDemocritusCodes = function (options) {

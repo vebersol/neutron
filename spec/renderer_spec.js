@@ -1,6 +1,9 @@
+var path = require('path');
+
 describe("Renderer", function() {
 	var renderer,
-		app;
+		app,
+		rootPath;
 	beforeEach(function() {
 		renderer = require('../libs/renderer.js');
 		app = renderer.democritus;
@@ -22,5 +25,17 @@ describe("Renderer", function() {
 		app.init();
 		expect(app.cleanPaths).toHaveBeenCalled();
 		expect(app.getPatterns).toHaveBeenCalled();
+	});
+
+	it("should get patterns and respective data", function() {
+		var patterns = app.getPatterns();
+
+		expect(patterns).not.toBeNull();
+		
+		var mock = {
+			path: __dirname + '/mocks/src/patterns/atoms/text/paragraph.handlebars'
+		}
+
+		app.openPattern(mock);
 	});
 });
