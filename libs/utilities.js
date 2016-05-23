@@ -34,7 +34,8 @@ var getSettings = function (settings) {
 		encode: 'utf8',
 		publicPatternsPath: '#{rootPath}/public/patterns',
 		layoutsDir: '#{rootPath}/src/layouts',
-		defaultLayoutName: 'application'
+		defaultLayoutName: 'application',
+		webPath: './'
 	};
 	
 	var settings = util._extend(defaultSettings, settings);
@@ -50,3 +51,10 @@ var getSettings = function (settings) {
 }
 
 module.exports.settings = getSettings(userSettings);
+
+Array.prototype.removeDuplicates = function () {
+	var a = this;
+	return a.filter(function(item, pos) {
+		return a.indexOf(item) == pos;
+	});
+}

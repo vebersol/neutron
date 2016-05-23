@@ -5,5 +5,6 @@
 	"encode": "utf8",
 	"publicPatternsPath": "#{rootPath}/public/patterns",
 	"layoutsDir": "#{rootPath}/src/layouts",
-	"defaultLayoutName": "application"
+	"defaultLayoutName": "application",
+	"webPath": "./"
 }

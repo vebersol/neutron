@@ -25,10 +25,18 @@ var democritus = function () {
 						getData(file.path, function (data) {
 							fse.readFile(file.path, u.settings.encode, function(err, source) {
 								if (source) {
-									var newData = getPartialsData(source, data ? data : {});
+									var partialData = getPartialsData(source, data ? data : {});
+									var newData = partialData.data;
+									var partialsList = partialData.partials;
 									var partialName = getPartialName(file.path);
 									var registerPartial = setPartial(partialName, source);
 									var layout = addLayout(source, newData.layout);
+
+									newData.democritusData = buildDemocritusCodes({
+										html: layout,
+										partials: partialsList
+									});
+									
 									var template = handlebars.compile(layout);
 									var result = getHtml(template, newData);
 
@@ -36,7 +44,7 @@ var democritus = function () {
 										partialName: partialName,
 										html: result
 									};
-
+									
 									renderFile(object);
 								}
 							});
@@ -49,6 +57,18 @@ var democritus = function () {
 			.on('end', function () {
 				u.log('Files rendered', 'success');
 			});
+	}
+
+	var buildDemocritusCodes = function (options) {
+		var dependencies = [];
+		options.partials.forEach(function (k, i) {
+			dependencies.push({
+				partial: k,
+				path: u.settings.webPath + k + '.html'
+			});
+		});
+
+		return '<script> var dependencies = ' + JSON.stringify(dependencies) + '</script>';
 	}
 
 	var getData = function (fileName, callback) {
@@ -132,7 +152,10 @@ var democritus = function () {
 			}
 		}
 
-		return newData;
+		return {
+			data: newData,
+			partials: partialNames.removeDuplicates()
+		};
 	}
 
 	var getPartialsNames = function (match) {
