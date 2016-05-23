@@ -3,6 +3,7 @@ var util = require('util');
 var userSettings = require('../democritus.json');
 
 module.exports = {
+	DS: path.sep,
 	log: function (message, type) {
 		var types = {
 				error: '\x1b[41m',

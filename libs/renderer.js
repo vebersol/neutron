@@ -98,12 +98,12 @@ var democritus = function () {
 	}
 
 	var renderFile = function (fileInfo, file) {
-		var partialName = path.sep !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : partialName;
-		var filePath = u.rootPath + path.sep + 'public' + path.sep + 'patterns' + path.sep + partialName + '.html';
-		fileArr = filePath.split(path.sep);
+		var partialName = u.DS !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : partialName;
+		var filePath = u.rootPath + u.DS + 'public' + u.DS + 'patterns' + u.DS + partialName + '.html';
+		fileArr = filePath.split(u.DS);
 		fileName = fileArr[fileArr.length - 1];
 		fileArr.pop();
-		var pathX = fileArr.join(path.sep);
+		var pathX = fileArr.join(u.DS);
 
 		mkdirp(pathX, function (err) {
 			fse.open(filePath, 'w', function(err, fd) {

@@ -4,7 +4,7 @@ var u = require('./utilities');
 
 module.exports = {
 	getPartialName: function (filePath) {
-		return filePath.replace(u.rootPath + path.sep + 'src' + path.sep + 'patterns' + path.sep, '')
+		return filePath.replace(u.rootPath + u.DS + 'src' + u.DS + 'patterns' + u.DS, '')
 			.replace(u.settings.fileExtension, '')
 			.replace(/\\/g, '/');
 	},
