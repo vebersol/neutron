@@ -4,8 +4,9 @@ var util = require('util');
 var handlebars = require('handlebars');
 var rimraf = require('rimraf');
 var mkdirp = require('mkdirp');
+var u = require('./utilities');
 
-var democritusRenderer = function (settings) {
+var democritus = function () {
 	var patternsData = {};
 	var layouts = {};
 
@@ -15,32 +16,14 @@ var democritusRenderer = function (settings) {
 			getPatterns();
 		});
 	};
-	var getSettings = function (settings) {
-		var defaultSettings = {
-			patternsDir: rootPath + '/src/patterns',
-			allowedPatterns: ['atoms', 'molecules'],
-			fileExtension: '.handlebars',
-			encode: 'utf8',
-			publicPatternsPath: rootPath + '/public/patterns',
-			layoutsDir: rootPath + '/src/layouts',
-			defaultLayoutName: 'application'
-		};
-		
-		return util._extend(defaultSettings, settings);
-	}
-
-	var getRootPath = function () {
-		var rootPath = path.dirname(require.main.filename).replace('/libs', '');
-		return rootPath;
-	}
 
 	var getPatterns = function () {
-		fse.walk(settings.patternsDir)
+		fse.walk(u.settings.patternsDir)
 			.on('data', function(file) {
-				if (path.extname(file.path) === settings.fileExtension) {
+				if (path.extname(file.path) === u.settings.fileExtension) {
 					try {
 						getData(file.path, function (data) {
-							fse.readFile(file.path, settings.encode, function(err, source) {
+							fse.readFile(file.path, u.settings.encode, function(err, source) {
 								if (source) {
 									var newData = getPartialsData(source, data ? data : {});
 									var partialName = getPartialName(file.path);
@@ -59,17 +42,17 @@ var democritusRenderer = function (settings) {
 							});
 						});
 					} catch (e) {
-						log(e, 'error');
+						u.log(e, 'error');
 					}
 				}
 			})
 			.on('end', function () {
-				log('Files rendered', 'success');
+				u.log('Files rendered', 'success');
 			});
 	}
 
 	var getData = function (fileName, callback) {
-		var jsonFile = fileName.replace(settings.fileExtension, '.json');
+		var jsonFile = fileName.replace(u.settings.fileExtension, '.json');
 
 		fse.stat(jsonFile, function(err, stat) {
 			var jsonData;
@@ -86,7 +69,7 @@ var democritusRenderer = function (settings) {
 	}
 
 	var renderFile = function (fileInfo, file) {
-		var filePath = rootPath + '/public/patterns/' + fileInfo.partialName + '.html';
+		var filePath = u.rootPath + '/public/patterns/' + fileInfo.partialName + '.html';
 		fileArr = filePath.split('/');
 		fileName = fileArr[fileArr.length - 1];
 		fileArr.pop();
@@ -94,9 +77,9 @@ var democritusRenderer = function (settings) {
 
 		mkdirp(path, function (err) {
 			fse.open(filePath, 'w', function(err, fd) {
-				fse.writeFile(filePath, fileInfo.html, settings.encode, function (err) {
+				fse.writeFile(filePath, fileInfo.html, u.settings.encode, function (err) {
 					if (err) {
-						log(err, 'error');
+						u.log(err, 'error');
 					}
 				});
 			});
@@ -104,8 +87,8 @@ var democritusRenderer = function (settings) {
 	}
 
 	var getPartialName = function (filePath) {
-		return filePath.replace(rootPath + '/src/patterns/', '')
-			.replace(settings.fileExtension, '');
+		return filePath.replace(u.rootPath + '/src/patterns/', '')
+			.replace(u.settings.fileExtension, '');
 	}
 
 	var setPartial = function (name, source) {
@@ -117,17 +100,17 @@ var democritusRenderer = function (settings) {
 			return template(data);
 		}
 		catch(err) {
-			log(err.message, 'error');
+			u.log(err.message, 'error');
 			return 'ERROR: ' + err.message;
 		}
 	}
 
 	var cleanPaths = function (callback) {
-		rimraf(settings.publicPatternsPath, function () {
-			log('cleaning up patterns folder before recreate');
-			mkdirp(settings.publicPatternsPath, function(err) {
+		rimraf(u.settings.publicPatternsPath, function () {
+			u.log('cleaning up patterns folder before recreate');
+			mkdirp(u.settings.publicPatternsPath, function(err) {
 				if (err) {
-					console.log(err, 'error');
+					u.log(err, 'error');
 				}
 
 				callback();
@@ -168,12 +151,12 @@ var democritusRenderer = function (settings) {
 	}
 
 	var getLayouts = function (source, layout) {
-		var layoutName = layout ? layout : settings.defaultLayoutName;
+		var layoutName = layout ? layout : u.settings.defaultLayoutName;
 
-		fse.walk(settings.layoutsDir)
+		fse.walk(u.settings.layoutsDir)
 			.on('data', function(file) {
-				if (path.extname(file.path) === settings.fileExtension) {
-					fse.readFile(file.path, settings.encode, function(err, layoutSource) {
+				if (path.extname(file.path) === u.settings.fileExtension) {
+					fse.readFile(file.path, u.settings.encode, function(err, layoutSource) {
 						layouts[layoutName] = layoutSource;
 					});
 				}
@@ -189,26 +172,9 @@ var democritusRenderer = function (settings) {
 		return layout.replace('{{> yield }}', source);
 	}
 
-	var rootPath = getRootPath();
-	var settings = getSettings(settings);
 	var layoutCache = {};
 
 	init();
 }
 
-democritusRenderer();
-
-var log = function (message, type) {
-	var types = {
-			error: '\x1b[41m',
-			success: '\x1b[42m'
-		},
-		reset = '\x1b[0m',
-		color = reset;
-
-	if (type) {
-		color = types[type];
-	}
-
-	console.log(color, message, reset);
-}
+module.exports.democritus = democritus();

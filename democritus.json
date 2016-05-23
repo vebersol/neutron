@@ -1,0 +1,9 @@
+{
+	"patternsDir": "#{rootPath}/src/patterns",
+	"allowedPatterns": ["atoms", "molecules"],
+	"fileExtension": ".handlebars",
+	"encode": "utf8",
+	"publicPatternsPath": "#{rootPath}/public/patterns",
+	"layoutsDir": "#{rootPath}/src/layouts",
+	"defaultLayoutName": "application"
+}
