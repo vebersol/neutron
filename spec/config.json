@@ -1,0 +1,10 @@
+{
+	"patternsDir": "#{rootPath}/spec/mocks/src/patterns",
+	"allowedPatterns": ["atoms", "molecules"],
+	"fileExtension": ".handlebars",
+	"encode": "utf8",
+	"publicPatternsPath": "#{rootPath}/spec/mocks/public/patterns",
+	"layoutsDir": "#{rootPath}/spec/mocks/src/layouts",
+	"defaultLayoutName": "application",
+	"webPath": "./"
+}

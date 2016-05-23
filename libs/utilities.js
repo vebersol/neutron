@@ -1,6 +1,9 @@
 var path = require('path');
 var util = require('util');
-var userSettings = require('../democritus.json');
+var args = process.argv;
+var isTest = args.indexOf('-t') > -1;
+var userSettings = !isTest ?
+	require('../democritus.json') : require('../spec/config.json');
 
 module.exports = {
 	DS: path.sep,
@@ -22,7 +25,13 @@ module.exports = {
 
 
 var getRootPath = function () {
-	var rootPath = path.dirname(require.main.filename).replace(path.sep + 'libs', '');
+	var rootPath;
+	if (isTest) {
+		rootPath = path.dirname(require.main.filename).replace(path.sep + 'libs', '');
+	}
+	else {
+		rootPath = path.dirname(require.main.filename).replace(path.sep + 'libs', '');
+	}
 	return rootPath;
 }
 

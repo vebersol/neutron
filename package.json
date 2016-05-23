@@ -4,7 +4,8 @@
   "description": "An atomic design based system!",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine"
+    "test": "./node_modules/.bin/jasmine",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "dependencies": {
     "fs-extra": "^0.30.0",
     "handlebars": "^4.0.5",
+    "istanbul": "^0.4.3",
     "jasmine": "^2.4.1",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.5.2"
