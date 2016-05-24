@@ -7,6 +7,7 @@ var mkdirp = require('mkdirp');
 var u = require('./utilities');
 var partials = require('./partials');
 var layouts = require('./layouts');
+var markup = require('./markup');
 
 var democritus = function () {
 	var _self = this;
@@ -14,33 +15,34 @@ var democritus = function () {
 
 	this.init = function () {
 		layouts.getLayouts();
+		this.template = fse.readFileSync(path.resolve(u.rootPath + '/core/script-template.html'), 'utf8');
 		this.cleanPaths(this.getPatterns);
 	};
 
 	this.getPatterns = function () {
 		return fse.walk(u.settings.patternsDir)
-			.on('data', _self.openPattern)
-			.on('end', _self.walkEnded);
-	}
-
-	this.openPattern = function (file) {
-		if (path.extname(file.path) === u.settings.fileExtension) {
-			try {
-				_self.getData(file.path, function (data) {
-					fse.readFile(file.path, u.settings.encode, function(err, source) {
-						if (source) {
-							_self.handlePattern({
-								file: file,
-								source: source,
-								data: data
+			.on('data', function (file) {
+				if (path.extname(file.path) === u.settings.fileExtension) {
+					try {
+						_self.getData(file.path, function (data) {
+							fse.readFile(file.path, u.settings.encode, function(err, source) {
+								if (source) {
+									_self.handlePattern({
+										file: file,
+										source: source,
+										data: data
+									});
+								}
 							});
-						}
-					});
-				});
-			} catch (e) {
-				u.log(e, 'error');
-			}
-		}
+						});
+					} catch (e) {
+						u.log(e, 'error');
+					}
+				}
+			})
+			.on('end', function () {
+				u.log('Files rendered', 'success');
+			});
 	}
 
 	this.handlePattern = function (pattern) {
@@ -56,19 +58,17 @@ var democritus = function () {
 			partials: partialsList
 		});
 
+		var markups = markup.addMarkup(pattern.source, newData);
 		var template = handlebars.compile(layout);
 		var result = _self.getHtml(template, newData);
 
 		var output = {
 			partialName: partialName,
-			html: result
+			html: result,
+			markup: markups
 		};
 
 		_self.renderFile(output);
-	}
-
-	this.walkEnded = function () {
-		u.log('Files rendered', 'success');
 	}
 
 	this.buildDemocritusCodes = function (options) {
@@ -80,7 +80,9 @@ var democritus = function () {
 			});
 		});
 
-		return '<script> var dependencies = ' + JSON.stringify(dependencies) + '</script>';
+		template = this.template.replace('#{dependencies}', JSON.stringify(dependencies));
+
+		return template;
 	}
 
 	this.getData = function (fileName, callback) {
@@ -101,16 +103,26 @@ var democritus = function () {
 	}
 
 	this.renderFile = function (fileInfo, file) {
-		var partialName = u.DS !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : partialName;
+		var partialName = u.DS !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : fileInfo.partialName;
 		var filePath = u.rootPath + u.DS + 'public' + u.DS + 'patterns' + u.DS + partialName + '.html';
 		fileArr = filePath.split(u.DS);
 		fileName = fileArr[fileArr.length - 1];
 		fileArr.pop();
-		var pathX = fileArr.join(u.DS);
+		var patternPath = fileArr.join(u.DS);
 
-		mkdirp(pathX, function (err) {
+		mkdirp(patternPath, function (err) {
 			fse.open(filePath, 'w', function(err, fd) {
 				fse.writeFile(filePath, fileInfo.html, u.settings.encode, function (err) {
+					if (err) {
+						u.log(err, 'error');
+					}
+				});
+			});
+		});
+
+		mkdirp(patternPath.replace('/patterns/', '/markups/'), function (err) {
+			fse.open(filePath.replace('/patterns/', '/markups/'), 'w', function(err, fd) {
+				fse.writeFile(filePath.replace('/patterns/', '/markups/'), fileInfo.markup, u.settings.encode, function (err) {
 					if (err) {
 						u.log(err, 'error');
 					}
@@ -130,14 +142,23 @@ var democritus = function () {
 	}
 
 	this.cleanPaths = function (callback) {
+
 		rimraf(u.settings.publicPatternsPath, function () {
 			u.log('cleaning up patterns folder before recreate');
-			mkdirp(u.settings.publicPatternsPath, function(err) {
-				if (err) {
-					u.log(err, 'error');
-				}
+			rimraf(u.settings.publicMarkupsPath, function () {
+				u.log('cleaning up markups folder before recreate');
+				mkdirp(u.settings.publicMarkupsPath, function(err) {
+					if (err) {
+						u.log(err, 'error');
+					}
+					mkdirp(u.settings.publicPatternsPath, function(err) {
+						if (err) {
+							u.log(err, 'error');
+						}
 
-				callback();
+						callback();
+					});
+				});
 			});
 		});
 	}

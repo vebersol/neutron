@@ -44,6 +44,7 @@ var getSettings = function (settings) {
 		fileExtension: '.handlebars',
 		encode: 'utf8',
 		publicPatternsPath: '#{rootPath}/public/patterns',
+		publicMarkupsPath: '#{rootPath}/public/markups',
 		layoutsDir: '#{rootPath}/src/layouts',
 		defaultLayoutName: 'application',
 		webPath: './'
