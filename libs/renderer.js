@@ -5,29 +5,33 @@ var handlebars = require('handlebars');
 var rimraf = require('rimraf');
 var mkdirp = require('mkdirp');
 var u = require('./utilities');
-var partials = require('./partials');
-var layouts = require('./layouts');
-var markup = require('./markup');
+var pa = require('./partials');
+var lh = require('./layouts');
+var mkp = require('./markup');
 
-var democritus = function () {
-	var _self = this;
-	this.patternsData = {};
+var engine = function () {
+	'use strict';
+	var template;
+	var patternsData = {};
+	var partials = new pa();
+	var markup = new mkp();
+	var layoutHandler = new lh();
 
-	this.init = function () {
-		layouts.getLayouts();
-		this.template = fse.readFileSync(path.resolve(u.rootPath + '/core/script-template.html'), 'utf8');
-		this.cleanPaths(this.getPatterns);
-	};
+	function init () {
+		layoutHandler.getLayouts();
+		template = fse.readFileSync(path.resolve(u.rootPath + '/core/script-template.html'), 'utf8');
+		cleanPaths(getPatterns);
+	}
 
-	this.getPatterns = function () {
+	function getPatterns() {
 		return fse.walk(u.settings.patternsDir)
 			.on('data', function (file) {
 				if (path.extname(file.path) === u.settings.fileExtension) {
 					try {
-						_self.getData(file.path, function (data) {
+						getData(file.path, function (data) {
 							fse.readFile(file.path, u.settings.encode, function(err, source) {
 								if (source) {
-									_self.handlePattern({
+									handlePattern({
 										file: file,
 										source: source,
 										data: data
@@ -45,22 +49,23 @@ var democritus = function () {
 			});
 	}
 
-	this.handlePattern = function (pattern) {
-		var partialData = partials.getPartialsData(pattern.source, pattern.data ? pattern.data : {}, _self.patternsData);
+	function handlePattern(pattern) {
+		var partialData = partials.getPartialsData(pattern.source, pattern.data ? pattern.data : {}, patternsData);
 		var newData = partialData.data;
 		var partialsList = partialData.partials;
 		var partialName = partials.getPartialName(pattern.file.path)
 		var registerPartial = partials.setPartial(partialName, pattern.source);
-		var layout = layouts.addLayout(pattern.source, newData.layout);
+		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
-		newData.democritusData = _self.buildDemocritusCodes({
+		newData.engineData = addEngineSnippets({
 			html: layout,
-			partials: partialsList
+			partials: partialsList,
+			partialName: partialName
 		});
 
 		var markups = markup.addMarkup(pattern.source, newData);
 		var template = handlebars.compile(layout);
-		var result = _self.getHtml(template, newData);
+		var result = getHtml(template, newData);
 
 		var output = {
 			partialName: partialName,
@@ -68,10 +73,10 @@ var democritus = function () {
 			markup: markups
 		};
 
-		_self.renderFile(output);
+		renderFile(output);
 	}
 
-	this.buildDemocritusCodes = function (options) {
+	function addEngineSnippets(options) {
 		var dependencies = [];
 		options.partials.forEach(function (k, i) {
 			dependencies.push({
@@ -80,12 +85,13 @@ var democritus = function () {
 			});
 		});
 
-		template = this.template.replace('#{dependencies}', JSON.stringify(dependencies));
+		var newTemplate = template.replace('#{dependencies}', JSON.stringify(dependencies));
+		newTemplate = newTemplate.replace('#{patternName}', options.partialName);
 
-		return template;
+		return newTemplate;
 	}
 
-	this.getData = function (fileName, callback) {
+	function getData(fileName, callback) {
 		var jsonFile = fileName.replace(u.settings.fileExtension, '.json');
 
 		fse.stat(jsonFile, function(err, stat) {
@@ -93,7 +99,7 @@ var democritus = function () {
 			if (!err) {
 				delete require.cache[require.resolve(jsonFile)];
 				jsonData = require(jsonFile);
-				_self.patternsData[partials.getPartialName(fileName)] = jsonData;
+				patternsData[partials.getPartialName(fileName)] = jsonData;
 			}
 
 			if (callback) {
@@ -102,13 +108,17 @@ var democritus = function () {
 		});
 	}
 
-	this.renderFile = function (fileInfo, file) {
+	function renderFile(fileInfo, file) {
 		var partialName = u.DS !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : fileInfo.partialName;
 		var filePath = u.rootPath + u.DS + 'public' + u.DS + 'patterns' + u.DS + partialName + '.html';
-		fileArr = filePath.split(u.DS);
-		fileName = fileArr[fileArr.length - 1];
+		var fileArr = filePath.split(u.DS);
+		var fileName = fileArr[fileArr.length - 1];
+
 		fileArr.pop();
+
 		var patternPath = fileArr.join(u.DS);
+		var patterns = u.DS + 'patterns' + u.DS;
+		var markups = u.DS + 'markups' + u.DS;
 
 		mkdirp(patternPath, function (err) {
 			fse.open(filePath, 'w', function(err, fd) {
@@ -120,9 +130,9 @@ var democritus = function () {
 			});
 		});
 
-		mkdirp(patternPath.replace('/patterns/', '/markups/'), function (err) {
-			fse.open(filePath.replace('/patterns/', '/markups/'), 'w', function(err, fd) {
-				fse.writeFile(filePath.replace('/patterns/', '/markups/'), fileInfo.markup, u.settings.encode, function (err) {
+		mkdirp(patternPath.replace(patterns, markups), function (err) {
+			fse.open(filePath.replace(patterns, markups), 'w', function(err, fd) {
+				fse.writeFile(filePath.replace(patterns, markups), fileInfo.markup, u.settings.encode, function (err) {
 					if (err) {
 						u.log(err, 'error');
 					}
@@ -131,7 +141,7 @@ var democritus = function () {
 		});
 	}
 
-	this.getHtml = function (template, data) {
+	function getHtml(template, data) {
 		try {
 			return template(data);
 		}
@@ -141,7 +151,7 @@ var democritus = function () {
 		}
 	}
 
-	this.cleanPaths = function (callback) {
+	function cleanPaths(callback) {
 
 		rimraf(u.settings.publicPatternsPath, function () {
 			u.log('cleaning up patterns folder before recreate');
@@ -163,9 +173,7 @@ var democritus = function () {
 		});
 	}
 
-	this.init();
-
-	return this;
+	init();
 }
 
-module.exports.democritus = new democritus();
+module.exports.engine = engine();

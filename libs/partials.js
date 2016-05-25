@@ -2,7 +2,9 @@ var handlebars = require('handlebars');
 var path = require('path');
 var u = require('./utilities');
 
-module.exports = {
+partials = function () {};
+
+partials.prototype = {
 	getPartialName: function (filePath) {
 		var breakPath = filePath.split('patterns' + u.DS);
 		return breakPath[1]
@@ -48,4 +50,6 @@ module.exports = {
 
 		return partialNames;
 	}
-}
+};
+
+module.exports = partials;

@@ -6,7 +6,11 @@ var rimraf = require('rimraf');
 var mkdirp = require('mkdirp');
 var u = require('./utilities');
 
-module.exports = {
+var layoutHandler = function () {
+	this.layouts = {};
+}
+
+layoutHandler.prototype = {
 	getLayouts: function (source, layout) {
 		var layoutName = layout ? layout : u.settings.defaultLayoutName;
 		var parent = this;
@@ -28,7 +32,7 @@ module.exports = {
 		var layout = this.layouts[layoutName];
 
 		return layout.replace('{{> yield }}', source);
-	},
-
-	layouts: {}
+	}
 }
+
+module.exports = layoutHandler;

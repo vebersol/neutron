@@ -1,7 +1,11 @@
 <script>
-	(function () {
-		var dependencies = #{dependencies};
-	});
+	window.democritus = {
+		i: {},
+		core: {}
+	};
+	democritus.i.dependencies = #{dependencies};
+	democritus.i.patternName = "#{patternName}";
 </script>
+<script src="/styleguide/js/lib.js"></script>
 
-<script src="public/styleguide/js/lib.js"></script>
+<aside id="democritus"></aside>

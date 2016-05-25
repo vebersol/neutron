@@ -19,6 +19,7 @@
   "homepage": "https://github.com/vebersol/democritus#readme",
   "dependencies": {
     "fs-extra": "^0.30.0",
+    "gulp": "^3.9.1",
     "handlebars": "^4.0.5",
     "html-escape": "^2.0.0",
     "istanbul": "^0.4.3",
