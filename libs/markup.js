@@ -6,13 +6,13 @@ var markup = function () {};
 markup.prototype = {
 	addMarkup: function (source, data) {
 		var html = [];
-		html.push('<ul>');
-		html.push('<li data-target="#html"><pre>');
+		html.push('<ul class="democritus-code--list">');
+		html.push('<li data-target="#html"><pre><code class="language-html">');
 		html.push(htmlEscape(handlebars.compile(source)(data)))
-		html.push('</pre></li>');
-		html.push('<li data-target="#handlebars"><pre>');
+		html.push('</code></pre></li>');
+		html.push('<li data-target="#handlebars"><pre><code class="language-handlebars">');
 		html.push(htmlEscape(source))
-		html.push('</pre></li>');
+		html.push('</code></pre></li>');
 		html.push('</ul>');
 
 		return html.join('');

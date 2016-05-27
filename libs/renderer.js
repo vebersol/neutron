@@ -11,7 +11,8 @@ var mkp = require('./markup');
 
 var engine = function () {
 	'use strict';
-	var template;
+	var header;
+	var footer;
 	var patternsData = {};
 	var partials = new pa();
 	var markup = new mkp();
@@ -19,7 +20,8 @@ var engine = function () {
 
 	function init () {
 		layoutHandler.getLayouts();
-		template = fse.readFileSync(path.resolve(u.rootPath + '/core/script-template.html'), 'utf8');
+		header = fse.readFileSync(path.resolve(u.rootPath + '/core/header.html'), 'utf8');
+		footer = fse.readFileSync(path.resolve(u.rootPath + '/core/footer.html'), 'utf8');
 		cleanPaths(getPatterns);
 	}
 
@@ -57,7 +59,9 @@ var engine = function () {
 		var registerPartial = partials.setPartial(partialName, pattern.source);
 		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
-		newData.engineData = addEngineSnippets({
+		newData.engineHeader = header;
+
+		newData.engineFooter = addEngineSnippets({
 			html: layout,
 			partials: partialsList,
 			partialName: partialName
@@ -85,7 +89,7 @@ var engine = function () {
 			});
 		});
 
-		var newTemplate = template.replace('#{dependencies}', JSON.stringify(dependencies));
+		var newTemplate = footer.replace('#{dependencies}', JSON.stringify(dependencies));
 		newTemplate = newTemplate.replace('#{patternName}', options.partialName);
 
 		return newTemplate;

@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<title>{{#if pageTitle}}{{pageTitle}}{{else}}Page Title{{/if}}</title>
 
+	<!-- ENGINE CODE -->
+	{{{engineHeader}}}
+	<!-- END ENGINE CODE -->
+
 	{{#if html }}
 	<!-- HTML IS TRUE -->
 	{{/if}}
@@ -12,7 +16,7 @@
 	{{> yield }}
 
 	<!-- ENGINE CODE -->
-	{{{engineData}}}
+	{{{engineFooter}}}
 	<!-- END ENGINE CODE -->
 </body>
 </html>

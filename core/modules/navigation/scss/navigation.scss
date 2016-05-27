@@ -1,0 +1,111 @@
+@import "mixins";
+@import "prism";
+
+$prefix: democritus;
+$bgcolor: #333;
+$txtcolor: #CCC;
+$tab: #CCC;
+$tab-active: #272822;
+
+.#{$prefix}-info-bar {
+	position: fixed;
+	left: 0;
+	bottom: -50%;
+	width: 100%;
+	height: 50%;
+	background: $bgcolor;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 100;
+	@include prefix(box-sizing, border-box);
+	color: $txtcolor;
+	@include prefix(transition, bottom 0.5s);
+
+	* {
+		@include prefix(box-sizing, border-box);
+	}
+	
+	a, p {
+		font-family: Arial, sans-serif;
+	}
+
+	&.active {
+		bottom: 0;
+	}
+}
+
+.#{$prefix}-info-bar {
+	padding: 20px;
+
+	&--close {
+		text-align: right;
+		text-transform: uppercase;
+
+		&__link {
+			color: $txtcolor;
+			text-decoration: none;
+			&:hover {
+				color: $txtcolor;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&--patterns {
+		font-size: 0.85em;
+		a {
+			color: $txtcolor;
+		}
+	}
+	
+	.#{$prefix}-code {
+		&--nav {
+			@include clearfix;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+		}
+		
+		&--item {
+			display: block;
+			float: left;
+			background-color: $tab;
+			margin-left: 2px;
+			border-top-right-radius: 4px;
+
+			&:first-child {
+				border-top-right-radius: 0;
+				border-top-left-radius: 4px;
+				margin-left: 0;
+			}
+
+			&.active {
+				background-color: $tab-active;
+				a {
+					color: white;
+				}
+			}
+			
+			a {
+				display: block;
+				width: 100%;
+				height: 100%;
+				padding: 10px;
+				color: black;
+				text-decoration: none;
+				font-weight: bold;
+			}
+		}
+		
+		&--list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			
+			li {
+				overflow: auto;
+			}
+		}
+	}
+}
