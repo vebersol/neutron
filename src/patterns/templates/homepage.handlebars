@@ -1,0 +1,40 @@
+<div class="page" id="page">
+	{{> organisms/global/header }}
+	<div role="main">
+		{{#if emergency }}
+			{{> molecules/messaging/alert }}
+		{{/if }}
+		{{#if hero }}
+			{{> molecules/blocks/block-hero }}
+		{{/if}}
+
+		<div class="g g-3up">
+			{{#if touts}}
+				<div class="gi">
+					{{> molecules/blocks/inset-block }}
+				</div>
+			{{/if}}
+		</div><!--end 3up-->
+
+		<hr />
+
+		<div class="l-two-col">
+			<div class="l-main">
+				<section class="section latest-posts">
+					<h2 class="section-title">Latest Posts</h2>
+					<ul class="post-list">
+						{{#if latest-posts }}
+							<li>{{> molecules/blocks/media-block }}</li>
+						{{/if }}
+					</ul>
+					<a href="#" class="text-btn">View more posts</a>
+				</section>
+			</div><!--end .l-main-->
+
+			<div class="l-sidebar">
+				{{> organisms/sections/recent-tweets }}
+			</div><!--end .l-sidebar-->
+		</div><!--end .l-two-col-->
+	</div><!--End role=main-->
+	{{> organisms/global/footer }}
+</div>
