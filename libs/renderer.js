@@ -12,6 +12,7 @@ var mkp = require('./markup');
 var engine = function () {
 	'use strict';
 	var template;
+	var globalData = {};
 	var patternFiles = [];
 	var patternsData = {};
 	var patternsTree = {};
@@ -22,11 +23,12 @@ var engine = function () {
 	function init () {
 		layoutHandler.getLayouts();
 		template = fse.readFileSync(path.resolve(u.rootPath + '/core/script-template.html'), 'utf8');
-		cleanPaths(getPatterns);
+		globalData = JSON.parse(fse.readFileSync(path.resolve(u.settings.globalDataDir + '/global.json'), 'utf8'));
+
+		cleanPaths(walkPartials);
 	}
 
 	function getPatterns() {
-
 		return fse.walk(u.settings.patternsDir)
 			.on('data', function (file) {
 				if (path.extname(file.path) === u.settings.fileExtension) {
@@ -39,18 +41,21 @@ var engine = function () {
 	}
 
 	function writeFiles() {
+
 		try {
-			var totalFIles = patternFiles.length;
+			var totalFiles = patternFiles.length;
 
 			patternFiles.forEach(function (file, i) {
 				getData(file.path, function (data) {
 					fse.readFile(file.path, u.settings.encode, function(err, source) {
 						if (source) {
+							var extendedData = Object.assign({}, globalData, data);
+
 							handlePattern({
 								file: file,
 								source: source,
-								data: data
-							}, i === totalFIles - 1);
+								data: extendedData
+							}, i === totalFiles - 1);
 						}
 					});
 				});
@@ -66,7 +71,6 @@ var engine = function () {
 		var newData = partialData.data;
 		var partialsList = partialData.partials;
 		var partialName = partials.getPartialName(pattern.file.path)
-		var registerPartial = partials.setPartial(partialName, pattern.source);
 		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
 		newData.engineData = addEngineSnippets({
@@ -206,6 +210,35 @@ var engine = function () {
 			}
 			u.log('Files rendered', 'success');
 			console.timeEnd('render duration');
+		});
+	}
+
+	function walkPartials() {
+		return fse.walk(u.settings.patternsDir)
+			.on('data', function (file) {
+				if (path.extname(file.path) === u.settings.fileExtension) {
+					partials.registeredPartials.push(file);
+				}
+			})
+			.on('end', function () {
+				registerPartials();
+			});
+	};
+
+	function registerPartials() {
+		var totalPartials = partials.registeredPartials.length;
+
+		partials.registeredPartials.forEach(function (file, i) {
+			fse.readFile(file.path, u.settings.encode, function(err, source) {
+				if (source) {
+					var partialName = partials.getPartialName(file.path);
+					partials.setPartial(partialName, source);
+
+					if (i === totalPartials - 1) {
+						getPatterns();
+					}
+				}
+			});
 		});
 	}
 

@@ -39,8 +39,8 @@ module.exports.rootPath = getRootPath();
 
 var getSettings = function (settings) {
 	var defaultSettings = {
+		globalDataDir: '#{rootPath}/src/data',
 		patternsDir: '#{rootPath}/src/patterns',
-		allowedPatterns: ['atoms', 'molecules'],
 		fileExtension: '.handlebars',
 		encode: 'utf8',
 		publicDataPath: '#{rootPath}/public/data',

@@ -1,8 +1,11 @@
 var handlebars = require('handlebars');
+var fse = require('fs-extra');
 var path = require('path');
 var u = require('./utilities');
 
-partials = function () {};
+partials = function () {
+	this.registeredPartials = [];
+};
 
 partials.prototype = {
 	getPartialName: function (filePath) {
@@ -26,7 +29,7 @@ partials.prototype = {
 
 		for (var i = 0; i < totalPartials; i++) {
 			if (patternsData.hasOwnProperty(partialNames[i])) {
-				newData = Object.assign(patternsData[partialNames[i]], newData);
+				newData = Object.assign({}, patternsData[partialNames[i]], newData);
 			}
 		}
 
@@ -41,13 +44,12 @@ partials.prototype = {
 
 		if (match) {
 			match.forEach(function (k, v) {
-				var cleanString = k.replace('{{>', '').replace('}}').trim();
+				var cleanString = k.replace('{{>', '').replace('}}', '').trim();
 				var partialName = cleanString.split(' ')[0];
 
 				partialNames.push(partialName);
 			});
 		}
-
 		return partialNames;
 	}
 };

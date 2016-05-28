@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{#if pageTitle}}{{pageTitle}}{{else}}Page Title{{/if}}</title>
+
+	{{#if html }}
+	<!-- HTML IS TRUE -->
+	{{/if}}
+</head>
+<body>
+	{{> yield }}
+
+	{{{democritusData}}}
+</body>
+</html>
