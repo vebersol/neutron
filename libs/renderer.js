@@ -3,6 +3,7 @@ var path = require('path');
 var util = require('util');
 var handlebars = require('handlebars');
 var object_merge = require('object-merge');
+var sort_object = require('sort-object');
 
 var u = require('./utilities');
 var pa = require('./partials');
@@ -15,7 +16,13 @@ var engine = function () {
 	var globalData = {};
 	var patternFiles = [];
 	var patternsData = {};
-	var patternsTree = {};
+	var patternsTree = {
+		atoms: {},
+		molecules: {},
+		organisms: {},
+		templates: {},
+		pages: {}
+	};
 	var partials = new pa();
 	var markup = new mkp();
 	var layoutHandler = new lh();
@@ -50,6 +57,11 @@ var engine = function () {
 					fse.readFile(file.path, u.settings.encode, function(err, source) {
 						if (source) {
 							var extendedData = Object.assign({}, globalData, data);
+
+							// do not render filenames starting with _
+							if (path.basename(file.path)[0] === "_") {
+								return true;
+							}
 
 							handlePattern({
 								file: file,
@@ -181,6 +193,7 @@ var engine = function () {
 
 	function addToTree(partial, end) {
 		var arr = partial.split('/');
+		var url = u.settings.publicPatternsUrl + '/' + partial + '.html';
 		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
 			var obj = {}
 			if (array.length - 2 === currentIndex && !obj.hasOwnProperty(currentValue)) {
@@ -188,7 +201,7 @@ var engine = function () {
 			}
 
 			if (array.length - 2 === currentIndex) {
-				obj[currentValue][previousValue] = true;
+				obj[currentValue][previousValue] = url;
 			}
 			else {
 				obj[currentValue] = previousValue;
@@ -204,6 +217,10 @@ var engine = function () {
 	}
 
 	function renderData() {
+		for (var obj in patternsTree) {
+			patternsTree[obj] = sort_object(patternsTree[obj], {sortOrder: 'ASC'});
+		}
+
 		fse.writeFile(u.settings.publicDataPath + u.DS +  'patterns.json', JSON.stringify(patternsTree), function(err, data) {
 			if (err) {
 				return console.log(err);

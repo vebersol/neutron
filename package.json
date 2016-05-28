@@ -24,6 +24,7 @@
     "html-escape": "^2.0.0",
     "istanbul": "^0.4.3",
     "jasmine": "^2.4.1",
-    "object-merge": "^2.5.1"
+    "object-merge": "^2.5.1",
+    "sort-object": "^3.0.2"
   }
 }

@@ -45,6 +45,7 @@ var getSettings = function (settings) {
 		encode: 'utf8',
 		publicDataPath: '#{rootPath}/public/data',
 		publicPatternsPath: '#{rootPath}/public/patterns',
+		publicPatternsUrl: '/patterns',
 		publicMarkupsPath: '#{rootPath}/public/markups',
 		layoutsDir: '#{rootPath}/src/layouts',
 		defaultLayoutName: 'application',
