@@ -2,8 +2,6 @@ var fse = require('fs-extra');
 var path = require('path');
 var util = require('util');
 var handlebars = require('handlebars');
-var rimraf = require('rimraf');
-var mkdirp = require('mkdirp');
 var u = require('./utilities');
 
 var layoutHandler = function () {

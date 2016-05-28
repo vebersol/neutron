@@ -2,9 +2,8 @@ var fse = require('fs-extra');
 var path = require('path');
 var util = require('util');
 var handlebars = require('handlebars');
-var rimraf = require('rimraf');
-var mkdirp = require('mkdirp');
 var object_merge = require('object-merge');
+
 var u = require('./utilities');
 var pa = require('./partials');
 var lh = require('./layouts');
@@ -135,7 +134,7 @@ var engine = function () {
 		var patterns = u.DS + 'patterns' + u.DS;
 		var markups = u.DS + 'markups' + u.DS;
 
-		mkdirp(patternPath, function (err) {
+		fse.mkdirs(patternPath, function (err) {
 			fse.open(filePath, 'w', function(err, fd) {
 				fse.writeFile(filePath, fileInfo.html, u.settings.encode, function (err) {
 					if (err) {
@@ -145,7 +144,7 @@ var engine = function () {
 			});
 		});
 
-		mkdirp(patternPath.replace(patterns, markups), function (err) {
+		fse.mkdirs(patternPath.replace(patterns, markups), function (err) {
 			fse.open(filePath.replace(patterns, markups), 'w', function(err, fd) {
 				fse.writeFile(filePath.replace(patterns, markups), fileInfo.markup, u.settings.encode, function (err) {
 					if (err) {
@@ -167,34 +166,13 @@ var engine = function () {
 	}
 
 	function cleanPaths(callback) {
-
-		// TODO add sync
-		rimraf(u.settings.publicPatternsPath, function () {
-			u.log('cleaning up patterns folder before recreate');
-			rimraf(u.settings.publicMarkupsPath, function () {
-				u.log('cleaning up markups folder before recreate');
-				rimraf(u.settings.publicDataPath, function () {
-					u.log('cleaning up data folder before recreate');
-					mkdirp(u.settings.publicDataPath, function(err) {
-						if (err) {
-							u.log(err, 'error');
-						}
-						mkdirp(u.settings.publicMarkupsPath, function(err) {
-							if (err) {
-								u.log(err, 'error');
-							}
-							mkdirp(u.settings.publicPatternsPath, function(err) {
-								if (err) {
-									u.log(err, 'error');
-								}
-
-								callback();
-							});
-						});
-					});
-				});
-			});
-		});
+		fse.removeSync(u.settings.publicPatternsPath);
+		fse.mkdirsSync(u.settings.publicPatternsPath);
+		fse.removeSync(u.settings.publicMarkupsPath);
+		fse.mkdirsSync(u.settings.publicMarkupsPath);
+		fse.removeSync(u.settings.publicDataPath);
+		fse.mkdirsSync(u.settings.publicDataPath);
+		callback();
 	}
 
 	function addToTree(partial, end) {
