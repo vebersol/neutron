@@ -3,8 +3,3 @@ node_js:
   - stable
   - 5
   - 4
-branches:
-  only:
-    - master
-    - develop
-    - testing
