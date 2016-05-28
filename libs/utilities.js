@@ -43,13 +43,14 @@ var getSettings = function (settings) {
 		allowedPatterns: ['atoms', 'molecules'],
 		fileExtension: '.handlebars',
 		encode: 'utf8',
+		publicDataPath: '#{rootPath}/public/data',
 		publicPatternsPath: '#{rootPath}/public/patterns',
 		publicMarkupsPath: '#{rootPath}/public/markups',
 		layoutsDir: '#{rootPath}/src/layouts',
 		defaultLayoutName: 'application',
 		webPath: './'
 	};
-	
+
 	var settings = util._extend(defaultSettings, settings);
 	var rootPath = getRootPath();
 
