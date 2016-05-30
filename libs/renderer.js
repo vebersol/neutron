@@ -4,6 +4,7 @@ var util = require('util');
 var handlebars = require('handlebars');
 var rimraf = require('rimraf');
 var mkdirp = require('mkdirp');
+var object_merge = require('object-merge');
 var u = require('./utilities');
 var pa = require('./partials');
 var lh = require('./layouts');
@@ -13,7 +14,9 @@ var engine = function () {
 	'use strict';
 	var header;
 	var footer;
+	var patternFiles = [];
 	var patternsData = {};
+	var patternsTree = {};
 	var partials = new pa();
 	var markup = new mkp();
 	var layoutHandler = new lh();
@@ -26,32 +29,42 @@ var engine = function () {
 	}
 
 	function getPatterns() {
+
 		return fse.walk(u.settings.patternsDir)
 			.on('data', function (file) {
 				if (path.extname(file.path) === u.settings.fileExtension) {
-					try {
-						getData(file.path, function (data) {
-							fse.readFile(file.path, u.settings.encode, function(err, source) {
-								if (source) {
-									handlePattern({
-										file: file,
-										source: source,
-										data: data
-									});
-								}
-							});
-						});
-					} catch (e) {
-						u.log(e, 'error');
-					}
+					patternFiles.push(file);
 				}
 			})
 			.on('end', function () {
-				u.log('Files rendered', 'success');
+				writeFiles();
 			});
 	}
 
-	function handlePattern(pattern) {
+	function writeFiles() {
+		try {
+			var totalFIles = patternFiles.length;
+
+			patternFiles.forEach(function (file, i) {
+				getData(file.path, function (data) {
+					fse.readFile(file.path, u.settings.encode, function(err, source) {
+						if (source) {
+							handlePattern({
+								file: file,
+								source: source,
+								data: data
+							}, i === totalFIles - 1);
+						}
+					});
+				});
+
+			});
+		} catch (e) {
+			u.log(e, 'error');
+		}
+	}
+
+	function handlePattern(pattern, end) {
 		var partialData = partials.getPartialsData(pattern.source, pattern.data ? pattern.data : {}, patternsData);
 		var newData = partialData.data;
 		var partialsList = partialData.partials;
@@ -77,6 +90,8 @@ var engine = function () {
 			markup: markups
 		};
 
+
+		addToTree(partialName, end);
 		renderFile(output);
 	}
 
@@ -157,26 +172,70 @@ var engine = function () {
 
 	function cleanPaths(callback) {
 
+		// TODO add sync
 		rimraf(u.settings.publicPatternsPath, function () {
 			u.log('cleaning up patterns folder before recreate');
 			rimraf(u.settings.publicMarkupsPath, function () {
 				u.log('cleaning up markups folder before recreate');
-				mkdirp(u.settings.publicMarkupsPath, function(err) {
-					if (err) {
-						u.log(err, 'error');
-					}
-					mkdirp(u.settings.publicPatternsPath, function(err) {
+				rimraf(u.settings.publicDataPath, function () {
+					u.log('cleaning up data folder before recreate');
+					mkdirp(u.settings.publicDataPath, function(err) {
 						if (err) {
 							u.log(err, 'error');
 						}
+						mkdirp(u.settings.publicMarkupsPath, function(err) {
+							if (err) {
+								u.log(err, 'error');
+							}
+							mkdirp(u.settings.publicPatternsPath, function(err) {
+								if (err) {
+									u.log(err, 'error');
+								}
 
-						callback();
+								callback();
+							});
+						});
 					});
 				});
 			});
 		});
 	}
 
+	function addToTree(partial, end) {
+		var arr = partial.split('/');
+		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
+			var obj = {}
+			if (array.length - 2 === currentIndex && !obj.hasOwnProperty(currentValue)) {
+				obj[currentValue] = {};
+			}
+
+			if (array.length - 2 === currentIndex) {
+				obj[currentValue][previousValue] = true;
+			}
+			else {
+				obj[currentValue] = previousValue;
+			}
+			return obj;
+		});
+
+		patternsTree = object_merge(patternsTree, tree);
+
+		if (end) {
+			renderData();
+		}
+	}
+
+	function renderData() {
+		fse.writeFile(u.settings.publicDataPath + u.DS +  'patterns.json', JSON.stringify(patternsTree), function(err, data) {
+			if (err) {
+				return console.log(err);
+			}
+			u.log('Files rendered', 'success');
+			console.timeEnd('render duration');
+		});
+	}
+
+	console.time('render duration');
 	init();
 }
 

@@ -30,6 +30,7 @@
     "istanbul": "^0.4.3",
     "jasmine": "^2.4.1",
     "mkdirp": "^0.5.1",
+    "object-merge": "^2.5.1",
     "rimraf": "^2.5.2"
   }
 }
