@@ -36,4 +36,5 @@
     "istanbul": "^0.4.3",
     "jasmine": "^2.4.1",
     "gulp-connect": "^4.0.0"
+  }
 }
