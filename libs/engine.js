@@ -34,7 +34,6 @@ var engine = function () {
 		header = fse.readFileSync(path.resolve(u.rootPath + '/core/header.html'), 'utf8');
 		footer = fse.readFileSync(path.resolve(u.rootPath + '/core/footer.html'), 'utf8');
 		cleanPaths(walkPartials);
-		// cleanPaths(getPatterns);
 	}
 
 	function getPatterns() {
@@ -155,22 +154,18 @@ var engine = function () {
 		var markups = u.DS + 'markups' + u.DS;
 
 		fse.mkdirs(patternPath, function (err) {
-			fse.open(filePath, 'w', function(err, fd) {
-				fse.writeFile(filePath, fileInfo.html, u.settings.encode, function (err) {
-					if (err) {
-						u.log(err, 'error');
-					}
-				});
+			fse.outputFile(filePath, fileInfo.html, function (err) {
+				if (err) {
+					u.log(err, 'error');
+				}
 			});
 		});
 
 		fse.mkdirs(patternPath.replace(patterns, markups), function (err) {
-			fse.open(filePath.replace(patterns, markups), 'w', function(err, fd) {
-				fse.writeFile(filePath.replace(patterns, markups), fileInfo.markup, u.settings.encode, function (err) {
-					if (err) {
-						u.log(err, 'error');
-					}
-				});
+			fse.outputFile(filePath.replace(patterns, markups), fileInfo.markup, function (err) {
+				if (err) {
+					u.log(err, 'error');
+				}
 			});
 		});
 	}
@@ -186,11 +181,11 @@ var engine = function () {
 	}
 
 	function cleanPaths(callback) {
-		fse.removeSync(u.settings.publicPatternsPath);
+		// fse.removeSync(u.settings.publicPatternsPath);
 		fse.mkdirsSync(u.settings.publicPatternsPath);
-		fse.removeSync(u.settings.publicMarkupsPath);
+		// fse.removeSync(u.settings.publicMarkupsPath);
 		fse.mkdirsSync(u.settings.publicMarkupsPath);
-		fse.removeSync(u.settings.publicDataPath);
+		// fse.removeSync(u.settings.publicDataPath);
 		fse.mkdirsSync(u.settings.publicDataPath);
 		callback();
 	}
@@ -267,4 +262,4 @@ var engine = function () {
 	init();
 }
 
-module.exports.engine = engine();
+module.exports = engine;
