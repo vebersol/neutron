@@ -31,23 +31,25 @@ democritus.core.main.prototype = {
 
 	addCode: function () {
 		var parent = this;
-		Zepto.ajax({
-			url: '/markups/' + democritus.i.patternName + '.html',
-			success: function (data) {
-				parent.code = parent.wrapper.find('.democritus-code')
-				parent.code.append(data);
+		if (democritus.i.patternName) {
+			Zepto.ajax({
+				url: '/markups/' + democritus.i.patternName + '.html',
+				success: function (data) {
+					parent.code = parent.wrapper.find('.democritus-code')
+					parent.code.append(data);
 
-				parent.code.find('.democritus-code--nav li:first-child').addClass('active');
-				parent.code.find('.democritus-code--list li[data-target]:last-child').hide();
+					parent.code.find('.democritus-code--nav li:first-child').addClass('active');
+					parent.code.find('.democritus-code--list li[data-target]:last-child').hide();
 
-				if (Prism) {
-					Prism.highlightElement(Zepto('.democritus-code--list li pre code.language-html').get(0));
-					Prism.highlightElement(Zepto('.democritus-code--list li pre code.language-handlebars').get(0));
+					if (Prism) {
+						Prism.highlightElement(Zepto('.democritus-code--list li pre code.language-html').get(0));
+						Prism.highlightElement(Zepto('.democritus-code--list li pre code.language-handlebars').get(0));
+					}
+
+					parent.bindTabs();
 				}
-
-				parent.bindTabs();
-			}
-		});
+			});
+		}
 	},
 
 	bindTabs: function () {

@@ -227,6 +227,8 @@ var engine = function () {
 			u.log('Files rendered', 'success');
 			console.timeEnd('render duration');
 		});
+
+		renderTemplate();
 	}
 
 	function walkPartials() {
@@ -255,6 +257,24 @@ var engine = function () {
 					}
 				}
 			});
+		});
+	}
+
+	function renderTemplate() {
+		var indexSource = fse.readFileSync(path.resolve(u.rootPath + '/core/modules/templates/index.handlebars'), 'utf8');
+		var indexTemplate = handlebars.compile(indexSource);
+
+		var engineFooter = addEngineSnippets({
+			partials: [],
+			partialName: ''
+		});
+
+		var indexHTML = indexTemplate({engineHeader: header, engineFooter: engineFooter});
+
+		fse.outputFile(path.resolve(u.settings.publicPath + '/index.html'), indexHTML, function (err) {
+			if (err) {
+				u.log(err, 'error');
+			}
 		});
 	}
 

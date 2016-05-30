@@ -43,6 +43,7 @@ var getSettings = function (settings) {
 		patternsDir: '#{rootPath}/src/patterns',
 		fileExtension: '.handlebars',
 		encode: 'utf8',
+		publicPath: '#{rootPath}/public',
 		publicDataPath: '#{rootPath}/public/data',
 		publicPatternsPath: '#{rootPath}/public/patterns',
 		publicPatternsUrl: '/patterns',
