@@ -12,8 +12,9 @@ var mkp = require('./markup');
 
 var engine = function () {
 	'use strict';
-	var template;
 	var globalData = {};
+	var header;
+	var footer;
 	var patternFiles = [];
 	var patternsData = {};
 	var patternsTree = {
@@ -29,10 +30,11 @@ var engine = function () {
 
 	function init () {
 		layoutHandler.getLayouts();
-		template = fse.readFileSync(path.resolve(u.rootPath + '/core/script-template.html'), 'utf8');
 		globalData = JSON.parse(fse.readFileSync(path.resolve(u.settings.globalDataDir + '/global.json'), 'utf8'));
-
+		header = fse.readFileSync(path.resolve(u.rootPath + '/core/header.html'), 'utf8');
+		footer = fse.readFileSync(path.resolve(u.rootPath + '/core/footer.html'), 'utf8');
 		cleanPaths(walkPartials);
+		// cleanPaths(getPatterns);
 	}
 
 	function getPatterns() {
@@ -85,7 +87,9 @@ var engine = function () {
 		var partialName = partials.getPartialName(pattern.file.path)
 		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
-		newData.engineData = addEngineSnippets({
+		newData.engineHeader = header;
+
+		newData.engineFooter = addEngineSnippets({
 			html: layout,
 			partials: partialsList,
 			partialName: partialName
@@ -115,7 +119,7 @@ var engine = function () {
 			});
 		});
 
-		var newTemplate = template.replace('#{dependencies}', JSON.stringify(dependencies));
+		var newTemplate = footer.replace('#{dependencies}', JSON.stringify(dependencies));
 		newTemplate = newTemplate.replace('#{patternName}', options.partialName);
 
 		return newTemplate;
