@@ -1,40 +1,33 @@
 'use strict';
- 
+
 var gulp = require('gulp');
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');  
-var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
+var path = require('path');
+var del = require('del');
+var connect = require('gulp-connect');
 
- 
-gulp.task('sass:navigation', function () {
-  return gulp.src('./core/modules/navigation/scss/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./public/styleguide/modules/navigation/css'));
+require('gulp-load')(gulp);
+
+gulp.loadTasks(__dirname + '/core/modules_gulp.js');
+gulp.loadTasks(__dirname + '/libs/engine_gulp.js');
+
+gulp.task('clean', function(cb) {
+	del.sync([
+		path.resolve('public/patterns', '*'),
+		path.resolve('public/markups', '*'),
+		path.resolve('public/data', '*')
+	], {force: true});
+	cb();
 });
 
-gulp.task('js:navigation', function(){
-	var dest = './public/styleguide/modules/navigation/js'
-    return gulp.src(['./core/modules/navigation/js/libs/zepto.js', './core/modules/navigation/js/libs/prism.js', './core/modules/navigation/js/main.js'])
-        .pipe(concat('scripts.js'))
-        .pipe(gulp.dest(dest))
-        .pipe(rename('scripts.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(dest))
+gulp.task('connect', function () {
+	connect.server({
+		root: ['public'],
+		port: 8080
+	});
 });
 
-gulp.task('copy:navigation', function () {
-	gulp.src('./core/modules/navigation/template/index.html', {
-			base: './core/'
-		})
-			.pipe(gulp.dest('./public/styleguide/'));
-});
+gulp.watch('./src/**/*.handlebars', ['engine']);
 
-gulp.task('watch', function() {
-	gulp.watch(['./core/modules/navigation/js/**/*.js'], ['js:navigation']);
-	gulp.watch(['./core/modules/navigation/scss/**/*.scss'], ['sass:navigation']);
-	gulp.watch(['./core/modules/navigation/template/**/*.html'], ['copy:navigation']);
-});
-
-gulp.task('default', ['sass:navigation', 'js:navigation', 'copy:navigation', 'watch']);
+gulp.task('navigation', ['sass:navigation', 'js:navigation', 'copy:navigation', 'watch:navigation']);
+gulp.task('default', ['engine']);
+gulp.task('server', ['engine', 'connect']);

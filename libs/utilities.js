@@ -27,10 +27,10 @@ module.exports = {
 var getRootPath = function () {
 	var rootPath;
 	if (isTest) {
-		rootPath = path.dirname(require.main.filename).replace(path.sep + 'libs', '');
+		rootPath = __dirname.replace(path.sep + 'libs', '');
 	}
 	else {
-		rootPath = path.dirname(require.main.filename).replace(path.sep + 'libs', '');
+		rootPath = __dirname.replace(path.sep + 'libs', '');
 	}
 	return rootPath;
 }
