@@ -32,7 +32,7 @@ democritus.core.main.prototype = {
 	addCode: function () {
 		var parent = this;
 		Zepto.ajax({
-			url: '/markups/' + democritus.i.patternName,
+			url: '/markups/' + democritus.i.patternName + '.html',
 			success: function (data) {
 				parent.code = parent.wrapper.find('.democritus-code')
 				parent.code.append(data);
@@ -74,8 +74,6 @@ democritus.core.main.prototype = {
 		var target = Zepto('#democritus-dependencies-list');
 		var d = [];
 
-		console.log(dependencies.length);
-
 		if (dependencies.length === 0) {
 			return Zepto('.democritus-info-bar--patterns').hide();
 		}
@@ -89,6 +87,109 @@ democritus.core.main.prototype = {
 	}
 }
 
+democritus.core.menu = function () {
+	this.init();
+}
+
+democritus.core.menu.prototype = {
+	init: function () {
+		var parent = this;
+		Zepto.ajax({
+			url: '/data/patterns.json',
+			success: function(data) {
+				parent.renderMenu(data);
+			}
+		});
+	},
+
+	renderMenu: function (data) {
+		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'];
+		var menu = Zepto('<ul></ul>').addClass('democritus-patterns-menu');
+		var activationBtn = Zepto('<a href="javascript:;">+</a>').addClass('democritus-patterns-activation');
+		Zepto('#democritus').append(activationBtn).append(menu);
+		var list;
+
+		menu.append('<li><a href="javascript:;" class="democritus-patterns-deactivation">X</a></li>')
+
+		for (var i = 0; i < menuArr.length; i++) {
+			list = Zepto('<li><a href="javascript:;">' + menuArr[i] + '</a></li>').data('item', menuArr[i]);
+			submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
+			list.append(submenu);
+			menu.append(list);
+		}
+
+		this.bind(menu, activationBtn);
+	},
+
+	createMenuItem: function (data, property) {
+		var list;
+		var objLen;
+		var menuItem = Zepto('[data-item="' + property + '"]');
+		var ul = Zepto('<ul></ul>');
+
+		for (var item in data) {
+			objLen = Object.size(data[item]);
+
+			if (typeof data[item] === 'string') {
+				list = Zepto('<li><a href="' + data[item] + '">' + item + '</a></li>');
+			} else if (typeof data[item] === 'object' && objLen > 0) {
+				list = Zepto('<li><a href="javascript:;">' + item + '</a></li>').data('item', item);
+				list.append(this.createMenuItem(data[item], item));
+			}
+
+			ul.append(list);
+		}
+
+		if (ul.children().length > 0) {
+			return ul;
+		}
+
+		return false;
+	},
+
+	bind: function (menu, activationBtn) {
+		var parent = this;
+		var path = window.location.pathname;
+
+		menu.find('[data-item] > a').click(function () {
+			// menu.find('ul').removeClass('active');
+			var subMenu = Zepto(this).parent().children('ul');
+			subMenu.toggleClass('active');
+		});
+
+		menu.find('a').each(function () {
+			var anchor = Zepto(this);
+			if (anchor.attr('href') == path) {
+				anchor.parent().addClass('current');
+				parent.showElement(anchor);
+			}
+		});
+
+		activationBtn.click(function () {
+			menu.addClass('visible');
+		});
+
+		Zepto('.democritus-patterns-deactivation').click(function () {
+			menu.removeClass('visible');
+		});
+	},
+
+	showElement: function (element) {
+		var uls = element.parents('ul:not(.democritus-patterns-menu)')
+		uls.addClass('active');
+	}
+}
+
 window.onload = function () {
 	new democritus.core.main();
+	new democritus.core.menu();
+};
+
+
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
 };
