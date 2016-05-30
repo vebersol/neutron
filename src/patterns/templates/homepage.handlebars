@@ -4,16 +4,16 @@
 		{{#if emergency }}
 			{{> molecules/messaging/alert }}
 		{{/if }}
-		{{#if hero }}
+		{{#each hero }}
 			{{> molecules/blocks/block-hero }}
-		{{/if}}
+		{{/each}}
 
 		<div class="g g-3up">
-			{{#if touts}}
+			{{#each touts}}
 				<div class="gi">
 					{{> molecules/blocks/inset-block }}
 				</div>
-			{{/if}}
+			{{/each}}
 		</div><!--end 3up-->
 
 		<hr />
@@ -23,9 +23,9 @@
 				<section class="section latest-posts">
 					<h2 class="section-title">Latest Posts</h2>
 					<ul class="post-list">
-						{{#if latest-posts }}
+						{{#each latest-posts }}
 							<li>{{> molecules/blocks/media-block }}</li>
-						{{/if }}
+						{{/each }}
 					</ul>
 					<a href="#" class="text-btn">View more posts</a>
 				</section>
