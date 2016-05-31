@@ -181,11 +181,8 @@ var engine = function () {
 	}
 
 	function cleanPaths(callback) {
-		// fse.removeSync(u.settings.publicPatternsPath);
 		fse.mkdirsSync(u.settings.publicPatternsPath);
-		// fse.removeSync(u.settings.publicMarkupsPath);
 		fse.mkdirsSync(u.settings.publicMarkupsPath);
-		// fse.removeSync(u.settings.publicDataPath);
 		fse.mkdirsSync(u.settings.publicDataPath);
 		callback();
 	}
