@@ -26,7 +26,22 @@ gulp.task('connect', function () {
 	});
 });
 
-gulp.watch(['./src/**/*.handlebars', './core/*.html'], ['engine']);
+gulp.task('engine-watch', ['engine'], function (cb) {
+	cb();
+});
+
+gulp.watch(
+    [
+      './src/patterns/*.handlebars',
+      './src/layouts/*.handlebars',
+      './src/patterns/*.json',
+      './src/css/*.css',
+      './src/data/*.json',
+    ],
+    ['engine-watch']
+);
+
+// gulp.watch(['./src/**/*.handlebars', './core/*.html'], ['engine']);
 gulp.watch('./core/modules/navigation/js/**/*.js', ['js:navigation']);
 gulp.watch('./core/modules/navigation/scss/**/*.scss', ['sass:navigation']);
 gulp.watch('./core/modules/navigation/template/**/*.html', ['copy:navigation']);

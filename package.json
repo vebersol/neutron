@@ -4,7 +4,7 @@
 	"description": "An atomic design based system!",
 	"main": "index.js",
 	"scripts": {
-		"test": "./node_modules/.bin/jasmine",
+		"test": "./node_modules/.bin/gulp engine",
 		"coverage": "./node_modules/.bin/istanbul cover ./node_modules/jasmine/bin/jasmine.js"
 	},
 	"repository": {
