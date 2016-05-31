@@ -208,28 +208,29 @@ democritus.core.menu.prototype = {
 	},
 
 	bindSearch: function () {
-		var timer;
-		var input = Zepto('.democritus-search-wrapper input');
+		var timer,
+				input = Zepto('.democritus-search-wrapper input');
 
 		input.blur();
 
 		input.on('keyup', function (ev) {
 			clearTimeout(timer);
 			timer = setTimeout(function () {
-				var value = Zepto(ev.target).val();
-				var anchors = Zepto('.democritus-patterns-menu > li a');
-				console.log(anchors)
+				var value = Zepto(ev.target).val(),
+						anchors = Zepto('.democritus-patterns-menu > li a');
+				
 				Zepto('.democritus-patterns-menu li').hide();				
 				anchors.each(function () {
-					var element = Zepto(this);
-					var text = element.text().toLowerCase();
+					var element = Zepto(this),
+							text = element.text().toLowerCase();
+
 					if (text.indexOf(value) !== -1) {
 						element.parent().show();
 						element.parents('li').each(function () {
-							$(this).show();
+							Zepto(this).show();
 						});
 					}
-				});
+				});				
 			}, 500);
 		});
 	}
