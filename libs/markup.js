@@ -1,10 +1,8 @@
 var htmlEscape = require('html-escape');
 var handlebars = require('handlebars');
 
-var markup = function () {};
-
-markup.prototype = {
-	addMarkup: function (source, data) {
+var markup = function () {
+	function addMarkup(source, data) {
 		var html = [];
 		html.push('<ul class="democritus-code--list">');
 		html.push('<li data-target="#html"><pre><code class="language-html">');
@@ -16,6 +14,10 @@ markup.prototype = {
 		html.push('</ul>');
 
 		return html.join('');
+	}
+
+	return {
+		addMarkup: addMarkup
 	}
 }
 

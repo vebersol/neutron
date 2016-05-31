@@ -24,9 +24,9 @@ var engine = function () {
 		templates: {},
 		pages: {}
 	};
-	var partials = new pa();
-	var markup = new mkp();
-	var layoutHandler = new lh();
+	var partials = pa();
+	var markup = mkp();
+	var layoutHandler = lh();
 
 	function init () {
 		layoutHandler.getLayouts();

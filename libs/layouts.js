@@ -5,31 +5,33 @@ var handlebars = require('handlebars');
 var u = require('./utilities');
 
 var layoutHandler = function () {
-	this.layouts = {};
-}
+	var layouts = {};
 
-layoutHandler.prototype = {
-	getLayouts: function (source, layout) {
+	function getLayouts(source, layout) {
 		var layoutName = layout ? layout : u.settings.defaultLayoutName;
-		var parent = this;
 
 		fse.walk(u.settings.layoutsDir)
 			.on('data', function(file) {
 				if (path.extname(file.path) === u.settings.fileExtension) {
 					fse.readFile(file.path, u.settings.encode, function(err, layoutSource) {
-						parent.layouts[layoutName] = layoutSource;
+						layouts[layoutName] = layoutSource;
 					});
 				}
 			});
 
 			return true;
-	},
+	}
 
-	addLayout: function (source, layout) {
+	function addLayout(source, layout) {
 		var layoutName = layout ? layout : 'application';
-		var layout = this.layouts[layoutName];
+		var layout = layouts[layoutName];
 
 		return layout.replace('{{> yield }}', source);
+	}
+
+	return {
+		addLayout: addLayout,
+		getLayouts: getLayouts
 	}
 }
 

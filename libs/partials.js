@@ -4,27 +4,25 @@ var path = require('path');
 var u = require('./utilities');
 
 partials = function () {
-	this.registeredPartials = [];
-};
+	var registeredPartials = [];
 
-partials.prototype = {
-	getPartialName: function (filePath) {
+	function getPartialName(filePath) {
 		var breakPath = filePath.split('patterns' + u.DS);
 		return breakPath[1]
 			.replace(u.settings.fileExtension, '')
 			.replace(/\\/g, '/');
-	},
+	}
 
-	setPartial: function (name, source) {
+	function setPartial(name, source) {
 		handlebars.registerPartial(name, source);
-	},
+	}
 
-	getPartialsData: function (source, data, patternsData) {
+	function getPartialsData(source, data, patternsData) {
 		var regex = /{{>(.*?)}}/g,
 			match = source.match(regex),
 			newData = data;
 
-		var partialNames = this.getPartialsNames(match);
+		var partialNames = getPartialsNames(match);
 		var totalPartials = partialNames.length;
 
 		for (var i = 0; i < totalPartials; i++) {
@@ -37,9 +35,9 @@ partials.prototype = {
 			data: newData,
 			partials: partialNames.removeDuplicates()
 		};
-	},
-
-	getPartialsNames: function (match) {
+	}
+	
+	function getPartialsNames(match) {
 		var partialNames = [];
 
 		if (match) {
@@ -51,6 +49,14 @@ partials.prototype = {
 			});
 		}
 		return partialNames;
+	}
+
+	return {
+		registeredPartials: registeredPartials,
+		getPartialName: getPartialName,
+		getPartialsNames: getPartialsNames,
+		setPartial: setPartial,
+		getPartialsData: getPartialsData
 	}
 };
 
