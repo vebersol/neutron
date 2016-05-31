@@ -2,16 +2,21 @@
 @import "prism";
 
 $prefix: democritus;
+
 $bgcolor: #333;
 $txtcolor: #CCC;
 $tab: #CCC;
 $tab-active: #272822;
+$activeNavigation: orange;
+
 $buttonSize: 33px;
 $gap: 2px;
 $menuWidth: 173px;
 
-.fa span {
-	display: none;
+.fa {
+	span {
+		display: none;
+	}
 }
 
 .#{$prefix}-code-frame,
@@ -20,7 +25,8 @@ $menuWidth: 173px;
 		@include prefix(box-sizing, border-box);
 	}
 	
-	a, p {
+	a:not(.fa),
+	p {
 		font-family: Arial, sans-serif;
 	}
 
@@ -74,7 +80,7 @@ $menuWidth: 173px;
 		}
 
 		&.active {
-			color: orange;
+			color: $activeNavigation;
 		}
 	}	
 }
@@ -166,15 +172,14 @@ $menuWidth: 173px;
 	}
 
 	&--close {
-		text-align: right;
-		text-transform: uppercase;
+		text-align: right;		
+		position: fixed;
+		right: 33px;
 
 		&__link {
 			color: $txtcolor;
-			text-decoration: none;
 			&:hover {
-				color: $txtcolor;
-				text-decoration: underline;
+				color: $txtcolor;				
 			}
 		}
 	}
