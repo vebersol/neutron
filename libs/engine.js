@@ -32,9 +32,9 @@ var engine = function () {
 
 	function init () {
 		layoutHandler.getLayouts();
-		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), 'utf8'));
-		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), 'utf8');
-		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), 'utf8');
+		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
+		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
+		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
 		cleanPaths(walkPartials);
 	}
 
@@ -261,7 +261,7 @@ var engine = function () {
 	}
 
 	function renderTemplate() {
-		var indexSource = fse.readFileSync(path.resolve(u.rootPath + '/core/modules/templates/index.handlebars'), 'utf8');
+		var indexSource = fse.readFileSync(u.getPath(settings.paths.core.templates, 'index.handlebars'), settings.encode);
 		var indexTemplate = handlebars.compile(indexSource);
 
 		var engineFooter = addEngineSnippets({
