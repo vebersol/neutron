@@ -99,7 +99,6 @@ democritus.core.menu.prototype = {
 				menu = Zepto('<ul></ul>').addClass('democritus-patterns-menu'),
 				list;		
 
-
 		for (var i = 0; i < menuArr.length; i++) {
 			list = Zepto('<li><a href="javascript:;">' + menuArr[i] + '</a></li>').data('item', menuArr[i]);
 			submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
@@ -161,7 +160,7 @@ democritus.core.menu.prototype = {
 
 			if (nav.hasClass('active')) {
 				element.removeClass('fa-compress');
-				Zepto('.democritus-patterns-menu').removeClass('active');
+				Zepto('.democritus-patterns-menu, .democritus-navigation--menu').removeClass('active');
 			} else {
 				element.addClass('fa-compress');
 			}
@@ -194,10 +193,9 @@ democritus.core.menu.prototype = {
 		});
 
 		Zepto('.democritus-code-frame--close__link').on('click', function () {
-			var infoBar = Zepto('.democritus-code-frame'),
-			 		bars = Zepto('.democritus-start-button, .democritus-navigation, .democritus-patterns-menu');
+			var	bars = Zepto('.democritus-start-button, .democritus-navigation, .democritus-patterns-menu');
 
-			infoBar.removeClass('active');
+			Zepto('.democritus-code-frame, .democritus-navigation--code').removeClass('active');
 			bars.removeClass('democritus-frame-active');
 		});
 	},

@@ -14,29 +14,6 @@ $menuWidth: 173px;
 	display: none;
 }
 
-#democritus ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;	
-
-	[data-item] > a {
-		color: #CCC;
-		text-transform: uppercase;
-	}
-
-	li {
-		padding-left: 5px;
-		
-		a {
-			font-family: Arial, sans-serif;
-			display: block;
-			padding: 5px;
-			color: orange;
-		}
-	}
-}
-
-
 .#{$prefix}-code-frame,
 .#{$prefix}-patterns-menu {
 	* {
@@ -50,12 +27,6 @@ $menuWidth: 173px;
 	a {
 		text-decoration: none;
 	}
-}
-
-.#{$prefix}-start-button,
-.#{$prefix}-navigation,
-.#{$prefix}-patterns-menu {
-	transition: left 0.5s ease-out, bottom 0.5s ease-out;
 }
 
 .#{$prefix}-start-button {
@@ -110,10 +81,34 @@ $menuWidth: 173px;
 
 .#{$prefix}-start-button,
 .#{$prefix}-navigation {
-	transition: left 0.5s ease-out, bottom 0.5s ease-out;
+	@include prefix(transition, bottom 0.5s ease-out);
+	@include prefix(transition, left 0.5s ease-out);
 
 	&.#{$prefix}-frame-active {
 		bottom: calc(50% + 2px);
+	}
+}
+
+.#{$prefix}-patterns-menu,
+.#{$prefix}-patterns-menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;	
+
+	[data-item] > a {
+		color: #CCC;
+		text-transform: uppercase;
+	}
+
+	li {
+		padding-left: 5px;
+		
+		a {
+			font-family: Arial, sans-serif;
+			display: block;
+			padding: 5px;
+			color: orange;
+		}
 	}
 }
 
@@ -127,7 +122,8 @@ $menuWidth: 173px;
 	background-color: $bgcolor;
 	margin: 0;
 	color: $txtcolor;
-	@include prefix(transition, left 0.5s);
+	@include prefix(transition, height 0.5s);
+	@include prefix(transition, left 0.5s ease-out);
 	@include prefix(box-sizing, border-box);
 
 	&.active {
@@ -142,6 +138,14 @@ $menuWidth: 173px;
 		display: none;
 		&.active {
 			display: block;
+		}
+	}
+
+	&.search-active {
+		padding-bottom: $s + $gap + 20px;
+
+		.democritus-search-wrapper {
+			left: 0;
 		}
 	}
 }
@@ -241,15 +245,16 @@ $menuWidth: 173px;
 .#{$prefix}-search-wrapper {
 	position: absolute;
 	bottom: 0;
-	left: 15% * -1;
-	transition: left 0.5s ease-out, bottom 0.5s ease-out;
+	left: $menuWidth * -1;
+	@include prefix(transition, bottom 0.5s ease-out);
+	@include prefix(transition, left 0.5s ease-out);
 	z-index: 3;
 
 	.democritus-search {
 		position: relative;
 		background-color: $bgcolor;
 		padding: 10px;
-		width: 15%;
+		width: $menuWidth;
 
 		input {
 			border-radius: 0;
