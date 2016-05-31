@@ -41,9 +41,24 @@ democritus.core.main.prototype = {
 					parent.code.find('.democritus-code--nav li:first-child').addClass('active');
 					parent.code.find('.democritus-code--list li[data-target]:last-child').hide();
 
+
+					var codeList = Zepto('.democritus-code--list li');
+
 					if (Prism) {
-						Prism.highlightElement(Zepto('.democritus-code--list li pre code.language-html').get(0));
-						Prism.highlightElement(Zepto('.democritus-code--list li pre code.language-handlebars').get(0));
+						Prism.highlightElement(codeList.find('pre code.language-html').get(0));
+						Prism.highlightElement(codeList.find('pre code.language-handlebars').get(0));
+						
+						var documentationItem = parent.code.find('.democritus-code--list li[data-target="#documentation"]');
+						var documentationNavItem = parent.code.find('.democritus-code--nav li a[href="#documentation"]');
+						if (documentationItem.length > 0) {
+							var docsCode = codeList.find('.democritus-code--documentation code');
+							docsCode.addClass('language-html');
+							if (docsCode.length > 0) {
+								Prism.highlightElement(docsCode.get(0));
+							}
+						} else {
+							documentationNavItem.parent().remove();
+						}
 					}
 
 					parent.bindTabs();
@@ -82,7 +97,7 @@ democritus.core.main.prototype = {
 
 		for (var i = 0; i < dependencies.length; i++) {
 			dependencies[i]
-			d.push('<a href="' + dependencies[i].path.replace('./', '/patterns/') + '">' + dependencies[i].partial + '</a>');
+			d.push('<a href="' + dependencies[i].path.replace('/', '/patterns/') + '">' + dependencies[i].partial + '</a>');
 		}
 
 		target.append(d.join(', '));

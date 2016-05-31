@@ -106,7 +106,6 @@ var engine = function () {
 			markup: markups
 		};
 
-
 		addToTree(partialName, end);
 		renderFile(output);
 	}
