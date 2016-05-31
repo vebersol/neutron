@@ -5,6 +5,8 @@ var handlebars = require('handlebars');
 var object_merge = require('object-merge');
 var sort_object = require('sort-object');
 
+var settings = require('../democritus.json');
+
 var u = require('./utilities');
 var pa = require('./partials');
 var lh = require('./layouts');
@@ -30,16 +32,16 @@ var engine = function () {
 
 	function init () {
 		layoutHandler.getLayouts();
-		globalData = JSON.parse(fse.readFileSync(path.resolve(u.settings.globalDataDir + '/global.json'), 'utf8'));
-		header = fse.readFileSync(path.resolve(u.rootPath + '/core/header.html'), 'utf8');
-		footer = fse.readFileSync(path.resolve(u.rootPath + '/core/footer.html'), 'utf8');
+		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), 'utf8'));
+		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), 'utf8');
+		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), 'utf8');
 		cleanPaths(walkPartials);
 	}
 
 	function getPatterns() {
-		return fse.walk(u.settings.patternsDir)
+		return fse.walk(settings.paths.src.patterns)
 			.on('data', function (file) {
-				if (path.extname(file.path) === u.settings.fileExtension) {
+				if (path.extname(file.path) === settings.fileExtension) {
 					patternFiles.push(file);
 				}
 			})
@@ -55,7 +57,7 @@ var engine = function () {
 
 			patternFiles.forEach(function (file, i) {
 				getData(file.path, function (data) {
-					fse.readFile(file.path, u.settings.encode, function(err, source) {
+					fse.readFile(file.path, settings.encode, function(err, source) {
 						if (source) {
 							var extendedData = Object.assign({}, globalData, data);
 
@@ -114,7 +116,7 @@ var engine = function () {
 		options.partials.forEach(function (k, i) {
 			dependencies.push({
 				partial: k,
-				path: u.settings.webPath + k + '.html'
+				path: settings.http.root + k + '.html'
 			});
 		});
 
@@ -125,7 +127,7 @@ var engine = function () {
 	}
 
 	function getData(fileName, callback) {
-		var jsonFile = fileName.replace(u.settings.fileExtension, '.json');
+		var jsonFile = fileName.replace(settings.fileExtension, '.json');
 
 		fse.stat(jsonFile, function(err, stat) {
 			var jsonData;
@@ -142,16 +144,17 @@ var engine = function () {
 	}
 
 	function renderFile(fileInfo, file) {
-		var partialName = u.DS !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : fileInfo.partialName;
-		var filePath = u.rootPath + u.DS + 'public' + u.DS + 'patterns' + u.DS + partialName + '.html';
-		var fileArr = filePath.split(u.DS);
+		var DS = path.sep;
+		var partialName = DS !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : fileInfo.partialName;
+		var filePath = u.getPath(settings.paths.public.patterns, partialName + '.html');
+		var fileArr = filePath.split(DS);
 		var fileName = fileArr[fileArr.length - 1];
 
 		fileArr.pop();
 
-		var patternPath = fileArr.join(u.DS);
-		var patterns = u.DS + 'patterns' + u.DS;
-		var markups = u.DS + 'markups' + u.DS;
+		var patternPath = fileArr.join(DS);
+		var patterns = DS + 'patterns' + DS;
+		var markups = DS + 'markups' + DS;
 
 		fse.mkdirs(patternPath, function (err) {
 			fse.outputFile(filePath, fileInfo.html, function (err) {
@@ -181,15 +184,15 @@ var engine = function () {
 	}
 
 	function cleanPaths(callback) {
-		fse.mkdirsSync(u.settings.publicPatternsPath);
-		fse.mkdirsSync(u.settings.publicMarkupsPath);
-		fse.mkdirsSync(u.settings.publicDataPath);
+		fse.mkdirsSync(settings.paths.public.patterns);
+		fse.mkdirsSync(settings.paths.public.markups);
+		fse.mkdirsSync(settings.paths.public.data);
 		callback();
 	}
 
 	function addToTree(partial, end) {
 		var arr = partial.split('/');
-		var url = u.settings.publicPatternsUrl + '/' + partial + '.html';
+		var url = settings.http.patterns + partial + '.html';
 		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
 			var obj = {}
 			if (array.length - 2 === currentIndex && !obj.hasOwnProperty(currentValue)) {
@@ -217,7 +220,7 @@ var engine = function () {
 			patternsTree[obj] = sort_object(patternsTree[obj], {sortOrder: 'ASC'});
 		}
 
-		fse.writeFile(u.settings.publicDataPath + u.DS +  'patterns.json', JSON.stringify(patternsTree), function(err, data) {
+		fse.writeFile(u.getPath(settings.paths.public.data, 'patterns.json'), JSON.stringify(patternsTree), function(err, data) {
 			if (err) {
 				return console.log(err);
 			}
@@ -229,9 +232,9 @@ var engine = function () {
 	}
 
 	function walkPartials() {
-		return fse.walk(u.settings.patternsDir)
+		return fse.walk(u.getPath(settings.paths.src.patterns))
 			.on('data', function (file) {
-				if (path.extname(file.path) === u.settings.fileExtension) {
+				if (path.extname(file.path) === settings.fileExtension) {
 					partials.registeredPartials.push(file);
 				}
 			})
@@ -244,7 +247,7 @@ var engine = function () {
 		var totalPartials = partials.registeredPartials.length;
 
 		partials.registeredPartials.forEach(function (file, i) {
-			fse.readFile(file.path, u.settings.encode, function(err, source) {
+			fse.readFile(file.path, settings.encode, function(err, source) {
 				if (source) {
 					var partialName = partials.getPartialName(file.path);
 					partials.setPartial(partialName, source);
@@ -268,7 +271,7 @@ var engine = function () {
 
 		var indexHTML = indexTemplate({engineHeader: header, engineFooter: engineFooter});
 
-		fse.outputFile(path.resolve(u.settings.publicPath + '/index.html'), indexHTML, function (err) {
+		fse.outputFile(u.getPath(settings.paths.public.root, 'index.html'), indexHTML, function (err) {
 			if (err) {
 				u.log(err, 'error');
 			}

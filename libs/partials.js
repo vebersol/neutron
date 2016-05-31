@@ -1,15 +1,18 @@
 var handlebars = require('handlebars');
 var fse = require('fs-extra');
 var path = require('path');
+
+var settings = require('../democritus.json');
+
 var u = require('./utilities');
 
 partials = function () {
 	var registeredPartials = [];
 
 	function getPartialName(filePath) {
-		var breakPath = filePath.split('patterns' + u.DS);
+		var breakPath = filePath.split('patterns' + path.sep);
 		return breakPath[1]
-			.replace(u.settings.fileExtension, '')
+			.replace(settings.fileExtension, '')
 			.replace(/\\/g, '/');
 	}
 
