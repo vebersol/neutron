@@ -1,10 +1,10 @@
 module.exports = function(gulp) {
 	var sass = require('gulp-sass');
 	var concat = require('gulp-concat');
-	var rename = require('gulp-rename');  
+	var rename = require('gulp-rename');
 	var uglify = require('gulp-uglify');
 	var sourcemaps = require('gulp-sourcemaps');
-	
+
 	gulp.task('sass:navigation', function() {
 		return gulp.src('./core/modules/navigation/scss/*.scss')
 			.pipe(sass().on('error', sass.logError))
@@ -26,11 +26,5 @@ module.exports = function(gulp) {
 			base: './core/'
 		})
 			.pipe(gulp.dest('./public/styleguide/'));
-	});
-
-	gulp.task('watch:navigation', function() {
-		gulp.watch(['./core/modules/navigation/js/**/*.js'], ['js:navigation']);
-		gulp.watch(['./core/modules/navigation/scss/**/*.scss'], ['sass:navigation']);
-		gulp.watch(['./core/modules/navigation/template/**/*.html'], ['copy:navigation']);
 	});
 }

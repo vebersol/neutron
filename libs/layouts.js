@@ -2,34 +2,39 @@ var fse = require('fs-extra');
 var path = require('path');
 var util = require('util');
 var handlebars = require('handlebars');
+
+var settings = require('../democritus.json');
+
 var u = require('./utilities');
 
 var layoutHandler = function () {
-	this.layouts = {};
-}
+	var layouts = {};
 
-layoutHandler.prototype = {
-	getLayouts: function (source, layout) {
-		var layoutName = layout ? layout : u.settings.defaultLayoutName;
-		var parent = this;
+	function getLayouts(source, layout) {
+		var layoutName = layout ? layout : settings.defaultLayoutName;
 
-		fse.walk(u.settings.layoutsDir)
+		fse.walk(settings.paths.src.layouts)
 			.on('data', function(file) {
-				if (path.extname(file.path) === u.settings.fileExtension) {
-					fse.readFile(file.path, u.settings.encode, function(err, layoutSource) {
-						parent.layouts[layoutName] = layoutSource;
+				if (path.extname(file.path) === settings.fileExtension) {
+					fse.readFile(file.path, settings.encode, function(err, layoutSource) {
+						layouts[layoutName] = layoutSource;
 					});
 				}
 			});
 
 			return true;
-	},
+	}
 
-	addLayout: function (source, layout) {
+	function addLayout(source, layout) {
 		var layoutName = layout ? layout : 'application';
-		var layout = this.layouts[layoutName];
+		var layout = layouts[layoutName];
 
 		return layout.replace('{{> yield }}', source);
+	}
+
+	return {
+		addLayout: addLayout,
+		getLayouts: getLayouts
 	}
 }
 

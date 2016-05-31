@@ -26,8 +26,18 @@ gulp.task('connect', function () {
 	});
 });
 
-gulp.watch('./src/**/*.handlebars', ['engine']);
+gulp.watch([
+	'./src/patterns/**/*.handlebars',
+    './src/layouts/**/*.handlebars',
+    './src/patterns/**/*.json',
+    './src/css/**/*.css',
+    './src/data/**/*.json'
+], ['engine']);
 
-gulp.task('navigation', ['sass:navigation', 'js:navigation', 'copy:navigation', 'watch:navigation']);
-gulp.task('default', ['engine']);
-gulp.task('server', ['engine', 'connect']);
+gulp.watch('./core/modules/navigation/js/**/*.js', ['js:navigation']);
+gulp.watch('./core/modules/navigation/scss/**/*.scss', ['sass:navigation']);
+gulp.watch('./core/modules/navigation/template/**/*.html', ['copy:navigation']);
+
+gulp.task('navigation', ['sass:navigation', 'js:navigation', 'copy:navigation']);
+gulp.task('default', ['navigation', 'engine']);
+gulp.task('server', ['navigation', 'engine', 'connect']);

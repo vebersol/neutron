@@ -1,11 +1,29 @@
 {
-	"globalDataDir": "#{rootPath}/src/data",
-	"patternsDir": "#{rootPath}/src/patterns",
 	"fileExtension": ".handlebars",
 	"encode": "utf8",
-	"publicDataPath": "#{rootPath}/public/data",
-	"publicPatternsPath": "#{rootPath}/public/patterns",
-	"layoutsDir": "#{rootPath}/src/layouts",
 	"defaultLayoutName": "application",
-	"webPath": "./"
+	"paths": {
+		"core": {
+			"root": "./core/",
+			"templates": "./core/modules/templates/"
+		},
+		"src": {
+			"root": "./src/",
+			"data": "./src/data/",
+			"patterns": "./src/patterns/",
+			"layouts": "./src/layouts/"
+		},
+		"public": {
+			"root": "./public/",
+			"data": "./public/data/",
+			"patterns": "./public/patterns/",
+			"markups": "./public/markups/"
+		}
+
+	},
+	"http": {
+		"root": "/",
+		"patterns": "/patterns/",
+		"markups": "/markups/"
+	}
 }

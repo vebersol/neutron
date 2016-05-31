@@ -3,9 +3,9 @@
 		<h2 class="section-title">59 Comments</h2>
 		{{> molecules/forms/comment-form }}
 		<ul class="comment-list">
-			{{#listItems.five}}
+			{{#each listItems}}
 				{{> molecules/components/single-comment }}
-			{{/listItems.five}}
+			{{/each}}
 		</ul>
 	</div>
 	{{> molecules/navigation/pagination }}

@@ -7,9 +7,9 @@
 				<section class="section latest-posts">
 
 					<ul class="post-list">
-						{{#if latest-posts}}
+						{{#each latest-posts}}
 							<li>{{> molecules/blocks/media-block }}</li>
-						{{/if}}
+						{{/each}}
 					</ul>
 					<a href="#" class="text-btn">View more posts</a>
 				</section>
