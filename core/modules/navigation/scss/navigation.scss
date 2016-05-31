@@ -142,7 +142,7 @@ $menuWidth: 173px;
 	}
 
 	&.search-active {
-		padding-bottom: $s + $gap + 20px;
+		padding-bottom: $buttonSize + $gap + 20px;
 
 		.democritus-search-wrapper {
 			left: 0;
