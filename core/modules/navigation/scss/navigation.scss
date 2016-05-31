@@ -142,11 +142,7 @@ $menuWidth: 173px;
 	}
 
 	&.search-active {
-		padding-bottom: $buttonSize + $gap + 20px;
-
-		.democritus-search-wrapper {
-			left: 0;
-		}
+		height: calc(100% - 90px);		
 	}
 }
 
@@ -243,18 +239,23 @@ $menuWidth: 173px;
 }
 
 .#{$prefix}-search-wrapper {
-	position: absolute;
-	bottom: 0;
+	position: fixed;
+	bottom: 35px;
 	left: $menuWidth * -1;
+	z-index: 3;
 	@include prefix(transition, bottom 0.5s ease-out);
 	@include prefix(transition, left 0.5s ease-out);
-	z-index: 3;
+
+	&.active {
+		left: 0;
+	}
 
 	.democritus-search {
 		position: relative;
 		background-color: $bgcolor;
 		padding: 10px;
 		width: $menuWidth;
+		@include prefix(box-sizing, border-box);
 
 		input {
 			border-radius: 0;

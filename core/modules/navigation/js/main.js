@@ -109,6 +109,7 @@ democritus.core.menu.prototype = {
 		Zepto('.democritus-sticky-nav').append(menu);
 		
 		this.bind(menu);
+		this.bindSearch();
 	},
 
 	createMenuItem: function (data, property) {
@@ -173,9 +174,10 @@ democritus.core.menu.prototype = {
 			menu.toggleClass('active');
 		});
 
-		Zepto('.democritus-navigation--search').click(function () {
+		Zepto('.democritus-navigation--search').click(function () {			
 			Zepto(this).toggleClass('active');
 			Zepto('.democritus-patterns-menu').toggleClass('search-active');
+			Zepto('.democritus-search-wrapper').toggleClass('active');
 		});
 
 		Zepto('.democritus-navigation--code').click(function () {
@@ -203,6 +205,33 @@ democritus.core.menu.prototype = {
 	showElement: function (element) {
 		var uls = element.parents('ul:not(.democritus-patterns-menu)')
 		uls.addClass('active');
+	},
+
+	bindSearch: function () {
+		var timer;
+		var input = Zepto('.democritus-search-wrapper input');
+
+		input.blur();
+
+		input.on('keyup', function (ev) {
+			clearTimeout(timer);
+			timer = setTimeout(function () {
+				var value = Zepto(ev.target).val();
+				var anchors = Zepto('.democritus-patterns-menu > li a');
+				console.log(anchors)
+				Zepto('.democritus-patterns-menu li').hide();				
+				anchors.each(function () {
+					var element = Zepto(this);
+					var text = element.text().toLowerCase();
+					if (text.indexOf(value) !== -1) {
+						element.parent().show();
+						element.parents('li').each(function () {
+							$(this).show();
+						});
+					}
+				});
+			}, 500);
+		});
 	}
 }
 
