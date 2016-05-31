@@ -30,4 +30,4 @@ gulp.watch('./src/**/*.handlebars', ['engine']);
 
 gulp.task('navigation', ['sass:navigation', 'js:navigation', 'copy:navigation', 'watch:navigation']);
 gulp.task('default', ['engine']);
-gulp.task('server', ['engine', 'connect']);
+gulp.task('server', ['engine', 'connect', 'navigation']);

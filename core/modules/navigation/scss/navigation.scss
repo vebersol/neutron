@@ -6,21 +6,39 @@ $bgcolor: #333;
 $txtcolor: #CCC;
 $tab: #CCC;
 $tab-active: #272822;
+$buttonSize: 33px;
+$gap: 2px;
+$menuWidth: 173px;
 
-.#{$prefix}-info-bar {
-	position: fixed;
-	left: 0;
-	bottom: -50%;
-	width: 100%;
-	height: 50%;
-	background: $bgcolor;
-	overflow-x: hidden;
-	overflow-y: auto;
-	z-index: 100;
-	@include prefix(box-sizing, border-box);
-	color: $txtcolor;
-	@include prefix(transition, bottom 0.5s);
+.fa span {
+	display: none;
+}
 
+#democritus ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;	
+
+	[data-item] > a {
+		color: #CCC;
+		text-transform: uppercase;
+	}
+
+	li {
+		padding-left: 5px;
+		
+		a {
+			font-family: Arial, sans-serif;
+			display: block;
+			padding: 5px;
+			color: orange;
+		}
+	}
+}
+
+
+.#{$prefix}-code-frame,
+.#{$prefix}-patterns-menu {
 	* {
 		@include prefix(box-sizing, border-box);
 	}
@@ -29,13 +47,123 @@ $tab-active: #272822;
 		font-family: Arial, sans-serif;
 	}
 
-	&.active {
-		bottom: 0;
+	a {
+		text-decoration: none;
 	}
 }
 
-.#{$prefix}-info-bar {
+.#{$prefix}-start-button,
+.#{$prefix}-navigation,
+.#{$prefix}-patterns-menu {
+	transition: left 0.5s ease-out, bottom 0.5s ease-out;
+}
+
+.#{$prefix}-start-button {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: $buttonSize;
+	height: $buttonSize;
+	color: white;
+	text-align: center;
+	background-color: $bgcolor;
+	line-height: $buttonSize !important;
+	z-index: 2;
+	text-decoration: none !important;
+
+	span {
+		display: none;
+	}
+}
+
+.#{$prefix}-navigation {
+	position: fixed;
+	bottom: 0;
+	left: (($buttonSize*3) + ($gap*3)) * -1;
+	z-index: 1;
+
+	&.active {
+		left: $buttonSize + $gap;
+	}
+
+	a {
+		float: left;
+		display: block;
+		width: $buttonSize;
+		height: $buttonSize;
+		background-color: $bgcolor;
+		color: white;
+		text-align: center;
+		line-height: $buttonSize;
+		margin-left: 2px;
+		text-decoration: none !important;
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		&.active {
+			color: orange;
+		}
+	}	
+}
+
+.#{$prefix}-start-button,
+.#{$prefix}-navigation {
+	transition: left 0.5s ease-out, bottom 0.5s ease-out;
+
+	&.#{$prefix}-frame-active {
+		bottom: calc(50% + 2px);
+	}
+}
+
+.#{$prefix}-patterns-menu {		
+	width: $menuWidth;
+	position: fixed;
+	top: 0;	
+	left: $menuWidth * -1;
+	height: calc(100% - 35px);
+	overflow: auto;		
+	background-color: $bgcolor;
+	margin: 0;
+	color: $txtcolor;
+	@include prefix(transition, left 0.5s);
+	@include prefix(box-sizing, border-box);
+
+	&.active {
+		left: 0;
+	}			
+
+	&.democritus-frame-active {
+		height: calc(50% - 37px);
+	}
+
+	ul {
+		display: none;
+		&.active {
+			display: block;
+		}
+	}
+}
+
+.#{$prefix}-code-frame {
+	position: fixed;
+	left: 0;
+	bottom: -50%;
+	width: 100%;
+	height: 50%;
+	background: $bgcolor;
+	overflow-x: hidden;
+	overflow-y: auto;
 	padding: 20px;
+	z-index: 100;
+	color: $txtcolor;
+	@include prefix(transition, bottom 0.5s);
+	@include prefix(box-sizing, border-box);
+
+	&.active {
+		bottom: 0;
+	}
 
 	&--close {
 		text-align: right;
@@ -106,6 +234,29 @@ $tab-active: #272822;
 			li {
 				overflow: auto;
 			}
+		}
+	}
+}
+
+.#{$prefix}-search-wrapper {
+	position: absolute;
+	bottom: 0;
+	left: 15% * -1;
+	transition: left 0.5s ease-out, bottom 0.5s ease-out;
+	z-index: 3;
+
+	.democritus-search {
+		position: relative;
+		background-color: $bgcolor;
+		padding: 10px;
+		width: 15%;
+
+		input {
+			border-radius: 0;
+			-webkit-appearance: none;
+			border: none;
+			width: 100%;
+			height: 33px;
 		}
 	}
 }
