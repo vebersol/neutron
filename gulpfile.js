@@ -14,9 +14,9 @@ gulp.loadTasks(u.getPath(settings.paths.libs.root, 'engine_gulp.js'));
 
 gulp.task('clean', function(cb) {
 	del.sync([
-		path.resolve(settings.paths.public.patterns, '*'),
+		path.resolve(settings.paths.public.data, '*'),
 		path.resolve(settings.paths.public.markups, '*'),
-		path.resolve(settings.paths.public.data, '*')
+		path.resolve(settings.paths.public.patterns, '*')
 	], {force: true});
 	cb();
 });
@@ -28,6 +28,34 @@ gulp.task('connect', function () {
 	});
 });
 
+gulp.task('copy:css', function() {
+		return gulp.src('**/*.css', {
+				cwd: gulp.src(u.getPath(settings.paths.src.css))
+			})
+			.pipe(gulp.dest(u.getPath(settings.paths.public.css)));
+});
+
+gulp.task('copy:images', function() {
+		return gulp.src(['**/*.gif', '**/*.jpg', '**/*.png', '**/*.svg'], {
+				cwd: gulp.src(u.getPath(settings.paths.src.images))
+			})
+			.pipe(gulp.dest(u.getPath(settings.paths.public.images)));
+});
+
+gulp.task('copy:js', function() {
+		return gulp.src('**/*.js', {
+				cwd: gulp.src(u.getPath(settings.paths.src.js))
+			})
+			.pipe(gulp.dest(u.getPath(settings.paths.public.js)));
+});
+
+gulp.task('copy:styleguide', function() {
+		return gulp.src(['**/*.css', '**/*.html', '**/*.js'], {
+				cwd: gulp.src(u.getPath(settings.paths.src.js))
+			})
+			.pipe(gulp.dest(u.getPath(settings.paths.public.js)));
+});
+
 gulp.watch([
 	u.getPath(settings.paths.src.patterns, '**/*.handlebars'),
 	u.getPath(settings.paths.src.patterns, '**/*.json'),
@@ -37,8 +65,9 @@ gulp.watch([
 
 gulp.watch('./core/modules/navigation/js/**/*.js', ['js:navigation']);
 gulp.watch('./core/modules/navigation/scss/**/*.scss', ['sass:navigation']);
-gulp.watch('./core/modules/navigation/template/**/*.html', ['copy:navigation']);
+gulp.watch('./core/modules/navigation/template/**/*.html', ['html:navigation']);
 
-gulp.task('navigation', ['sass:navigation', 'js:navigation', 'copy:navigation']);
-gulp.task('default', ['navigation', 'engine']);
-gulp.task('server', ['navigation', 'engine', 'connect']);
+gulp.task('copy:all', ['copy:js', 'copy:css', 'copy:images', 'copy:styleguide']);
+gulp.task('navigation', ['sass:navigation', 'js:navigation', 'html:navigation']);
+gulp.task('default', ['navigation', 'assets', 'engine']);
+gulp.task('server', ['navigation', 'assets', 'engine', 'connect']);

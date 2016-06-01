@@ -14,12 +14,18 @@
 			"root": "./src/",
 			"css": "./src/css/",
 			"data": "./src/data/",
+			"images": "./src/images/",
+			"js": "./src/js/",
 			"layouts": "./src/layouts/",
-			"patterns": "./src/patterns/"
+			"patterns": "./src/patterns/",
+			"styleguides": "./src/styleguide/"
 		},
 		"public": {
 			"root": "./public/",
+			"css": "./public/css/",
 			"data": "./public/data/",
+			"images": "./public/images/",
+			"js": "./public/js/",
 			"markups": "./public/markups/",
 			"patterns": "./public/patterns/",
 			"styleguides": "./public/styleguide/"
