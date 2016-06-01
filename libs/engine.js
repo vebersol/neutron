@@ -12,7 +12,7 @@ var pa = require('./partials');
 var lh = require('./layouts');
 var mkp = require('./markup');
 
-var engine = function () {
+var engine = function (cb) {
 	'use strict';
 	var globalData = {};
 	var header;
@@ -36,6 +36,13 @@ var engine = function () {
 		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
 		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
 		cleanPaths(walkPartials);
+	}
+
+	function onEnd() {
+		console.timeEnd('render duration');
+		if (cb) {
+			cb();
+		}
 	}
 
 	function getPatterns() {
@@ -107,7 +114,7 @@ var engine = function () {
 		};
 
 		addToTree(partialName, end);
-		renderFile(output);
+		renderFile(output, end);
 	}
 
 	function addEngineSnippets(options) {
@@ -142,7 +149,7 @@ var engine = function () {
 		});
 	}
 
-	function renderFile(fileInfo, file) {
+	function renderFile(fileInfo, end) {
 		var DS = path.sep;
 		var partialName = DS !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : fileInfo.partialName;
 		var filePath = u.getPath(settings.paths.public.patterns, partialName + '.html');
@@ -155,21 +162,12 @@ var engine = function () {
 		var patterns = DS + 'patterns' + DS;
 		var markups = DS + 'markups' + DS;
 
-		fse.mkdirs(patternPath, function (err) {
-			fse.outputFile(filePath, fileInfo.html, function (err) {
-				if (err) {
-					u.log(err, 'error');
-				}
-			});
-		});
+		fse.outputFileSync(filePath, fileInfo.html);
+		fse.outputFileSync(filePath.replace(patterns, markups), fileInfo.markup);
 
-		fse.mkdirs(patternPath.replace(patterns, markups), function (err) {
-			fse.outputFile(filePath.replace(patterns, markups), fileInfo.markup, function (err) {
-				if (err) {
-					u.log(err, 'error');
-				}
-			});
-		});
+		if (end) {
+			onEnd();
+		}
 	}
 
 	function getHtml(template, data) {
@@ -219,13 +217,7 @@ var engine = function () {
 			patternsTree[obj] = sort_object(patternsTree[obj], {sortOrder: 'ASC'});
 		}
 
-		fse.writeFile(u.getPath(settings.paths.public.data, 'patterns.json'), JSON.stringify(patternsTree), function(err, data) {
-			if (err) {
-				return console.log(err);
-			}
-			u.log('Files rendered', 'success');
-			console.timeEnd('render duration');
-		});
+		fse.outputFileSync(u.getPath(settings.paths.public.data, 'patterns.json'), JSON.stringify(patternsTree));
 
 		renderTemplate();
 	}
@@ -270,11 +262,7 @@ var engine = function () {
 
 		var indexHTML = indexTemplate({engineHeader: header, engineFooter: engineFooter});
 
-		fse.outputFile(u.getPath(settings.paths.public.root, 'index.html'), indexHTML, function (err) {
-			if (err) {
-				u.log(err, 'error');
-			}
-		});
+		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}
 
 	console.time('render duration');
