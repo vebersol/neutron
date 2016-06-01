@@ -69,5 +69,5 @@ gulp.watch('./core/modules/navigation/template/**/*.html', ['html:navigation']);
 
 gulp.task('copy:all', ['copy:js', 'copy:css', 'copy:images', 'copy:styleguide']);
 gulp.task('navigation', ['sass:navigation', 'js:navigation', 'html:navigation']);
-gulp.task('default', ['navigation', 'assets', 'engine']);
-gulp.task('server', ['navigation', 'assets', 'engine', 'connect']);
+gulp.task('default', ['navigation', 'copy:all', 'engine']);
+gulp.task('server', ['navigation', 'copy:all', 'engine', 'connect']);
