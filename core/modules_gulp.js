@@ -5,15 +5,23 @@ module.exports = function(gulp) {
 	var uglify = require('gulp-uglify');
 	var sourcemaps = require('gulp-sourcemaps');
 
+	var settings = require('../democritus.json');
+	var u = require('../libs/utilities');
+
 	gulp.task('sass:navigation', function() {
-		return gulp.src('./core/modules/navigation/scss/*.scss')
+		return gulp.src(u.getPath(settings.paths.core.root, 'modules/navigation/scss/*.scss'))
 			.pipe(sass().on('error', sass.logError))
-			.pipe(gulp.dest('./public/styleguide/modules/navigation/css'));
+			.pipe(gulp.dest(u.getPath(settings.paths.public.styleguides, 'modules/navigation/css')));
 	});
 
 	gulp.task('js:navigation', function() {
-		var dest = './public/styleguide/modules/navigation/js'
-		return gulp.src(['./core/modules/navigation/js/libs/zepto.js', './core/modules/navigation/js/libs/prism.js', './core/modules/navigation/js/main.js'])
+		var dest = u.getPath(settings.paths.public.styleguides, 'modules/navigation/js');
+
+		return gulp.src([
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/zepto.js'),
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/prism.js'),
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/main.js'),
+			])
 			.pipe(concat('scripts.js'))
 			.pipe(gulp.dest(dest))
 			.pipe(rename('scripts.min.js'))
@@ -22,9 +30,9 @@ module.exports = function(gulp) {
 	});
 
 	gulp.task('copy:navigation', function() {
-		gulp.src('./core/modules/navigation/template/index.html', {
-			base: './core/'
+		gulp.src(u.getPath(settings.paths.core.root, 'modules/navigation/template/index.html'), {
+			base: u.getPath(settings.paths.core.root)
 		})
-			.pipe(gulp.dest('./public/styleguide/'));
+			.pipe(gulp.dest(u.getPath(settings.paths.public.styleguides, 'styleguide/')));
 	});
 }
