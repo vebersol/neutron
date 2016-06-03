@@ -23,10 +23,10 @@ module.exports = function(gulp) {
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/prism.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/main.js'),
 			])
-			.pipe(concat('script.js'))
+			.pipe(concat('scripts.js'))
 			.pipe(wrap("(function() {\n\n <%= contents %> \n\n})();"))
 			.pipe(gulp.dest(dest))
-			.pipe(rename('script.min.js'))
+			.pipe(rename('scripts.min.js'))
 			.pipe(uglify())
 			.pipe(gulp.dest(dest));
 	});

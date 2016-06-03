@@ -1,5 +1,6 @@
 var patternData = democritus;
 
+//TODO: Improve javascript structure and transform the two components in one
 var Main = function () {
 	this.init();
 };
@@ -16,18 +17,9 @@ Main.prototype = {
 			url: '/styleguide/modules/navigation/template/index.html',
 			success: function (data) {
 				parent.wrapper.append(data);
-				parent.buildDependenciesList();
-				parent.bind();
+				parent.buildDependenciesList();				
 				parent.addCode();
 			}
-		});
-	},
-
-	bind: function () {
-		var infoBar = Zepto('.democritus-info-bar');
-
-		Zepto('.democritus-info-bar--close__link').on('click', function () {
-			infoBar.removeClass('active');
 		});
 	},
 
@@ -94,7 +86,7 @@ Main.prototype = {
 		var d = [];
 
 		if (dependencies.length === 0) {
-			return Zepto('.democritus-info-bar--patterns').hide();
+			return Zepto('.democritus-code-frame--patterns').hide();
 		}
 
 		for (var i = 0; i < dependencies.length; i++) {
@@ -122,29 +114,28 @@ Menu.prototype = {
 	},
 
 	renderMenu: function (data) {
-		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'];
-		var menu = Zepto('<ul></ul>').addClass('democritus-patterns-menu');
-		var activationBtn = Zepto('<a href="javascript:;">+</a>').addClass('democritus-patterns-activation');
-		Zepto('#democritus').append(activationBtn).append(menu);
-		var list;
-
-		menu.append('<li><a href="javascript:;" class="democritus-patterns-deactivation">X</a></li>')
+		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'],
+				menu = Zepto('<ul></ul>').addClass('democritus-patterns-menu'),
+				list;		
 
 		for (var i = 0; i < menuArr.length; i++) {
 			list = Zepto('<li><a href="javascript:;">' + menuArr[i] + '</a></li>').data('item', menuArr[i]);
 			submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
 			list.append(submenu);
 			menu.append(list);
-		}
+		}		
 
-		this.bind(menu, activationBtn);
+		Zepto('.democritus-sticky-nav').append(menu);
+		
+		this.bind(menu);
+		this.bindSearch();
 	},
 
 	createMenuItem: function (data, property) {
-		var list;
-		var objLen;
-		var menuItem = Zepto('[data-item="' + property + '"]');
-		var ul = Zepto('<ul></ul>');
+		var list,
+				objLen,
+				menuItem = Zepto('[data-item="' + property + '"]'),
+				ul = Zepto('<ul></ul>');
 
 		for (var item in data) {
 			objLen = Object.size(data[item]);
@@ -166,12 +157,11 @@ Menu.prototype = {
 		return false;
 	},
 
-	bind: function (menu, activationBtn) {
-		var parent = this;
-		var path = window.location.pathname;
+	bind: function (menu) {
+		var parent = this,
+				path = window.location.pathname;
 
-		menu.find('[data-item] > a').click(function () {
-			// menu.find('ul').removeClass('active');
+		menu.find('[data-item] > a').click(function () {			
 			var subMenu = Zepto(this).parent().children('ul');
 			subMenu.toggleClass('active');
 		});
@@ -182,20 +172,91 @@ Menu.prototype = {
 				anchor.parent().addClass('current');
 				parent.showElement(anchor);
 			}
+		});		
+		Zepto('.democritus-start-button').click(function () {					
+			var element = Zepto(this),
+					nav = Zepto('.democritus-navigation');			
+
+			if (nav.hasClass('active')) {
+				element.removeClass('fa-compress');
+				Zepto('.democritus-patterns-menu, .democritus-navigation--menu').removeClass('active');
+			} else {
+				element.addClass('fa-compress');
+			}
+
+			nav.toggleClass('active');
 		});
 
-		activationBtn.click(function () {
-			menu.addClass('visible');
+		Zepto('.democritus-navigation--menu').click(function () {
+			Zepto(this).toggleClass('active');
+			menu.toggleClass('active');
 		});
 
-		Zepto('.democritus-patterns-deactivation').click(function () {
-			menu.removeClass('visible');
+		Zepto('.democritus-navigation--search').click(function () {			
+			Zepto(this).toggleClass('active');
+			Zepto('.democritus-patterns-menu').toggleClass('search-active');
+			Zepto('.democritus-search-wrapper').toggleClass('active');
+		});
+
+		var codeBtn = Zepto('.democritus-navigation--code');
+
+		if (patternData.i.patternName.length > 0) {
+			codeBtn.click(function () {
+				Zepto(this).toggleClass('active');
+				var frame = Zepto('.democritus-code-frame');
+				var bars = Zepto('.democritus-start-button, .democritus-navigation, .democritus-patterns-menu');
+
+				frame.toggleClass('active');
+
+				if (frame.hasClass('active')) {
+					bars.addClass('democritus-frame-active');
+				} else {
+					bars.removeClass('democritus-frame-active');
+				}
+			});
+		} else {
+			codeBtn.addClass('disabled');
+		}
+
+		Zepto('.democritus-code-frame--close__link').on('click', function () {
+			var	bars = Zepto('.democritus-start-button, .democritus-navigation, .democritus-patterns-menu');
+
+			Zepto('.democritus-code-frame, .democritus-navigation--code').removeClass('active');
+			bars.removeClass('democritus-frame-active');
 		});
 	},
 
 	showElement: function (element) {
 		var uls = element.parents('ul:not(.democritus-patterns-menu)')
 		uls.addClass('active');
+	},
+
+	bindSearch: function () {
+		var timer,
+				input = Zepto('.democritus-search-wrapper input');
+
+		input.blur();
+
+		input.on('keyup', function (ev) {
+			clearTimeout(timer);
+			timer = setTimeout(function () {
+				var value = Zepto(ev.target).val(),
+						anchors = Zepto('.democritus-patterns-menu > li a');
+				
+				Zepto('.democritus-patterns-menu li').hide();				
+				anchors.each(function () {
+					var element = Zepto(this),
+							text = element.text().toLowerCase();
+
+					if (text.indexOf(value) !== -1) {
+						element.parent().show();
+						element.parents('li').each(function () {
+							Zepto(this).show();
+						});
+					}
+				});				
+			}, 500);
+		});
 	}
 }
 
@@ -204,7 +265,6 @@ window.onload = function () {
 	new Menu();
 };
 
-
 Object.size = function(obj) {
     var size = 0, key;
     for (key in obj) {
@@ -212,3 +272,4 @@ Object.size = function(obj) {
     }
     return size;
 };
+
