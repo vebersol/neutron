@@ -8,9 +8,9 @@ var sort_object = require('sort-object');
 var settings = require('../democritus.json');
 
 var u = require('./utilities');
-var pa = require('./partials');
-var lh = require('./layouts');
-var mkp = require('./markup');
+var partials = require('./partials')();
+var layoutHandler = require('./layouts')();
+var markup = require('./markup')();
 
 var engine = function () {
 	'use strict';
@@ -26,9 +26,6 @@ var engine = function () {
 		templates: {},
 		pages: {}
 	};
-	var partials = pa();
-	var markup = mkp();
-	var layoutHandler = lh();
 
 	function init () {
 		layoutHandler.getLayouts();
