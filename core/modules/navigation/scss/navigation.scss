@@ -1,7 +1,7 @@
 @import "mixins";
 @import "prism";
 
-$prefix: democritus;
+$prefix: neutron;
 
 $bgcolor: #333;
 $txtcolor: #CCC;
@@ -141,7 +141,7 @@ $menuWidth: 173px;
 		left: 0;
 	}			
 
-	&.democritus-frame-active {
+	&.#{$prefix}-frame-active {
 		height: calc(50% - 37px);
 	}
 
@@ -281,7 +281,7 @@ $menuWidth: 173px;
 		left: 0;
 	}
 
-	.democritus-search {
+	.#{$prefix}-search {
 		position: relative;
 		background-color: $bgcolor;
 		padding: 10px;

@@ -6,7 +6,7 @@ module.exports = function(gulp) {
 	var sourcemaps = require('gulp-sourcemaps');
 	var wrap = require("gulp-wrap");
 
-	var settings = require('../democritus.json');
+	var settings = require('../neutron.json');
 	var u = require('../libs/utilities');
 
 	gulp.task('sass:navigation', function() {

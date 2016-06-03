@@ -2,7 +2,7 @@ var handlebars = require('handlebars');
 var fse = require('fs-extra');
 var path = require('path');
 
-var settings = require('../democritus.json');
+var settings = require('../neutron.json');
 
 var u = require('./utilities');
 

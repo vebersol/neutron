@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var path = require('path');
 var del = require('del');
 var connect = require('gulp-connect');
-var settings = require('./democritus.json');
+var settings = require('./neutron.json');
 var u = require('./libs/utilities');
 
 require('gulp-load')(gulp);

@@ -3,7 +3,7 @@ var path = require('path');
 var util = require('util');
 var handlebars = require('handlebars');
 
-var settings = require('../democritus.json');
+var settings = require('../neutron.json');
 
 var u = require('./utilities');
 
