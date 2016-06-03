@@ -30,21 +30,21 @@ gulp.task('connect', function () {
 
 gulp.task('copy:css', function() {
 		return gulp.src('**/*.css', {
-				cwd: gulp.src(u.getPath(settings.paths.src.css))
+				cwd: u.getPath(settings.paths.src.css)
 			})
 			.pipe(gulp.dest(u.getPath(settings.paths.public.css)));
 });
 
 gulp.task('copy:images', function() {
 		return gulp.src(['**/*.gif', '**/*.jpg', '**/*.png', '**/*.svg'], {
-				cwd: gulp.src(u.getPath(settings.paths.src.images))
+				cwd: u.getPath(settings.paths.src.images)
 			})
 			.pipe(gulp.dest(u.getPath(settings.paths.public.images)));
 });
 
 gulp.task('copy:js', function() {
 		return gulp.src('**/*.js', {
-				cwd: gulp.src(u.getPath(settings.paths.src.js))
+				cwd: u.getPath(settings.paths.src.js)
 			})
 			.pipe(gulp.dest(u.getPath(settings.paths.public.js)));
 });
