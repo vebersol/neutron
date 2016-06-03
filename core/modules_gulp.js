@@ -21,7 +21,8 @@ module.exports = function(gulp) {
 		return gulp.src([
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/zepto.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/prism.js'),
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/main.js'),
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/keyboardNav.js'),
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/main.js')
 			])
 			.pipe(concat('scripts.js'))
 			.pipe(wrap("(function() {\n\n <%= contents %> \n\n})();"))

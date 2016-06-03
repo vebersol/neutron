@@ -224,6 +224,10 @@ Menu.prototype = {
 			Zepto('.neutron-code-frame, .neutron-navigation--code').removeClass('active');
 			bars.removeClass('neutron-frame-active');
 		});
+
+		Zepto('.neutron-navigation--qr').click(function () {
+			alert('show QR code in a dialog');
+		});
 	},
 
 	showElement: function (element) {
@@ -263,6 +267,7 @@ Menu.prototype = {
 window.onload = function () {
 	new Main();
 	new Menu();
+	new KeyboardNav();
 };
 
 Object.size = function(obj) {
