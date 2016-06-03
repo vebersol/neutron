@@ -4,6 +4,7 @@ module.exports = function(gulp) {
 	var rename = require('gulp-rename');
 	var uglify = require('gulp-uglify');
 	var sourcemaps = require('gulp-sourcemaps');
+	var wrap = require("gulp-wrap");
 
 	var settings = require('../democritus.json');
 	var u = require('../libs/utilities');
@@ -22,11 +23,12 @@ module.exports = function(gulp) {
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/prism.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/main.js'),
 			])
-			.pipe(concat('scripts.js'))
+			.pipe(concat('script.js'))
+			.pipe(wrap("(function() {\n\n <%= contents %> \n\n})();"))
 			.pipe(gulp.dest(dest))
-			.pipe(rename('scripts.min.js'))
+			.pipe(rename('script.min.js'))
 			.pipe(uglify())
-			.pipe(gulp.dest(dest))
+			.pipe(gulp.dest(dest));
 	});
 
 	gulp.task('html:navigation', function() {

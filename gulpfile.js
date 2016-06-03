@@ -49,21 +49,21 @@ gulp.task('copy:js', function() {
 			.pipe(gulp.dest(u.getPath(settings.paths.public.js)));
 });
 
-gulp.task('copy:styleguide', function() {
+gulp.task('copy:styleguide', function(cb) {
 		return gulp.src(['**/*.css', '**/*.html', '**/*.js'], {
-				cwd: gulp.src(u.getPath(settings.paths.src.js))
+				cwd: u.getPath(settings.paths.src.styleguides)
 			})
-			.pipe(gulp.dest(u.getPath(settings.paths.public.js)));
+			.pipe(gulp.dest(u.getPath(settings.paths.public.styleguides)));
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', ['connect'], function () {
 	gulp.watch([
 		u.getPath(settings.paths.src.patterns, '**/*.handlebars'),
 		u.getPath(settings.paths.src.patterns, '**/*.json'),
 		u.getPath(settings.paths.src.layouts, '**/*.handlebars'),
 		u.getPath(settings.paths.src.data, '**/*.json')
 	], ['engine']);
-	gulp.watch('./core/modules/navigation/js/**/*.js', ['js:navigation']);
+	gulp.watch('./core/modules/navigation/js/**/*.js', ['js:navigation', 'copy:styleguide']);
 	gulp.watch('./core/modules/navigation/scss/**/*.scss', ['sass:navigation']);
 	gulp.watch('./core/modules/navigation/template/**/*.html', ['html:navigation']);
 })

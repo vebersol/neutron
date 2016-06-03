@@ -1,8 +1,10 @@
-democritus.core.main = function () {
+var patternData = democritus;
+
+var Main = function () {
 	this.init();
 };
 
-democritus.core.main.prototype = {
+Main.prototype = {
 	init: function () {
 		this.wrapper = Zepto('#democritus');
 		this.addPatternsInfo();
@@ -31,9 +33,9 @@ democritus.core.main.prototype = {
 
 	addCode: function () {
 		var parent = this;
-		if (democritus.i.patternName) {
+		if (patternData.i.patternName) {
 			Zepto.ajax({
-				url: '/markups/' + democritus.i.patternName + '.html',
+				url: '/markups/' + patternData.i.patternName + '.html',
 				success: function (data) {
 					parent.code = parent.wrapper.find('.democritus-code')
 					parent.code.append(data);
@@ -87,7 +89,7 @@ democritus.core.main.prototype = {
 	},
 
 	buildDependenciesList: function () {
-		var dependencies = democritus.i.dependencies;
+		var dependencies = patternData.i.dependencies;
 		var target = Zepto('#democritus-dependencies-list');
 		var d = [];
 
@@ -104,11 +106,11 @@ democritus.core.main.prototype = {
 	}
 }
 
-democritus.core.menu = function () {
+var Menu = function () {
 	this.init();
 }
 
-democritus.core.menu.prototype = {
+Menu.prototype = {
 	init: function () {
 		var parent = this;
 		Zepto.ajax({
@@ -198,8 +200,8 @@ democritus.core.menu.prototype = {
 }
 
 window.onload = function () {
-	new democritus.core.main();
-	new democritus.core.menu();
+	new Main();
+	new Menu();
 };
 
 
