@@ -17,7 +17,7 @@ Main.prototype = {
 			url: '/styleguide/modules/navigation/template/index.html',
 			success: function (data) {
 				parent.wrapper.append(data);
-				parent.buildDependenciesList();				
+				parent.buildDependenciesList();
 				parent.addCode();
 			}
 		});
@@ -27,7 +27,7 @@ Main.prototype = {
 		var parent = this;
 		if (patternData.i.patternName) {
 			Zepto.ajax({
-				url: '/markups/' + patternData.i.patternName + '.html',
+				url: '/patterns/' + patternData.i.patternName.replace(/\//g, '-') + '/markups.html',
 				success: function (data) {
 					parent.code = parent.wrapper.find('.neutron-code')
 					parent.code.append(data);
@@ -41,7 +41,7 @@ Main.prototype = {
 					if (Prism) {
 						Prism.highlightElement(codeList.find('pre code.language-html').get(0));
 						Prism.highlightElement(codeList.find('pre code.language-handlebars').get(0));
-						
+
 						var documentationItem = parent.code.find('.neutron-code--list li[data-target="#documentation"]');
 						var documentationNavItem = parent.code.find('.neutron-code--nav li a[href="#documentation"]');
 						if (documentationItem.length > 0) {
@@ -116,17 +116,17 @@ Menu.prototype = {
 	renderMenu: function (data) {
 		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'],
 				menu = Zepto('<ul></ul>').addClass('neutron-patterns-menu'),
-				list;		
+				list;
 
 		for (var i = 0; i < menuArr.length; i++) {
 			list = Zepto('<li><a href="javascript:;">' + menuArr[i] + '</a></li>').data('item', menuArr[i]);
 			submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
 			list.append(submenu);
 			menu.append(list);
-		}		
+		}
 
 		Zepto('.neutron-sticky-nav').append(menu);
-		
+
 		this.bind(menu);
 		this.bindSearch();
 	},
@@ -161,7 +161,7 @@ Menu.prototype = {
 		var parent = this,
 				path = window.location.pathname;
 
-		menu.find('[data-item] > a').click(function () {			
+		menu.find('[data-item] > a').click(function () {
 			var subMenu = Zepto(this).parent().children('ul');
 			subMenu.toggleClass('active');
 		});
@@ -172,7 +172,7 @@ Menu.prototype = {
 				anchor.parent().addClass('current');
 				parent.showElement(anchor);
 			}
-		});		
+		});
 		Zepto('.neutron-start-button').click(function () {
 			var element = Zepto(this),
 					nav = Zepto('.neutron-navigation');
@@ -225,8 +225,28 @@ Menu.prototype = {
 			bars.removeClass('neutron-frame-active');
 		});
 
+		var qrcode;
+		var qrcodeEl = Zepto('#qrcode');
 		Zepto('.neutron-navigation--qr').click(function () {
-			alert('show QR code in a dialog');
+			var el = Zepto(this);
+
+			var qrCodeFrame = Zepto('.neutron-qr-code-frame');
+			if (!qrCodeFrame.hasClass('active')) {
+				el.addClass('active');
+				qrCodeFrame.addClass('active');
+				qrcode = new QRCode(qrcodeEl.get(0), {
+					text: location.href,
+					width: 143,
+					height: 143
+				});
+			}
+			else {
+				el.removeClass('active');
+				qrCodeFrame.removeClass('active');
+				setTimeout(function () {
+					qrcodeEl.html('');
+				}, 500)
+			}
 		});
 	},
 
@@ -246,7 +266,7 @@ Menu.prototype = {
 			timer = setTimeout(function () {
 				var value = Zepto(ev.target).val(),
 						anchors = Zepto('.neutron-patterns-menu > li a');
-				
+
 				Zepto('.neutron-patterns-menu li').hide();
 				anchors.each(function () {
 					var element = Zepto(this),
@@ -258,7 +278,7 @@ Menu.prototype = {
 							Zepto(this).show();
 						});
 					}
-				});				
+				});
 			}, 500);
 		});
 	}

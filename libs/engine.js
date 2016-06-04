@@ -122,7 +122,7 @@ var engine = function (cb) {
 		options.partials.forEach(function (k, i) {
 			dependencies.push({
 				partial: k,
-				path: settings.http.root + k + '.html'
+				path: settings.http.root + partials.getPatternFolder(k) + '/index.html'
 			});
 		});
 
@@ -151,19 +151,12 @@ var engine = function (cb) {
 
 	function renderFile(fileInfo, end) {
 		var DS = path.sep;
-		var partialName = DS !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : fileInfo.partialName;
-		var filePath = u.getPath(settings.paths.public.patterns, partialName + '.html');
-		var fileArr = filePath.split(DS);
-		var fileName = fileArr[fileArr.length - 1];
-
-		fileArr.pop();
-
-		var patternPath = fileArr.join(DS);
-		var patterns = DS + 'patterns' + DS;
-		var markups = DS + 'markups' + DS;
+		var partialName = partials.getPatternFolder(fileInfo.partialName);
+		var filePath = u.getPath(settings.paths.public.patterns + partialName, '/index.html');
+		var filePathMarkups = u.getPath(settings.paths.public.patterns + partialName, '/markups.html');
 
 		fse.outputFileSync(filePath, fileInfo.html);
-		fse.outputFileSync(filePath.replace(patterns, markups), fileInfo.markup);
+		fse.outputFileSync(filePathMarkups, fileInfo.markup);
 
 		if (end) {
 			onEnd();
@@ -182,16 +175,16 @@ var engine = function (cb) {
 
 	function cleanPaths(callback) {
 		fse.mkdirsSync(settings.paths.public.patterns);
-		fse.mkdirsSync(settings.paths.public.markups);
 		fse.mkdirsSync(settings.paths.public.data);
 		callback();
 	}
 
 	function addToTree(partial, end) {
 		var arr = partial.split('/');
-		var url = settings.http.patterns + partial + '.html';
+		var url = settings.http.patterns + partials.getPatternFolder(partial) + '/index.html';
 		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
 			var obj = {}
+
 			if (array.length - 2 === currentIndex && !obj.hasOwnProperty(currentValue)) {
 				obj[currentValue] = {};
 			}
@@ -202,6 +195,7 @@ var engine = function (cb) {
 			else {
 				obj[currentValue] = previousValue;
 			}
+
 			return obj;
 		});
 

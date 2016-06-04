@@ -39,7 +39,7 @@ partials = function () {
 			partials: partialNames.removeDuplicates()
 		};
 	}
-	
+
 	function getPartialsNames(match) {
 		var partialNames = [];
 
@@ -54,12 +54,17 @@ partials = function () {
 		return partialNames;
 	}
 
+	function getPatternFolder(pattern) {
+		return pattern.replace(/\//g, '-');
+	}
+
 	return {
 		registeredPartials: registeredPartials,
 		getPartialName: getPartialName,
 		getPartialsNames: getPartialsNames,
 		setPartial: setPartial,
-		getPartialsData: getPartialsData
+		getPartialsData: getPartialsData,
+		getPatternFolder: getPatternFolder
 	}
 };
 

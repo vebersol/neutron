@@ -24,7 +24,7 @@ $menuWidth: 173px;
 	* {
 		@include prefix(box-sizing, border-box);
 	}
-	
+
 	a:not(.fa),
 	p {
 		font-family: Arial, sans-serif;
@@ -87,7 +87,7 @@ $menuWidth: 173px;
 			cursor: default;
 			color: #666;
 		}
-	}	
+	}
 }
 
 .#{$prefix}-start-button,
@@ -104,7 +104,7 @@ $menuWidth: 173px;
 .#{$prefix}-patterns-menu ul {
 	list-style: none;
 	margin: 0;
-	padding: 0;	
+	padding: 0;
 
 	[data-item] > a {
 		color: #CCC;
@@ -113,7 +113,7 @@ $menuWidth: 173px;
 
 	li {
 		padding-left: 5px;
-		
+
 		a {
 			font-family: Arial, sans-serif;
 			display: block;
@@ -123,13 +123,13 @@ $menuWidth: 173px;
 	}
 }
 
-.#{$prefix}-patterns-menu {		
+.#{$prefix}-patterns-menu {
 	width: $menuWidth;
 	position: fixed;
-	top: 0;	
+	top: 0;
 	left: $menuWidth * -1;
 	height: calc(100% - 35px);
-	overflow: auto;		
+	overflow: auto;
 	background-color: $bgcolor;
 	margin: 0;
 	color: $txtcolor;
@@ -139,7 +139,7 @@ $menuWidth: 173px;
 
 	&.active {
 		left: 0;
-	}			
+	}
 
 	&.#{$prefix}-frame-active {
 		height: calc(50% - 37px);
@@ -153,7 +153,7 @@ $menuWidth: 173px;
 	}
 
 	&.search-active {
-		height: calc(100% - 90px);		
+		height: calc(100% - 90px);
 	}
 }
 
@@ -177,14 +177,14 @@ $menuWidth: 173px;
 	}
 
 	&--close {
-		text-align: right;		
+		text-align: right;
 		position: fixed;
 		right: 33px;
 
 		&__link {
 			color: $txtcolor;
 			&:hover {
-				color: $txtcolor;				
+				color: $txtcolor;
 			}
 		}
 	}
@@ -199,7 +199,7 @@ $menuWidth: 173px;
 			text-decoration: underline;
 		}
 	}
-	
+
 	.#{$prefix}-code {
 		&--nav {
 			@include clearfix;
@@ -208,7 +208,7 @@ $menuWidth: 173px;
 			padding: 0;
 
 		}
-		
+
 		&--item {
 			display: block;
 			float: left;
@@ -231,7 +231,7 @@ $menuWidth: 173px;
 					color: white;
 				}
 			}
-			
+
 			a {
 				display: block;
 				width: 100%;
@@ -242,12 +242,12 @@ $menuWidth: 173px;
 				font-weight: bold;
 			}
 		}
-		
+
 		&--list {
 			list-style: none;
 			padding: 0;
 			margin: 0;
-			
+
 			li {
 				overflow: auto;
 			}
@@ -295,5 +295,25 @@ $menuWidth: 173px;
 			width: 100%;
 			height: 33px;
 		}
+	}
+}
+
+.#{$prefix}-qr-code-frame {
+	position: fixed;
+	bottom: $buttonSize + $gap;
+	left: $menuWidth * -1;
+	width: $menuWidth;
+	height: $menuWidth;
+	background-color: $bgcolor;
+	padding: 10px;
+	@include prefix(transition, left 0.5s);
+
+	&.active {
+		left: 0;
+	}
+
+	#qrcode {
+		background-color: white;
+		padding: 5px;
 	}
 }
