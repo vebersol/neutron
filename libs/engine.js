@@ -32,7 +32,8 @@ var engine = function (cb) {
 		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
 		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
 		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
-		cleanPaths(walkPartials);
+		cleanPaths();
+		walkPartials()
 	}
 
 	function onEnd() {
@@ -167,10 +168,9 @@ var engine = function (cb) {
 		}
 	}
 
-	function cleanPaths(callback) {
+	function cleanPaths() {
 		fse.mkdirsSync(settings.paths.public.patterns);
 		fse.mkdirsSync(settings.paths.public.data);
-		callback();
 	}
 
 	function addToTree(partial, end) {
