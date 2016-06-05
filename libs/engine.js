@@ -37,9 +37,6 @@ var engine = function (cb) {
 
 	function onEnd() {
 		console.timeEnd('render duration');
-		if (cb) {
-			cb();
-		}
 	}
 
 	function getPatterns() {
