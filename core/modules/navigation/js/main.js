@@ -1,10 +1,13 @@
-democritus.core.main = function () {
+var patternData = neutronADT;
+
+//TODO: Improve javascript structure and transform the two components in one
+var Main = function () {
 	this.init();
 };
 
-democritus.core.main.prototype = {
+Main.prototype = {
 	init: function () {
-		this.wrapper = Zepto('#democritus');
+		this.wrapper = Zepto('#neutron');
 		this.addPatternsInfo();
 	},
 
@@ -15,43 +18,34 @@ democritus.core.main.prototype = {
 			success: function (data) {
 				parent.wrapper.append(data);
 				parent.buildDependenciesList();
-				parent.bind();
 				parent.addCode();
 			}
 		});
 	},
 
-	bind: function () {
-		var infoBar = Zepto('.democritus-info-bar');
-
-		Zepto('.democritus-info-bar--close__link').on('click', function () {
-			infoBar.removeClass('active');
-		});
-	},
-
 	addCode: function () {
 		var parent = this;
-		if (democritus.i.patternName) {
+		if (patternData.i.patternName) {
 			Zepto.ajax({
-				url: '/markups/' + democritus.i.patternName + '.html',
+				url: '/patterns/' + patternData.i.patternName.replace(/\//g, '-') + '/markups.html',
 				success: function (data) {
-					parent.code = parent.wrapper.find('.democritus-code')
+					parent.code = parent.wrapper.find('.neutron-code')
 					parent.code.append(data);
 
-					parent.code.find('.democritus-code--nav li:first-child').addClass('active');
-					parent.code.find('.democritus-code--list li[data-target]:last-child').hide();
+					parent.code.find('.neutron-code--nav li:first-child').addClass('active');
+					parent.code.find('.neutron-code--list li[data-target]:last-child').hide();
 
 
-					var codeList = Zepto('.democritus-code--list li');
+					var codeList = Zepto('.neutron-code--list li');
 
 					if (Prism) {
 						Prism.highlightElement(codeList.find('pre code.language-html').get(0));
 						Prism.highlightElement(codeList.find('pre code.language-handlebars').get(0));
-						
-						var documentationItem = parent.code.find('.democritus-code--list li[data-target="#documentation"]');
-						var documentationNavItem = parent.code.find('.democritus-code--nav li a[href="#documentation"]');
+
+						var documentationItem = parent.code.find('.neutron-code--list li[data-target="#documentation"]');
+						var documentationNavItem = parent.code.find('.neutron-code--nav li a[href="#documentation"]');
 						if (documentationItem.length > 0) {
-							var docsCode = codeList.find('.democritus-code--documentation code');
+							var docsCode = codeList.find('.neutron-code--documentation code');
 							docsCode.addClass('language-html');
 							if (docsCode.length > 0) {
 								Prism.highlightElement(docsCode.get(0));
@@ -69,7 +63,7 @@ democritus.core.main.prototype = {
 
 	bindTabs: function () {
 		var parent = this,
-			tabs = this.code.find('.democritus-code--nav li a');
+			tabs = this.code.find('.neutron-code--nav li a');
 
 		tabs.each(function () {
 			Zepto(this).on('click', function () {
@@ -80,19 +74,19 @@ democritus.core.main.prototype = {
 				parent.code.find('[data-target]').hide();
 
 				list.addClass('active');
-				parent.code.find('.democritus-code--list li[data-target="' + element.attr('href') + '"]').show();
+				parent.code.find('.neutron-code--list li[data-target="' + element.attr('href') + '"]').show();
 				return false;
 			});
 		});
 	},
 
 	buildDependenciesList: function () {
-		var dependencies = democritus.i.dependencies;
-		var target = Zepto('#democritus-dependencies-list');
+		var dependencies = patternData.i.dependencies;
+		var target = Zepto('#neutron-dependencies-list');
 		var d = [];
 
 		if (dependencies.length === 0) {
-			return Zepto('.democritus-info-bar--patterns').hide();
+			return Zepto('.neutron-code-frame--patterns').hide();
 		}
 
 		for (var i = 0; i < dependencies.length; i++) {
@@ -104,11 +98,11 @@ democritus.core.main.prototype = {
 	}
 }
 
-democritus.core.menu = function () {
+var Menu = function () {
 	this.init();
 }
 
-democritus.core.menu.prototype = {
+Menu.prototype = {
 	init: function () {
 		var parent = this;
 		Zepto.ajax({
@@ -120,13 +114,9 @@ democritus.core.menu.prototype = {
 	},
 
 	renderMenu: function (data) {
-		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'];
-		var menu = Zepto('<ul></ul>').addClass('democritus-patterns-menu');
-		var activationBtn = Zepto('<a href="javascript:;">+</a>').addClass('democritus-patterns-activation');
-		Zepto('#democritus').append(activationBtn).append(menu);
-		var list;
-
-		menu.append('<li><a href="javascript:;" class="democritus-patterns-deactivation">X</a></li>')
+		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'],
+				menu = Zepto('<ul></ul>').addClass('neutron-patterns-menu'),
+				list;
 
 		for (var i = 0; i < menuArr.length; i++) {
 			list = Zepto('<li><a href="javascript:;">' + menuArr[i] + '</a></li>').data('item', menuArr[i]);
@@ -135,14 +125,17 @@ democritus.core.menu.prototype = {
 			menu.append(list);
 		}
 
-		this.bind(menu, activationBtn);
+		Zepto('.neutron-sticky-nav').append(menu);
+
+		this.bind(menu);
+		this.bindSearch();
 	},
 
 	createMenuItem: function (data, property) {
-		var list;
-		var objLen;
-		var menuItem = Zepto('[data-item="' + property + '"]');
-		var ul = Zepto('<ul></ul>');
+		var list,
+				objLen,
+				menuItem = Zepto('[data-item="' + property + '"]'),
+				ul = Zepto('<ul></ul>');
 
 		for (var item in data) {
 			objLen = Object.size(data[item]);
@@ -164,12 +157,11 @@ democritus.core.menu.prototype = {
 		return false;
 	},
 
-	bind: function (menu, activationBtn) {
-		var parent = this;
-		var path = window.location.pathname;
+	bind: function (menu) {
+		var parent = this,
+				path = window.location.pathname;
 
 		menu.find('[data-item] > a').click(function () {
-			// menu.find('ul').removeClass('active');
 			var subMenu = Zepto(this).parent().children('ul');
 			subMenu.toggleClass('active');
 		});
@@ -181,27 +173,122 @@ democritus.core.menu.prototype = {
 				parent.showElement(anchor);
 			}
 		});
+		Zepto('.neutron-start-button').click(function () {
+			var element = Zepto(this),
+					nav = Zepto('.neutron-navigation');
 
-		activationBtn.click(function () {
-			menu.addClass('visible');
+			if (nav.hasClass('active')) {
+				element.removeClass('fa-compress');
+				Zepto('.neutron-patterns-menu, .neutron-navigation--menu').removeClass('active');
+			} else {
+				element.addClass('fa-compress');
+			}
+
+			nav.toggleClass('active');
 		});
 
-		Zepto('.democritus-patterns-deactivation').click(function () {
-			menu.removeClass('visible');
+		Zepto('.neutron-navigation--menu').click(function () {
+			Zepto(this).toggleClass('active');
+			menu.toggleClass('active');
+		});
+
+		Zepto('.neutron-navigation--search').click(function () {
+			Zepto(this).toggleClass('active');
+			Zepto('.neutron-patterns-menu').toggleClass('search-active');
+			Zepto('.neutron-search-wrapper').toggleClass('active');
+		});
+
+		var codeBtn = Zepto('.neutron-navigation--code');
+
+		if (patternData.i.patternName.length > 0) {
+			codeBtn.click(function () {
+				Zepto(this).toggleClass('active');
+				var frame = Zepto('.neutron-code-frame');
+				var bars = Zepto('.neutron-start-button, .neutron-navigation, .neutron-patterns-menu');
+
+				frame.toggleClass('active');
+
+				if (frame.hasClass('active')) {
+					bars.addClass('neutron-frame-active');
+				} else {
+					bars.removeClass('neutron-frame-active');
+				}
+			});
+		} else {
+			codeBtn.addClass('disabled');
+		}
+
+		Zepto('.neutron-code-frame--close__link').on('click', function () {
+			var	bars = Zepto('.neutron-start-button, .neutron-navigation, .neutron-patterns-menu');
+
+			Zepto('.neutron-code-frame, .neutron-navigation--code').removeClass('active');
+			bars.removeClass('neutron-frame-active');
+		});
+
+		var qrcode;
+		var qrcodeEl = Zepto('#qrcode');
+		Zepto('.neutron-navigation--qr').click(function () {
+			var el = Zepto(this);
+
+			var qrCodeFrame = Zepto('.neutron-qr-code-frame');
+			if (!qrCodeFrame.hasClass('active')) {
+				el.addClass('active');
+				qrCodeFrame.addClass('active');
+				qrcode = new QRCode(qrcodeEl.get(0), {
+					text: location.href,
+					width: 143,
+					height: 143
+				});
+			}
+			else {
+				el.removeClass('active');
+				qrCodeFrame.removeClass('active');
+				setTimeout(function () {
+					qrcodeEl.html('');
+				}, 500)
+			}
 		});
 	},
 
 	showElement: function (element) {
-		var uls = element.parents('ul:not(.democritus-patterns-menu)')
+		var uls = element.parents('ul:not(.neutron-patterns-menu)')
 		uls.addClass('active');
+	},
+
+	bindSearch: function () {
+		var timer,
+				input = Zepto('.neutron-search-wrapper input');
+
+		input.blur();
+
+		input.on('keyup', function (ev) {
+			clearTimeout(timer);
+			timer = setTimeout(function () {
+				var value = Zepto(ev.target).val(),
+						anchors = Zepto('.neutron-patterns-menu > li a');
+
+				Zepto('.neutron-patterns-menu li').hide();
+				anchors.each(function () {
+					var element = Zepto(this),
+							text = element.text().toLowerCase();
+
+					if (text.indexOf(value) !== -1) {
+						element.parent().show();
+						element.parents('li').each(function () {
+							Zepto(this).show();
+						});
+					}
+				});
+			}, 500);
+		});
 	}
 }
 
 window.onload = function () {
-	new democritus.core.main();
-	new democritus.core.menu();
+	new Main();
+	new Menu();
+	new KeyboardNav();
 };
-
 
 Object.size = function(obj) {
     var size = 0, key;
@@ -210,3 +297,4 @@ Object.size = function(obj) {
     }
     return size;
 };
+

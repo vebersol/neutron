@@ -1,16 +1,47 @@
-<div class="democritus-info-bar active">
-	<div class="democritus-info-bar--close">
-		<a href="javascript:;" class="democritus-info-bar--close__link">X</a>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<div class="neutron-sticky-nav">
+  <a href="javascript:;" class="neutron-start-button fa fa-expand"><span>Neutron Options</span></a>
+  <div class="neutron-navigation">
+    <a href="javascript:;" class="neutron-navigation--menu fa fa-bars">
+      <span>Menu</span>
+    </a>
+    <a href="javascript:;" class="neutron-navigation--code fa fa-code">
+      <span>Code</span>
+    </a>
+    <a href="javascript:;" class="neutron-navigation--qr fa fa-qrcode">
+      <span>QR Code</span>
+    </a>
+    <a href="javascript:;" class="neutron-navigation--search fa fa-search">
+      <span>Search</span>
+    </a>
+  </div>
+  <div class="neutron-search-wrapper">
+    <div class="neutron-search">
+      <input type="search">
+    </div>
+  </div>
+</div>
+
+<div class="neutron-code-frame">
+	<div class="neutron-code-frame--close">
+		<a href="javascript:;" class="neutron-code-frame--close__link fa fa-close">
+			<span>Close</span>
+		</a>
 	</div>
-	<div class="democritus-info-bar--patterns">
-		<p>Dependencies: <span id="democritus-dependencies-list"></span></p>
+	<div class="neutron-code-frame--patterns">
+		<p>Dependencies: <span id="neutron-dependencies-list"></span></p>
 	</div>
 
-	<div class="democritus-code">
-		<ul class="democritus-code--nav">
-			<li class="democritus-code--item"><a href="#html">HTML</a></li>
-			<li class="democritus-code--item"><a href="#handlebars">Handlebars</a></li>
-			<li class="democritus-code--item"><a href="#documentation">Documentation</a></li>
+	<div class="neutron-code">
+		<ul class="neutron-code--nav">
+			<li class="neutron-code--item"><a href="#html">HTML</a></li>
+			<li class="neutron-code--item"><a href="#handlebars">Handlebars</a></li>
+			<li class="neutron-code--item"><a href="#documentation">Documentation</a></li>
 		</ul>
 	</div>
+</div>
+
+<div class="neutron-qr-code-frame">
+	<div id="qrcode"></div>
 </div>

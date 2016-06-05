@@ -5,14 +5,14 @@ var handlebars = require('handlebars');
 var object_merge = require('object-merge');
 var sort_object = require('sort-object');
 
-var settings = require('../democritus.json');
+var settings = require('../neutron.json');
 
 var u = require('./utilities');
 var partials = require('./partials')();
 var layoutHandler = require('./layouts')();
 var markup = require('./markup')();
 
-var engine = function () {
+var engine = function (cb) {
 	'use strict';
 	var globalData = {};
 	var header;
@@ -33,6 +33,13 @@ var engine = function () {
 		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
 		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
 		cleanPaths(walkPartials);
+	}
+
+	function onEnd() {
+		console.timeEnd('render duration');
+		if (cb) {
+			cb();
+		}
 	}
 
 	function getPatterns() {
@@ -104,7 +111,7 @@ var engine = function () {
 		};
 
 		addToTree(partialName, end);
-		renderFile(output);
+		renderFile(output, end);
 	}
 
 	function addEngineSnippets(options) {
@@ -112,7 +119,7 @@ var engine = function () {
 		options.partials.forEach(function (k, i) {
 			dependencies.push({
 				partial: k,
-				path: settings.http.root + k + '.html'
+				path: settings.http.root + partials.getPatternFolder(k) + '/index.html'
 			});
 		});
 
@@ -139,34 +146,18 @@ var engine = function () {
 		});
 	}
 
-	function renderFile(fileInfo, file) {
+	function renderFile(fileInfo, end) {
 		var DS = path.sep;
-		var partialName = DS !== '/' ? fileInfo.partialName.replace(/\//g, '\\') : fileInfo.partialName;
-		var filePath = u.getPath(settings.paths.public.patterns, partialName + '.html');
-		var fileArr = filePath.split(DS);
-		var fileName = fileArr[fileArr.length - 1];
+		var partialName = partials.getPatternFolder(fileInfo.partialName);
+		var filePath = u.getPath(settings.paths.public.patterns + partialName, '/index.html');
+		var filePathMarkups = u.getPath(settings.paths.public.patterns + partialName, '/markups.html');
 
-		fileArr.pop();
+		fse.outputFileSync(filePath, fileInfo.html);
+		fse.outputFileSync(filePathMarkups, fileInfo.markup);
 
-		var patternPath = fileArr.join(DS);
-		var patterns = DS + 'patterns' + DS;
-		var markups = DS + 'markups' + DS;
-
-		fse.mkdirs(patternPath, function (err) {
-			fse.outputFile(filePath, fileInfo.html, function (err) {
-				if (err) {
-					u.log(err, 'error');
-				}
-			});
-		});
-
-		fse.mkdirs(patternPath.replace(patterns, markups), function (err) {
-			fse.outputFile(filePath.replace(patterns, markups), fileInfo.markup, function (err) {
-				if (err) {
-					u.log(err, 'error');
-				}
-			});
-		});
+		if (end) {
+			onEnd();
+		}
 	}
 
 	function getHtml(template, data) {
@@ -181,16 +172,16 @@ var engine = function () {
 
 	function cleanPaths(callback) {
 		fse.mkdirsSync(settings.paths.public.patterns);
-		fse.mkdirsSync(settings.paths.public.markups);
 		fse.mkdirsSync(settings.paths.public.data);
 		callback();
 	}
 
 	function addToTree(partial, end) {
 		var arr = partial.split('/');
-		var url = settings.http.patterns + partial + '.html';
+		var url = settings.http.patterns + partials.getPatternFolder(partial) + '/index.html';
 		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
 			var obj = {}
+
 			if (array.length - 2 === currentIndex && !obj.hasOwnProperty(currentValue)) {
 				obj[currentValue] = {};
 			}
@@ -201,6 +192,7 @@ var engine = function () {
 			else {
 				obj[currentValue] = previousValue;
 			}
+
 			return obj;
 		});
 
@@ -216,13 +208,7 @@ var engine = function () {
 			patternsTree[obj] = sort_object(patternsTree[obj], {sortOrder: 'ASC'});
 		}
 
-		fse.writeFile(u.getPath(settings.paths.public.data, 'patterns.json'), JSON.stringify(patternsTree), function(err, data) {
-			if (err) {
-				return console.log(err);
-			}
-			u.log('Files rendered', 'success');
-			console.timeEnd('render duration');
-		});
+		fse.outputFileSync(u.getPath(settings.paths.public.data, 'patterns.json'), JSON.stringify(patternsTree));
 
 		renderTemplate();
 	}
@@ -267,11 +253,7 @@ var engine = function () {
 
 		var indexHTML = indexTemplate({engineHeader: header, engineFooter: engineFooter});
 
-		fse.outputFile(u.getPath(settings.paths.public.root, 'index.html'), indexHTML, function (err) {
-			if (err) {
-				u.log(err, 'error');
-			}
-		});
+		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}
 
 	console.time('render duration');

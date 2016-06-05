@@ -7,23 +7,34 @@
 			"root": "./core/",
 			"templates": "./core/modules/templates/"
 		},
+		"libs": {
+			"root": "./libs/"
+		},
 		"src": {
 			"root": "./src/",
+			"css": "./src/css/",
 			"data": "./src/data/",
+			"images": "./src/images/",
+			"js": "./src/js/",
+			"layouts": "./src/layouts/",
 			"patterns": "./src/patterns/",
-			"layouts": "./src/layouts/"
+			"styleguides": "./src/styleguide/"
 		},
 		"public": {
 			"root": "./public/",
+			"css": "./public/css/",
 			"data": "./public/data/",
+			"images": "./public/images/",
+			"js": "./public/js/",
+			"markups": "./public/markups/",
 			"patterns": "./public/patterns/",
-			"markups": "./public/markups/"
+			"styleguides": "./public/styleguide/"
 		}
 
 	},
 	"http": {
 		"root": "/",
-		"patterns": "/patterns/",
-		"markups": "/markups/"
+		"markups": "/markups/",
+		"patterns": "/patterns/"
 	}
 }

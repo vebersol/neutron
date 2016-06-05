@@ -9,7 +9,7 @@ var markup = function () {
 		var documentation = documentationHandler.getDocs(source);
 		var html = [];
 
-		html.push('<ul class="democritus-code--list">');
+		html.push('<ul class="neutron-code--list">');
 		
 		html.push('<li data-target="#html"><pre><code class="language-html">');
 		html.push(htmlEscape(handlebars.compile(source)(data)))
@@ -20,7 +20,7 @@ var markup = function () {
 		html.push('</code></pre></li>');
 
 		if (documentation) {
-			html.push('<li data-target="#documentation"><div class="democritus-code--documentation">');
+			html.push('<li data-target="#documentation"><div class="neutron-code--documentation">');
 			html.push(documentation);
 			html.push('</div></li>');
 		}
