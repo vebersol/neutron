@@ -47,9 +47,7 @@ var engine = function (cb) {
 					patternFiles.push(file);
 				}
 			})
-			.on('end', function () {
-				writeFiles();
-			});
+			.on('end', writeFiles);
 	}
 
 	function writeFiles() {
