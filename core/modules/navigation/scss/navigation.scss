@@ -91,7 +91,7 @@ $menuWidth: 173px;
 }
 
 .#{$prefix}-start-button,
-.#{$prefix}-navigation {
+.#{$prefix}-navigation, {
 	@include prefix(transition, bottom 0.5s ease-out);
 	@include prefix(transition, left 0.5s ease-out);
 
@@ -128,7 +128,7 @@ $menuWidth: 173px;
 	position: fixed;
 	top: 0;
 	left: $menuWidth * -1;
-	height: calc(100% - 35px);
+	height: calc(100% - 78px);
 	overflow: auto;
 	background-color: $bgcolor;
 	margin: 0;
@@ -142,7 +142,7 @@ $menuWidth: 173px;
 	}
 
 	&.#{$prefix}-frame-active {
-		height: calc(50% - 37px);
+		height: calc(50% - 80px);
 	}
 
 	ul {
@@ -150,10 +150,6 @@ $menuWidth: 173px;
 		&.active {
 			display: block;
 		}
-	}
-
-	&.search-active {
-		height: calc(100% - 90px);
 	}
 }
 
@@ -179,7 +175,7 @@ $menuWidth: 173px;
 	&--close {
 		text-align: right;
 		position: fixed;
-		right: 33px;
+		right: $buttonSize;		
 
 		&__link {
 			color: $txtcolor;
@@ -281,10 +277,14 @@ $menuWidth: 173px;
 		left: 0;
 	}
 
+	&.#{$prefix}-frame-active {
+		bottom: calc(50% + 37px);
+	}
+
 	.#{$prefix}-search {
 		position: relative;
 		background-color: $bgcolor;
-		padding: 10px;
+		padding: 5px;
 		width: $menuWidth;
 		@include prefix(box-sizing, border-box);
 
@@ -307,6 +307,7 @@ $menuWidth: 173px;
 	background-color: $bgcolor;
 	padding: 10px;
 	@include prefix(transition, left 0.5s);
+	z-index: 4;
 
 	&.active {
 		left: 0;
@@ -315,5 +316,9 @@ $menuWidth: 173px;
 	#qrcode {
 		background-color: white;
 		padding: 5px;
+	}
+
+	&.#{$prefix}-frame-active {
+		bottom: calc(50% + 37px);
 	}
 }
