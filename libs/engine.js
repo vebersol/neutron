@@ -242,9 +242,7 @@ var engine = function (cb) {
 					partials.registeredPartials.push(file);
 				}
 			})
-			.on('end', function () {
-				registerPartials();
-			});
+			.on('end', registerPartials);
 	};
 
 	function registerPartials() {
