@@ -238,7 +238,7 @@ var engine = function (cb) {
 	function walkPartials() {
 		return fse.walk(u.getPath(settings.paths.src.patterns))
 			.on('data', function (file) {
-				if (path.extname(file.path) === settings.fileExtension) {
+				if (isPatternExtension(path.extname(file.path))) {
 					partials.registeredPartials.push(file);
 				}
 			})
