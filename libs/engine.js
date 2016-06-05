@@ -12,6 +12,8 @@ var partials = require('./partials')();
 var layoutHandler = require('./layouts')();
 var markup = require('./markup')();
 
+var helpers = require(path.resolve(settings.paths.core.helpers));
+
 var engine = function (cb) {
 	'use strict';
 	var globalData = {};
@@ -33,7 +35,16 @@ var engine = function (cb) {
 		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
 		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
 		cleanPaths();
-		walkPartials()
+		walkPartials();
+		registerHelpers();
+	}
+
+	/**
+	 * Register all base helpers into handlebars
+	 * */
+	function registerHelpers() {
+		var allHelpers = helpers(handlebars);
+		handlebars.registerHelper(allHelpers);
 	}
 
 	function onEnd() {
