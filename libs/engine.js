@@ -12,7 +12,7 @@ var partials = require('./partials')();
 var layoutHandler = require('./layouts')();
 var markup = require('./markup')();
 
-var helpers = require(path.resolve(settings.paths.core.helpers));
+var helpers = require(path.resolve(settings.paths.core.helpers))(handlebars);
 
 var engine = function (cb) {
 	'use strict';
@@ -34,17 +34,16 @@ var engine = function (cb) {
 		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
 		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
 		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
+		registerHelpers();
 		cleanPaths();
 		walkPartials();
-		registerHelpers();
 	}
 
 	/**
 	 * Register all base helpers into handlebars
 	 * */
 	function registerHelpers() {
-		var allHelpers = helpers(handlebars);
-		handlebars.registerHelper(allHelpers);
+		handlebars.registerHelper(helpers);
 	}
 
 	function onEnd() {
@@ -123,6 +122,7 @@ var engine = function (cb) {
 			partialName: partialName
 		});
 
+		helpers.resetHelpers();
 		var markups = markup.addMarkup(pattern.source, newData);
 		var template = handlebars.compile(layout);
 		var result = getHtml(template, newData);
@@ -266,6 +266,8 @@ var engine = function (cb) {
 
 	function renderTemplate() {
 		var indexSource = fse.readFileSync(u.getPath(settings.paths.core.templates, 'index.handlebars'), settings.encode);
+
+		helpers.resetHelpers();
 		var indexTemplate = handlebars.compile(indexSource);
 
 		var engineFooter = addEngineSnippets({
