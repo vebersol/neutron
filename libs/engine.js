@@ -58,6 +58,15 @@ var engine = function (cb) {
 			.on('end', writeFiles);
 	}
 
+	/**
+	 * Return true when the file path should be ignored for render
+	 * @partam path file path
+	 * @return Boolen
+	 */
+	function shouldIgnoreFile(path) {
+		return path[0] === "_";
+	}
+
 	function writeFiles() {
 
 		try {
@@ -69,8 +78,7 @@ var engine = function (cb) {
 						if (source) {
 							var extendedData = Object.assign({}, globalData, data);
 
-							// do not render filenames starting with _
-							if (path.basename(file.path)[0] === "_") {
+							if (shouldIgnoreFile(path.basename(file.path))) {
 								return true;
 							}
 
