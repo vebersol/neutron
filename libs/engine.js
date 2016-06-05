@@ -40,10 +40,18 @@ var engine = function (cb) {
 		console.timeEnd('render duration');
 	}
 
+	/**
+	 * Returns true when extension is a pattern extension
+	 * @return Boolean
+	*/
+	function isPatternExtension(extension) {
+		return extension === settings.fileExtension;
+	}
+
 	function getPatterns() {
 		return fse.walk(settings.paths.src.patterns)
 			.on('data', function (file) {
-				if (path.extname(file.path) === settings.fileExtension) {
+				if (isPatternExtension(path.extname(file.path))) {
 					patternFiles.push(file);
 				}
 			})
