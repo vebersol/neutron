@@ -9,6 +9,9 @@ Menu.prototype = {
 			url: '/data/patterns.json',
 			success: function(data) {
 				parent.renderMenu(data);
+
+				new KeyboardNav();				
+				new Search();
 			}
 		});
 	},

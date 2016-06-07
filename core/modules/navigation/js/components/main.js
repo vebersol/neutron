@@ -15,6 +15,9 @@ Main.prototype = {
 			success: function (data) {
 				parent.wrapper.append(data);
 				parent.buildDependenciesList();				
+				
+				new CodeFrame();
+				new Menu();
 			}
 		});
 	},

@@ -1,11 +1,7 @@
 var patternData = neutronADT;
 
 window.onload = function () {
-	new Main();
-	new Menu();
-	new Search();
-	new KeyboardNav();
-	new CodeFrame();
+	new Main();		
 };
 
 Object.size = function(obj) {
