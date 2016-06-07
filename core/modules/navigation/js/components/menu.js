@@ -22,7 +22,7 @@ Menu.prototype = {
 				list;
 
 		for (var i = 0; i < menuArr.length; i++) {
-			list = Zepto('<li><a href="javascript:;">' + menuArr[i] + '</a></li>').data('item', menuArr[i]);
+			list = Zepto('<li><a href="javascript:;">' + this.toTitle(menuArr[i]) + '</a></li>').data('item', menuArr[i]);
 			submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
 			list.append(submenu);
 			menu.append(list);
@@ -43,9 +43,9 @@ Menu.prototype = {
 			objLen = Object.size(data[item]);
 
 			if (typeof data[item] === 'string') {
-				list = Zepto('<li><a href="' + data[item] + '">' + item + '</a></li>');
+				list = Zepto('<li><a href="' + data[item] + '">' + this.toTitle(item) + '</a></li>');
 			} else if (typeof data[item] === 'object' && objLen > 0) {
-				list = Zepto('<li><a href="javascript:;">' + item + '</a></li>').data('item', item);
+				list = Zepto('<li><a href="javascript:;">' + this.toTitle(item) + '</a></li>').data('item', item);
 				list.append(this.createMenuItem(data[item], item));
 			}
 
@@ -151,5 +151,16 @@ Menu.prototype = {
 	showElement: function (element) {
 		var uls = element.parents('ul:not(.neutron-patterns-menu)')
 		uls.addClass('active');
-	}	
+	},
+
+	toTitle: function (slug) {
+		var words = slug.split('-');
+
+		for (var i = 0; i < words.length; i++) {
+			var word = words[i];
+			words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+		}
+
+		return words.join(' ');
+	}
 }
