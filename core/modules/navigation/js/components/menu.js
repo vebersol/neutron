@@ -27,7 +27,7 @@ Menu.prototype = {
 
 		Zepto('.neutron-sticky-nav').append(menu);
 
-		this.bind(menu);		
+		this.bind(menu);
 	},
 
 	createMenuItem: function (data, property) {
@@ -82,10 +82,10 @@ Menu.prototype = {
 					bars = '.neutron-patterns-menu, .neutron-navigation--menu, .neutron-search-wrapper, .neutron-navigation--qr, .neutron-qr-code-frame';
 
 			if (nav.hasClass('active')) {
-				element.removeClass('fa-compress');
+				element.removeClass('active');
 				Zepto(bars).removeClass('active');
 			} else {
-				element.addClass('fa-compress');
+				element.addClass('active');
 			}
 
 			nav.toggleClass('active');

@@ -13,19 +13,13 @@ $buttonSize: 33px;
 $gap: 2px;
 $menuWidth: 173px;
 
-.fa {
-	span {
-		display: none;
-	}
-}
-
 .#{$prefix}-code-frame,
 .#{$prefix}-patterns-menu {
 	* {
 		@include prefix(box-sizing, border-box);
 	}
 
-	a:not(.fa),
+	a,
 	p {
 		font-family: Arial, sans-serif;
 	}
@@ -44,13 +38,8 @@ $menuWidth: 173px;
 	color: white;
 	text-align: center;
 	background-color: $bgcolor;
-	line-height: $buttonSize !important;
 	z-index: 2;
 	text-decoration: none !important;
-
-	span {
-		display: none;
-	}
 }
 
 .#{$prefix}-navigation {
@@ -71,7 +60,6 @@ $menuWidth: 173px;
 		background-color: $bgcolor;
 		color: white;
 		text-align: center;
-		line-height: $buttonSize;
 		margin-left: 2px;
 		text-decoration: none !important;
 
@@ -79,14 +67,27 @@ $menuWidth: 173px;
 			margin-left: 0;
 		}
 
-		&.active {
-			color: $activeNavigation;
-		}
-
 		&.disabled {
 			cursor: default;
 			color: #666;
 		}
+	}
+}
+
+.#{$prefix}-start-button,
+.#{$prefix}-navigation a {
+	line-height: 37px;
+
+	span {
+		display: none;
+	}
+
+	svg {
+		width: 16px;
+	}
+
+	&.active svg path {
+		fill: $activeNavigation;
 	}
 }
 
