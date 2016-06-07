@@ -9,10 +9,9 @@ Search.prototype = {
 
 	bindSearch: function () {
 		var timer,
-				input = Zepto('.neutron-search__input');
-				
-		input.keyup(function(ev) {			
-			console.log('suh')
+				input = Zepto('.neutron-search-wrapper input');		
+			
+		input.on('keyup', function (ev) {			
 			clearTimeout(timer);
 			timer = setTimeout(function () {
 				var value = Zepto(ev.target).val(),

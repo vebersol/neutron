@@ -12,13 +12,11 @@ module.exports = function(gulp) {
 	gulp.task('sass:navigation', function() {
 		return gulp.src(u.getPath(settings.paths.core.root, 'modules/navigation/scss/*.scss'))
 			.pipe(sass().on('error', sass.logError))
-			.pipe(gulp.dest(u.getPath(settings.paths.src.styleguides, 'modules/navigation/css')))
-			.pipe(gulp.dest(u.getPath(settings.paths.public.styleguides, 'modules/navigation/css')));
+			.pipe(gulp.dest(u.getPath(settings.paths.src.styleguides, 'modules/navigation/css')));			
 	});
 
 	gulp.task('js:navigation', function() {
-		var dest = u.getPath(settings.paths.src.styleguides, 'modules/navigation/js'),
-				destPublic = u.getPath(settings.paths.public.styleguides, 'modules/navigation/js');
+		var dest = u.getPath(settings.paths.src.styleguides, 'modules/navigation/js');
 
 		return gulp.src([
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/zepto.js'),
@@ -36,15 +34,13 @@ module.exports = function(gulp) {
 			.pipe(gulp.dest(dest))
 			.pipe(rename('scripts.min.js'))
 			.pipe(uglify())
-			.pipe(gulp.dest(dest))
-			.pipe(gulp.dest(destPublic));
+			.pipe(gulp.dest(dest));			
 	});
 
 	gulp.task('html:navigation', function() {
 		gulp.src(u.getPath(settings.paths.core.root, 'modules/navigation/template/index.html'), {
 			base: u.getPath(settings.paths.core.root)
 		})
-		.pipe(gulp.dest(u.getPath(settings.paths.src.styleguides)))
-		.pipe(gulp.dest(u.getPath(settings.paths.public.styleguides)));
+		.pipe(gulp.dest(u.getPath(settings.paths.src.styleguides)));		
 	});
 }
