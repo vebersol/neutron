@@ -66,16 +66,16 @@ Menu.prototype = {
 				path = window.location.pathname,
 				qrcode,
 				qrcodeEl = Zepto('#qrcode'),
-				qrCodeFrame = Zepto('.neutron-qr-code-frame'),
+				qrCodeFrame = Zepto('.neutron-qr-code-wrapper'),
 				codeBtn = Zepto('.neutron-button--code'),
 				menu = Zepto('.neutron-menu--items'),
 				selectors = [
 					'.neutron-menu', '.neutron-button--menu',
 					'.neutron-button--code', '.neutron-button--qr',
-					'.neutron-qr-code-frame', '.neutron-code-frame'
+					'.neutron-qr-code-wrapper', '.neutron-code-frame'
 				],
 				bars = Zepto(selectors.join(', ')),
-				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu, .neutron-qr-code-frame');
+				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu');
 
 		menu.find('[data-item] > a').click(function () {
 			var subMenu = Zepto(this).parent().children('ul');
@@ -158,8 +158,8 @@ Menu.prototype = {
 				qrCodeFrame.addClass('active');
 				qrcode = new QRCode(qrcodeEl.get(0), {
 					text: location.href,
-					width: 143,
-					height: 143
+					width: 256,
+					height: 256
 				});
 
 				parent.storage.add('qr');

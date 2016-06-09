@@ -40,6 +40,10 @@ $menuWidth: 173px;
 	background-color: $bgcolor;
 	z-index: 2;
 	text-decoration: none !important;
+
+	svg path {
+		fill: white;
+	}
 }
 
 .#{$prefix}-navigation {
@@ -58,10 +62,14 @@ $menuWidth: 173px;
 		width: $buttonSize;
 		height: $buttonSize;
 		background-color: $bgcolor;
-		color: white;
 		text-align: center;
 		margin-left: 2px;
 		text-decoration: none !important;
+		color: white;
+		
+		svg path {
+			fill: white;
+		}
 
 		&:first-child {
 			margin-left: 0;
@@ -69,7 +77,9 @@ $menuWidth: 173px;
 
 		&.disabled {
 			cursor: default;
-			color: #666;
+			svg path {
+				fill: #666;
+			}
 		}
 	}
 }
@@ -301,27 +311,93 @@ $menuWidth: 173px;
 	}
 }
 
-.#{$prefix}-qr-code-frame {
-	position: fixed;
-	bottom: $buttonSize + $gap;
-	left: $menuWidth * -1;
-	width: $menuWidth;
-	height: $menuWidth;
-	background-color: $bgcolor;
-	padding: 10px;
-	@include prefix(transition, "left 0.5s ease-out, bottom 0.5s ease-out");
-	z-index: 4;
+.#{$prefix}-qr-code-wrapper {
+	z-index: 999999;
+
+	&:after {
+		position: absolute;
+		top: -999px;
+		left: 0;
+		display: block;
+		content: " ";
+		width: 0;
+		height: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 3;
+		@include prefix(transition, opacity 1s ease-out);
+		opacity: 0;
+	}
 
 	&.active {
-		left: 0;
+		&:after {
+			top: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 1;
+		}
+
+		.#{$prefix}-qr-code-frame {
+			top: 50%;
+		}
 	}
+}
+
+.#{$prefix}-qr-code-frame {
+	position: fixed;
+	top: -999px;
+	left: 50%;
+	width: 600px;
+	height: auto;
+	margin: -150px 0 0 -300px;
+	background-color: $bgcolor;
+	padding: 10px;
+	@include prefix(transition, top 1s ease-out);
+	z-index: 4;
+	@include prefix(box-sizing, border-box);
+	color: white;
 
 	#qrcode {
 		background-color: white;
 		padding: 5px;
+		text-align: center;
+		width: 276px;
+		height: 276px;
+		margin: 0 auto;
+
+		img {
+			margin: 0 auto;
+		}
 	}
 
 	&.#{$prefix}-frame-active {
 		bottom: calc(50% + 37px);
+	}
+
+	&--headline,
+	&--text {
+		color: white;
+		font-family: Arial, sans-serif;
+	}
+
+	&--headline {
+		font-size: 24px;
+		line-height: 1;
+		margin-bottom: 12px;
+	}
+
+	&--text {
+		font-size: 16px;
+		line-height: 1;
+		margin-bottom: 8px;
+	}
+
+	@media (max-width: 600px) {
+		left: 0;
+		width: 100%;
+
+		&.active {
+			left: 0;
+			margin-left: 0;
+		}
 	}
 }
