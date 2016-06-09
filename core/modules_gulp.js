@@ -26,6 +26,7 @@ module.exports = function(gulp) {
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/menu.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/search.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/codeFrame.js'),
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/storage.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/main.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/app.js')
 			])

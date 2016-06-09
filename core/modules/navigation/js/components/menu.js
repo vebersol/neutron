@@ -8,6 +8,7 @@ Menu.prototype = {
 		Zepto.ajax({
 			url: '/data/patterns.json',
 			success: function(data) {
+				parent.storage = new Storage();
 				parent.renderMenu(data);
 
 				new KeyboardNav();
@@ -29,6 +30,7 @@ Menu.prototype = {
 		}
 
 		this.bind();
+		this.setupButtons();
 	},
 
 	createMenuItem: function (data, property) {
@@ -94,16 +96,26 @@ Menu.prototype = {
 				element.removeClass('active');
 				bars.removeClass('active');
 				movableFrames.removeClass('neutron-frame-active')
+				parent.storage.removeAll();
 			} else {
 				element.addClass('active');
+				parent.storage.add('start');
 			}
 
 			nav.toggleClass('active');
 		});
 
 		Zepto('.neutron-button--menu').click(function () {
-			Zepto(this).toggleClass('active');
+			var element = Zepto(this);
+			element.toggleClass('active');
 			menu.parent().toggleClass('active');
+
+			if (element.hasClass('active')) {
+				parent.storage.add('menu');
+			}
+			else {
+				parent.storage.remove('menu');
+			}
 		});
 
 		if (patternData.i.patternName.length > 0) {
@@ -114,8 +126,10 @@ Menu.prototype = {
 				frame.toggleClass('active');
 
 				if (frame.hasClass('active')) {
+					parent.storage.add('code');
 					movableFrames.addClass('neutron-frame-active');
 				} else {
+					parent.storage.remove('code');
 					movableFrames.removeClass('neutron-frame-active');
 				}
 			});
@@ -126,6 +140,7 @@ Menu.prototype = {
 		Zepto('.neutron-code-frame--close__link').on('click', function () {
 			Zepto('.neutron-code-frame, .neutron-button--code').removeClass('active');
 			movableFrames.removeClass('neutron-frame-active');
+			parent.storage.remove('code');
 		});
 
 		Zepto('.neutron-button--qr').click(function () {
@@ -140,10 +155,13 @@ Menu.prototype = {
 					width: 143,
 					height: 143
 				});
+
+				parent.storage.add('qr');
 			}
 			else {
 				el.removeClass('active');
 				qrCodeFrame.removeClass('active');
+				parent.storage.remove('qr');
 			}
 		});
 	},
@@ -171,5 +189,13 @@ Menu.prototype = {
 			if (obj.hasOwnProperty(key)) size++;
 		}
 		return size;
+	},
+
+	setupButtons: function () {
+		var btns = this.storage.data.split(',');
+
+		for (var i = 0; i < btns.length; i++) {
+			Zepto('.neutron-button--' + btns[i]).click();
+		}
 	}
 }

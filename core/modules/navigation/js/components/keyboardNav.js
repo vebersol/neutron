@@ -5,7 +5,14 @@ var KeyboardNav = function () {
 KeyboardNav.prototype = {
 	init: function (buttons) {
 		var parent = this;
+		
 		this.buttons = buttons;
+		this.startBtn = Zepto('.neutron-button--start');
+		this.navBar = Zepto('.neutron-navigation');
+		this.menuBtn = Zepto('.neutron-button--menu');
+		this.infoBtn = Zepto('.neutron-button--code');
+		this.qrCodeBtn = Zepto('.neutron-button--qr');
+
 		Zepto(document).on('keyup', function (ev) {
 			parent.keyUp(ev);
 		});
@@ -32,41 +39,45 @@ KeyboardNav.prototype = {
 	},
 
 	openMenu: function () {
-		var barElement = Zepto('.neutron-navigation');
-		var menuBtn = Zepto('.neutron-button--menu');
+		this.menuBtn = Zepto('.neutron-button--menu');
 
-		if (!barElement.hasClass('active')) {
-			barElement.addClass('active');
+		if (!this.navBar.hasClass('active')) {
+			this.navBar.addClass('active');
 		}
 
-		menuBtn.click();
+		this.menuBtn.click();
+		this.checkStartBtn();
 	},
 
 	openInfoBar: function () {
-		var barElement = Zepto('.neutron-navigation');
-		var infoBtn = Zepto('.neutron-button--code');
+		this.infoBtn = Zepto('.neutron-button--code');
 
-		if (!barElement.hasClass('active')) {
-			barElement.addClass('active');
+		if (!this.navBar.hasClass('active')) {
+			this.navBar.addClass('active');
 		}
 
-		infoBtn.click();
+		this.infoBtn.click();
+		this.checkStartBtn();
 	},
 
 	openQRCodeBar: function () {
-		var barElement = Zepto('.neutron-navigation');
-		var qrCodeBtn = Zepto('.neutron-button--qr');
+		this.qrCodeBtn = Zepto('.neutron-button--qr');
 
-		if (!barElement.hasClass('active')) {
-			barElement.addClass('active');
+		if (!this.navBar.hasClass('active')) {
+			this.navBar.addClass('active');
 		}
 
-		qrCodeBtn.click();
+		this.qrCodeBtn.click();
+		this.checkStartBtn();
 	},
 
 	toggleBar: function () {
-		var startBtn = Zepto('.neutron-button--start');
+		this.startBtn.click();
+	},
 
-		startBtn.click();
+	checkStartBtn: function () {
+		if (!this.startBtn.hasClass('active')) {
+			this.startBtn.addClass('active');
+		}
 	}
 }
