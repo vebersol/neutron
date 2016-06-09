@@ -14,7 +14,7 @@ $gap: 2px;
 $menuWidth: 173px;
 
 .#{$prefix}-code-frame,
-.#{$prefix}-patterns-menu {
+.#{$prefix}-menu {
 	* {
 		@include prefix(box-sizing, border-box);
 	}
@@ -29,7 +29,7 @@ $menuWidth: 173px;
 	}
 }
 
-.#{$prefix}-start-button {
+.#{$prefix}-button--start {
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -74,7 +74,7 @@ $menuWidth: 173px;
 	}
 }
 
-.#{$prefix}-start-button,
+.#{$prefix}-button--start,
 .#{$prefix}-navigation a {
 	line-height: 37px;
 
@@ -91,25 +91,62 @@ $menuWidth: 173px;
 	}
 }
 
-.#{$prefix}-start-button,
+.#{$prefix}-button--start,
 .#{$prefix}-navigation, {
-	@include prefix(transition, bottom 0.5s ease-out);
-	@include prefix(transition, left 0.5s ease-out);
+	@include prefix(transition, "bottom 0.5s ease-out, left 0.5s ease-out");
 
 	&.#{$prefix}-frame-active {
 		bottom: calc(50% + 2px);
 	}
 }
 
-.#{$prefix}-patterns-menu,
-.#{$prefix}-patterns-menu ul {
+.#{$prefix}-menu {
+	width: $menuWidth;
+	position: fixed;
+	top: 0;
+	left: $menuWidth * -1;
+	height: calc(100% - 35px);
+	background-color: $bgcolor;
+	margin: 0;
+	color: $txtcolor;
+	padding-bottom: $buttonSize + 10px;
+	@include prefix(transition, "height 0.5s ease-out, left 0.5s ease-out");
+	@include prefix(box-sizing, border-box);
+
+	&.active {
+		left: 0;
+
+		.#{$prefix}-menu--search  {
+			left: 0;
+		}
+	}
+
+	&.#{$prefix}-frame-active {
+		height: calc(50% - 37px);
+
+		.#{$prefix}-menu--search {
+			bottom: calc(50% + 37px);;
+		}
+	}
+}
+
+.#{$prefix}-menu--items {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	overflow: auto;
+	height: 100%;
 
 	[data-item] > a {
 		color: #CCC;
 		text-transform: uppercase;
+	}
+
+	ul {
+		display: none;
+		&.active {
+			display: block;
+		}
 	}
 
 	li {
@@ -124,32 +161,30 @@ $menuWidth: 173px;
 	}
 }
 
-.#{$prefix}-patterns-menu {
-	width: $menuWidth;
+.#{$prefix}-menu--search {
 	position: fixed;
-	top: 0;
+	bottom: 35px;
 	left: $menuWidth * -1;
-	height: calc(100% - 78px);
-	overflow: auto;
-	background-color: $bgcolor;
-	margin: 0;
-	color: $txtcolor;
-	@include prefix(transition, height 0.5s);
-	@include prefix(transition, left 0.5s ease-out);
-	@include prefix(box-sizing, border-box);
-
-	&.active {
-		left: 0;
-	}
+	z-index: 3;
+	@include prefix(transition, "left 0.5s ease-out, bottom 0.5s ease-out");
 
 	&.#{$prefix}-frame-active {
-		height: calc(50% - 80px);
+		bottom: calc(50% + 37px);
 	}
 
-	ul {
-		display: none;
-		&.active {
-			display: block;
+	&__input {
+		position: relative;
+		background-color: $bgcolor;
+		padding: 5px;
+		width: $menuWidth;
+		@include prefix(box-sizing, border-box);
+
+		input {
+			border-radius: 0;
+			-webkit-appearance: none;
+			border: none;
+			width: 100%;
+			height: 33px;
 		}
 	}
 }
@@ -166,7 +201,7 @@ $menuWidth: 173px;
 	padding: 20px;
 	z-index: 100;
 	color: $txtcolor;
-	@include prefix(transition, bottom 0.5s);
+	@include prefix(transition, bottom 0.5s ease-out);
 	@include prefix(box-sizing, border-box);
 
 	&.active {
@@ -176,7 +211,7 @@ $menuWidth: 173px;
 	&--close {
 		text-align: right;
 		position: fixed;
-		right: $buttonSize;		
+		right: $buttonSize;
 
 		&__link {
 			color: $txtcolor;
@@ -266,39 +301,6 @@ $menuWidth: 173px;
 	}
 }
 
-.#{$prefix}-search-wrapper {
-	position: fixed;
-	bottom: 35px;
-	left: $menuWidth * -1;
-	z-index: 3;
-	@include prefix(transition, bottom 0.5s ease-out);
-	@include prefix(transition, left 0.5s ease-out);
-
-	&.active {
-		left: 0;
-	}
-
-	&.#{$prefix}-frame-active {
-		bottom: calc(50% + 37px);
-	}
-
-	.#{$prefix}-search {
-		position: relative;
-		background-color: $bgcolor;
-		padding: 5px;
-		width: $menuWidth;
-		@include prefix(box-sizing, border-box);
-
-		input {
-			border-radius: 0;
-			-webkit-appearance: none;
-			border: none;
-			width: 100%;
-			height: 33px;
-		}
-	}
-}
-
 .#{$prefix}-qr-code-frame {
 	position: fixed;
 	bottom: $buttonSize + $gap;
@@ -307,7 +309,7 @@ $menuWidth: 173px;
 	height: $menuWidth;
 	background-color: $bgcolor;
 	padding: 10px;
-	@include prefix(transition, left 0.5s);
+	@include prefix(transition, "left 0.5s ease-out, bottom 0.5s ease-out");
 	z-index: 4;
 
 	&.active {

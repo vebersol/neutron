@@ -9,15 +9,15 @@ Search.prototype = {
 
 	bindSearch: function () {
 		var timer,
-				input = Zepto('.neutron-search-wrapper input');		
-			
-		input.on('keyup', function (ev) {			
+				input = Zepto('.neutron-menu--search input');
+
+		input.on('keyup', function (ev) {
 			clearTimeout(timer);
 			timer = setTimeout(function () {
 				var value = Zepto(ev.target).val(),
-						anchors = Zepto('.neutron-patterns-menu > li a');
+						anchors = Zepto('.neutron-menu--items > li a');
 
-				Zepto('.neutron-patterns-menu li').hide();
+				Zepto('.neutron-menu--items li').hide();
 				anchors.each(function () {
 					var element = Zepto(this),
 							text = element.text().toLowerCase();
@@ -31,5 +31,5 @@ Search.prototype = {
 				});
 			}, 500);
 		});
-	}	
+	}
 }

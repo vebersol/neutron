@@ -10,7 +10,7 @@ Menu.prototype = {
 			success: function(data) {
 				parent.renderMenu(data);
 
-				new KeyboardNav();				
+				new KeyboardNav();
 				new Search();
 			}
 		});
@@ -18,7 +18,7 @@ Menu.prototype = {
 
 	renderMenu: function (data) {
 		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'],
-				menu = Zepto('<ul></ul>').addClass('neutron-patterns-menu'),
+				menu = Zepto('.neutron-menu--items'),
 				list;
 
 		for (var i = 0; i < menuArr.length; i++) {
@@ -28,9 +28,7 @@ Menu.prototype = {
 			menu.append(list);
 		}
 
-		Zepto('.neutron-sticky-nav').append(menu);
-
-		this.bind(menu);
+		this.bind();
 	},
 
 	createMenuItem: function (data, property) {
@@ -59,12 +57,21 @@ Menu.prototype = {
 		return false;
 	},
 
-	bind: function (menu) {
+	bind: function () {
 		var parent = this,
 				path = window.location.pathname,
-				qrcode,	
+				qrcode,
 				qrcodeEl = Zepto('#qrcode'),
-				codeBtn = Zepto('.neutron-navigation--code');
+				qrCodeFrame = Zepto('.neutron-qr-code-frame'),
+				codeBtn = Zepto('.neutron-button--code'),
+				menu = Zepto('.neutron-menu--items'),
+				selectors = [
+					'.neutron-menu', '.neutron-button--menu',
+					'.neutron-button--code', '.neutron-button--qr',
+					'.neutron-qr-code-frame', '.neutron-code-frame'
+				],
+				bars = Zepto(selectors.join(', ')),
+				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu, .neutron-qr-code-frame');
 
 		menu.find('[data-item] > a').click(function () {
 			var subMenu = Zepto(this).parent().children('ul');
@@ -79,14 +86,14 @@ Menu.prototype = {
 			}
 		});
 
-		Zepto('.neutron-start-button').click(function () {
+		Zepto('.neutron-button--start').click(function () {
 			var element = Zepto(this),
-					nav = Zepto('.neutron-navigation'),
-					bars = '.neutron-patterns-menu, .neutron-navigation--menu, .neutron-search-wrapper, .neutron-navigation--qr, .neutron-qr-code-frame';
+					nav = Zepto('.neutron-navigation');
 
 			if (nav.hasClass('active')) {
 				element.removeClass('active');
-				Zepto(bars).removeClass('active');
+				bars.removeClass('active');
+				movableFrames.removeClass('neutron-frame-active')
 			} else {
 				element.addClass('active');
 			}
@@ -94,24 +101,22 @@ Menu.prototype = {
 			nav.toggleClass('active');
 		});
 
-		Zepto('.neutron-navigation--menu').click(function () {
+		Zepto('.neutron-button--menu').click(function () {
 			Zepto(this).toggleClass('active');
-			menu.toggleClass('active');
-			Zepto('.neutron-search-wrapper').toggleClass('active');
+			menu.parent().toggleClass('active');
 		});
 
 		if (patternData.i.patternName.length > 0) {
 			codeBtn.click(function () {
 				Zepto(this).toggleClass('active');
 				var frame = Zepto('.neutron-code-frame');
-				var bars = Zepto('.neutron-start-button, .neutron-navigation, .neutron-patterns-menu, .neutron-search-wrapper, .neutron-qr-code-frame');
 
 				frame.toggleClass('active');
 
 				if (frame.hasClass('active')) {
-					bars.addClass('neutron-frame-active');
+					movableFrames.addClass('neutron-frame-active');
 				} else {
-					bars.removeClass('neutron-frame-active');
+					movableFrames.removeClass('neutron-frame-active');
 				}
 			});
 		} else {
@@ -119,17 +124,15 @@ Menu.prototype = {
 		}
 
 		Zepto('.neutron-code-frame--close__link').on('click', function () {
-			var	bars = Zepto('.neutron-start-button, .neutron-navigation, .neutron-patterns-menu');
-
-			Zepto('.neutron-code-frame, .neutron-navigation--code').removeClass('active');
-			bars.removeClass('neutron-frame-active');
+			Zepto('.neutron-code-frame, .neutron-button--code').removeClass('active');
+			movableFrames.removeClass('neutron-frame-active');
 		});
-		
-		Zepto('.neutron-navigation--qr').click(function () {
+
+		Zepto('.neutron-button--qr').click(function () {
 			var el = Zepto(this);
 
-			var qrCodeFrame = Zepto('.neutron-qr-code-frame');
 			if (!qrCodeFrame.hasClass('active')) {
+				qrcodeEl.html('');
 				el.addClass('active');
 				qrCodeFrame.addClass('active');
 				qrcode = new QRCode(qrcodeEl.get(0), {
@@ -141,15 +144,12 @@ Menu.prototype = {
 			else {
 				el.removeClass('active');
 				qrCodeFrame.removeClass('active');
-				setTimeout(function () {
-					qrcodeEl.html('');
-				}, 500)
 			}
 		});
 	},
 
 	showElement: function (element) {
-		var uls = element.parents('ul:not(.neutron-patterns-menu)')
+		var uls = element.parents('ul:not(.neutron-menu--items)')
 		uls.addClass('active');
 	},
 

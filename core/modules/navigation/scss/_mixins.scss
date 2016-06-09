@@ -5,11 +5,11 @@
 /// @param {List} $prefixes (()) - List of prefixes to print
 @mixin prefix($property, $value, $prefixes: (webkit moz ms)) {
   @each $prefix in $prefixes {
-    #{'-' + $prefix + '-' + $property}: $value;
+    #{'-' + $prefix + '-' + $property}: #{$value};
   }
- 
+
   // Output standard non-prefixed declaration
-  #{$property}: $value;
+  #{$property}: #{$value};
 }
 
 @mixin clearfix {

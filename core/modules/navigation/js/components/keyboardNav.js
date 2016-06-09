@@ -20,8 +20,6 @@ KeyboardNav.prototype = {
 			this.openMenu();
 		} else if (ctrlAlt && this.isKey(ev, 'c')) {
 			this.openInfoBar();
-		} else if (ctrlAlt && this.isKey(ev, 'f')) {
-			this.openSearchBar();
 		} else if (ctrlAlt && this.isKey(ev, 'e')) {
 			this.openQRCodeBar();
 		} else if (ctrlAlt && this.isKey(ev, 'z')) {
@@ -30,24 +28,24 @@ KeyboardNav.prototype = {
 	},
 
 	isKey: function (ev, key) {
-		return (ev.code == 'Key' + key.toUpperCase() || ev.key == key)	
+		return (ev.code == 'Key' + key.toUpperCase() || ev.key == key)
 	},
 
 	openMenu: function () {
 		var barElement = Zepto('.neutron-navigation');
-		var menuBtn = Zepto('.neutron-navigation--menu');
-		
+		var menuBtn = Zepto('.neutron-button--menu');
+
 		if (!barElement.hasClass('active')) {
 			barElement.addClass('active');
 		}
-		
+
 		menuBtn.click();
 	},
 
 	openInfoBar: function () {
 		var barElement = Zepto('.neutron-navigation');
-		var infoBtn = Zepto('.neutron-navigation--code');
-		
+		var infoBtn = Zepto('.neutron-button--code');
+
 		if (!barElement.hasClass('active')) {
 			barElement.addClass('active');
 		}
@@ -55,21 +53,10 @@ KeyboardNav.prototype = {
 		infoBtn.click();
 	},
 
-	openSearchBar: function () {
-		var barElement = Zepto('.neutron-navigation');
-		var searchBtn = Zepto('.neutron-navigation--search');
-		
-		if (!barElement.hasClass('active')) {
-			barElement.addClass('active');
-		}
-
-		searchBtn.click();
-	},
-
 	openQRCodeBar: function () {
 		var barElement = Zepto('.neutron-navigation');
-		var qrCodeBtn = Zepto('.neutron-navigation--qr');
-		
+		var qrCodeBtn = Zepto('.neutron-button--qr');
+
 		if (!barElement.hasClass('active')) {
 			barElement.addClass('active');
 		}
@@ -78,7 +65,7 @@ KeyboardNav.prototype = {
 	},
 
 	toggleBar: function () {
-		var startBtn = Zepto('.neutron-start-button');
+		var startBtn = Zepto('.neutron-button--start');
 
 		startBtn.click();
 	}
