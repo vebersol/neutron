@@ -38,7 +38,7 @@ Menu.prototype = {
 				ul = Zepto('<ul></ul>');
 
 		for (var item in data) {
-			objLen = Object.size(data[item]);
+			objLen = this.getObjectSize(data[item]);
 
 			if (typeof data[item] === 'string') {
 				list = Zepto('<li><a href="' + data[item] + '">' + this.toTitle(item) + '</a></li>');
@@ -162,5 +162,14 @@ Menu.prototype = {
 		}
 
 		return words.join(' ');
+	},
+
+	getObjectSize: function(obj) {
+		var size = 0,
+			key;
+		for (key in obj) {
+			if (obj.hasOwnProperty(key)) size++;
+		}
+		return size;
 	}
 }
