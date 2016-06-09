@@ -15,7 +15,6 @@ Main.prototype = {
 		parent.wrapper.append(template);
 		parent.buildDependenciesList();				
 		
-		new CodeFrame();
 		new Menu();
 	},
 	

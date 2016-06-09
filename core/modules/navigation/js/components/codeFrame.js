@@ -1,10 +1,11 @@
 var CodeFrame = function() {
 	this.wrapper = Zepto('#neutron');
-	this.init();
+	this.loaded = false;
 }
 
 CodeFrame.prototype =  {
-	init: function() {
+	load: function () {
+		this.loaded = true;
 		this.addCode();
 	},
 

@@ -1,10 +1,12 @@
 var Menu = function () {
+	this.codeFrame = new CodeFrame();
 	this.init();
 }
 
 Menu.prototype = {
 	init: function () {
 		var parent = this;
+
 		Zepto.ajax({
 			url: '/data/patterns.json',
 			success: function(data) {
@@ -120,6 +122,10 @@ Menu.prototype = {
 
 		if (patternData.i.patternName.length > 0) {
 			codeBtn.click(function () {
+				if (!parent.codeFrame.loaded) {
+					parent.codeFrame.load();
+				}
+
 				Zepto(this).toggleClass('active');
 				var frame = Zepto('.neutron-code-frame');
 
