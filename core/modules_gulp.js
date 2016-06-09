@@ -12,7 +12,9 @@ module.exports = function(gulp) {
 
 	gulp.task('sass:navigation', function() {
 		return gulp.src(u.getPath(settings.paths.core.root, 'modules/navigation/scss/*.scss'))
+			.pipe(sourcemaps.init())
 			.pipe(sass().on('error', sass.logError))
+			.pipe(sourcemaps.write('./'))
 			.pipe(gulp.dest(u.getPath(settings.paths.src.styleguides, 'modules/navigation/css')));			
 	});
 
@@ -32,12 +34,16 @@ module.exports = function(gulp) {
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/main.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/app.js')
 			])
-			.pipe(concat('scripts.js'))
+			.pipe(sourcemaps.init())
+			.pipe(concat('scripts.min.js'))
 			.pipe(wrap("(function() {\n\n <%= contents %> \n\n})();"))
-			.pipe(gulp.dest(dest))
-			.pipe(rename('scripts.min.js'))
-			.pipe(uglify())
-			.pipe(gulp.dest(dest));			
+			.pipe(uglify({
+				compress: {
+					negate_iife: false
+				}
+			}))
+			.pipe(sourcemaps.write('./'))
+			.pipe(gulp.dest(dest));
 	});
 
 	gulp.task('jstemplate', function() {

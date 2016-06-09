@@ -29,7 +29,7 @@ gulp.task('connect', function () {
 });
 
 gulp.task('copy:css', function() {
-		return gulp.src('**/*.css', {
+		return gulp.src(['**/*.css', '**/*.css.map'], {
 				cwd: u.getPath(settings.paths.src.css)
 			})
 			.pipe(gulp.dest(u.getPath(settings.paths.public.css)));
@@ -43,14 +43,14 @@ gulp.task('copy:images', function() {
 });
 
 gulp.task('copy:js', function() {
-		return gulp.src('**/*.js', {
+		return gulp.src(['**/*.js', '**/*.js.map'], {
 				cwd: u.getPath(settings.paths.src.js)
 			})
 			.pipe(gulp.dest(u.getPath(settings.paths.public.js)));
 });
 
 gulp.task('copy:styleguide', ['js:navigation', 'sass:navigation'], function(cb) {
-		return gulp.src(['**/*.css', '**/*.js'], {
+		return gulp.src(['**/*.css', '**/*.js', '**/*.map'], {
 				cwd: u.getPath(settings.paths.src.styleguides)
 			})
 			.pipe(gulp.dest(u.getPath(settings.paths.public.styleguides)));
