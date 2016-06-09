@@ -12,18 +12,18 @@ KeyboardNav.prototype = {
 	},
 
 	keyUp: function (ev) {
-		ev.preventDefault();
+		if (!Zepto(ev.target).is('input')) {
+			ev.preventDefault();
 
-		var ctrlAlt = ev.ctrlKey && ev.altKey;
-
-		if (ctrlAlt && this.isKey(ev, 'm')) {
-			this.openMenu();
-		} else if (ctrlAlt && this.isKey(ev, 'c')) {
-			this.openInfoBar();
-		} else if (ctrlAlt && this.isKey(ev, 'e')) {
-			this.openQRCodeBar();
-		} else if (ctrlAlt && this.isKey(ev, 'z')) {
-			this.toggleBar();
+			if (this.isKey(ev, 'm')) {
+				this.openMenu();
+			} else if (this.isKey(ev, 'c')) {
+				this.openInfoBar();
+			} else if (this.isKey(ev, 'q')) {
+				this.openQRCodeBar();
+			} else if (this.isKey(ev, 'n')) {
+				this.toggleBar();
+			}
 		}
 	},
 
