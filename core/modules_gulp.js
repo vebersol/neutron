@@ -22,16 +22,9 @@ module.exports = function(gulp) {
 		var dest = u.getPath(settings.paths.src.styleguides, 'modules/navigation/js');
 
 		return gulp.src([
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/zepto.js'),
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/prism.js'),
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/qrcode.min.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/templates.js'),
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/keyboardNav.js'),
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/menu.js'),
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/search.js'),
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/codeFrame.js'),
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/storage.js'),
-				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/main.js'),
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/**/*.js'),
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/**/*.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/app.js')
 			])
 			.pipe(sourcemaps.init())
