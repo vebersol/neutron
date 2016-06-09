@@ -10,16 +10,13 @@ Main.prototype = {
 
 	addPatternsInfo: function () {
 		var parent = this;
-		Zepto.ajax({
-			url: '/styleguide/modules/navigation/template/index.html',
-			success: function (data) {
-				parent.wrapper.append(data);
-				parent.buildDependenciesList();				
-				
-				new CodeFrame();
-				new Menu();
-			}
-		});
+		var template = NADTJST['index.html']();
+		
+		parent.wrapper.append(template);
+		parent.buildDependenciesList();				
+		
+		new CodeFrame();
+		new Menu();
 	},
 	
 	buildDependenciesList: function () {

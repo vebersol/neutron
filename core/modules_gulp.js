@@ -5,6 +5,7 @@ module.exports = function(gulp) {
 	var uglify = require('gulp-uglify');
 	var sourcemaps = require('gulp-sourcemaps');
 	var wrap = require("gulp-wrap");
+	var template = require('gulp-template-compile');
 
 	var settings = require('../neutron.json');
 	var u = require('../libs/utilities');
@@ -15,13 +16,14 @@ module.exports = function(gulp) {
 			.pipe(gulp.dest(u.getPath(settings.paths.src.styleguides, 'modules/navigation/css')));			
 	});
 
-	gulp.task('js:navigation', function() {
+	gulp.task('js:navigation', ['jstemplate'], function() {
 		var dest = u.getPath(settings.paths.src.styleguides, 'modules/navigation/js');
 
 		return gulp.src([
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/zepto.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/prism.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/qrcode.min.js'),
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/templates.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/keyboardNav.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/menu.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/search.js'),
@@ -38,10 +40,12 @@ module.exports = function(gulp) {
 			.pipe(gulp.dest(dest));			
 	});
 
-	gulp.task('html:navigation', function() {
-		gulp.src(u.getPath(settings.paths.core.root, 'modules/navigation/template/index.html'), {
-			base: u.getPath(settings.paths.core.root)
-		})
-		.pipe(gulp.dest(u.getPath(settings.paths.src.styleguides)));		
+	gulp.task('jstemplate', function() {
+		gulp.src(u.getPath(settings.paths.core.root, 'modules/navigation/template/index.html'))
+		.pipe(template({
+			namespace: 'NADTJST'
+		}))
+		.pipe(concat('templates.js'))
+		.pipe(gulp.dest(u.getPath(settings.paths.core.root, 'modules/navigation/js/')));
 	});
 }
