@@ -143,10 +143,15 @@ Menu.prototype = {
 			codeBtn.addClass('disabled');
 		}
 
-		Zepto('.neutron-code-frame--close__link').on('click', function () {
+		Zepto('.neutron-code-frame--close .neutron-button--close__link').on('click', function () {
 			Zepto('.neutron-code-frame, .neutron-button--code').removeClass('active');
 			movableFrames.removeClass('neutron-frame-active');
 			parent.storage.remove('code');
+		});
+
+		qrCodeFrame.find('.neutron-button--close__link').on('click', function () {
+			Zepto('.neutron-qr-code-wrapper, .neutron-button--qr').removeClass('active');
+			parent.storage.remove('qr');
 		});
 
 		Zepto('.neutron-button--qr').click(function () {
