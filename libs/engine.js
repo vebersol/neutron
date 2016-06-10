@@ -108,13 +108,14 @@ var engine = function (cb) {
 	}
 
 	function handlePattern(pattern, end) {
-		var partialData = partials.getPartialsData(pattern.source, pattern.data ? pattern.data : {}, patternsData);
+		var partialData = partials.getPartialsData(pattern.source, pattern.data ? pattern.data : {});
 		var newData = partialData.data;
 		var partialsList = partialData.partials;
 		var partialName = partials.getPartialName(pattern.file.path)
 		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
 		newData.engineHeader = header;
+		newData.partialClass = partials.getPatternFolder(partialName);
 
 		newData.engineFooter = addEngineSnippets({
 			html: layout,
@@ -123,18 +124,24 @@ var engine = function (cb) {
 		});
 
 		helpers.resetHelpers();
-		var markups = markup.addMarkup(pattern.source, newData);
-		var template = handlebars.compile(layout);
-		var result = getHtml(template, newData);
+		try {
+			var template = handlebars.compile(layout);
+			var markups = markup.addMarkup(pattern.source, newData);
+			var result = getHtml(template, newData);
 
-		var output = {
-			partialName: partialName,
-			html: result,
-			markup: markups
-		};
+			var output = {
+				partialName: partialName,
+				html: result,
+				markup: markups
+			};
 
-		addToTree(partialName, end);
-		renderFile(output, end);
+			addToTree(partialName, end);
+			renderFile(output, end);
+		} catch(e) {
+			u.log('Error in ' + partialName, 'error');
+			console.log(e.message)
+			process.exit()
+		}
 	}
 
 	function addEngineSnippets(options) {
