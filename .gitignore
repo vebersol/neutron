@@ -35,3 +35,7 @@ node_modules
 .DS_Store
 
 public
+src/styleguide
+
+# ignore navigation module JS template file
+core/modules/navigation/js/templates.js

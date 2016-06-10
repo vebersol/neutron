@@ -29,7 +29,7 @@ gulp.task('connect', function () {
 });
 
 gulp.task('copy:css', function() {
-		return gulp.src('**/*.css', {
+		return gulp.src(['**/*.css', '**/*.css.map'], {
 				cwd: u.getPath(settings.paths.src.css)
 			})
 			.pipe(gulp.dest(u.getPath(settings.paths.public.css)));
@@ -43,33 +43,35 @@ gulp.task('copy:images', function() {
 });
 
 gulp.task('copy:js', function() {
-		return gulp.src('**/*.js', {
+		return gulp.src(['**/*.js', '**/*.js.map'], {
 				cwd: u.getPath(settings.paths.src.js)
 			})
 			.pipe(gulp.dest(u.getPath(settings.paths.public.js)));
 });
 
-gulp.task('copy:styleguide', function(cb) {
-		return gulp.src(['**/*.css', '**/*.html', '**/*.js'], {
+gulp.task('copy:styleguide', ['js:navigation', 'sass:navigation'], function(cb) {
+		return gulp.src(['**/*.css', '**/*.js', '**/*.map'], {
 				cwd: u.getPath(settings.paths.src.styleguides)
 			})
 			.pipe(gulp.dest(u.getPath(settings.paths.public.styleguides)));
 });
 
-gulp.task('watch', ['connect'], function () {
+gulp.task('watch', function () {
 	gulp.watch([
 		u.getPath(settings.paths.src.patterns, '**/*.handlebars'),
 		u.getPath(settings.paths.src.patterns, '**/*.json'),
 		u.getPath(settings.paths.src.layouts, '**/*.handlebars'),
 		u.getPath(settings.paths.src.data, '**/*.json')
 	], ['engine']);
-	gulp.watch('./core/modules/navigation/js/**/*.js', ['js:navigation', 'copy:styleguide']);
-	gulp.watch('./core/modules/navigation/scss/**/*.scss', ['sass:navigation']);
-	gulp.watch('./core/modules/navigation/template/**/*.html', ['html:navigation']);
+	gulp.watch([
+		'./core/modules/navigation/js/**/*.js',
+		'./core/modules/navigation/template/**/*.html',
+		'./core/modules/navigation/scss/**/*.scss'
+		], ['copy:styleguide']);
 })
 
 
 gulp.task('copy:all', ['copy:js', 'copy:css', 'copy:images', 'copy:styleguide']);
-gulp.task('navigation', ['sass:navigation', 'js:navigation', 'html:navigation']);
+gulp.task('navigation', ['sass:navigation', 'js:navigation']);
 gulp.task('default', ['navigation', 'copy:all', 'engine']);
-gulp.task('server', ['navigation', 'copy:all', 'engine', 'connect']);
+gulp.task('server', ['navigation', 'engine', 'connect', 'watch']);
