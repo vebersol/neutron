@@ -35,6 +35,7 @@ var engine = function (cb) {
 		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
 		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
 		registerHelpers();
+		registerEnginePartials();
 		cleanPaths();
 		walkPartials();
 	}
@@ -44,6 +45,11 @@ var engine = function (cb) {
 	 * */
 	function registerHelpers() {
 		handlebars.registerHelper(helpers);
+	}
+
+	function registerEnginePartials() {
+		handlebars.registerPartial('engineHeader', header);
+		handlebars.registerPartial('engineFooter', footer);
 	}
 
 	function onEnd() {
@@ -114,14 +120,9 @@ var engine = function (cb) {
 		var partialName = partials.getPartialName(pattern.file.path)
 		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
-		newData.engineHeader = header;
 		newData.partialClass = partials.getPatternFolder(partialName);
-
-		newData.engineFooter = addEngineSnippets({
-			html: layout,
-			partials: partialsList,
-			partialName: partialName
-		});
+		newData.patternName = partialName;
+		newData.dependencies = addEngineSnippets(partialsList);
 
 		helpers.resetHelpers();
 		try {
@@ -144,19 +145,21 @@ var engine = function (cb) {
 		}
 	}
 
-	function addEngineSnippets(options) {
+	function addEngineSnippets(partialsArr) {
+		if (!partialsArr) {
+			return [];
+		}
+
 		var dependencies = [];
-		options.partials.forEach(function (k, i) {
+
+		partialsArr.forEach(function (k, i) {
 			dependencies.push({
 				partial: k,
-				path: settings.http.root + partials.getPatternFolder(k) + '/index.html'
+				path: partials.getPatternFolder(k) + '/index.html'
 			});
 		});
 
-		var newTemplate = footer.replace('#{dependencies}', JSON.stringify(dependencies));
-		newTemplate = newTemplate.replace('#{patternName}', options.partialName);
-
-		return newTemplate;
+		return JSON.stringify(dependencies);
 	}
 
 	function getData(fileName, callback) {
@@ -207,7 +210,7 @@ var engine = function (cb) {
 
 	function addToTree(partial, end) {
 		var arr = partial.split('/');
-		var url = settings.http.patterns + partials.getPatternFolder(partial) + '/index.html';
+		var url = partials.getPatternFolder(partial) + '/index.html';
 		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
 			var obj = {}
 
@@ -270,17 +273,15 @@ var engine = function (cb) {
 	}
 
 	function renderTemplate() {
-		var indexSource = fse.readFileSync(u.getPath(settings.paths.core.templates, 'index.handlebars'), settings.encode);
+		var indexSource = fse.readFileSync(u.getPath(settings.paths.core.templates, 'index' + settings.fileExtension), settings.encode);
 
 		helpers.resetHelpers();
 		var indexTemplate = handlebars.compile(indexSource);
 
-		var engineFooter = addEngineSnippets({
-			partials: [],
-			partialName: ''
+		var indexHTML = indexTemplate({
+			assetsPath: settings.assetsPath,
+			dependencies: '[]'
 		});
-
-		var indexHTML = indexTemplate({engineHeader: header, engineFooter: engineFooter});
 
 		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}

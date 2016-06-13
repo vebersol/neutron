@@ -20,19 +20,13 @@ partials = function () {
 		handlebars.registerPartial(name, source);
 	}
 
-	function getPartialsData(source, data, patternsData) {
+	function getPartialsData(source, data) {
 		var regex = /{{>(.*?)}}/g,
 			match = source.match(regex),
 			newData = data;
 
 		var partialNames = getPartialsNames(match);
 		var totalPartials = partialNames.length;
-
-		for (var i = 0; i < totalPartials; i++) {
-			if (patternsData.hasOwnProperty(partialNames[i])) {
-				newData = Object.assign({}, patternsData[partialNames[i]], newData);
-			}
-		}
 
 		return {
 			data: newData,

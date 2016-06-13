@@ -29,7 +29,7 @@ Main.prototype = {
 
 		for (var i = 0; i < dependencies.length; i++) {
 			dependencies[i]
-			d.push('<a href="' + dependencies[i].path.replace('/', '/patterns/') + '">' + dependencies[i].partial + '</a>');
+			d.push('<a href="' + PATTERNS_PATH + dependencies[i].path + '">' + dependencies[i].partial + '</a>');
 		}
 
 		target.append(d.join(', '));
