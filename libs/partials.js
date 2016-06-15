@@ -21,7 +21,7 @@ partials = function () {
 	}
 
 	function getPartialsData(source, data) {
-		var regex = /{{.*(>|render)(.*?)}}/g,
+		var regex = /{{\s?(>|render)(.*?)}}/g,
 			match = source.match(regex),
 			newData = data;
 
@@ -37,10 +37,9 @@ partials = function () {
 	function getPartialsNames(match) {
 		var partialNames = [];
 
-
 		if (match) {
 			match.forEach(function (k, v) {
-				var partialName = k.match(/\"(.*[a-z\/]+.*)\"/);
+				var partialName = k.match(/["'](.*?)["']/);
 
 				if (partialName && partialName.length > 1) {
 					partialNames.push(partialName[1]);

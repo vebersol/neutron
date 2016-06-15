@@ -214,6 +214,7 @@ var engine = function (cb) {
 	function addToTree(partial, end) {
 		var arr = partial.split('/');
 		var url = partials.getPatternFolder(partial) + '/index.html';
+
 		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
 			var obj = {}
 
@@ -261,18 +262,23 @@ var engine = function (cb) {
 	function registerPartials() {
 		var totalPartials = partials.registeredPartials.length;
 
-		partials.registeredPartials.forEach(function (file, i) {
-			fse.readFile(file.path, settings.encode, function(err, source) {
-				if (source) {
-					var partialName = partials.getPartialName(file.path);
-					partials.setPartial(partialName, source);
+		if (totalPartials > 0) {
+			return partials.registeredPartials.forEach(function (file, i) {
+				fse.readFile(file.path, settings.encode, function(err, source) {
+					if (source) {
+						var partialName = partials.getPartialName(file.path);
+						partials.setPartial(partialName, source);
 
-					if (i === totalPartials - 1) {
-						getPatterns();
+						if (i === totalPartials - 1) {
+							getPatterns();
+						}
 					}
-				}
+				});
 			});
-		});
+		}
+
+		return renderData();
+
 	}
 
 	function renderTemplate() {
