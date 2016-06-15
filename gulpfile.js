@@ -13,12 +13,13 @@ gulp.loadTasks(u.getPath(settings.paths.core.root, 'modules_gulp.js'));
 gulp.loadTasks(u.getPath(settings.paths.libs.root, 'engine_gulp.js'));
 
 gulp.task('clean', function(cb) {
-	del.sync([
+	var d = del([
 		path.resolve(settings.paths.public.data, '*'),
 		path.resolve(settings.paths.public.markups, '*'),
 		path.resolve(settings.paths.public.patterns, '*')
-	], {force: true});
-	cb();
+	], {force: true}).then(function () {
+		cb();
+	});
 });
 
 gulp.task('connect', function () {
@@ -58,9 +59,9 @@ gulp.task('copy:styleguide', ['js:navigation', 'sass:navigation'], function(cb) 
 
 gulp.task('watch', function () {
 	gulp.watch([
-		u.getPath(settings.paths.src.patterns, '**/*.handlebars'),
+		u.getPath(settings.paths.src.patterns, '**/*' + settings.fileExtension),
 		u.getPath(settings.paths.src.patterns, '**/*.json'),
-		u.getPath(settings.paths.src.layouts, '**/*.handlebars'),
+		u.getPath(settings.paths.src.layouts, '**/*' + settings.fileExtension),
 		u.getPath(settings.paths.src.data, '**/*.json')
 	], ['engine']);
 	gulp.watch([
@@ -68,7 +69,7 @@ gulp.task('watch', function () {
 		'./core/modules/navigation/template/**/*.html',
 		'./core/modules/navigation/scss/**/*.scss'
 		], ['copy:styleguide']);
-})
+});
 
 
 gulp.task('copy:all', ['copy:js', 'copy:css', 'copy:images', 'copy:styleguide']);

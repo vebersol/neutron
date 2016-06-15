@@ -53,6 +53,9 @@ var engine = function (cb) {
 	}
 
 	function onEnd() {
+		if (cb) {
+			cb();
+		}
 		console.timeEnd('render duration');
 	}
 
@@ -65,6 +68,7 @@ var engine = function (cb) {
 	}
 
 	function getPatterns() {
+		setRenderHelper();
 		return fse.walk(settings.paths.src.patterns)
 			.on('data', function (file) {
 				if (isPatternExtension(path.extname(file.path))) {
@@ -84,7 +88,6 @@ var engine = function (cb) {
 	}
 
 	function writeFiles() {
-
 		try {
 			var totalFiles = patternFiles.length;
 
@@ -286,8 +289,26 @@ var engine = function (cb) {
 		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}
 
+	function setRenderHelper() {
+		handlebars.registerHelper('render', function (partial, params) {
+			var source = '{{> '+ partial + '}}';
+			var data = Object.assign({}, params.data.root, params.hash);
+
+			if (!params.hash.hasOwnProperty('styleModifier') && data.hasOwnProperty('styleModifier')) {
+				data.styleModifier = null;
+			}
+
+			var template = handlebars.compile(source);
+			var result = template(data);
+
+			return new handlebars.SafeString(result);
+		});
+	}
+
 	console.time('render duration');
 	init();
+
+	return true;
 }
 
 module.exports = engine;
