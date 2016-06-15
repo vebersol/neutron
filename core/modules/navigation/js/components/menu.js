@@ -172,8 +172,7 @@ Menu.prototype = {
 	},
 
 	showElement: function (element) {
-		var uls = element.parents('ul:not(.neutron-menu--items) li')
-		uls.addClass('active');		
+		var uls = element.parents('ul:not(.neutron-menu--items) li')		
 		uls.find('input[type=checkbox]').prop('checked', true);
 	},
 
