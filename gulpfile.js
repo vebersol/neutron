@@ -13,7 +13,7 @@ gulp.loadTasks(u.getPath(settings.paths.core.root, 'modules_gulp.js'));
 gulp.loadTasks(u.getPath(settings.paths.libs.root, 'engine_gulp.js'));
 
 gulp.task('clean', function(cb) {
-	var d = del([
+	del([
 		path.resolve(settings.paths.public.data, '*'),
 		path.resolve(settings.paths.public.markups, '*'),
 		path.resolve(settings.paths.public.patterns, '*')
