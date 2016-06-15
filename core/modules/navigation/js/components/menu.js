@@ -25,7 +25,7 @@ Menu.prototype = {
 				list;
 
 		for (var i = 0; i < menuArr.length; i++) {
-			list = Zepto('<li><a href="javascript:;">' + this.toTitle(menuArr[i]) + '</a></li>').data('item', menuArr[i]);
+			list = Zepto('<li><input type="checkbox" id="'+this.toTitle(menuArr[i])+'" /><label for="'+this.toTitle(menuArr[i])+'">' + this.toTitle(menuArr[i]) + '</label></li>').data('item', menuArr[i]);
 			submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
 			list.append(submenu);
 			menu.append(list);
@@ -47,7 +47,7 @@ Menu.prototype = {
 			if (typeof data[item] === 'string') {
 				list = Zepto('<li><a href="' + data[item] + '">' + this.toTitle(item) + '</a></li>');
 			} else if (typeof data[item] === 'object' && objLen > 0) {
-				list = Zepto('<li><a href="javascript:;">' + this.toTitle(item) + '</a></li>').data('item', item);
+				list = Zepto('<li><input type="checkbox" id="'+this.toTitle(item)+'" /><label for="'+this.toTitle(item)+'">' + this.toTitle(item) + '</label></li>').data('item', item);
 				list.append(this.createMenuItem(data[item], item));
 			}
 
@@ -75,17 +75,11 @@ Menu.prototype = {
 					'.neutron-qr-code-wrapper', '.neutron-code-frame'
 				],
 				bars = Zepto(selectors.join(', ')),
-				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu');
-
-		menu.find('[data-item] > a').click(function () {
-			var subMenu = Zepto(this).parent().children('ul');
-			subMenu.toggleClass('active');
-		});
+				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu');		
 
 		menu.find('a').each(function () {
 			var anchor = Zepto(this);
-			if (anchor.attr('href') == path) {
-				anchor.parent().addClass('current');
+			if (anchor.attr('href') == path) {							
 				parent.showElement(anchor);
 			}
 		});
@@ -178,8 +172,9 @@ Menu.prototype = {
 	},
 
 	showElement: function (element) {
-		var uls = element.parents('ul:not(.neutron-menu--items)')
-		uls.addClass('active');
+		var uls = element.parents('ul:not(.neutron-menu--items) li')
+		uls.addClass('active');		
+		uls.find('input[type=checkbox]').prop('checked', true);
 	},
 
 	toTitle: function (slug) {

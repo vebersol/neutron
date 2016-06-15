@@ -15,7 +15,7 @@ Search.prototype = {
 			clearTimeout(timer);
 			timer = setTimeout(function () {
 				var value = Zepto(ev.target).val(),
-						anchors = Zepto('.neutron-menu--items > li a');
+						anchors = Zepto('.neutron-menu--items > li label');
 
 				Zepto('.neutron-menu--items li').hide();
 				anchors.each(function () {
