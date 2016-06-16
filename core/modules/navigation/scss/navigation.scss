@@ -304,6 +304,11 @@ $menuWidth: 173px;
 
 			li {
 				overflow: auto;
+
+				a {
+					color: white;
+					text-decoration: underline;
+				}
 			}
 		}
 

@@ -19,7 +19,7 @@ CodeFrame.prototype =  {
 					parent.code.append(data);
 
 					parent.code.find('.neutron-code--nav li:first-child').addClass('active');
-					parent.code.find('.neutron-code--list li[data-target]:last-child').hide();
+					parent.code.find('.neutron-code--list li[data-target]').slice(1).hide();
 
 
 					var codeList = Zepto('.neutron-code--list li');
