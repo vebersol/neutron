@@ -1,9 +1,11 @@
 'use strict';
 
-var gulp = require('gulp');
 var path = require('path');
-var del = require('del');
+var gulp = require('gulp');
+var watch = require('gulp-watch');
+var batch = require('gulp-batch');
 var connect = require('gulp-connect');
+var del = require('del');
 var settings = require('./neutron.json');
 var u = require('./libs/utilities');
 
@@ -58,17 +60,15 @@ gulp.task('copy:styleguide', ['js:navigation', 'sass:navigation'], function(cb) 
 });
 
 gulp.task('watch', function () {
-	gulp.watch([
+
+	watch([
 		u.getPath(settings.paths.src.patterns, '**/*' + settings.fileExtension),
 		u.getPath(settings.paths.src.patterns, '**/*.json'),
 		u.getPath(settings.paths.src.layouts, '**/*' + settings.fileExtension),
 		u.getPath(settings.paths.src.data, '**/*.json')
-	], ['engine']);
-	gulp.watch([
-		'./core/modules/navigation/js/**/*.js',
-		'./core/modules/navigation/template/**/*.html',
-		'./core/modules/navigation/scss/**/*.scss'
-		], ['copy:styleguide']);
+	], batch(function (events, done) {
+        gulp.start('engine', done);
+    }));
 });
 
 

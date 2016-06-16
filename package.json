@@ -36,8 +36,10 @@
     "sort-object": "^3.0.2"
   },
   "devDependencies": {
+    "gulp-batch": "^1.0.5",
+    "gulp-connect": "^4.0.0",
+    "gulp-watch": "^4.3.6",
     "istanbul": "^0.4.3",
-    "jasmine": "^2.4.1",
-    "gulp-connect": "^4.0.0"
+    "jasmine": "^2.4.1"
   }
 }
