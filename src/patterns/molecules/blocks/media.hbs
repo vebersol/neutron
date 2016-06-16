@@ -1,0 +1,14 @@
+<div class="media">
+	<div class="media-left">
+		{{#if url}}<a href="{{url}}">
+			{{ render "atoms/media/image" img=img }}
+		</a>
+		{{else}}
+			{{ render "atoms/media/image" img=img }}
+		{{/if}}
+	</div>
+	<div class="media-body">
+		<h4 class="media-heading">{{headline}}</h4>
+		<p>{{text}}</p>
+	</div>
+</div>

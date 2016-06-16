@@ -1,0 +1,9 @@
+<div class="col-md-6">
+	<div class="page-header">
+		{{ render "atoms/text/headline" level=2 text="News" }}
+	</div>
+
+	{{#each news}}
+		{{ render "molecules/blocks/media" }}
+	{{/each}}
+</div>
