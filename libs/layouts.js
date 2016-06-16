@@ -10,12 +10,11 @@ var u = require('./utilities');
 var layoutHandler = function () {
 	var layouts = {};
 
-	function getLayouts(source, layout) {
-		var layoutName = layout ? layout : settings.defaultLayoutName;
-
+	function getLayouts() {
 		fse.walk(settings.paths.src.layouts)
 			.on('data', function(file) {
 				if (path.extname(file.path) === settings.fileExtension) {
+					var layoutName = path.basename(file.path, settings.fileExtension);
 					fse.readFile(file.path, settings.encode, function(err, layoutSource) {
 						layouts[layoutName] = layoutSource;
 					});

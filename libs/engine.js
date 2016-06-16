@@ -298,18 +298,22 @@ var engine = function (cb) {
 	function setRenderHelper() {
 		handlebars.registerHelper('render', function (partial, params) {
 			var data;
+			var partialArr = partial.split(':');
+			var partialName = partialArr[0];
+			var styleModifier = partialArr.length > 1 ? partialArr[1] : null;
 			var hasHash = params.hasOwnProperty('hash');
+			var partialData = patternsData.hasOwnProperty(partialName) ? patternsData[partialName] : {};
 
-
-			var source = '{{> '+ partial + '}}';
+			var source = '{{> '+ partialName + '}}';
 
 			if (this && hasHash) {
-				data = Object.assign({}, this, params.hash);
+				data = Object.assign({}, partialData, this, params.hash);
 			}
 
-			if (hasHash && !params.hash.hasOwnProperty('styleModifier') && data.hasOwnProperty('styleModifier')) {
-				data.styleModifier = null;
+			if (styleModifier) {
+				data.styleModifier = styleModifier;
 			}
+
 
 			var template = handlebars.compile(source);
 			var result = template(data);
