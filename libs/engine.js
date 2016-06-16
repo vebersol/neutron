@@ -297,10 +297,17 @@ var engine = function (cb) {
 
 	function setRenderHelper() {
 		handlebars.registerHelper('render', function (partial, params) {
-			var source = '{{> '+ partial + '}}';
-			var data = Object.assign({}, params.data.root, params.hash);
+			var data;
+			var hasHash = params.hasOwnProperty('hash');
 
-			if (!params.hash.hasOwnProperty('styleModifier') && data.hasOwnProperty('styleModifier')) {
+
+			var source = '{{> '+ partial + '}}';
+
+			if (this && hasHash) {
+				data = Object.assign({}, this, params.hash);
+			}
+
+			if (hasHash && !params.hash.hasOwnProperty('styleModifier') && data.hasOwnProperty('styleModifier')) {
 				data.styleModifier = null;
 			}
 
