@@ -1,0 +1,11 @@
+{
+	"breadcrumbItems": [{
+		"item": "Home",
+		"url": "{{assetsPath}}"
+	},{
+		"item": "Library",
+		"url": "{{assetsPath}}"
+	},{
+		"item": "Article"
+	}]
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{#if title}}{{title}}{{else}}Clean Layout{{/if}}</title>
+	<!-- NEUTRON HEADER-->
+	{{> engineHeader}}
+	<!-- /NEUTRON HEADER -->
+	{{outputFor "css"}}
+</head>
+<body>
+	{{> yield }}
+
+	<!-- NEUTRON FOOTER -->
+	{{> engineFooter}}
+	<!-- /NEUTRON FOOTER -->
+
+</body>
+</html>

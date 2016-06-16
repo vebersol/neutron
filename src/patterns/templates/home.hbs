@@ -10,7 +10,9 @@
 	</div>
 
 	<div class="row">
-		{{ render "organisms/blocks/news" }}
-		{{ render "organisms/blocks/twitter" }}
+		{{ render "organisms/blocks/media-box" collection=news boxTitle="News" }}
+		{{ render "organisms/blocks/media-box" collection=twitter boxTitle="Twitter" }}
 	</div>
 </div>
+
+{{ render "organisms/navigation/footer" }}

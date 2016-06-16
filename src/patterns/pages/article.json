@@ -1,0 +1,14 @@
+{
+	"headline": {
+		"text": "Atomic Design Principles"
+	},
+	"breadcrumbItems": [{
+		"item": "Start",
+		"url": "{{assetsPath}}"
+	},{
+		"item": "Blog",
+		"url": "{{assetsPath}}"
+	},{
+		"item": "Lorem ipsum dolor sit amet"
+	}]
+}

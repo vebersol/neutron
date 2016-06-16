@@ -1,5 +1,8 @@
 {
 	"assetsPath": "../../",
 	"title": "Neutron Atomic Design Tool",
-	"brand": "Neutron"
+	"brand": "Neutron",
+	"thumbnails": [{}, {}, {}],
+	"twitter": [{},{},{}],
+	"news": [{},{},{}]
 }
