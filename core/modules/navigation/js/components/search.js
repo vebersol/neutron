@@ -15,20 +15,28 @@ Search.prototype = {
 			clearTimeout(timer);
 			timer = setTimeout(function () {
 				var value = Zepto(ev.target).val(),
-						anchors = Zepto('.neutron-menu--items > li label');
+						anchors = Zepto('.neutron-menu--items > li a, .neutron-menu--items > li label');
 
-				Zepto('.neutron-menu--items li').hide();
-				anchors.each(function () {
-					var element = Zepto(this),
-							text = element.text().toLowerCase();
+				Zepto('.neutron-menu--items > li').hide();
+				Zepto('.neutron-menu--items li input').prop('checked', false);
 
-					if (text.indexOf(value) !== -1) {
-						element.parent().show();
-						element.parents('li').each(function () {
-							Zepto(this).show();
-						});
-					}
-				});
+				if(value != ''){
+					anchors.each(function () {
+						var element = Zepto(this),
+								text = element.text().toLowerCase();
+
+						if (text.indexOf(value) !== -1) {						
+							element.parents('li[data-item]').each(function () {
+								Zepto(this).children('input').prop('checked', true);
+								Zepto(this).show();
+							});
+						}									
+					});
+				} else {
+					Zepto('.neutron-menu--items > li')
+								.show()
+								.children('input').prop('checked', false);
+				}
 			}, 500);
 		});
 	}

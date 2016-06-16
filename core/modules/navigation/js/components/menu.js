@@ -172,8 +172,8 @@ Menu.prototype = {
 	},
 
 	showElement: function (element) {
-		var uls = element.parents('ul:not(.neutron-menu--items) li')		
-		uls.find('input[type=checkbox]').prop('checked', true);
+		var checkboxes = element.parents('li[data-item]').children('input');
+		checkboxes.prop('checked', true);		
 	},
 
 	toTitle: function (slug) {
