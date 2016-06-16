@@ -170,10 +170,17 @@ var engine = function (cb) {
 
 		fse.stat(jsonFile, function(err, stat) {
 			var jsonData;
+			var partialName = partials.getPartialName(fileName);
 			if (!err) {
 				delete require.cache[require.resolve(jsonFile)];
-				jsonData = require(jsonFile);
-				patternsData[partials.getPartialName(fileName)] = jsonData;
+				try {
+					jsonData = require(jsonFile);
+					patternsData[partialName] = jsonData;
+				}
+				catch(e) {
+					u.log('JSON error: ' + partialName, 'error');
+					console.log(e.message)
+				}
 			}
 
 			if (callback) {
