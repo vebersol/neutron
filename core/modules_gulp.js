@@ -15,7 +15,7 @@ module.exports = function(gulp) {
 			.pipe(sourcemaps.init())
 			.pipe(sass().on('error', sass.logError))
 			.pipe(sourcemaps.write('./'))
-			.pipe(gulp.dest(u.getPath(settings.paths.src.styleguides, 'modules/navigation/css')));			
+			.pipe(gulp.dest(u.getPath(settings.paths.src.styleguides, 'modules/navigation/css')));
 	});
 
 	gulp.task('js:navigation', ['jstemplate'], function() {
