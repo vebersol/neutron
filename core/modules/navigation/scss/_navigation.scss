@@ -3,15 +3,6 @@
 
 $prefix: neutron;
 
-$bgcolor: #333;
-$txtcolor: #CCC;
-$tab: #CCC;
-$tab-active: #272822;
-$activeNavigation: orange;
-
-$buttonSize: 33px;
-$gap: 2px;
-$menuWidth: 173px;
 
 ##{$prefix} {
 	z-index: 9999999;
@@ -106,7 +97,7 @@ $menuWidth: 173px;
 		&.disabled {
 			cursor: default;
 			svg path {
-				fill: #666;
+				fill: $disabled-svg-fill;
 			}
 		}
 	}
@@ -125,7 +116,7 @@ $menuWidth: 173px;
 	}
 
 	&.active svg path {
-		fill: $activeNavigation;
+		fill: $active-navigation;
 	}
 }
 
@@ -175,7 +166,7 @@ $menuWidth: 173px;
 	height: 100%;
 
 	[data-item] > a {
-		color: #CCC;
+		color: $txtcolor;
 		text-transform: uppercase;
 	}
 
@@ -193,7 +184,7 @@ $menuWidth: 173px;
 			font-family: Arial, sans-serif;
 			display: block;
 			padding: 5px;
-			color: orange;
+			color: $link-color;
 		}
 	}
 }
@@ -222,6 +213,7 @@ $menuWidth: 173px;
 			border: none;
 			width: 100%;
 			height: 33px;
+			color: $input-text-color;
 		}
 	}
 }
@@ -283,7 +275,7 @@ $menuWidth: 173px;
 			&.active {
 				background-color: $tab-active;
 				a {
-					color: white;
+					color: $tab-color;
 				}
 			}
 
@@ -292,7 +284,7 @@ $menuWidth: 173px;
 				width: 100%;
 				height: 100%;
 				padding: 10px;
-				color: black;
+				color: $tab-color;
 				text-decoration: none;
 				font-weight: bold;
 			}
@@ -306,7 +298,7 @@ $menuWidth: 173px;
 				overflow: auto;
 
 				a {
-					color: white;
+					color: $documentation-link-color;
 					text-decoration: underline;
 				}
 			}
@@ -314,8 +306,8 @@ $menuWidth: 173px;
 
 		&--documentation {
 			padding: 1em;
-			background-color: #272822;
-			color: #f8f8f2;
+			background-color: $documentation-bg-color;
+			color: $documentation-color;
 			border-radius: 0.3em;
 			border-top-left-radius: 0;
 			font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;

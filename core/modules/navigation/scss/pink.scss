@@ -1,0 +1,27 @@
+$jazzberry-jam: #9C0F5F;
+$silver: #CCCCCC;
+$pigment-indigo: #60047A;
+$white: #FFFFFF;
+$heavy-metal: #272822;
+$violet: #160A47;
+$spring-wood: #f8f8f2;
+$flamingo: #F2671F;
+
+$bgcolor: $jazzberry-jam;
+$txtcolor: $silver;
+$tab: $pigment-indigo;
+$tab-color: $white;
+$tab-active: $heavy-metal;
+$active-navigation: $violet;
+$disabled-svg-fill: $silver;
+$documentation-bg-color: $heavy-metal;
+$documentation-color: $spring-wood;
+$link-color: $violet;
+$documentation-link-color: $flamingo;
+$input-text-color: $pigment-indigo;
+
+$buttonSize: 33px;
+$gap: 2px;
+$menuWidth: 173px;
+
+@import "navigation";
