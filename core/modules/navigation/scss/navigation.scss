@@ -18,12 +18,22 @@ $menuWidth: 173px;
 }
 
 .#{$prefix}-sticky-nav {
-	position: absolute;
+	position: fixed;
 	top: 0;
-	left: 0;
+	left: $menuWidth * -1;
 	height: 100%;
 	width: 0px;
-	z-index: 1;
+	z-index: 1;	
+
+	@include prefix(transition, left 0.5s ease-out);
+
+	&.active {
+		left: 0;
+
+		.#{$prefix}-button--start {
+			left: $menuWidth;
+		}		
+	}
 }
 
 .#{$prefix}-code-frame,
@@ -54,25 +64,25 @@ $menuWidth: 173px;
 	z-index: 2;
 	text-decoration: none !important;
 
+	@include prefix(transition, "bottom 0.5s ease-out, left 0.5s ease-out");
+
 	svg path {
 		fill: white;
+	}
+
+	&.#{$prefix}-frame-active {
+		bottom: calc(50%);
 	}
 }
 
 .#{$prefix}-navigation {
-	position: fixed;
-	bottom: 0;
-	left: (($buttonSize*3) + ($gap*3)) * -1;
-	z-index: 1;
-	width: ($buttonSize*3) + ($gap*2);
-
-	&.active {
-		left: $buttonSize + $gap;
-	}
+	padding: 2px 5px;
+	width: 100%;
+	border-bottom: 1px solid #fff;
 
 	a {
-		float: left;
-		display: block;
+		/* float: left; */
+		display: inline-block;
 		width: $buttonSize;
 		height: $buttonSize;
 		background-color: $bgcolor;
@@ -115,25 +125,17 @@ $menuWidth: 173px;
 	}
 }
 
-.#{$prefix}-button--start,
-.#{$prefix}-navigation, {
-	@include prefix(transition, "bottom 0.5s ease-out, left 0.5s ease-out");
-
-	&.#{$prefix}-frame-active {
-		bottom: calc(50% + 2px);
-	}
-}
-
 .#{$prefix}-menu {
-	width: $menuWidth;
-	position: fixed;
-	top: 0;
-	left: $menuWidth * -1;
-	height: calc(100% - 35px);
+	position: relative;
+	width: $menuWidth;	
+	top: 0;	
+	height: 100%;
 	background-color: $bgcolor;
 	margin: 0;
 	color: $txtcolor;
-	padding-bottom: $buttonSize + 10px;
+	padding-bottom: $buttonSize + 3px;
+	border-right: 2px solid orange;
+
 	@include prefix(transition, "height 0.5s ease-out, left 0.5s ease-out");
 	@include prefix(box-sizing, border-box);
 
@@ -146,7 +148,7 @@ $menuWidth: 173px;
 	}
 
 	&.#{$prefix}-frame-active {
-		height: calc(50% - 37px);
+		height: calc(50%);
 
 		.#{$prefix}-menu--search {
 			bottom: calc(50% + 37px);;
@@ -159,7 +161,7 @@ $menuWidth: 173px;
 	margin: 0;
 	padding-top: 10px;
 	overflow: auto;
-	height: 100%;
+	height: calc(100% - 44px);
 
 	[data-item] > label {
 		color: #CCC;
@@ -195,22 +197,13 @@ $menuWidth: 173px;
 	}
 }
 
-.#{$prefix}-menu--search {
-	position: fixed;
-	bottom: 35px;
-	left: $menuWidth * -1;
-	z-index: 3;
-	@include prefix(transition, "left 0.5s ease-out, bottom 0.5s ease-out");
-
-	&.#{$prefix}-frame-active {
-		bottom: calc(50% + 37px);
-	}
+.#{$prefix}-menu--search {	
+	z-index: 3;		
 
 	&__input {
 		position: relative;
 		background-color: $bgcolor;
-		padding: 5px;
-		width: $menuWidth;
+		padding: 5px;		
 		@include prefix(box-sizing, border-box);
 
 		input {

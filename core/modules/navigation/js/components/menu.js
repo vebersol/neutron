@@ -84,35 +84,18 @@ Menu.prototype = {
 				anchor.parent().addClass('current');
 				parent.showElement(anchor);
 			}
-		});
+		});		
 
 		Zepto('.neutron-button--start').click(function () {
-			var element = Zepto(this),
-					nav = Zepto('.neutron-navigation');
-
-			if (nav.hasClass('active')) {
-				element.removeClass('active');
-				bars.removeClass('active');
-				movableFrames.removeClass('neutron-frame-active')
-				parent.storage.removeAll();
-			} else {
-				element.addClass('active');
-				parent.storage.add('start');
-			}
-
-			nav.toggleClass('active');
-		});
-
-		Zepto('.neutron-button--menu').click(function () {
 			var element = Zepto(this);
 			element.toggleClass('active');
-			menu.parent().toggleClass('active');
+
+			Zepto('.neutron-sticky-nav').toggleClass('active');
 
 			if (element.hasClass('active')) {
-				parent.storage.add('menu');
-			}
-			else {
-				parent.storage.remove('menu');
+				parent.storage.add('start');
+			} else {
+				parent.storage.remove('start');
 			}
 		});
 
