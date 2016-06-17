@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/vebersol/democritus#readme",
   "dependencies": {
+    "browser-sync": "^2.13.0",
     "del": "^2.2.0",
     "fs-extra": "^0.30.0",
     "gulp": "^3.9.1",

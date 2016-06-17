@@ -4,7 +4,7 @@ var path = require('path');
 var gulp = require('gulp');
 var watch = require('gulp-watch');
 var batch = require('gulp-batch');
-var connect = require('gulp-connect');
+var browserSync = require('browser-sync').create();
 var del = require('del');
 var settings = require('./neutron.json');
 var u = require('./libs/utilities');
@@ -27,9 +27,10 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('connect', function() {
-	connect.server({
-		root: [settings.paths.public.root],
-		port: 8080
+	browserSync.init({
+		server: {
+			baseDir: settings.paths.public.root
+		}
 	});
 });
 
@@ -68,10 +69,11 @@ gulp.task('watch:patterns', function() {
 		u.getPath(settings.paths.src.patterns, '**/*.json'),
 		u.getPath(settings.paths.src.layouts, '**/*' + settings.fileExtension),
 		u.getPath(settings.paths.src.data, '**/*.json')
-	], {
-		verbose: true
-	}, batch(function(events, cb) {
-		gulp.start('engine', cb);
+	], batch(function(events, cb) {
+		gulp.start('engine', function () {
+			browserSync.reload();
+			cb();
+		});
 	}));
 });
 
@@ -81,7 +83,11 @@ gulp.task('watch:navigation', ['copy:styleguide'], function() {
 		'./core/modules/navigation/template/**/*.html',
 		'./core/modules/navigation/scss/**/*.scss',
 		'!./core/modules/navigation/js/templates.js'
-	], ['copy:styleguide']);
+	], function () {
+		gulp.start('copy:styleguide', function() {
+			browserSync.reload();
+		});
+	});
 })
 
 
