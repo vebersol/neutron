@@ -8,9 +8,11 @@ var sort_object = require('sort-object');
 var settings = require('../neutron.json');
 
 var u = require('./utilities');
-var pa = require('./partials');
-var lh = require('./layouts');
-var mkp = require('./markup');
+var partials = require('./partials')();
+var layoutHandler = require('./layouts')();
+var markup = require('./markup')();
+
+var helpers = require(path.resolve(settings.paths.core.helpers))(handlebars);
 
 var engine = function (cb) {
 	'use strict';
@@ -26,35 +28,59 @@ var engine = function (cb) {
 		templates: {},
 		pages: {}
 	};
-	var partials = pa();
-	var markup = mkp();
-	var layoutHandler = lh();
 
 	function init () {
 		layoutHandler.getLayouts();
 		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
 		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
 		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
-		cleanPaths(walkPartials);
+		registerHelpers();
+		registerEnginePartials();
+		cleanPaths();
+		walkPartials();
+	}
+
+	/**
+	 * Register all base helpers into handlebars
+	 * */
+	function registerHelpers() {
+		handlebars.registerHelper(helpers);
+	}
+
+	function registerEnginePartials() {
+		handlebars.registerPartial('engineHeader', header);
+		handlebars.registerPartial('engineFooter', footer);
 	}
 
 	function onEnd() {
 		console.timeEnd('render duration');
-		if (cb) {
-			cb();
-		}
+	}
+
+	/**
+	 * Returns true when extension is a pattern extension
+	 * @return Boolean
+	*/
+	function isPatternExtension(extension) {
+		return extension === settings.fileExtension;
 	}
 
 	function getPatterns() {
 		return fse.walk(settings.paths.src.patterns)
 			.on('data', function (file) {
-				if (path.extname(file.path) === settings.fileExtension) {
+				if (isPatternExtension(path.extname(file.path))) {
 					patternFiles.push(file);
 				}
 			})
-			.on('end', function () {
-				writeFiles();
-			});
+			.on('end', writeFiles);
+	}
+
+	/**
+	 * Return true when the file path should be ignored for render
+	 * @partam path file path
+	 * @return Boolen
+	 */
+	function shouldIgnoreFile(path) {
+		return path[0] === "_";
 	}
 
 	function writeFiles() {
@@ -68,8 +94,7 @@ var engine = function (cb) {
 						if (source) {
 							var extendedData = Object.assign({}, globalData, data);
 
-							// do not render filenames starting with _
-							if (path.basename(file.path)[0] === "_") {
+							if (shouldIgnoreFile(path.basename(file.path))) {
 								return true;
 							}
 
@@ -89,47 +114,52 @@ var engine = function (cb) {
 	}
 
 	function handlePattern(pattern, end) {
-		var partialData = partials.getPartialsData(pattern.source, pattern.data ? pattern.data : {}, patternsData);
+		var partialData = partials.getPartialsData(pattern.source, pattern.data ? pattern.data : {});
 		var newData = partialData.data;
 		var partialsList = partialData.partials;
 		var partialName = partials.getPartialName(pattern.file.path)
 		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
-		newData.engineHeader = header;
+		newData.partialClass = partials.getPatternFolder(partialName);
+		newData.patternName = partialName;
+		newData.dependencies = addEngineSnippets(partialsList);
 
-		newData.engineFooter = addEngineSnippets({
-			html: layout,
-			partials: partialsList,
-			partialName: partialName
-		});
+		helpers.resetHelpers();
+		try {
+			var template = handlebars.compile(layout);
+			var markups = markup.addMarkup(pattern.source, newData);
+			var result = getHtml(template, newData);
 
-		var markups = markup.addMarkup(pattern.source, newData);
-		var template = handlebars.compile(layout);
-		var result = getHtml(template, newData);
+			var output = {
+				partialName: partialName,
+				html: result,
+				markup: markups
+			};
 
-		var output = {
-			partialName: partialName,
-			html: result,
-			markup: markups
-		};
-
-		addToTree(partialName, end);
-		renderFile(output, end);
+			addToTree(partialName, end);
+			renderFile(output, end);
+		} catch(e) {
+			u.log('Error in ' + partialName, 'error');
+			console.log(e.message)
+			process.exit()
+		}
 	}
 
-	function addEngineSnippets(options) {
+	function addEngineSnippets(partialsArr) {
+		if (!partialsArr) {
+			return [];
+		}
+
 		var dependencies = [];
-		options.partials.forEach(function (k, i) {
+
+		partialsArr.forEach(function (k, i) {
 			dependencies.push({
 				partial: k,
-				path: settings.http.root + partials.getPatternFolder(k) + '/index.html'
+				path: partials.getPatternFolder(k) + '/index.html'
 			});
 		});
 
-		var newTemplate = footer.replace('#{dependencies}', JSON.stringify(dependencies));
-		newTemplate = newTemplate.replace('#{patternName}', options.partialName);
-
-		return newTemplate;
+		return JSON.stringify(dependencies);
 	}
 
 	function getData(fileName, callback) {
@@ -173,15 +203,14 @@ var engine = function (cb) {
 		}
 	}
 
-	function cleanPaths(callback) {
+	function cleanPaths() {
 		fse.mkdirsSync(settings.paths.public.patterns);
 		fse.mkdirsSync(settings.paths.public.data);
-		callback();
 	}
 
 	function addToTree(partial, end) {
 		var arr = partial.split('/');
-		var url = settings.http.patterns + partials.getPatternFolder(partial) + '/index.html';
+		var url = partials.getPatternFolder(partial) + '/index.html';
 		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
 			var obj = {}
 
@@ -219,13 +248,11 @@ var engine = function (cb) {
 	function walkPartials() {
 		return fse.walk(u.getPath(settings.paths.src.patterns))
 			.on('data', function (file) {
-				if (path.extname(file.path) === settings.fileExtension) {
+				if (isPatternExtension(path.extname(file.path))) {
 					partials.registeredPartials.push(file);
 				}
 			})
-			.on('end', function () {
-				registerPartials();
-			});
+			.on('end', registerPartials);
 	};
 
 	function registerPartials() {
@@ -246,15 +273,15 @@ var engine = function (cb) {
 	}
 
 	function renderTemplate() {
-		var indexSource = fse.readFileSync(u.getPath(settings.paths.core.templates, 'index.handlebars'), settings.encode);
+		var indexSource = fse.readFileSync(u.getPath(settings.paths.core.templates, 'index' + settings.fileExtension), settings.encode);
+
+		helpers.resetHelpers();
 		var indexTemplate = handlebars.compile(indexSource);
 
-		var engineFooter = addEngineSnippets({
-			partials: [],
-			partialName: ''
+		var indexHTML = indexTemplate({
+			assetsPath: settings.assetsPath,
+			dependencies: '[]'
 		});
-
-		var indexHTML = indexTemplate({engineHeader: header, engineFooter: engineFooter});
 
 		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}

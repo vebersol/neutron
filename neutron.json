@@ -5,7 +5,8 @@
 	"paths": {
 		"core": {
 			"root": "./core/",
-			"templates": "./core/modules/templates/"
+			"templates": "./core/modules/templates/",
+			"helpers": "./core/modules/helpers/"
 		},
 		"libs": {
 			"root": "./libs/"

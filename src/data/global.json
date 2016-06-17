@@ -1,5 +1,6 @@
 {
 	"title" : "Pattern Lab",
+	"assetsPath": "../../",
 	"htmlClass": "pl",
 	"bodyClass": "body",
 	"img": {

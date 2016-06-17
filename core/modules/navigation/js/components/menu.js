@@ -8,7 +8,8 @@ Menu.prototype = {
 		var parent = this;
 
 		Zepto.ajax({
-			url: '/data/patterns.json',
+			url: patternData.i.assetsPath + 'data/patterns.json',
+			dataType: "json",
 			success: function(data) {
 				parent.storage = new Storage();
 				parent.renderMenu(data);
@@ -45,7 +46,7 @@ Menu.prototype = {
 			objLen = this.getObjectSize(data[item]);
 
 			if (typeof data[item] === 'string') {
-				list = Zepto('<li><a href="' + data[item] + '">' + this.toTitle(item) + '</a></li>');
+				list = Zepto('<li><a href="' + PATTERNS_PATH + data[item] + '">' + this.toTitle(item) + '</a></li>');
 			} else if (typeof data[item] === 'object' && objLen > 0) {
 				list = Zepto('<li><input type="checkbox" id="'+this.toTitle(item)+'" /><label for="'+this.toTitle(item)+'">' + this.toTitle(item) + '</label></li>').data('item', item);
 				list.append(this.createMenuItem(data[item], item));
@@ -79,7 +80,8 @@ Menu.prototype = {
 
 		menu.find('a').each(function () {
 			var anchor = Zepto(this);
-			if (anchor.attr('href') == path) {							
+			if (anchor.attr('href').match(path)) {
+				anchor.parent().addClass('current');
 				parent.showElement(anchor);
 			}
 		});

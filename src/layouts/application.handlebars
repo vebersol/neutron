@@ -5,7 +5,7 @@
 	<title>{{#if pageTitle}}{{pageTitle}}{{else}}Page Title{{/if}}</title>
 
 	<!-- ENGINE CODE -->
-	{{{engineHeader}}}
+	{{> engineHeader}}
 	<!-- END ENGINE CODE -->
 
 	{{#if html }}
@@ -16,7 +16,7 @@
 	{{> yield }}
 
 	<!-- ENGINE CODE -->
-	{{{engineFooter}}}
+	{{> engineFooter}}
 	<!-- END ENGINE CODE -->
 </body>
 </html>

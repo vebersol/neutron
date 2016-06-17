@@ -13,7 +13,7 @@ CodeFrame.prototype =  {
 		var parent = this;
 		if (patternData.i.patternName) {
 			Zepto.ajax({
-				url: '/patterns/' + patternData.i.patternName.replace(/\//g, '-') + '/markups.html',
+				url: PATTERNS_PATH + patternData.i.patternName.replace(/\//g, '-') + '/markups.html',
 				success: function (data) {
 					parent.code = parent.wrapper.find('.neutron-code')
 					parent.code.append(data);
