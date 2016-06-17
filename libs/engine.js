@@ -29,6 +29,8 @@ var engine = function (cb) {
 		pages: {}
 	};
 
+	console.log('\x1b[42m' + 'Start render' + '\x1b[0m');
+
 	function init () {
 		layoutHandler.getLayouts();
 		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
@@ -56,7 +58,9 @@ var engine = function (cb) {
 		if (cb) {
 			cb();
 		}
+		console.log('\x1b[42m')
 		console.timeEnd('render duration');
+		console.log('\x1b[0m')
 	}
 
 	/**
