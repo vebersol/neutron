@@ -1,6 +1,7 @@
 {
 	"fileExtension": ".hbs",
 	"encode": "utf8",
+	"cssTheme": "default",
 	"defaultLayoutName": "application",
 	"paths": {
 		"core": {

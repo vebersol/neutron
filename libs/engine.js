@@ -127,6 +127,7 @@ var engine = function (cb) {
 		var partialName = partials.getPartialName(pattern.file.path)
 		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
+		newData.cssTheme = settings.cssTheme;
 		newData.partialClass = partials.getPatternFolder(partialName);
 		newData.patternName = partialName;
 		newData.dependencies = addEngineSnippets(partialsList);
@@ -300,6 +301,7 @@ var engine = function (cb) {
 
 		var indexHTML = indexTemplate({
 			assetsPath: settings.assetsPath,
+			cssTheme: settings.cssTheme,
 			dependencies: '[]'
 		});
 

@@ -68,7 +68,8 @@ gulp.task('watch:patterns', function() {
 		u.getPath(settings.paths.src.patterns, '**/*' + settings.fileExtension),
 		u.getPath(settings.paths.src.patterns, '**/*.json'),
 		u.getPath(settings.paths.src.layouts, '**/*' + settings.fileExtension),
-		u.getPath(settings.paths.src.data, '**/*.json')
+		u.getPath(settings.paths.src.data, '**/*.json'),
+		u.getPath(settings.paths.core.templates, '**/*.html')
 	], batch(function(events, cb) {
 		gulp.start('engine', function () {
 			browserSync.reload();
