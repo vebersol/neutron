@@ -123,6 +123,7 @@ var engine = function (cb) {
 		newData.partialClass = partials.getPatternFolder(partialName);
 		newData.patternName = partialName;
 		newData.dependencies = addEngineSnippets(partialsList);
+		newData.menuBehavior = settings.menuBehavior || "overlay";
 
 		helpers.resetHelpers();
 		try {

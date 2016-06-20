@@ -1,11 +1,15 @@
 var Menu = function () {
 	this.codeFrame = new CodeFrame();
+	this.menuBehavior = window.neutronADT.i.menuBehavior || "overlay";
+
 	this.init();
 }
 
 Menu.prototype = {
 	init: function () {
 		var parent = this;
+
+		Zepto('body').addClass(this.menuBehavior);
 
 		Zepto.ajax({
 			url: patternData.i.assetsPath + 'data/patterns.json',
@@ -91,7 +95,10 @@ Menu.prototype = {
 			element.toggleClass('active');
 
 			Zepto('.neutron-sticky-nav').toggleClass('active');
-			Zepto('body').toggleClass('active');
+
+			if(this.menuBehavior == "offCanvas") {
+				Zepto('body').toggleClass('neutron-off-canvas');
+			}
 
 			if (element.hasClass('active')) {
 				parent.storage.add('start');

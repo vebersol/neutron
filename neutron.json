@@ -1,6 +1,7 @@
 {
 	"fileExtension": ".handlebars",
 	"encode": "utf8",
+	"menuBehavior": "offCanvas",
 	"defaultLayoutName": "application",
 	"paths": {
 		"core": {
@@ -31,7 +32,6 @@
 			"patterns": "./public/patterns/",
 			"styleguides": "./public/styleguide/"
 		}
-
 	},
 	"http": {
 		"root": "/",

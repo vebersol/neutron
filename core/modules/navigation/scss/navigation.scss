@@ -17,13 +17,12 @@ $menuWidth: 173px;
 	z-index: 9999999;
 }
 
-body {
+body.offCanvas {
 	@include prefix(transition, left 0.5s ease-out);
 	left: 0;
 	position: relative;
-	overflow-x: hidden;
 
-	&.active {
+	&.#{$prefix}-off-canvas {
 		left: $menuWidth;
 	}
 }
@@ -150,7 +149,7 @@ body {
 	margin: 0;
 	color: $txtcolor;
 	padding-bottom: $buttonSize + 3px;
-	border-right: 3px solid orange;
+	border-right: 2px solid orange;
 
 	@include prefix(transition, "height 0.5s ease-out, left 0.5s ease-out");
 	@include prefix(box-sizing, border-box);
