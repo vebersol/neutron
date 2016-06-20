@@ -76,7 +76,7 @@ Menu.prototype = {
 					'.neutron-qr-code-wrapper', '.neutron-code-frame'
 				],
 				bars = Zepto(selectors.join(', ')),
-				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu');		
+				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu');
 
 		menu.find('a').each(function () {
 			var anchor = Zepto(this);
@@ -84,13 +84,14 @@ Menu.prototype = {
 				anchor.parent().addClass('current');
 				parent.showElement(anchor);
 			}
-		});		
+		});
 
 		Zepto('.neutron-button--start').click(function () {
 			var element = Zepto(this);
 			element.toggleClass('active');
 
 			Zepto('.neutron-sticky-nav').toggleClass('active');
+			Zepto('body').toggleClass('active');
 
 			if (element.hasClass('active')) {
 				parent.storage.add('start');
@@ -158,7 +159,7 @@ Menu.prototype = {
 
 	showElement: function (element) {
 		var checkboxes = element.parents('li[data-item]').children('input');
-		checkboxes.prop('checked', true);		
+		checkboxes.prop('checked', true);
 	},
 
 	toTitle: function (slug) {

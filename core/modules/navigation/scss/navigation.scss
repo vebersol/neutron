@@ -17,13 +17,24 @@ $menuWidth: 173px;
 	z-index: 9999999;
 }
 
+body {
+	@include prefix(transition, left 0.5s ease-out);
+	left: 0;
+	position: relative;
+	overflow-x: hidden;
+
+	&.active {
+		left: $menuWidth;
+	}
+}
+
 .#{$prefix}-sticky-nav {
 	position: fixed;
 	top: 0;
 	left: $menuWidth * -1;
 	height: 100%;
 	width: 0px;
-	z-index: 1;	
+	z-index: 1;
 
 	@include prefix(transition, left 0.5s ease-out);
 
@@ -32,7 +43,7 @@ $menuWidth: 173px;
 
 		.#{$prefix}-button--start {
 			left: $menuWidth;
-		}		
+		}
 	}
 }
 
@@ -64,7 +75,12 @@ $menuWidth: 173px;
 	z-index: 2;
 	text-decoration: none !important;
 
+	@include prefix(opacity, 0.8);
 	@include prefix(transition, "bottom 0.5s ease-out, left 0.5s ease-out");
+
+	&.active {
+		@include prefix(opacity, 1);
+	}
 
 	svg path {
 		fill: white;
@@ -127,14 +143,14 @@ $menuWidth: 173px;
 
 .#{$prefix}-menu {
 	position: relative;
-	width: $menuWidth;	
-	top: 0;	
+	width: $menuWidth;
+	top: 0;
 	height: 100%;
 	background-color: $bgcolor;
 	margin: 0;
 	color: $txtcolor;
 	padding-bottom: $buttonSize + 3px;
-	border-right: 2px solid orange;
+	border-right: 3px solid orange;
 
 	@include prefix(transition, "height 0.5s ease-out, left 0.5s ease-out");
 	@include prefix(box-sizing, border-box);
@@ -191,19 +207,19 @@ $menuWidth: 173px;
 
 		a {
 			font-family: Arial, sans-serif;
-			display: block;			
+			display: block;
 			color: orange;
 		}
 	}
 }
 
-.#{$prefix}-menu--search {	
-	z-index: 3;		
+.#{$prefix}-menu--search {
+	z-index: 3;
 
 	&__input {
 		position: relative;
 		background-color: $bgcolor;
-		padding: 5px;		
+		padding: 5px;
 		@include prefix(box-sizing, border-box);
 
 		input {
