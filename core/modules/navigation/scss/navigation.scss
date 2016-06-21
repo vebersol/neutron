@@ -25,6 +25,10 @@ body.#{$prefix}-off-canvas {
 	&--active {
 		left: $menuWidth;
 	}
+
+	&--overflow {
+		overflow-x: hidden;
+	}
 }
 
 .#{$prefix}-sticky-nav {

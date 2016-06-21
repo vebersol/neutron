@@ -74,23 +74,31 @@ Menu.prototype = {
 				qrcodeEl = Zepto('#qrcode'),
 				qrCodeFrame = Zepto('.neutron-qr-code-wrapper'),
 				codeBtn = Zepto('.neutron-button--code'),
-				menu = Zepto('.neutron-menu--items'),
-				selectors = [
-					'.neutron-menu', '.neutron-button--menu',
-					'.neutron-button--code', '.neutron-button--qr',
-					'.neutron-qr-code-wrapper', '.neutron-code-frame'
-				],
-				bars = Zepto(selectors.join(', ')),
+				menu = Zepto('.neutron-menu--items'),				
 				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu');		
 
-		Zepto('.neutron-button--start').click(function () {
-			var element = Zepto(this);
-			element.toggleClass('active');
+		if(parent.menuBehavior === "off-canvas") {
+			Zepto('body').on('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function() {
+				if(!Zepto(this).hasClass('neutron-off-canvas--active')) {
+					Zepto(this).removeClass('neutron-off-canvas--overflow');									
+				}
+			});
+		}
 
+		Zepto('.neutron-button--start').click(function () {
+			var element = Zepto(this),
+					body = Zepto('body');
+
+			element.toggleClass('active');
 			Zepto('.neutron-sticky-nav').toggleClass('active');
 
 			if(parent.menuBehavior === "off-canvas") {
-				Zepto('body').toggleClass('neutron-off-canvas--active');
+				if (body.hasClass('neutron-off-canvas--active')) {
+					body.removeClass('neutron-off-canvas--active');									
+				} else {					
+					body.addClass('neutron-off-canvas--active');									
+					body.addClass('neutron-off-canvas--overflow');									
+				}
 			}
 
 			if (element.hasClass('active')) {
