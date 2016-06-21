@@ -74,4 +74,4 @@ gulp.task('watch', function () {
 gulp.task('copy:all', ['copy:js', 'copy:css', 'copy:images', 'copy:styleguide']);
 gulp.task('navigation', ['sass:navigation', 'js:navigation']);
 gulp.task('default', ['navigation', 'copy:all', 'engine']);
-gulp.task('server', ['navigation', 'engine', 'connect', 'watch']);
+gulp.task('server', ['navigation', 'copy:all', 'engine', 'connect', 'watch']);

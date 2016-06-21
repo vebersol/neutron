@@ -17,12 +17,12 @@ $menuWidth: 173px;
 	z-index: 9999999;
 }
 
-body.offCanvas {
+body.#{$prefix}-off-canvas {
 	@include prefix(transition, left 0.5s ease-out);
 	left: 0;
 	position: relative;
 
-	&.#{$prefix}-off-canvas {
+	&--active {
 		left: $menuWidth;
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"fileExtension": ".handlebars",
 	"encode": "utf8",
-	"menuBehavior": "offCanvas",
+	"menuBehavior": "off-canvas",
 	"defaultLayoutName": "application",
 	"paths": {
 		"core": {

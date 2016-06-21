@@ -1,6 +1,6 @@
 var Menu = function () {
 	this.codeFrame = new CodeFrame();
-	this.menuBehavior = window.neutronADT.i.menuBehavior || "overlay";
+	this.menuBehavior = menuBehavior;
 
 	this.init();
 }
@@ -9,7 +9,9 @@ Menu.prototype = {
 	init: function () {
 		var parent = this;
 
-		Zepto('body').addClass(this.menuBehavior);
+		if(this.menuBehavior === "off-canvas") {
+			Zepto('body').toggleClass('neutron-off-canvas');			
+		}
 
 		Zepto.ajax({
 			url: patternData.i.assetsPath + 'data/patterns.json',
@@ -45,14 +47,14 @@ Menu.prototype = {
 				objLen,
 				menuItem = Zepto('[data-item="' + property + '"]'),
 				ul = Zepto('<ul></ul>');
-
+								
 		for (var item in data) {
 			objLen = this.getObjectSize(data[item]);
 
 			if (typeof data[item] === 'string') {
 				list = Zepto('<li><a href="' + PATTERNS_PATH + data[item] + '">' + this.toTitle(item) + '</a></li>');
-			} else if (typeof data[item] === 'object' && objLen > 0) {
-				list = Zepto('<li><input type="checkbox" id="'+this.toTitle(item)+'" /><label for="'+this.toTitle(item)+'">' + this.toTitle(item) + '</label></li>').data('item', item);
+			} else if (typeof data[item] === 'object' && objLen > 0) {				
+				list = Zepto('<li><input type="checkbox" id="'+this.toTitle(item)+'-'+property+'" /><label for="'+this.toTitle(item)+'-'+property+'">' + this.toTitle(item) + '</label></li>').data('item', item);
 				list.append(this.createMenuItem(data[item], item));
 			}
 
@@ -67,8 +69,7 @@ Menu.prototype = {
 	},
 
 	bind: function () {
-		var parent = this,
-				path = window.location.pathname,
+		var parent = this,				
 				qrcode,
 				qrcodeEl = Zepto('#qrcode'),
 				qrCodeFrame = Zepto('.neutron-qr-code-wrapper'),
@@ -80,15 +81,7 @@ Menu.prototype = {
 					'.neutron-qr-code-wrapper', '.neutron-code-frame'
 				],
 				bars = Zepto(selectors.join(', ')),
-				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu');
-
-		menu.find('a').each(function () {
-			var anchor = Zepto(this);
-			if (anchor.attr('href').match(path)) {
-				anchor.parent().addClass('current');
-				parent.showElement(anchor);
-			}
-		});
+				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu');		
 
 		Zepto('.neutron-button--start').click(function () {
 			var element = Zepto(this);
@@ -96,8 +89,8 @@ Menu.prototype = {
 
 			Zepto('.neutron-sticky-nav').toggleClass('active');
 
-			if(this.menuBehavior == "offCanvas") {
-				Zepto('body').toggleClass('neutron-off-canvas');
+			if(parent.menuBehavior === "off-canvas") {
+				Zepto('body').toggleClass('neutron-off-canvas--active');
 			}
 
 			if (element.hasClass('active')) {
@@ -162,6 +155,8 @@ Menu.prototype = {
 				parent.storage.remove('qr');
 			}
 		});
+
+		parent.showCurrent(menu);
 	},
 
 	showElement: function (element) {
@@ -195,5 +190,18 @@ Menu.prototype = {
 		for (var i = 0; i < btns.length; i++) {
 			Zepto('.neutron-button--' + btns[i]).click();
 		}
+	},
+
+	showCurrent: function(menu) {
+		var parent = this,
+				path = window.location.pathname;
+
+		menu.find('a').each(function () {
+			var anchor = Zepto(this);
+			if (anchor.attr('href').match(path)) {
+				anchor.parent().addClass('current');
+				parent.showElement(anchor);
+			}
+		});
 	}
 }
