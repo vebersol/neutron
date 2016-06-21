@@ -1,0 +1,12 @@
+<div class="jumbotron">
+	{{#with headline}}
+	{{ render "atoms/text/headline" }}
+	{{/with}}
+
+	{{#with intro}}
+	{{ render "atoms/text/paragraph" }}
+	{{/with}}
+	<p>
+		{{ render "atoms/text/link:btn btn-primary btn-lg" url="#" text="Learn more"}}
+	</p>
+</div>

@@ -1,0 +1,107 @@
+{
+	"thumbnails": [{
+		"headline": "Lorem ipsum dolor sit amet, consectetur",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit id placeat nesciunt, veritatis dignissimos amet.",
+		"img": {
+			"src": "https://unsplash.it/242/200?image=20",
+			"alt": "Lorem ipsum dolor sit amet."
+		}
+	},
+	{
+		"headline": "Lorem ipsum dolor sit amet, consectetur",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit id placeat nesciunt, veritatis dignissimos amet.",
+		"img": {
+			"src": "https://unsplash.it/242/200?image=4",
+			"alt": "Lorem ipsum dolor sit amet."
+		}
+	},
+	{
+		"headline": "Lorem ipsum dolor sit amet, consectetur",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit id placeat nesciunt, veritatis dignissimos amet.",
+		"img": {
+			"src": "https://unsplash.it/242/200?image=30",
+			"alt": "Lorem ipsum dolor sit amet."
+		}
+	}],
+	"twitter": [{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=900",
+			"alt": "Thumbnail"
+		},
+		"headline": "@dolor",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
+	},
+	{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=901",
+			"alt": "Thumbnail"
+		},
+		"headline": "@lorem",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
+	},
+	{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=902",
+			"alt": "Thumbnail"
+		},
+		"headline": "@ipsum",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
+	},
+	{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=903",
+			"alt": "Thumbnail"
+		},
+		"headline": "@amet",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
+	},
+	{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=904",
+			"alt": "Thumbnail"
+		},
+		"headline": "@sit",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
+	}],
+	"news": [{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=800",
+			"alt": "Thumbnail"
+		},
+		"headline": "Lorem ipsum dolor",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.",
+		"url": "http://mydomain.com/page"
+	},
+	{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=799",
+			"alt": "Thumbnail"
+		},
+		"headline": "Lorem ipsum dolor sit amet, consectetur",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam distinctio veritatis rem officiis quas consectetur similique beatae, necessitatibus, dicta placeat!"
+	},
+	{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=802",
+			"alt": "Thumbnail"
+		},
+		"headline": "Lorem ipsum",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, officia fugit sed!"
+	},
+	{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=803",
+			"alt": "Thumbnail"
+		},
+		"headline": "@amet",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
+	},
+	{
+		"img": {
+			"src": "https://unsplash.it/64/64?image=804",
+			"alt": "Thumbnail"
+		},
+		"headline": "@sit",
+		"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
+	}]
+}

@@ -29,6 +29,8 @@ var engine = function (cb) {
 		pages: {}
 	};
 
+	console.log('\x1b[42m' + 'Start render' + '\x1b[0m');
+
 	function init () {
 		layoutHandler.getLayouts();
 		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
@@ -53,7 +55,12 @@ var engine = function (cb) {
 	}
 
 	function onEnd() {
+		if (cb) {
+			cb();
+		}
+		console.log('\x1b[42m')
 		console.timeEnd('render duration');
+		console.log('\x1b[0m')
 	}
 
 	/**
@@ -65,6 +72,7 @@ var engine = function (cb) {
 	}
 
 	function getPatterns() {
+		setRenderHelper();
 		return fse.walk(settings.paths.src.patterns)
 			.on('data', function (file) {
 				if (isPatternExtension(path.extname(file.path))) {
@@ -84,7 +92,6 @@ var engine = function (cb) {
 	}
 
 	function writeFiles() {
-
 		try {
 			var totalFiles = patternFiles.length;
 
@@ -120,6 +127,7 @@ var engine = function (cb) {
 		var partialName = partials.getPartialName(pattern.file.path)
 		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
+		newData.cssTheme = settings.cssTheme;
 		newData.partialClass = partials.getPatternFolder(partialName);
 		newData.patternName = partialName;
 		newData.dependencies = addEngineSnippets(partialsList);
@@ -168,10 +176,17 @@ var engine = function (cb) {
 
 		fse.stat(jsonFile, function(err, stat) {
 			var jsonData;
+			var partialName = partials.getPartialName(fileName);
 			if (!err) {
 				delete require.cache[require.resolve(jsonFile)];
-				jsonData = require(jsonFile);
-				patternsData[partials.getPartialName(fileName)] = jsonData;
+				try {
+					jsonData = require(jsonFile);
+					patternsData[partialName] = jsonData;
+				}
+				catch(e) {
+					u.log('JSON error: ' + partialName, 'error');
+					console.log(e.message)
+				}
 			}
 
 			if (callback) {
@@ -212,6 +227,7 @@ var engine = function (cb) {
 	function addToTree(partial, end) {
 		var arr = partial.split('/');
 		var url = partials.getPatternFolder(partial) + '/index.html';
+
 		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
 			var obj = {}
 
@@ -259,18 +275,23 @@ var engine = function (cb) {
 	function registerPartials() {
 		var totalPartials = partials.registeredPartials.length;
 
-		partials.registeredPartials.forEach(function (file, i) {
-			fse.readFile(file.path, settings.encode, function(err, source) {
-				if (source) {
-					var partialName = partials.getPartialName(file.path);
-					partials.setPartial(partialName, source);
+		if (totalPartials > 0) {
+			return partials.registeredPartials.forEach(function (file, i) {
+				fse.readFile(file.path, settings.encode, function(err, source) {
+					if (source) {
+						var partialName = partials.getPartialName(file.path);
+						partials.setPartial(partialName, source);
 
-					if (i === totalPartials - 1) {
-						getPatterns();
+						if (i === totalPartials - 1) {
+							getPatterns();
+						}
 					}
-				}
+				});
 			});
-		});
+		}
+
+		return renderData();
+
 	}
 
 	function renderTemplate() {
@@ -281,14 +302,44 @@ var engine = function (cb) {
 
 		var indexHTML = indexTemplate({
 			assetsPath: settings.assetsPath,
+			cssTheme: settings.cssTheme,
 			dependencies: '[]'
 		});
 
 		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}
 
+	function setRenderHelper() {
+		handlebars.registerHelper('render', function (partial, params) {
+			var data;
+			var partialArr = partial.split(':');
+			var partialName = partialArr[0];
+			var styleModifier = partialArr.length > 1 ? partialArr[1] : null;
+			var hasHash = params.hasOwnProperty('hash');
+			var partialData = patternsData.hasOwnProperty(partialName) ? patternsData[partialName] : {};
+
+			var source = '{{> '+ partialName + '}}';
+
+			if (this && hasHash) {
+				data = Object.assign({}, partialData, this, params.hash);
+			}
+
+			if (styleModifier) {
+				data.styleModifier = styleModifier;
+			}
+
+
+			var template = handlebars.compile(source);
+			var result = template(data);
+
+			return new handlebars.SafeString(result);
+		});
+	}
+
 	console.time('render duration');
 	init();
+
+	return true;
 }
 
 module.exports = engine;

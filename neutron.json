@@ -1,7 +1,8 @@
 {
-	"fileExtension": ".handlebars",
+	"fileExtension": ".hbs",
 	"encode": "utf8",
 	"menuBehavior": "off-canvas",
+	"cssTheme": "bluewood",
 	"defaultLayoutName": "application",
 	"paths": {
 		"core": {

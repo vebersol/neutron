@@ -1,0 +1,30 @@
+$mine-shaft: #333333;
+$silver: #CCCCCC;
+$white: #FFFFFF;
+$heavy-metal: #272822;
+$orange: orange;
+$spring-wood: #F8F8F2;
+
+$bgcolor: $mine-shaft;
+$txtcolor: $silver;
+$tab: $silver;
+$tab-color: $white;
+$tab-active: $heavy-metal;
+$active-navigation: $orange;
+$menu-border: $orange;
+$disabled-svg-fill: $silver;
+$documentation-bg-color: $heavy-metal;
+$documentation-color: $spring-wood;
+$documentation-font: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+$link-color: $orange;
+$documentation-link-color: $orange;
+$input-text-color: $mine-shaft;
+$dependencies-list-color: $white;
+$code-frame-bg: $white;
+$code-frame-color: $white;
+
+$buttonSize: 33px;
+$gap: 2px;
+$menuWidth: 173px;
+
+@import "navigation";

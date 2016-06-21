@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/vebersol/democritus#readme",
   "dependencies": {
+    "browser-sync": "^2.13.0",
     "del": "^2.2.0",
     "fs-extra": "^0.30.0",
     "gulp": "^3.9.1",
@@ -36,8 +37,10 @@
     "sort-object": "^3.0.2"
   },
   "devDependencies": {
+    "gulp-batch": "^1.0.5",
+    "gulp-connect": "^4.0.0",
+    "gulp-watch": "^4.3.6",
     "istanbul": "^0.4.3",
-    "jasmine": "^2.4.1",
-    "gulp-connect": "^4.0.0"
+    "jasmine": "^2.4.1"
   }
 }

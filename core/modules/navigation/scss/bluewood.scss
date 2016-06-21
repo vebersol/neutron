@@ -1,0 +1,31 @@
+$burnt-sienna: #EB7260;
+$malibu: #77C5F7;
+$white: #FFFFFF;
+$heavy-metal: #272822;
+$pickled-bluewood: #354458;
+$jungle-green: #29ABA4;
+$flamingo: #F2671F;
+
+$bgcolor: $pickled-bluewood;
+$txtcolor: $white;
+$tab: $jungle-green;
+$tab-color: $white;
+$tab-active: $heavy-metal;
+$active-navigation: $burnt-sienna;
+$menu-border: $burnt-sienna;
+$disabled-svg-fill: $white;
+$documentation-bg-color: $heavy-metal;
+$documentation-color: $malibu;
+$documentation-font: arial, sans-serif;
+$link-color: $burnt-sienna;
+$documentation-link-color: $flamingo;
+$input-text-color: $pickled-bluewood;
+$dependencies-list-color: $malibu;
+$code-frame-bg: $pickled-bluewood;
+$code-frame-color: $pickled-bluewood;
+
+$buttonSize: 33px;
+$gap: 2px;
+$menuWidth: 173px;
+
+@import "navigation";

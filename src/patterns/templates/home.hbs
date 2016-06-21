@@ -1,0 +1,18 @@
+{{ render "organisms/navigation/main-navbar" }}
+
+<div class="container">
+	{{ render "organisms/highlights/jumbotron" }}
+
+	<div class="row">
+		{{#each thumbnails}}
+			{{ render "molecules/blocks/thumbnail" }}
+		{{/each}}
+	</div>
+
+	<div class="row">
+		{{ render "organisms/blocks/media-box" collection=news boxTitle="News" }}
+		{{ render "organisms/blocks/media-box" collection=twitter boxTitle="Twitter" }}
+	</div>
+</div>
+
+{{ render "organisms/navigation/footer" }}

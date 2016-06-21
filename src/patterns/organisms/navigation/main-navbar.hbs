@@ -1,0 +1,13 @@
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			{{ render "molecules/navigation/toggle-button" }}
+			{{ render "atoms/links/brand" text="Neutron" url=assetsPath }}
+		</div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			{{ render "molecules/navigation/menu-items" }}
+			{{ render "molecules/forms/search-bar" }}
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,17 @@
+{{!!
+  **Multiple layouts support**
+
+  Neutron supports multiple layouts. You just need to add a layout property in your json file related to the partial and it will render in your template file.
+}}
+{{ render "atoms/text/headline" }}
+
+<p>This is a clean layout version. In Neutron you're able to create many layout styles letting you decide the layout you want to use in your templates!</p>
+
+{{# contentFor "css"}}
+<!-- This block is instantiated in pattern page, but this element will be rendered wherever you decide by adding the **outputFor** helper. In this case the result is the header element. -->
+<style>
+	body {
+		font-size: 18px;
+	}
+</style>
+{{/contentFor}}

@@ -155,6 +155,8 @@ Menu.prototype = {
 					height: 256
 				});
 
+				qrCodeFrame.find('.neutron-qr-code-frame--text span').html(location.href);
+
 				parent.storage.add('qr');
 			}
 			else {
