@@ -8,6 +8,7 @@ $prefix: neutron;
 
 	* {
 		font-size: 16px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	}
 
 	pre {
@@ -197,16 +198,20 @@ body.#{$prefix}-off-canvas {
 		padding-left: 15px;
 
 		label {
+			display: inline-block;			
 			cursor: pointer;
 			position: relative;
 			padding-left: 12px;
-			padding-bottom: 0;
+			padding-bottom: 5px;
+			margin: 0 !important;
+			font-weight: bold;
+			line-height: 1.4;
 		}
 
 		a {
-			font-family: Arial, sans-serif;
 			display: block;
 			color: $link-color;			
+			padding-bottom: 5px;
 		}
 	}
 
@@ -221,10 +226,11 @@ body.#{$prefix}-off-canvas {
 		height: 0;
 
 		& + label::before {
+			box-sizing: border-box;
 			display: inline-block;
 			position: absolute;
 			left: -10px;
-			top: 3px;
+			top: 2px;
 			content: "+";
 			width: 15px;
 			height: 15px;
