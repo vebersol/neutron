@@ -10,7 +10,7 @@ Menu.prototype = {
 		var parent = this;
 
 		if(this.menuBehavior === "off-canvas") {
-			Zepto('body').toggleClass(pcn('.off-canvas'));
+			Zepto('body').toggleClass(pcn('off-canvas'));
 		}
 
 		Zepto.ajax({

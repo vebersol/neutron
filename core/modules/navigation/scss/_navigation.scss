@@ -223,19 +223,20 @@ body.#{$prefix}-off-canvas {
 			width: 0;
 			height: 0;
 
-			& + label::before {
+			& + label::before, {
 				box-sizing: border-box;
 				display: inline-block;
 				position: absolute;
 				left: -10px;
 				top: 2px;
-				content: "+";
+				content: "\2795";
 				width: 15px;
 				height: 15px;
 				border-radius: 3px;
 				font-weight: bold;
 				line-height: 17px;
 				text-align: center;
+				font-size: 9px;
 				color: $bgcolor;
 				background-color: $txtcolor;
 			}
@@ -245,13 +246,11 @@ body.#{$prefix}-off-canvas {
 					display: block;
 				}
 
-				& ~ label::before {
-					content: "-";
-					line-height: 14px;
+				& + label::before, {
+					content: '\2796';
 				}
 			}
 		}
-
 	}
 
 	.#{$prefix}-menu--search {
