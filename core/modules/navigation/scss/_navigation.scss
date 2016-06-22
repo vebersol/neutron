@@ -3,6 +3,20 @@
 
 $prefix: neutron;
 
+body.#{$prefix}-off-canvas {
+	@include prefix(transition, left 0.5s ease-out);
+	left: 0;
+	position: relative;
+
+	&--active {
+		left: $menuWidth;
+	}
+
+	&--overflow {
+		overflow-x: hidden;
+	}
+}
+
 ##{$prefix} {
 	z-index: 9999999;
 
@@ -20,468 +34,453 @@ $prefix: neutron;
 		margin: 0;
 		padding: 0;
 	}
-}
 
-body.#{$prefix}-off-canvas {
-	@include prefix(transition, left 0.5s ease-out);
-	left: 0;
-	position: relative;
+	.#{$prefix}-sticky-nav {
+		position: fixed;
+		top: 0;
+		left: $menuWidth * -1;
+		height: 100%;
+		width: 0px;
+		z-index: 1;
 
-	&--active {
-		left: $menuWidth;
-	}
+		@include prefix(transition, left 0.5s ease-out);
 
-	&--overflow {
-		overflow-x: hidden;
-	}
-}
+		&.active {
+			left: 0;
 
-.#{$prefix}-sticky-nav {
-	position: fixed;
-	top: 0;
-	left: $menuWidth * -1;
-	height: 100%;
-	width: 0px;
-	z-index: 1;
-
-	@include prefix(transition, left 0.5s ease-out);
-
-	&.active {
-		left: 0;
-
-		.#{$prefix}-button--start {
-			left: $menuWidth;
+			.#{$prefix}-button--start {
+				left: $menuWidth;
+			}
 		}
 	}
-}
 
-.#{$prefix}-code-frame,
-.#{$prefix}-menu {
-	* {
-		@include prefix(box-sizing, border-box);
+	.#{$prefix}-code-frame,
+	.#{$prefix}-menu {
+		* {
+			@include prefix(box-sizing, border-box);
+		}
+
+		a,
+		p {
+			font-family: Arial, sans-serif;
+		}
+
+		a {
+			text-decoration: none;
+		}
 	}
 
-	a,
-	p {
-		font-family: Arial, sans-serif;
-	}
-
-	a {
-		text-decoration: none;
-	}
-}
-
-.#{$prefix}-button--start {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: $buttonSize;
-	height: $buttonSize;
-	color: white;
-	text-align: center;
-	background-color: $bgcolor;
-	z-index: 2;
-	text-decoration: none !important;
-
-	@include prefix(opacity, 0.8);
-	@include prefix(transition, "bottom 0.5s ease-out, left 0.5s ease-out");
-
-	&.active {
-		@include prefix(opacity, 1);
-	}
-
-	svg path {
-		fill: white;
-	}
-
-	&.#{$prefix}-frame-active {
-		bottom: calc(50%);
-	}
-}
-
-.#{$prefix}-navigation {
-	padding: 2px 5px;
-	width: 100%;	
-
-	a {
-		/* float: left; */
-		display: inline-block;
+	.#{$prefix}-button--start {
+		position: fixed;
+		bottom: 0;
+		left: 0;
 		width: $buttonSize;
 		height: $buttonSize;
-		background-color: $bgcolor;
+		color: $txtcolor;
 		text-align: center;
-		margin-left: 2px;
+		background-color: $bgcolor;
+		z-index: 2;
 		text-decoration: none !important;
-		color: white;
+
+		@include prefix(opacity, 0.8);
+		@include prefix(transition, "bottom 0.5s ease-out, left 0.5s ease-out");
+
+		&.active {
+			@include prefix(opacity, 1);
+		}
 
 		svg path {
-			fill: white;
+			fill: $txtcolor;
 		}
 
-		&:first-child {
-			margin-left: 0;
-		}
-
-		&.disabled {
-			cursor: default;
-			svg path {
-				fill: $disabled-svg-fill;
-			}
-		}
-	}
-}
-
-.#{$prefix}-button--start,
-.#{$prefix}-navigation a {
-	line-height: 37px;
-
-	span {
-		display: none;
-	}
-
-	svg {
-		width: 16px;
-	}
-
-	&.active svg path {
-		fill: $active-navigation;
-	}
-}
-
-.#{$prefix}-menu {
-	position: relative;
-	width: $menuWidth;
-	top: 0;
-	height: 100%;
-	background-color: $bgcolor;
-	margin: 0;
-	color: $txtcolor;
-	padding-bottom: $buttonSize + 3px;
-	border-right: 2px solid $menu-border;
-
-	@include prefix(transition, "height 0.5s ease-out, left 0.5s ease-out");
-	@include prefix(box-sizing, border-box);
-
-	&.active {
-		left: 0;
-
-		.#{$prefix}-menu--search  {
-			left: 0;
+		&.#{$prefix}-frame-active {
+			bottom: calc(50%);
 		}
 	}
 
-	&.#{$prefix}-frame-active {
-		height: calc(50%);
-
-		.#{$prefix}-menu--search {
-			bottom: calc(50% + 37px);
-		}
-	}
-}
-
-.#{$prefix}-menu--items {
-	margin: 0;
-	padding: 10px 0 0 5px !important;	
-	overflow: auto;
-	height: calc(100% - 44px);
-
-	[data-item] > a {
-		color: $txtcolor;
-		text-transform: uppercase;
-	}
-
-	ul {
-		display: none;
-	}
-
-	li {
-		padding-left: 15px;
-
-		label {
-			display: inline-block;			
-			cursor: pointer;
-			position: relative;
-			padding-left: 12px;
-			padding-bottom: 5px;
-			margin: 0 !important;
-			font-weight: bold;
-			line-height: 1.4;
-		}
+	.#{$prefix}-navigation {
+		padding: 2px 5px;
+		width: 100%;
 
 		a {
-			display: block;
-			color: $link-color;			
-			padding-bottom: 5px;
-		}
-	}
-
-	[data-item] > label {
-		color: $txtcolor;
-		text-transform: uppercase;
-	}
-
-	input[type=checkbox] {
-		display: none;
-		width: 0;
-		height: 0;
-
-		& + label::before {
-			box-sizing: border-box;
 			display: inline-block;
-			position: absolute;
-			left: -10px;
-			top: 2px;
-			content: "+";
-			width: 15px;
-			height: 15px;
-			border-radius: 3px;
-			font-weight: bold;
-			line-height: 17px;
+			width: $buttonSize;
+			height: $buttonSize;
+			background-color: $bgcolor;
 			text-align: center;
-			color: $bgcolor;
-			background-color: $txtcolor;
-		}
-
-		&:checked {
-			& ~ ul {
-				display: block;
-			}
-
-			& ~ label::before {
-				content: "-";
-				line-height: 14px;
-			}
-		}
-	}
-
-}
-
-.#{$prefix}-menu--search {
-	z-index: 3;
-
-	&__input {
-		position: relative;
-		background-color: $bgcolor;
-		padding: 5px;
-		@include prefix(box-sizing, border-box);
-
-		input {
-			border-radius: 0;
-			-webkit-appearance: none;
-			border: none;
-			width: 100%;
-			height: 33px;
-			color: $input-text-color;
-		}
-	}
-}
-
-.#{$prefix}-code-frame {
-	position: fixed;
-	left: 0;
-	bottom: -50%;
-	width: 100%;
-	height: 50%;
-	background: $code-frame-bg;
-	overflow-x: hidden;
-	overflow-y: auto;
-	padding: 20px;
-	z-index: 1;
-	color: $code-frame-color;
-	@include prefix(transition, bottom 0.5s ease-out);
-	@include prefix(box-sizing, border-box);
-
-	&.active {
-		bottom: 0;
-	}
-
-	&--patterns {
-		font-size: 0.85em;
-		a {
-			color: $dependencies-list-color;
-		}
-
-		##{$prefix}-dependencies-list a {
-			text-decoration: underline;
-		}
-	}
-
-	.#{$prefix}-code {
-		&--nav {
-			@include clearfix;
-			margin: 0;
-			padding: 0;
-
-		}
-
-		&--item {
-			display: block;
-			float: left;
-			background-color: $tab;
 			margin-left: 2px;
+			text-decoration: none !important;
+			color: $txtcolor;
+
+			svg path {
+				fill: $txtcolor;
+			}
 
 			&:first-child {
-				border-top-right-radius: 0;
-				border-top-left-radius: 4px;
 				margin-left: 0;
 			}
 
-			&:last-child {
-				border-top-right-radius: 4px;
-			}
-
-			&.active {
-				background-color: $tab-active;
-				a {
-					color: $tab-color;
+			&.disabled {
+				cursor: default;
+				svg path {
+					fill: $disabled-svg-fill;
 				}
+			}
+		}
+	}
+
+	.#{$prefix}-button--start,
+	.#{$prefix}-navigation a {
+		line-height: 37px;
+
+		span {
+			display: none;
+		}
+
+		svg {
+			width: 16px;
+		}
+
+		&.active svg path {
+			fill: $active-navigation;
+		}
+	}
+
+	.#{$prefix}-menu {
+		position: relative;
+		width: $menuWidth;
+		top: 0;
+		height: 100%;
+		background-color: $bgcolor;
+		margin: 0;
+		color: $txtcolor;
+		padding-bottom: $buttonSize + 3px;
+		border-right: 2px solid $menu-border;
+
+		@include prefix(transition, "height 0.5s ease-out, left 0.5s ease-out");
+		@include prefix(box-sizing, border-box);
+
+		&.active {
+			left: 0;
+
+			.#{$prefix}-menu--search  {
+				left: 0;
+			}
+		}
+
+		&.#{$prefix}-frame-active {
+			height: calc(50%);
+
+			.#{$prefix}-menu--search {
+				bottom: calc(50% + 37px);
+			}
+		}
+	}
+
+	.#{$prefix}-menu--items {
+		margin: 0;
+		padding: 10px 0 0 5px !important;
+		overflow: auto;
+		height: calc(100% - 44px);
+
+		[data-item] > a {
+			color: $txtcolor;
+			text-transform: uppercase;
+		}
+
+		ul {
+			display: none;
+		}
+
+		li {
+			padding-left: 15px;
+
+			label {
+				display: inline-block;
+				cursor: pointer;
+				position: relative;
+				padding-left: 12px;
+				padding-bottom: 5px;
+				margin: 0 !important;
+				font-weight: bold;
+				line-height: 1.4;
 			}
 
 			a {
 				display: block;
-				width: 100%;
-				height: 100%;
-				padding: 10px;
-				color: $tab-color;
-				text-decoration: none;
-				font-weight: bold;
+				color: $link-color;
+				padding-bottom: 5px;
 			}
 		}
 
-		&--list {
-			padding: 0;
-			margin: 0;
+		[data-item] > label {
+			color: $txtcolor;
+			text-transform: uppercase;
+		}
 
-			li {
-				overflow: auto;
+		input[type=checkbox] {
+			display: none;
+			width: 0;
+			height: 0;
 
-				a {
-					color: $documentation-link-color;
-					text-decoration: underline;
+			& + label::before {
+				box-sizing: border-box;
+				display: inline-block;
+				position: absolute;
+				left: -10px;
+				top: 2px;
+				content: "+";
+				width: 15px;
+				height: 15px;
+				border-radius: 3px;
+				font-weight: bold;
+				line-height: 17px;
+				text-align: center;
+				color: $bgcolor;
+				background-color: $txtcolor;
+			}
+
+			&:checked {
+				& ~ ul {
+					display: block;
+				}
+
+				& ~ label::before {
+					content: "-";
+					line-height: 14px;
 				}
 			}
 		}
 
-		&--documentation {
-			padding: 1em;
-			background-color: $documentation-bg-color;
-			color: $documentation-color;
-			border-radius: 0.3em;
-			border-top-left-radius: 0;
-			font-family: $documentation-font;
-			text-align: left;
-			word-spacing: normal;
-			word-break: normal;
-			word-wrap: normal;
-			line-height: 1.5;
-		}
-	}
-}
-
-.#{$prefix}-lightbox {
-	font-family: Arial, sans-serif;
-	z-index: 999999;
-
-	&--content {
-		position: fixed;
-		top: -999px;
-		left: 50%;
-		width: 600px;
-		height: auto;
-		margin: -150px 0 0 -300px;
-		background-color: $bgcolor;
-		padding: 10px;
-		@include prefix(transition, top 1s ease-out);
-		z-index: 4;
-		@include prefix(box-sizing, border-box);
-		color: white;
-
-		&--headline,
-		&--text {
-			color: white;
-			font-family: Arial, sans-serif;
-		}
-
-		&--headline {
-			font-size: 24px;
-			line-height: 1;
-			margin-bottom: 12px;
-		}
-
-		&--text {
-			font-size: 16px;
-			line-height: 1;
-			margin-bottom: 8px;
-		}
-
 	}
 
-	&:after {
-		position: fixed;
-		top: -999px;
-		left: 0;
-		display: block;
-		content: " ";
-		width: 0;
-		height: 0;
-		background-color: rgba(0, 0, 0, 0.8);
+	.#{$prefix}-menu--search {
 		z-index: 3;
-		@include prefix(transition, opacity 1s ease-out);
-		opacity: 0;
-	}
 
-	&.active {
-		&:after {
-			top: 0;
-			width: 100%;
-			height: 100%;
-			opacity: 1;
-		}
+		&__input {
+			position: relative;
+			background-color: $bgcolor;
+			padding: 5px;
+			@include prefix(box-sizing, border-box);
 
-		.#{$prefix}-lightbox--content {
-			top: 40%;
-			@media (max-width: 600px) {
-				left: 0;
-				margin-left: 0;
+			input {
+				border-radius: 0;
+				-webkit-appearance: none;
+				border: none;
 				width: 100%;
+				height: 33px;
+				color: $input-text-color;
 			}
 		}
 	}
-}
 
-.#{$prefix}-qr-code-frame {
-	#qrcode {
-		background-color: white;
-		padding: 5px;
-		text-align: center;
-		width: 276px;
-		height: 276px;
-		margin: 0 auto;
+	.#{$prefix}-code-frame {
+		position: fixed;
+		left: 0;
+		bottom: -50%;
+		width: 100%;
+		height: 50%;
+		background: $code-frame-bg;
+		overflow-x: hidden;
+		overflow-y: auto;
+		padding: 20px;
+		z-index: 1;
+		color: $code-frame-color;
+		@include prefix(transition, bottom 0.5s ease-out);
+		@include prefix(box-sizing, border-box);
 
-		img {
-			margin: 0 auto;
+		&.active {
+			bottom: 0;
+		}
+
+		&--patterns {
+			font-size: 0.85em;
+			a {
+				color: $dependencies-list-color;
+			}
+
+			##{$prefix}-dependencies-list a {
+				text-decoration: underline;
+			}
+		}
+
+		.#{$prefix}-code {
+			&--nav {
+				@include clearfix;
+				margin: 0;
+				padding: 0;
+
+			}
+
+			&--item {
+				display: block;
+				float: left;
+				background-color: $tab;
+				margin-left: 2px;
+
+				&:first-child {
+					border-top-right-radius: 0;
+					border-top-left-radius: 4px;
+					margin-left: 0;
+				}
+
+				&:last-child {
+					border-top-right-radius: 4px;
+				}
+
+				&.active {
+					background-color: $tab-active;
+					a {
+						color: $tab-color;
+					}
+				}
+
+				a {
+					display: block;
+					width: 100%;
+					height: 100%;
+					padding: 10px;
+					color: $tab-color;
+					text-decoration: none;
+					font-weight: bold;
+				}
+			}
+
+			&--list {
+				padding: 0;
+				margin: 0;
+
+				li {
+					overflow: auto;
+
+					a {
+						color: $documentation-link-color;
+						text-decoration: underline;
+					}
+				}
+			}
+
+			&--documentation {
+				padding: 1em;
+				background-color: $documentation-bg-color;
+				color: $documentation-color;
+				border-radius: 0.3em;
+				border-top-left-radius: 0;
+				font-family: $documentation-font;
+				text-align: left;
+				word-spacing: normal;
+				word-break: normal;
+				word-wrap: normal;
+				line-height: 1.5;
+			}
 		}
 	}
-}
 
-.#{$prefix}-button--close__link {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: $buttonSize;
-	height: $buttonSize;
-	background-color: white;
-	color: $bgcolor;
+	.#{$prefix}-lightbox {
+		font-family: Arial, sans-serif;
+		z-index: 999999;
 
-	span {
-		display: none;
+		&--content {
+			position: fixed;
+			top: -999px;
+			left: 50%;
+			width: 600px;
+			height: auto;
+			margin: -150px 0 0 -300px;
+			background-color: $bgcolor;
+			padding: 10px;
+			@include prefix(transition, top 1s ease-out);
+			z-index: 4;
+			@include prefix(box-sizing, border-box);
+			color: $txtcolor;
+
+			&__headline,
+			&__text {
+				color: $txtcolor;
+				font-family: Arial, sans-serif;
+			}
+
+			&__headline {
+				font-size: 24px;
+				line-height: 1;
+				margin-bottom: 12px;
+			}
+
+			&__text {
+				font-size: 16px;
+				line-height: 1;
+				margin-bottom: 8px;
+			}
+
+		}
+
+		&:after {
+			position: fixed;
+			top: -999px;
+			left: 0;
+			display: block;
+			content: " ";
+			width: 0;
+			height: 0;
+			background-color: $lightbox-overlay-bg;
+			z-index: 3;
+			@include prefix(transition, opacity 1s ease-out);
+			opacity: 0;
+		}
+
+		&.active {
+			&:after {
+				top: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 1;
+			}
+
+			.#{$prefix}-lightbox--content {
+				top: 40%;
+				@media (max-width: 600px) {
+					left: 0;
+					margin-left: 0;
+					width: 100%;
+				}
+			}
+		}
 	}
 
-	svg {
-		width: 100%;
-		height: 100%;
-		path {
-			fill: $bgcolor;
+	.#{$prefix}-qr-code-frame {
+		#qrcode {
+			background-color: white;
+			padding: 5px;
+			text-align: center;
+			width: 276px;
+			height: 276px;
+			margin: 0 auto;
+
+			img {
+				margin: 0 auto;
+			}
+		}
+	}
+
+	.#{$prefix}-button--close__link {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: $buttonSize;
+		height: $buttonSize;
+		background-color: $txtcolor;
+		color: $bgcolor;
+
+		span {
+			display: none;
+		}
+
+		svg {
+			width: 100%;
+			height: 100%;
+			path {
+				fill: $bgcolor;
+			}
 		}
 	}
 }

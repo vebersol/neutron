@@ -1,18 +1,18 @@
 $mine-shaft: #333333;
-$silver: #CCCCCC;
+$dove-gray: #666666;
 $white: #FFFFFF;
 $heavy-metal: #272822;
 $orange: orange;
 $spring-wood: #F8F8F2;
 
 $bgcolor: $mine-shaft;
-$txtcolor: $silver;
-$tab: $silver;
+$txtcolor: $spring-wood;
+$tab: $dove-gray;
 $tab-color: $white;
 $tab-active: $heavy-metal;
 $active-navigation: $orange;
 $menu-border: $orange;
-$disabled-svg-fill: $silver;
+$disabled-svg-fill: $dove-gray;
 $documentation-bg-color: $heavy-metal;
 $documentation-color: $spring-wood;
 $documentation-font: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -20,8 +20,9 @@ $link-color: $orange;
 $documentation-link-color: $orange;
 $input-text-color: $mine-shaft;
 $dependencies-list-color: $white;
-$code-frame-bg: $white;
+$code-frame-bg: $mine-shaft;
 $code-frame-color: $white;
+$lightbox-overlay-bg: rgba(0, 0, 0, 0.65);
 
 $buttonSize: 33px;
 $gap: 2px;

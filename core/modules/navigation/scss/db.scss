@@ -1,0 +1,29 @@
+$dixie: #E29317;
+$white: #FFFFFF;
+$black: #000000;
+$heavy-metal: #272822;
+
+$bgcolor: $dixie;
+$txtcolor: $white;
+$tab: $dixie;
+$tab-color: $white;
+$tab-active: $heavy-metal;
+$active-navigation: $black;
+$menu-border: $dixie;
+$disabled-svg-fill: $white;
+$documentation-bg-color: $heavy-metal;
+$documentation-color: $white;
+$documentation-font: arial, sans-serif;
+$link-color: $black;
+$documentation-link-color: $dixie;
+$input-text-color: $black;
+$dependencies-list-color: $white;
+$code-frame-bg: $black;
+$code-frame-color: $white;
+$lightbox-overlay-bg: rgba(0, 0, 0, 0.65);
+
+$buttonSize: 33px;
+$gap: 2px;
+$menuWidth: 173px;
+
+@import "navigation";
