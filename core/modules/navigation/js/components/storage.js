@@ -1,5 +1,6 @@
 var Storage = function () {
 	this.namespace = 'neutronADT';
+	this.privateMode = false;
 	this.data = window.localStorage.getItem(this.namespace);
 
 	this.init();
@@ -15,9 +16,14 @@ Storage.prototype = {
 	setData: function () {
 		var layers = this.getOpenedLayers();
 		var store = this.setItemsToStore(layers);
-		console.log(store);
-		window.localStorage.setItem(this.namespace, store);
-		this.data = window.localStorage.getItem(this.namespace);
+
+		// ✔ TODO: check an alternative solution to store in private mode
+		try {
+			window.localStorage.setItem(this.namespace, store);
+			this.data = window.localStorage.getItem(this.namespace);
+		} catch(e) {
+			this.privateMode = true;
+		}
 	},
 
 	getOpenedLayers: function () {
@@ -36,6 +42,9 @@ Storage.prototype = {
 	},
 
 	add: function (name) {
+		if (this.privateMode) {
+			return false;
+		}
 		var dataArr = this.data.split(',');
 
 		if (name !== 'start' && Zepto.inArray('start', dataArr) === -1) {
@@ -59,6 +68,9 @@ Storage.prototype = {
 	},
 
 	remove: function (name) {
+		if (this.privateMode) {
+			return false;
+		}
 		var dataArr = this.data.split(',');
 
 		if(Zepto.inArray(name, dataArr) > -1) {
@@ -73,11 +85,6 @@ Storage.prototype = {
 		}
 
 		return false;
-	},
-
-	removeAll: function () {
-		this.data = "";
-		window.localStorage.setItem(this.namespace, "");
 	},
 
 	setItemsToStore: function (items) {

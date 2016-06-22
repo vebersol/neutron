@@ -31,7 +31,6 @@ Menu.prototype = {
 				menu = Zepto(pcn('.menu--items')),
 				list;
 
-
 		for (var i = 0; i < menuArr.length; i++) {
 			list = Zepto('<li><input type="checkbox" id="'+menuArr[i]+'" /><label for="'+menuArr[i]+'">' + this.toTitle(menuArr[i]) + '</label></li>').data('item', menuArr[i]);
 			submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
@@ -202,10 +201,12 @@ Menu.prototype = {
 	},
 
 	setupButtons: function () {
-		var btns = this.storage.data.split(',');
+		if (!this.storage.privateMode) {
+			var btns = this.storage.data.split(',');
 
-		for (var i = 0; i < btns.length; i++) {
-			Zepto(pcn('.button--' + btns[i])).click();
+			for (var i = 0; i < btns.length; i++) {
+				Zepto(pcn('.button--' + btns[i])).click();
+			}
 		}
 	},
 
