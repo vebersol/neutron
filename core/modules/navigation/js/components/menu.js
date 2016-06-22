@@ -132,6 +132,11 @@ Menu.prototype = {
 			codeBtn.addClass('disabled');
 		}
 
+		Zepto(pcn('.button--search')).click(function () {
+			var searchInput = Zepto(pcn('.menu--search input'));
+			searchInput.focus();
+		});
+
 		var buttonClassPath = [pcn('.code-frame--close'), pcn('.button--close__link')];
 
 		Zepto(buttonClassPath.join(' ')).on('click', function () {
