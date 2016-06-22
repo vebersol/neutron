@@ -303,7 +303,8 @@ var engine = function (cb) {
 		var indexHTML = indexTemplate({
 			assetsPath: settings.assetsPath,
 			cssTheme: settings.cssTheme,
-			dependencies: '[]'
+			dependencies: '[]',
+			menuBehavior: settings.menuBehavior || "overlay"
 		});
 
 		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);

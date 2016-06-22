@@ -186,6 +186,7 @@ body.#{$prefix}-off-canvas {
 
 		li {
 			padding-left: 15px;
+			position: relative;
 
 			label {
 				display: inline-block;
@@ -202,6 +203,17 @@ body.#{$prefix}-off-canvas {
 				display: block;
 				color: $link-color;
 				padding-bottom: 5px;
+			}
+
+			&.current {
+				a::before {
+					content: "\2023";
+					position: absolute;
+					top: 0;
+					left: 0;
+					color: $txtcolor;
+					line-height: 1.2;
+				}
 			}
 		}
 
@@ -220,15 +232,15 @@ body.#{$prefix}-off-canvas {
 				display: inline-block;
 				position: absolute;
 				left: -10px;
-				top: 2px;
+				top: 4px;
 				content: "\2795";
-				width: 15px;
-				height: 15px;
+				width: 12px;
+				height: 12px;
 				border-radius: 3px;
-				font-weight: bold;
-				line-height: 17px;
+				font-weight: normal;
+				line-height: 13px;
 				text-align: center;
-				font-size: 9px;
+				font-size: 8px;
 				color: $bgcolor;
 				background-color: $txtcolor;
 			}
@@ -268,6 +280,8 @@ body.#{$prefix}-off-canvas {
 				width: 100%;
 				padding-right: 33px;
 				@include prefix(transition, width 0.5s ease-out);
+				outline: none;
+				padding: 4px;
 			}
 		}
 
@@ -280,11 +294,6 @@ body.#{$prefix}-off-canvas {
 
 		&__opened {
 			top: 0;
-
-			.#{$prefix}-menu--search__input {
-				input {
-				}
-			}
 		}
 	}
 
