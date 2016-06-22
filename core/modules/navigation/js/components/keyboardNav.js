@@ -5,13 +5,13 @@ var KeyboardNav = function () {
 KeyboardNav.prototype = {
 	init: function (buttons) {
 		var parent = this;
-		
+
 		this.buttons = buttons;
-		this.startBtn = Zepto('.neutron-button--start');
-		this.navBar = Zepto('.neutron-navigation');
-		this.menuBtn = Zepto('.neutron-button--menu');
-		this.infoBtn = Zepto('.neutron-button--code');
-		this.qrCodeBtn = Zepto('.neutron-button--qr');
+		this.startBtn = Zepto(pcn('.button--start'));
+		this.navBar = Zepto(pcn('.navigation'));
+		this.menuBtn = Zepto(pcn('.button--menu'));
+		this.infoBtn = Zepto(pcn('.button--code'));
+		this.qrCodeBtn = Zepto(pcn('.button--qr'));
 
 		Zepto(document).on('keyup', function (ev) {
 			parent.keyUp(ev);
@@ -39,7 +39,7 @@ KeyboardNav.prototype = {
 	},
 
 	openMenu: function () {
-		this.menuBtn = Zepto('.neutron-button--menu');
+		this.menuBtn = Zepto(pcn('.button--menu'));
 
 		if (!this.navBar.hasClass('active')) {
 			this.navBar.addClass('active');
@@ -50,7 +50,7 @@ KeyboardNav.prototype = {
 	},
 
 	openInfoBar: function () {
-		this.infoBtn = Zepto('.neutron-button--code');
+		this.infoBtn = Zepto(pcn('.button--code'));
 
 		if (!this.navBar.hasClass('active')) {
 			this.navBar.addClass('active');
@@ -61,7 +61,7 @@ KeyboardNav.prototype = {
 	},
 
 	openQRCodeBar: function () {
-		this.qrCodeBtn = Zepto('.neutron-button--qr');
+		this.qrCodeBtn = Zepto(pcn('.button--qr'));
 
 		if (!this.navBar.hasClass('active')) {
 			this.navBar.addClass('active');

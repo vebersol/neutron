@@ -4,27 +4,28 @@ var Main = function () {
 
 Main.prototype = {
 	init: function () {
-		this.wrapper = Zepto('#neutron');
+		this.wrapper = Zepto('<aside id="' + PREFIX + '"></aside>');
+		Zepto('body').append(this.wrapper);
 		this.addPatternsInfo();
 	},
 
 	addPatternsInfo: function () {
 		var parent = this;
 		var template = NADTJST['index.html']();
-		
+
 		parent.wrapper.append(template);
-		parent.buildDependenciesList();				
-		
+		parent.buildDependenciesList();
+
 		new Menu();
 	},
-	
+
 	buildDependenciesList: function () {
 		var dependencies = patternData.i.dependencies;
-		var target = Zepto('#neutron-dependencies-list');
+		var target = Zepto(pcn('#dependencies-list'));
 		var d = [];
 
 		if (dependencies.length === 0) {
-			return Zepto('.neutron-code-frame--patterns').hide();
+			return Zepto(pcn('.code-frame--patterns')).hide();
 		}
 
 		for (var i = 0; i < dependencies.length; i++) {

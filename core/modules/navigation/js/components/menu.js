@@ -10,7 +10,7 @@ Menu.prototype = {
 		var parent = this;
 
 		if(this.menuBehavior === "off-canvas") {
-			Zepto('body').toggleClass('neutron-off-canvas');			
+			Zepto('body').toggleClass(pcn('.off-canvas'));
 		}
 
 		Zepto.ajax({
@@ -28,11 +28,12 @@ Menu.prototype = {
 
 	renderMenu: function (data) {
 		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'],
-				menu = Zepto('.neutron-menu--items'),
+				menu = Zepto(pcn('.menu--items')),
 				list;
 
+
 		for (var i = 0; i < menuArr.length; i++) {
-			list = Zepto('<li><input type="checkbox" id="'+this.toTitle(menuArr[i])+'" /><label for="'+this.toTitle(menuArr[i])+'">' + this.toTitle(menuArr[i]) + '</label></li>').data('item', menuArr[i]);
+			list = Zepto('<li><input type="checkbox" id="'+menuArr[i]+'" /><label for="'+menuArr[i]+'">' + this.toTitle(menuArr[i]) + '</label></li>').data('item', menuArr[i]);
 			submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
 			list.append(submenu);
 			menu.append(list);
@@ -47,14 +48,14 @@ Menu.prototype = {
 				objLen,
 				menuItem = Zepto('[data-item="' + property + '"]'),
 				ul = Zepto('<ul></ul>');
-								
+
 		for (var item in data) {
 			objLen = this.getObjectSize(data[item]);
 
 			if (typeof data[item] === 'string') {
 				list = Zepto('<li><a href="' + PATTERNS_PATH + data[item] + '">' + this.toTitle(item) + '</a></li>');
-			} else if (typeof data[item] === 'object' && objLen > 0) {				
-				list = Zepto('<li><input type="checkbox" id="'+this.toTitle(item)+'-'+property+'" /><label for="'+this.toTitle(item)+'-'+property+'">' + this.toTitle(item) + '</label></li>').data('item', item);
+			} else if (typeof data[item] === 'object' && objLen > 0) {
+				list = Zepto('<li><input type="checkbox" id="'+item+'-'+property+'" /><label for="'+item+'-'+property+'">' + this.toTitle(item) + '</label></li>').data('item', item);
 				list.append(this.createMenuItem(data[item], item));
 			}
 
@@ -69,35 +70,36 @@ Menu.prototype = {
 	},
 
 	bind: function () {
-		var parent = this,				
+		var parent = this,
 				qrcode,
 				qrcodeEl = Zepto('#qrcode'),
-				qrCodeFrame = Zepto('.neutron-qr-code-wrapper'),
-				codeBtn = Zepto('.neutron-button--code'),
-				menu = Zepto('.neutron-menu--items'),				
-				movableFrames = Zepto('.neutron-button--start, .neutron-navigation, .neutron-menu');		
+				qrCodeFrame = Zepto(pcn('.qr-code-wrapper')),
+				codeBtn = Zepto(pcn('.button--code')),
+				menu = Zepto(pcn('.menu--items')),
+				classList = [pcn('.button--start'), pcn('.navigation'), pcn('.menu')],
+				movableFrames = Zepto(classList.join(', '));
 
 		if(parent.menuBehavior === "off-canvas") {
 			Zepto('body').on('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function() {
-				if(!Zepto(this).hasClass('neutron-off-canvas--active')) {
-					Zepto(this).removeClass('neutron-off-canvas--overflow');									
+				if(!Zepto(this).hasClass(pcn('off-canvas--active'))) {
+					Zepto(this).removeClass(pcn('off-canvas--overflow'));
 				}
 			});
 		}
 
-		Zepto('.neutron-button--start').click(function () {
+		Zepto(pcn('.button--start')).click(function () {
 			var element = Zepto(this),
 					body = Zepto('body');
 
 			element.toggleClass('active');
-			Zepto('.neutron-sticky-nav').toggleClass('active');
+			Zepto(pcn('.sticky-nav')).toggleClass('active');
 
 			if(parent.menuBehavior === "off-canvas") {
-				if (body.hasClass('neutron-off-canvas--active')) {
-					body.removeClass('neutron-off-canvas--active');									
-				} else {					
-					body.addClass('neutron-off-canvas--active');									
-					body.addClass('neutron-off-canvas--overflow');									
+				if (body.hasClass(pcn('off-canvas--active'))) {
+					body.removeClass(pcn('off-canvas--active'));
+				} else {
+					body.addClass(pcn('off-canvas--active'));
+					body.addClass(pcn('off-canvas--overflow'));
 				}
 			}
 
@@ -115,34 +117,39 @@ Menu.prototype = {
 				}
 
 				Zepto(this).toggleClass('active');
-				var frame = Zepto('.neutron-code-frame');
+				var frame = Zepto(pcn('.code-frame'));
 
 				frame.toggleClass('active');
 
 				if (frame.hasClass('active')) {
 					parent.storage.add('code');
-					movableFrames.addClass('neutron-frame-active');
+					movableFrames.addClass(pcn('frame-active'));
 				} else {
 					parent.storage.remove('code');
-					movableFrames.removeClass('neutron-frame-active');
+					movableFrames.removeClass(pcn('frame-active'));
 				}
 			});
 		} else {
 			codeBtn.addClass('disabled');
 		}
 
-		Zepto('.neutron-code-frame--close .neutron-button--close__link').on('click', function () {
-			Zepto('.neutron-code-frame, .neutron-button--code').removeClass('active');
-			movableFrames.removeClass('neutron-frame-active');
+		var buttonClassPath = [pcn('.code-frame--close'), pcn('.button--close__link')];
+
+		Zepto(buttonClassPath.join(' ')).on('click', function () {
+			var codeFrameClasses = [pcn('.code-frame'), pcn('.button--code')];
+			Zepto(codeFrameClasses.join(', ')).removeClass('active');
+			movableFrames.removeClass(pcn('frame-active'));
 			parent.storage.remove('code');
 		});
 
-		qrCodeFrame.find('.neutron-button--close__link').on('click', function () {
-			Zepto('.neutron-qr-code-wrapper, .neutron-button--qr').removeClass('active');
+		qrCodeFrame.find(pcn('.button--close__link')).on('click', function () {
+			var qrCodeClasses = [pcn('.qr-code-wrapper'), pcn('.button--qr')];
+
+			Zepto(qrCodeClasses.join(', ')).removeClass('active');
 			parent.storage.remove('qr');
 		});
 
-		Zepto('.neutron-button--qr').click(function () {
+		Zepto(pcn('.button--qr')).click(function () {
 			var el = Zepto(this);
 
 			if (!qrCodeFrame.hasClass('active')) {
@@ -155,7 +162,7 @@ Menu.prototype = {
 					height: 256
 				});
 
-				qrCodeFrame.find('.neutron-qr-code-frame--text span').html(location.href);
+				qrCodeFrame.find(pcn('.lightbox--content__text span')).html(location.href);
 
 				parent.storage.add('qr');
 			}
@@ -198,7 +205,7 @@ Menu.prototype = {
 		var btns = this.storage.data.split(',');
 
 		for (var i = 0; i < btns.length; i++) {
-			Zepto('.neutron-button--' + btns[i]).click();
+			Zepto(pcn('.button--' + btns[i])).click();
 		}
 	},
 

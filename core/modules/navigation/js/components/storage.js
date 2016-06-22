@@ -1,7 +1,7 @@
 var Storage = function () {
 	this.namespace = 'neutronADT';
 	this.data = window.localStorage.getItem(this.namespace);
-	
+
 	this.init();
 };
 
@@ -21,13 +21,14 @@ Storage.prototype = {
 	},
 
 	getOpenedLayers: function () {
-		var wrapper = Zepto('.neutron-sticky-nav');
-		var buttons = wrapper.find('[class*="neutron-button--"]');
+		var wrapper = Zepto(pcn('.sticky-nav'));
+		var btnClass = pcn('button--');
+		var buttons = wrapper.find('[class*="' + btnClass + '"]');
 		var openedLayers = [];
 
 		for (var i = 0; i < buttons.length; i++) {
 			if (Zepto(buttons[i]).hasClass('active')) {
-				openedLayers.push(buttons[i].replace('neutron-button--', ''));
+				openedLayers.push(buttons[i].replace(btnClass, ''));
 			}
 		}
 
@@ -43,7 +44,7 @@ Storage.prototype = {
 
 		if(Zepto.inArray(name, dataArr) === -1) {
 			dataArr.push(name);
-			
+
 			dataArr = dataArr.filter(function(n){
 				return n != ""
 			});
