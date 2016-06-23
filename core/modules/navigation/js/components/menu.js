@@ -177,6 +177,10 @@ Menu.prototype = {
 			}
 		});
 
+		Zepto(document).on('showCurrent', function() {			
+			parent.showCurrent(menu);
+		});
+
 		parent.showCurrent(menu);
 	},
 
@@ -217,14 +221,16 @@ Menu.prototype = {
 
 	showCurrent: function(menu) {
 		var parent = this,
-				path = window.location.pathname;
+				path = window.location.pathname;		
 
-		menu.find('a').each(function () {
-			var anchor = Zepto(this);
-			if (anchor.attr('href').match(path)) {
-				anchor.parent().addClass('current');
-				parent.showElement(anchor);
-			}
-		});
+		if(path !== '/') {
+			menu.find('a').each(function () {
+				var anchor = Zepto(this);
+				if (anchor.attr('href').match(path)) {
+					anchor.parent().addClass('current');
+					parent.showElement(anchor);
+				}
+			});			
+		}
 	}
 }

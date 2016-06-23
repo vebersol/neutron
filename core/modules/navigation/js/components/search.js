@@ -50,6 +50,7 @@ Search.prototype = {
 					});
 				} else {
 					Zepto(itemsList.join(', ')).show();
+					Zepto(document).trigger('showCurrent');
 				}
 			}, 500);
 		});
