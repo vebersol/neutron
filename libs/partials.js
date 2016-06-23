@@ -42,7 +42,10 @@ partials = function () {
 				var partialName = k.match(/["'](.*?)["']/);
 
 				if (partialName && partialName.length > 1) {
-					partialNames.push(partialName[1]);
+					// skip hidden patterns
+					if (!isHiddenPartial(partialName[1])) {
+						partialNames.push(partialName[1]);
+					}
 				}
 			});
 		}
@@ -53,13 +56,18 @@ partials = function () {
 		return pattern.replace(/\//g, '-');
 	}
 
+	function isHiddenPartial(partialName) {
+		return /(\/_)/.test(partialName);
+	}
+
 	return {
 		registeredPartials: registeredPartials,
 		getPartialName: getPartialName,
 		getPartialsNames: getPartialsNames,
 		setPartial: setPartial,
 		getPartialsData: getPartialsData,
-		getPatternFolder: getPatternFolder
+		getPatternFolder: getPatternFolder,
+		isHiddenPartial: isHiddenPartial
 	}
 };
 

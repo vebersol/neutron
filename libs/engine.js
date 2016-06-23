@@ -280,6 +280,11 @@ var engine = function (cb) {
 				fse.readFile(file.path, settings.encode, function(err, source) {
 					if (source) {
 						var partialName = partials.getPartialName(file.path);
+
+						if (partials.isHiddenPartial(partialName)) {
+							partialName = partialName.replace('/_', '/');
+						}
+
 						partials.setPartial(partialName, source);
 
 						if (i === totalPartials - 1) {
