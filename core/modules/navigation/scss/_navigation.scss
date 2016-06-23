@@ -175,11 +175,6 @@ body.#{$prefix}-off-canvas {
 		overflow: auto;
 		height: calc(100%);
 
-		[data-item] > a {
-			color: $txtcolor;
-			text-transform: uppercase;
-		}
-
 		ul {
 			display: none;
 		}
@@ -205,14 +200,19 @@ body.#{$prefix}-off-canvas {
 				padding-bottom: 5px;
 			}
 
+			a::before {
+				content: "\2023";
+				position: absolute;
+				top: 0;
+				left: 0;
+				color: $txtcolor;
+				line-height: 1.2;
+				opacity: 0.3;
+			}
+
 			&.current {
 				a::before {
-					content: "\2023";
-					position: absolute;
-					top: 0;
-					left: 0;
-					color: $txtcolor;
-					line-height: 1.2;
+					opacity: 1;
 				}
 			}
 		}
