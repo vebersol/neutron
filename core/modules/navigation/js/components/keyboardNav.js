@@ -7,11 +7,12 @@ KeyboardNav.prototype = {
 		var parent = this;
 
 		this.buttons = buttons;
+		this.bar = Zepto(pcn('.sticky-nav'));
 		this.startBtn = Zepto(pcn('.button--start'));
-		this.navBar = Zepto(pcn('.navigation'));
 		this.menuBtn = Zepto(pcn('.button--menu'));
 		this.infoBtn = Zepto(pcn('.button--code'));
 		this.qrCodeBtn = Zepto(pcn('.button--qr'));
+		this.searchBtn = Zepto(pcn('.button--search'));
 
 		Zepto(document).on('keyup', function (ev) {
 			parent.keyUp(ev);
@@ -30,6 +31,8 @@ KeyboardNav.prototype = {
 				this.openQRCodeBar();
 			} else if (this.isKey(ev, 'n')) {
 				this.toggleBar();
+			} else if (this.isKey(ev, 'f')) {
+				this.toggleSearch();
 			}
 		}
 	},
@@ -41,10 +44,6 @@ KeyboardNav.prototype = {
 	openMenu: function () {
 		this.menuBtn = Zepto(pcn('.button--menu'));
 
-		if (!this.navBar.hasClass('active')) {
-			this.navBar.addClass('active');
-		}
-
 		this.menuBtn.click();
 		this.checkStartBtn();
 	},
@@ -52,20 +51,12 @@ KeyboardNav.prototype = {
 	openInfoBar: function () {
 		this.infoBtn = Zepto(pcn('.button--code'));
 
-		if (!this.navBar.hasClass('active')) {
-			this.navBar.addClass('active');
-		}
-
 		this.infoBtn.click();
 		this.checkStartBtn();
 	},
 
 	openQRCodeBar: function () {
 		this.qrCodeBtn = Zepto(pcn('.button--qr'));
-
-		if (!this.navBar.hasClass('active')) {
-			this.navBar.addClass('active');
-		}
 
 		this.qrCodeBtn.click();
 		this.checkStartBtn();
@@ -79,5 +70,13 @@ KeyboardNav.prototype = {
 		if (!this.startBtn.hasClass('active')) {
 			this.startBtn.addClass('active');
 		}
+	},
+
+	toggleSearch: function () {
+		if(!this.bar.hasClass('active')) {
+			this.toggleBar();
+		}
+		this.checkStartBtn();
+		this.searchBtn.click();
 	}
 }

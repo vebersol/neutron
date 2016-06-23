@@ -177,10 +177,6 @@ Menu.prototype = {
 			}
 		});
 
-		Zepto(document).on('showCurrent', function() {			
-			parent.showCurrent(menu);
-		});
-
 		parent.showCurrent(menu);
 	},
 
@@ -221,7 +217,7 @@ Menu.prototype = {
 
 	showCurrent: function(menu) {
 		var parent = this,
-				path = window.location.pathname;		
+				path = window.location.pathname;
 
 		if(path !== '/') {
 			menu.find('a').each(function () {
@@ -230,7 +226,7 @@ Menu.prototype = {
 					anchor.parent().addClass('current');
 					parent.showElement(anchor);
 				}
-			});			
+			});
 		}
 	}
 }

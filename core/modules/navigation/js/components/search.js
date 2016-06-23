@@ -1,5 +1,7 @@
 var Search = function () {
 	this.init();
+
+	this.firstSearch = true;
 };
 
 Search.prototype = {
@@ -8,10 +10,11 @@ Search.prototype = {
 	},
 
 	bindSearch: function () {
-		var timer,
-				input = Zepto(pcn('.menu--search input')),
-				clearBtn = Zepto(pcn('.menu--search__clear')),
-				menu = Zepto(pcn('.menu--items'));
+		var parent = this,
+			timer,
+			input = Zepto(pcn('.menu--search input')),
+			clearBtn = Zepto(pcn('.menu--search__clear')),
+			menu = Zepto(pcn('.menu--items'));
 
 		input.on('keyup blur', function (ev) {
 			clearTimeout(timer);
@@ -20,6 +23,11 @@ Search.prototype = {
 					anchorsList = [pcn('.menu--items > li a'), pcn('.menu--items > li label')],
 					anchors = Zepto(anchorsList.join(', ')),
 					itemsList = [pcn('.menu--items li[data-item]'), pcn('.menu--items li a')];
+
+				if(parent.firstSearch) {
+					parent.opened = Zepto(pcn('.menu--items input:checked'));
+					parent.firstSearch = false;
+				}
 
 				Zepto(itemsList.join(', ')).hide();
 				Zepto(pcn('.menu--items li input')).prop('checked', false);
@@ -50,7 +58,9 @@ Search.prototype = {
 					});
 				} else {
 					Zepto(itemsList.join(', ')).show();
-					Zepto(document).trigger('showCurrent');
+					parent.opened.prop('checked', true);
+					parent.firstSearch = true;
+					parent.opened = Zepto(pcn('.menu--items input:checked'));
 				}
 			}, 500);
 		});
