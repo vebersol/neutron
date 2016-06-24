@@ -44,7 +44,8 @@ partials = function () {
 				if (partialName && partialName.length > 1) {
 					// skip hidden patterns
 					if (!isHiddenPartial(partialName[1])) {
-						partialNames.push(partialName[1]);
+						var name = partialName[1].split(':');
+						partialNames.push(name[0]);
 					}
 				}
 			});

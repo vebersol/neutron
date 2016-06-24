@@ -315,6 +315,11 @@ var engine = function (cb) {
 		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}
 
+	function isTemplate(partial) {
+		var regex = /^(template)/;
+		return regex.test(partial);
+	}
+
 	function setRenderHelper() {
 		handlebars.registerHelper('render', function (partial, params) {
 			var data;
@@ -322,7 +327,7 @@ var engine = function (cb) {
 			var partialName = partialArr[0];
 			var styleModifier = partialArr.length > 1 ? partialArr[1] : null;
 			var hasHash = params.hasOwnProperty('hash');
-			var partialData = patternsData.hasOwnProperty(partialName) ? patternsData[partialName] : {};
+			var partialData = !isTemplate(partial) && patternsData.hasOwnProperty(partialName) ? patternsData[partialName] : {};
 
 			var source = '{{> '+ partialName + '}}';
 
@@ -333,7 +338,6 @@ var engine = function (cb) {
 			if (styleModifier) {
 				data.styleModifier = styleModifier;
 			}
-
 
 			var template = handlebars.compile(source);
 			var result = template(data);
