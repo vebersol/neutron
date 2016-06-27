@@ -24,16 +24,27 @@ var layoutHandler = function () {
 			return true;
 	}
 
-	function addLayout(source, layout) {
-		var layoutName = layout ? layout : 'application';
-		var layout = layouts[layoutName];
-
-		return layout.replace('{{> yield }}', source);
+	function setHelpers() {
+		handlebars.registerHelper('$yield', function (partial, data) {
+			return new handlebars.SafeString(this._yield);
+		});
 	}
 
+	function renderLayout(data, compiledPattern) {
+		var layoutName = data.layout ? data.layout : 'application';
+
+		var layout = layouts[layoutName];
+		var template = handlebars.compile(layout);
+		data._yield = compiledPattern;
+
+		return template(data);
+	}
+
+	setHelpers();
+
 	return {
-		addLayout: addLayout,
-		getLayouts: getLayouts
+		getLayouts: getLayouts,
+		renderLayout: renderLayout
 	}
 }
 

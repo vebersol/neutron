@@ -124,8 +124,7 @@ var engine = function (cb) {
 		var partialData = partials.getPartialsData(pattern.source, pattern.data ? pattern.data : {});
 		var newData = partialData.data;
 		var partialsList = partialData.partials;
-		var partialName = partials.getPartialName(pattern.file.path)
-		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
+		var partialName = partials.getPartialName(pattern.file.path);
 
 		newData.cssTheme = settings.cssTheme;
 		newData.partialClass = partials.getPatternFolder(partialName);
@@ -135,13 +134,15 @@ var engine = function (cb) {
 
 		helpers.resetHelpers();
 		try {
-			var template = handlebars.compile(layout);
-			var markups = markup.addMarkup(pattern.source, newData);
-			var result = getHtml(template, newData);
+			var source = handlebars.compile(pattern.source);
+			var compiledSource = getHtml(source, newData);
+
+			var fullLayout = layoutHandler.renderLayout(newData, compiledSource);
+			var markups = markup.addMarkup(pattern.source, compiledSource, newData);
 
 			var output = {
 				partialName: partialName,
-				html: result,
+				html: fullLayout,
 				markup: markups
 			};
 
