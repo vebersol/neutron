@@ -1,201 +1,30 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en" <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
-<!--[if IE 9]> <html class="no-js lt-ie10" lang="en"> <![endif]-->
-<!--[if gt IE 9] -->
-<html class="no-js {{ htmlClass }}" lang="ge">
-
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
-
-	<title>{{ title }}</title>
-	<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam">
-
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>{{#if title}}{{title}}{{else}}Title{{/if}}</title>
 
-	<link rel="stylesheet" href="../../css/plugins.css" media="all">
-	<link rel="stylesheet" href="../../css/styles.css" media="all">
-	<link rel="stylesheet" href="../../css/components.css" media="all">
-	<link rel="stylesheet" href="../../css/components2.css" media="all">
-	{{!-- <link rel="stylesheet" href="../../css/patternlab.css" media="all"> --}}
-	<meta name="theme-color" content="#3d4855">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-	{{#if components.infographics }}
-		<link rel="stylesheet" href="../../css/infographics.css" media="all">
-	{{/if }}
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-	{{#if components.financialWeatherSmall }}
-		<link rel="stylesheet" href="../../features/financial-weather/css/styles-small.css" />
-	{{/if }}
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 
-	{{#if components.financialWeather }}
-		<link rel="stylesheet" href="../../features/financial-weather/css/styles-small.css" />
-		<link rel="stylesheet" href="../../features/financial-weather/css/styles.css" />
-	{{/if }}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-	<!--[if lt IE 10]>
-		<script src="../../js/es5-shim.min.js"></script>
-	<![endif]-->
-
-	<link rel="stylesheet" href="../../css/print.css" media="print">
-
-	<script src="../../js/modernizr-latest.js"></script>
-
-	{{#if etfus }}
-		<script src="../../js/webtrekk_v4.js"></script>
-	{{/if }}
-
-	<!-- ENGINE CODE -->
+	<!-- NEUTRON HEADER-->
 	{{> $$engineHeader}}
-	<!-- END ENGINE CODE -->
-
-	<!-- STYLES FOR ENGINE -->
-	<link rel="stylesheet" href="../../css/patternlab.css" media="all">
-	<!-- END STYLES FOR ENGINE -->
+	<!-- /NEUTRON HEADER -->
 </head>
-<body class="{{partialClass}}">
-	{{! yield }}
+<body>
 	{{ $yield }}
 
-
-	{{#if etfus }}
-	<script>
-		window.wt = new webtrekkV3({
-			sitefamily: 'etfus',
-	        product: 'passive',
-	        country: 'us',
-	        language: 'en'
-		});
-	</script>
-	{{/if }}
-
-	{{#unless nojs }}
-	<script src="../../js/application.js"></script>
-
-
-	{{ render "atoms/scripts/script-default" }}
-
-	{{/unless }}
-
-	<!-- ENGINE CODE -->
-	{{> $$engineFooter }}
-	<!-- END ENGINE CODE -->
-
-	{{#if cioview}}
-		<style>
-			.btn-toggle-theme {
-				position: fixed;
-				bottom: 0;
-				right: 0;
-				width: 30px;
-				height: 30px;
-				background-color: rgba(255, 255, 255, 0.5);
-				border: none;
-				border-top: 1px solid #222222;
-				border-left: 1px solid #222222;
-			}
-			.btn-toggle-theme img {
-				max-width: 100%;
-			}
-		</style>
-
-		<button class="btn-toggle-theme contrast">
-			<img src="http://cdn.flaticon.com/svg/28/28538.svg">
-		</button>
-		<button class="btn-toggle-theme default">
-			<img src="http://cdn.flaticon.com/svg/28/28538.svg">
-		</button>
-		<script>
-			function toggleTheme(linkPath, toggleTo) {
-				linkPath.styles.attr('href', toggleTo.styles);
-				linkPath.components.attr('href', toggleTo.components);
-				linkPath.components2.attr('href', toggleTo.components2);
-				linkPath.infographics.attr('href', toggleTo.infographics);
-
-			}
-
-			function getLinksToTheme (theme) {
-				if(theme === 'db') {
-					return {
-						styles: jQuery('link[href="../../css/themes/dbonline/styles.css"]'),
-						components: jQuery('link[href="../../css/themes/dbonline/components.css"]'),
-						components2: jQuery('link[href="../../css/themes/dbonline/components2.css"]'),
-						infographics: jQuery('link[href="../../css/themes/dbonline/infographics.css"]')
-					};
-				}
-				if(theme === 'default') {
-					return {
-						styles: jQuery('link[href="../../css/styles.css"]'),
-						components: jQuery('link[href="../../css/components.css"]'),
-						components2: jQuery('link[href="../../css/components2.css"]'),
-						infographics: jQuery('link[href="../../css/infographics.css"]')
-					};
-				}
-			}
-
-			function getOnlyLink (theme) {
-				if(theme === 'db') {
-					return {
-						styles: "../../css/themes/dbonline/styles.css",
-						components: "../../css/themes/dbonline/components.css",
-						components2: "../../css/themes/dbonline/components2.css",
-						infographics: "../../css/themes/dbonline/infographics.css"
-					};
-				}
-				if(theme === 'default') {
-					return {
-						styles: "../../css/styles.css",
-						components: "../../css/components.css",
-						components2: "../../css/components2.css",
-						infographics: "../../css/infographics.css"
-					};
-				}
-			}
-
-		if(Boolean(sessionStorage.getItem('theme-banking')) === true) {
-			var linkPath = '',
-				toggleTo = '';
-
-			linkPath = getLinksToTheme('default');
-			toggleTo = getOnlyLink('db');
-			jQuery('body').addClass('theme-db-banking');
-			$('[data-highcharts-chart]').html('');
-			if(window.createAllPageCharts) {
-				window.createAllPageCharts('dbdotcom');
-			}
-			toggleTheme(linkPath, toggleTo)
-		}
-
-		jQuery('.btn-toggle-theme.default').click(function() {
-			var linkPath = '',
-				toggleTo = '';
-
-			$('[data-highcharts-chart]').html('');
-
-			if(Boolean(sessionStorage.getItem('theme-banking')) === true) {
-				linkPath = getLinksToTheme('db');
-				toggleTo = getOnlyLink('default');
-				jQuery('body').removeClass('theme-db-banking');
-				delete sessionStorage['theme-banking'];
-				if(window.createAllPageCharts) {
-					window.createAllPageCharts('standard');
-				}
-			}
-			else {
-				linkPath = getLinksToTheme('default');
-				toggleTo = getOnlyLink('db');
-				jQuery('body').addClass('theme-db-banking');
-				sessionStorage['theme-banking'] = true;
-				if(window.createAllPageCharts) {
-					window.createAllPageCharts('dbdotcom');
-				}
-			}
-
-			toggleTheme(linkPath, toggleTo);
-		});
-		</script>
-	{{/if}}
+	<!-- NEUTRON FOOTER -->
+	{{> $$engineFooter}}
+	<!-- /NEUTRON FOOTER -->
 </body>
 </html>
