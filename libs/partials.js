@@ -8,6 +8,7 @@ var u = require('./utilities');
 
 partials = function () {
 	var registeredPartials = [];
+	var hiddenPartials = [];
 
 	function getPartialName(filePath) {
 		var breakPath = filePath.split('patterns' + path.sep);
@@ -42,9 +43,8 @@ partials = function () {
 				var partialName = k.match(/["'](.*?)["']/);
 
 				if (partialName && partialName.length > 1) {
-					// skip hidden patterns
-					if (!isHiddenPartial(partialName[1])) {
-						var name = partialName[1].split(':');
+					var name = partialName[1].split(':');
+					if (_checkHidden(name[0])) {
 						partialNames.push(name[0]);
 					}
 				}
@@ -57,12 +57,21 @@ partials = function () {
 		return pattern.replace(/\//g, '-');
 	}
 
+	function _checkHidden(pattern) {
+		if (hiddenPartials.indexOf(pattern) == -1) {
+			return true;
+		}
+
+		return false;
+	}
+
 	function isHiddenPartial(partialName) {
 		return /(\/_)/.test(partialName);
 	}
 
 	return {
 		registeredPartials: registeredPartials,
+		hiddenPartials: hiddenPartials,
 		getPartialName: getPartialName,
 		getPartialsNames: getPartialsNames,
 		setPartial: setPartial,

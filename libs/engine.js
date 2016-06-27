@@ -283,6 +283,7 @@ var engine = function (cb) {
 
 						if (partials.isHiddenPartial(partialName)) {
 							partialName = partialName.replace('/_', '/');
+							partials.hiddenPartials.push(partialName);
 						}
 
 						partials.setPartial(partialName, source);
