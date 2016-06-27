@@ -9,6 +9,16 @@ var u = require('./utilities');
 
 var layoutHandler = function () {
 	var layouts = {};
+	var header;
+	var footer;
+
+	function init() {
+		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
+		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
+
+		setHelpers();
+		getLayouts();
+	}
 
 	function getLayouts() {
 		fse.walk(settings.paths.src.layouts)
@@ -25,9 +35,14 @@ var layoutHandler = function () {
 	}
 
 	function setHelpers() {
+		// $ for helpers
 		handlebars.registerHelper('$yield', function (partial, data) {
 			return new handlebars.SafeString(this._yield);
 		});
+
+		// $$ for partials
+		handlebars.registerPartial('$$engineHeader', header);
+		handlebars.registerPartial('$$engineFooter', footer);
 	}
 
 	function renderLayout(data, compiledPattern) {
@@ -40,7 +55,7 @@ var layoutHandler = function () {
 		return template(data);
 	}
 
-	setHelpers();
+	init();
 
 	return {
 		getLayouts: getLayouts,

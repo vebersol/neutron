@@ -17,8 +17,6 @@ var helpers = require(path.resolve(settings.paths.core.helpers))(handlebars);
 var engine = function (cb) {
 	'use strict';
 	var globalData = {};
-	var header;
-	var footer;
 	var patternFiles = [];
 	var patternsData = {};
 	var patternsTree = {
@@ -32,12 +30,8 @@ var engine = function (cb) {
 	console.log('\x1b[42m' + 'Start render' + '\x1b[0m');
 
 	function init () {
-		layoutHandler.getLayouts();
 		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
-		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
-		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
 		registerHelpers();
-		registerEnginePartials();
 		cleanPaths();
 		walkPartials();
 	}
@@ -47,11 +41,6 @@ var engine = function (cb) {
 	 * */
 	function registerHelpers() {
 		handlebars.registerHelper(helpers);
-	}
-
-	function registerEnginePartials() {
-		handlebars.registerPartial('engineHeader', header);
-		handlebars.registerPartial('engineFooter', footer);
 	}
 
 	function onEnd() {
@@ -305,6 +294,7 @@ var engine = function (cb) {
 		var indexSource = fse.readFileSync(u.getPath(settings.paths.core.templates, 'index' + settings.fileExtension), settings.encode);
 
 		helpers.resetHelpers();
+
 		var indexTemplate = handlebars.compile(indexSource);
 
 		var indexHTML = indexTemplate({
