@@ -127,8 +127,8 @@ var engine = function (cb) {
 		helpers.resetHelpers();
 		try {
 			var template = handlebars.compile(layout);
-			var markups = markup.addMarkup(pattern.source, newData);
 			var result = getHtml(template, newData);
+			var markups = markup.addMarkup(pattern.source, newData, helpers.doc(partialName));
 
 			var output = {
 				partialName: partialName,
