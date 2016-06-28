@@ -1,4 +1,6 @@
 module.exports = function(Handlebars) {
+	var docCache = {};
+
 	return {
 		testHelper: function (a, b) {
 			return new Handlebars.SafeString('<div>Hello, Im testHelper!</div>')
@@ -7,7 +9,7 @@ module.exports = function(Handlebars) {
 		contentFor(name, options) {
 			var blocks = this._blocks || (this._blocks = {});
 			var block  = blocks[name] || (blocks[name] = []);
-			
+
 			block.push(options.fn(this));
 		},
 
@@ -21,6 +23,14 @@ module.exports = function(Handlebars) {
 			}
 
 			return new Handlebars.SafeString(html);
+		},
+
+		doc(docOrKey, doc) {
+			if(doc) {
+				docCache[this.patternName] = docOrKey;
+				return;
+			}
+			return docCache[docOrKey];
 		},
 
 		resetHelpers() {
