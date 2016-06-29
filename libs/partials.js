@@ -9,6 +9,7 @@ var u = require('./utilities');
 partials = function () {
 	var registeredPartials = [];
 	var reverseDependencies = {};
+	var hiddenPartials = [];
 
 	function getPartialName(filePath) {
 		var breakPath = filePath.split('patterns' + path.sep);
@@ -46,9 +47,9 @@ partials = function () {
 				var partialName = k.match(/["'](.*?)["']/);
 
 				if (partialName && partialName.length > 1) {
-					// skip hidden patterns
-					if (!isHiddenPartial(partialName[1])) {
-						partialNames.push(partialName[1]);
+					var name = partialName[1].split(':');
+					if (_checkHidden(name[0])) {
+						partialNames.push(name[0]);
 					}
 				}
 			});
@@ -58,6 +59,14 @@ partials = function () {
 
 	function getPatternFolder(pattern) {
 		return pattern.replace(/\//g, '-');
+	}
+
+	function _checkHidden(pattern) {
+		if (hiddenPartials.indexOf(pattern) == -1) {
+			return true;
+		}
+
+		return false;
 	}
 
 	function isHiddenPartial(partialName) {
@@ -86,6 +95,7 @@ partials = function () {
 	return {
 		registeredPartials: registeredPartials,
 		reverseDependencies: reverseDependencies,
+		hiddenPartials: hiddenPartials,
 		getPartialName: getPartialName,
 		getPartialsNames: getPartialsNames,
 		setPartial: setPartial,

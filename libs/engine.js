@@ -17,8 +17,6 @@ var helpers = require(path.resolve(settings.paths.core.helpers))(handlebars);
 var engine = function (cb) {
 	'use strict';
 	var globalData = {};
-	var header;
-	var footer;
 	var patternFiles = [];
 	var patternsData = {};
 	var outputCache = [];
@@ -33,12 +31,8 @@ var engine = function (cb) {
 	console.log('\x1b[42m' + 'Start render' + '\x1b[0m');
 
 	function init () {
-		layoutHandler.getLayouts();
 		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
-		header = fse.readFileSync(u.getPath(settings.paths.core.templates, 'header.html'), settings.encode);
-		footer = fse.readFileSync(u.getPath(settings.paths.core.templates, 'footer.html'), settings.encode);
 		registerHelpers();
-		registerEnginePartials();
 		cleanPaths();
 		walkPartials();
 	}
@@ -48,11 +42,6 @@ var engine = function (cb) {
 	 * */
 	function registerHelpers() {
 		handlebars.registerHelper(helpers);
-	}
-
-	function registerEnginePartials() {
-		handlebars.registerPartial('engineHeader', header);
-		handlebars.registerPartial('engineFooter', footer);
 	}
 
 	function onEnd() {
@@ -126,7 +115,6 @@ var engine = function (cb) {
 		var newData = partialData.data;
 		var partialsList = partialData.partials;
 		var partialName = partials.getPartialName(pattern.file.path);
-		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
 		newData.cssTheme = settings.cssTheme;
 		newData.partialClass = partials.getPatternFolder(partialName);
@@ -136,13 +124,15 @@ var engine = function (cb) {
 
 		helpers.resetHelpers();
 		try {
-			var template = handlebars.compile(layout);
-			var markups = markup.addMarkup(pattern.source, newData);
-			var result = getHtml(template, newData);
+			var source = handlebars.compile(pattern.source);
+			var compiledSource = getHtml(source, newData);
+
+			var fullLayout = layoutHandler.renderLayout(newData, compiledSource);
+			var markups = markup.addMarkup(pattern.source, compiledSource, newData);
 
 			var output = {
 				partialName: partialName,
-				html: result,
+				html: fullLayout,
 				markup: markups
 			};
 
@@ -154,7 +144,7 @@ var engine = function (cb) {
 		} catch(e) {
 			u.log('Error in ' + partialName, 'error');
 			console.log(e.message)
-			process.exit()
+			process.exit();
 		}
 	}
 
@@ -304,6 +294,7 @@ var engine = function (cb) {
 
 						if (partials.isHiddenPartial(partialName)) {
 							partialName = partialName.replace('/_', '/');
+							partials.hiddenPartials.push(partialName);
 						}
 
 						partials.setPartial(partialName, source);
@@ -324,6 +315,7 @@ var engine = function (cb) {
 		var indexSource = fse.readFileSync(u.getPath(settings.paths.core.templates, 'index' + settings.fileExtension), settings.encode);
 
 		helpers.resetHelpers();
+
 		var indexTemplate = handlebars.compile(indexSource);
 
 		var indexHTML = indexTemplate({
@@ -336,6 +328,11 @@ var engine = function (cb) {
 		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}
 
+	function isTemplate(partial) {
+		var regex = /^(template)/;
+		return regex.test(partial);
+	}
+
 	function setRenderHelper() {
 		handlebars.registerHelper('render', function (partial, params) {
 			var data;
@@ -343,7 +340,7 @@ var engine = function (cb) {
 			var partialName = partialArr[0];
 			var styleModifier = partialArr.length > 1 ? partialArr[1] : null;
 			var hasHash = params.hasOwnProperty('hash');
-			var partialData = patternsData.hasOwnProperty(partialName) ? patternsData[partialName] : {};
+			var partialData = !isTemplate(partial) && patternsData.hasOwnProperty(partialName) ? patternsData[partialName] : {};
 
 			var source = '{{> '+ partialName + '}}';
 
@@ -354,7 +351,6 @@ var engine = function (cb) {
 			if (styleModifier) {
 				data.styleModifier = styleModifier;
 			}
-
 
 			var template = handlebars.compile(source);
 			var result = template(data);

@@ -2,6 +2,7 @@
 @import "prism";
 
 $prefix: neutron;
+$z-index: 99999;
 
 body.#{$prefix}-off-canvas {
 	@include prefix(transition, left 0.5s ease-out);
@@ -18,9 +19,9 @@ body.#{$prefix}-off-canvas {
 }
 
 ##{$prefix} {
-	z-index: 9999999;
+	z-index: $z-index;
 
-	* {
+	*:not(pre > *) {
 		font-size: 16px;
 		font-family: Arial, sans-serif;
 	}
@@ -41,7 +42,7 @@ body.#{$prefix}-off-canvas {
 		left: $menuWidth * -1;
 		height: 100%;
 		width: 0px;
-		z-index: 1;
+		z-index: $z-index;
 
 		@include prefix(transition, left 0.5s ease-out);
 
@@ -56,6 +57,8 @@ body.#{$prefix}-off-canvas {
 
 	.#{$prefix}-code-frame,
 	.#{$prefix}-menu {
+		z-index: $z-index;
+
 		* {
 			@include prefix(box-sizing, border-box);
 		}
@@ -79,7 +82,7 @@ body.#{$prefix}-off-canvas {
 		color: $txtcolor;
 		text-align: center;
 		background-color: $bgcolor;
-		z-index: 2;
+		z-index: $z-index;
 		text-decoration: none !important;
 
 		@include prefix(opacity, 0.8);
@@ -261,7 +264,7 @@ body.#{$prefix}-off-canvas {
 		position: absolute;
 		top: -$buttonSize * 2;
 		left: 0;
-		z-index: 3;
+		z-index: $z-index + 7;
 		width: 100%;
 		@include prefix(transition, top 0.5s ease-out);
 
@@ -307,7 +310,7 @@ body.#{$prefix}-off-canvas {
 		overflow-x: hidden;
 		overflow-y: auto;
 		padding: 20px;
-		z-index: 1;
+		z-index: $z-index;
 		color: $code-frame-color;
 		@include prefix(transition, bottom 0.5s ease-out);
 		@include prefix(box-sizing, border-box);
@@ -401,7 +404,7 @@ body.#{$prefix}-off-canvas {
 
 	.#{$prefix}-lightbox {
 		font-family: Arial, sans-serif;
-		z-index: 999999;
+		z-index: $z-index + 10;
 
 		&--content {
 			position: fixed;
@@ -413,7 +416,7 @@ body.#{$prefix}-off-canvas {
 			background-color: $bgcolor;
 			padding: 10px;
 			@include prefix(transition, top 1s ease-out);
-			z-index: 4;
+			z-index: $z-index + 11;
 			@include prefix(box-sizing, border-box);
 			color: $txtcolor;
 
@@ -446,7 +449,7 @@ body.#{$prefix}-off-canvas {
 			width: 0;
 			height: 0;
 			background-color: $lightbox-overlay-bg;
-			z-index: 3;
+			z-index: $z-index + 9;
 			@include prefix(transition, opacity 1s ease-out);
 			opacity: 0;
 		}
