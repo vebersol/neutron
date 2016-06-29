@@ -2,7 +2,7 @@
 	"fileExtension": ".hbs",
 	"encode": "utf8",
 	"menuBehavior": "off-canvas",
-	"cssTheme": "bluewood",
+	"cssTheme": "default",
 	"defaultLayoutName": "application",
 	"paths": {
 		"core": {
@@ -11,7 +11,7 @@
 			"helpers": "./core/modules/helpers/"
 		},
 		"libs": {
-			"root": "./libs/"
+			"root": "./core/libs/"
 		},
 		"src": {
 			"root": "./src/",

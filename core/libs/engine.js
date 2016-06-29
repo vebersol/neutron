@@ -5,7 +5,7 @@ var handlebars = require('handlebars');
 var object_merge = require('object-merge');
 var sort_object = require('sort-object');
 
-var settings = require('../neutron.json');
+var settings = require('../../neutron.json');
 
 var u = require('./utilities');
 var partials = require('./partials')();

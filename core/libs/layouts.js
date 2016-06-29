@@ -3,7 +3,7 @@ var path = require('path');
 var util = require('util');
 var handlebars = require('handlebars');
 
-var settings = require('../neutron.json');
+var settings = require('../../neutron.json');
 
 var u = require('./utilities');
 
@@ -30,6 +30,7 @@ var layoutHandler = function () {
 					});
 				}
 			});
+
 
 			return true;
 	}

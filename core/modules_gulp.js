@@ -8,7 +8,7 @@ module.exports = function(gulp) {
 	var template = require('gulp-template-compile');
 
 	var settings = require('../neutron.json');
-	var u = require('../libs/utilities');
+	var u = require('./libs/utilities');
 
 	gulp.task('sass:navigation', function() {
 		return gulp.src(u.getPath(settings.paths.core.root, 'modules/navigation/scss/*.scss'))

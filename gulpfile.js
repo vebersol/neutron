@@ -7,7 +7,7 @@ var batch = require('gulp-batch');
 var browserSync = require('browser-sync').create();
 var del = require('del');
 var settings = require('./neutron.json');
-var u = require('./libs/utilities');
+var u = require('./core/libs/utilities');
 
 require('gulp-load')(gulp);
 
