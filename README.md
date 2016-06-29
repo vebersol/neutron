@@ -25,6 +25,15 @@ After successfully load your own implementation, just run:
 
 It will compile your patterns, copy your assets and automatically load a [browsersync](https://www.browsersync.io/) server in *http://localhost:3000*
 
+## Tips
+
+Check the items below to understand **Neutron's** functionalities and structure.
+
+* Write patterns - TBD
+* Document your patterns - TBD
+* Project structure - TBD
+* Keyboard shortcuts - TBD
+
 ### Main gulp tasks
 
 * **engine**: Renders your patterns
@@ -47,8 +56,8 @@ We'd love to have you as a contributor! Before contribue, read the blog post [10
 ## Authors
 
 * **André Dias** - *Support in navigation module* - [andrehNSFW](https://github.com/andrehNSFW)
-* **Mateus Vahl** - *Support in core* - [andrehNSFW](https://github.com/andrehNSFW)
-* **Vinícius Ebersol** - *Initial work* - [mateuspv](https://github.com/mateuspv)
+* **Mateus Vahl** - *Support in core* - [mateuspv](https://github.com/mateuspv)
+* **Vinícius Ebersol** - *Initial work* - [vebersol](https://github.com/vebersol)
 
 See also the list of [contributors](https://github.com/vebersol/neutron/graphs/contributors) and [members](https://github.com/vebersol/neutron/network/members) who participated in this project.
 
