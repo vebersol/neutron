@@ -322,7 +322,7 @@ body.#{$prefix}-off-canvas {
 				color: $dependencies-list-color;
 			}
 
-			##{$prefix}-dependencies-list a {
+			p a {
 				text-decoration: underline;
 			}
 		}

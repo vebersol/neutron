@@ -21,6 +21,7 @@ var engine = function (cb) {
 	var footer;
 	var patternFiles = [];
 	var patternsData = {};
+	var outputCache = [];
 	var patternsTree = {
 		atoms: {},
 		molecules: {},
@@ -121,10 +122,10 @@ var engine = function (cb) {
 	}
 
 	function handlePattern(pattern, end) {
-		var partialData = partials.getPartialsData(pattern.source, pattern.data ? pattern.data : {});
+		var partialData = partials.getPartialsData(pattern);
 		var newData = partialData.data;
 		var partialsList = partialData.partials;
-		var partialName = partials.getPartialName(pattern.file.path)
+		var partialName = partials.getPartialName(pattern.file.path);
 		var layout = layoutHandler.addLayout(pattern.source, newData.layout);
 
 		newData.cssTheme = settings.cssTheme;
@@ -145,13 +146,33 @@ var engine = function (cb) {
 				markup: markups
 			};
 
-			addToTree(partialName, end);
-			renderFile(output, end);
+			outputCache.push(output);
+
+			if (end) {
+				saveToDisk();
+			}
 		} catch(e) {
 			u.log('Error in ' + partialName, 'error');
 			console.log(e.message)
 			process.exit()
 		}
+	}
+
+	function saveToDisk() {
+		outputCache.forEach(function (file, i) {
+			var end = i === (outputCache.length - 1);
+
+			if (partials.reverseDependencies.hasOwnProperty(file.partialName)) {
+				var dependenciesList = partials.reverseDependencies[file.partialName]
+					.sort(function (a, b) {
+						return a.partial > b.partial;
+					});
+
+				file.html = file.html.replace('reverseDependencies: []', 'reverseDependencies: ' + JSON.stringify(dependenciesList) + '');
+			}
+			addToTree(file.partialName, end);
+			renderFile(file, end);
+		});
 	}
 
 	function addEngineSnippets(partialsArr) {

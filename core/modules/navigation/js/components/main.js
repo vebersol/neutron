@@ -21,18 +21,30 @@ Main.prototype = {
 
 	buildDependenciesList: function () {
 		var dependencies = patternData.i.dependencies;
-		var target = Zepto(pcn('#dependencies-list'));
+		var dependenciesTarget = Zepto(pcn('#dependencies-list'));
+		var reverseDependencies = patternData.i.reverseDependencies;
+		var reverseDependenciesTarget = Zepto(pcn('#reverse-dependencies-list'));
+
 		var d = [];
+		var rd = [];
 
 		if (dependencies.length === 0) {
-			return Zepto(pcn('.code-frame--patterns')).hide();
+			dependenciesTarget.hide();
+		} else {
+			for (var i = 0; i < dependencies.length; i++) {
+				d.push('<a href="' + PATTERNS_PATH + dependencies[i].path + '">' + dependencies[i].partial + '</a>');
+			}
 		}
 
-		for (var i = 0; i < dependencies.length; i++) {
-			dependencies[i]
-			d.push('<a href="' + PATTERNS_PATH + dependencies[i].path + '">' + dependencies[i].partial + '</a>');
+		if (reverseDependencies.length === 0) {
+			reverseDependenciesTarget.hide();
+		} else {
+			for (var i = 0; i < reverseDependencies.length; i++) {
+				rd.push('<a href="' + PATTERNS_PATH + reverseDependencies[i].path + '">' + reverseDependencies[i].partial + '</a>');
+			}
 		}
 
-		target.append(d.join(', '));
+		dependenciesTarget.find('span').append(d.join(', '));
+		reverseDependenciesTarget.find('span').append(rd.join(', '));
 	}
 }

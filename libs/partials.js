@@ -8,6 +8,7 @@ var u = require('./utilities');
 
 partials = function () {
 	var registeredPartials = [];
+	var reverseDependencies = {};
 
 	function getPartialName(filePath) {
 		var breakPath = filePath.split('patterns' + path.sep);
@@ -20,17 +21,20 @@ partials = function () {
 		handlebars.registerPartial(name, source);
 	}
 
-	function getPartialsData(source, data) {
+	function getPartialsData(pattern) {
 		var regex = /{{\s?(>|render)(.*?)}}/g,
-			match = source.match(regex),
-			newData = data;
+			match = pattern.source.match(regex),
+			newData = pattern.data ? pattern.data : {};
 
-		var partialNames = getPartialsNames(match);
-		var totalPartials = partialNames.length;
+		var partialName = getPartialName(pattern.file.path)
+		var dependenciesList = getPartialsNames(match);
+		var cleanDependenciesList = dependenciesList.removeDuplicates();
+
+		setReverseDependence(partialName, cleanDependenciesList);
 
 		return {
 			data: newData,
-			partials: partialNames.removeDuplicates()
+			partials: cleanDependenciesList
 		};
 	}
 
@@ -60,8 +64,28 @@ partials = function () {
 		return /(\/_)/.test(partialName);
 	}
 
+	function setReverseDependence(partial, dependencies) {
+		var url = getPatternFolder(partial) + '/index.html';
+
+		if (dependencies.length > 0) {
+			dependencies.forEach(function (dependency) {
+				var partialData = {
+					partial: partial,
+					path: url
+				}
+				if (reverseDependencies.hasOwnProperty(dependency)) {
+					reverseDependencies[dependency].push(partialData);
+				}
+				else {
+					reverseDependencies[dependency] = [partialData];
+				}
+			});
+		}
+	}
+
 	return {
 		registeredPartials: registeredPartials,
+		reverseDependencies: reverseDependencies,
 		getPartialName: getPartialName,
 		getPartialsNames: getPartialsNames,
 		setPartial: setPartial,
