@@ -2,7 +2,7 @@
 	"fileExtension": ".hbs",
 	"encode": "utf8",
 	"menuBehavior": "off-canvas",
-	"cssTheme": "default",
+	"cssTheme": "bluewood",
 	"defaultLayoutName": "application",
 	"paths": {
 		"core": {
