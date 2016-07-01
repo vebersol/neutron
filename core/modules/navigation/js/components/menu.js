@@ -185,9 +185,11 @@ Menu.prototype = {
 		Zepto(pcn('.menu--theme__select select')).on('change', function () {
 			var el = Zepto(this),
 				value = el.val(),
-				stylesheet = Zepto(pcn('.theme-stylesheet'));
+				stylesheet = Zepto(pcn('.theme-stylesheet')),
+				path = window.location.pathname,
+				assetsPath = (path === '/') ? '' : '../../';
 
-			stylesheet.attr('href', 'styleguide/modules/navigation/css/'+value+'.css');
+			stylesheet.attr('href', assetsPath+'styleguide/modules/navigation/css/'+value+'.css');
 		});
 
 		Zepto(pcn('.menu--theme__select select')).on('focus', function () {
