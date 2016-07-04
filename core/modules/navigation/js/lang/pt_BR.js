@@ -1,0 +1,22 @@
+var I18n = {
+	"neutron_options": "Opções do Neutron",
+	"neutron_options_description": "Alternar Opções do Neutron",
+	"search_placeholder": "Buscar Patterns",
+	"default": "Padrão",
+	"close": "Fechar",
+	"search": "Buscar",
+	"search_description": "Buscar patterns",
+	"code_frame": "Frame de códigos",
+	"code_frame_description": "Abrir frame de códigos",
+	"qr_code": "QR Code",
+	"qr_code_description": "Exibir QR Code",
+	"themes": "Temas",
+	"themes_description": "Selecione o tema do Neutron",
+	"dependencies": "Dependências",
+	"reverse_dependencies": "Dependências reversas",
+	"html": "HTML",
+	"handlebars": "Handlebars",
+	"documentation": "Documentação",
+	"export_url": "Exportar URL",
+	"export_message": "Exportando a seguinte URL como QR Code"
+}

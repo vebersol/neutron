@@ -1,0 +1,22 @@
+var I18n = {
+	"neutron_options": "Neutron options",
+	"neutron_options_description": "Toggle Neutron options",
+	"search_placeholder": "Search patterns",
+	"default": "Default",
+	"close": "Close",
+	"search": "Search",
+	"search_description": "Search patterns",
+	"code_frame": "Code frame",
+	"code_frame_description": "Open code frame",
+	"qr_code": "QR Code",
+	"qr_code_description": "Show QR Code",
+	"themes": "Themes",
+	"themes_description": "Select Neutron Theme",
+	"dependencies": "Dependencies",
+	"reverse_dependencies": "Reverse Dependencies",
+	"html": "HTML",
+	"handlebars": "Handlebars",
+	"documentation": "Documentation",
+	"export_url": "Export URL",
+	"export_message": "Exporting the following URL as QR Code"
+}

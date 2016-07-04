@@ -1,6 +1,6 @@
 <div class="neutron-sticky-nav">
-	<a href="javascript:;" class="neutron-button--start" title="Open neutron options">
-		<span>Neutron Options</span>
+	<a href="javascript:;" class="neutron-button--start" title="{{neutron_options_description}}">
+		<span>{{neutron_options}}</span>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
 			<path d="M30.2,18.3l12.7,20.4c-0.9,0.9-1.8,1.9-2.7,2.8c-1.8,1.8-3.6,3.5-5.4,5.1L22,26c0.5-0.5,0.9-0.9,1.4-1.4
 			C25.6,22.4,27.9,20.2,30.2,18.3z M8.6,23.5c1.7,2.6,3.7,5.4,5.9,8.2c1.7-2.1,3.6-4.2,5.6-6.3v-2.3l0.9,1.4c0.4-0.4,0.7-0.7,1.1-1.1
@@ -18,7 +18,7 @@
 	<div class="neutron-menu">
 		<div class="neutron-menu--search">
 			<div class="neutron-menu--search__input">
-				<input type="text" placeholder="Search patterns">
+				<input type="text" placeholder="{{search_placeholder}}">
 				<a href="javascript:;" class="neutron-menu--search__clear">&#10006;</a>
 			</div>
 		</div>
@@ -26,7 +26,7 @@
 		<div class="neutron-menu--theme">
 			<div class="neutron-menu--theme__select">
 				<select>
-					<option value="default">Default</option>
+					<option value="default">{{default}}</option>
 					<option value="bluewood">BlueWood</option>
 					<option value="db">DB</option>
 				</select>
@@ -34,8 +34,8 @@
 		</div>
 
 		<div class="neutron-navigation">
-			<a href="javascript:;" class="neutron-button--search" title="Search pattern">
-				<span>Search</span>
+			<a href="javascript:;" class="neutron-button--search" title="{{search_description}}">
+				<span>{{search}}</span>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
 					<path d="M44.3,27.1c0-4.7-1.7-8.8-5.1-12.2c-3.4-3.4-7.4-5.1-12.2-5.1s-8.8,1.7-12.2,5.1s-5.1,7.4-5.1,12.2
 					s1.7,8.8,5.1,12.2s7.4,5.1,12.2,5.1s8.8-1.7,12.2-5.1C42.6,35.9,44.3,31.8,44.3,27.1z M64,59.1c0,1.3-0.5,2.5-1.5,3.5
@@ -45,22 +45,22 @@
 				</svg>
 
 			</a>
-			<a href="javascript:;" class="neutron-button--code" title="Open code frame">
-				<span>Code</span>
+			<a href="javascript:;" class="neutron-button--code" title="{{code_frame_description}}">
+				<span>{{code_frame}}</span>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
 					<path d="M20,47.9l-1.7,1.7C18,49.9,17.8,50,17.5,50s-0.6-0.1-0.8-0.3L0.3,33.4C0.1,33.1,0,32.9,0,32.6
 					s0.1-0.6,0.3-0.8l16.3-16.3c0.2-0.2,0.5-0.3,0.8-0.3s0.6,0.1,0.8,0.3l1.7,1.7c0.2,0.2,0.3,0.5,0.3,0.8s-0.1,0.6-0.3,0.8L6.3,32.6 L20,46.3c0.2,0.2,0.3,0.5,0.3,0.8C20.4,47.4,20.2,47.7,20,47.9z M40.7,10.6l-13,45.1c-0.1,0.3-0.3,0.5-0.5,0.7 c-0.3,0.2-0.5,0.2-0.8,0.1l-2.2-0.6c-0.3-0.1-0.5-0.3-0.7-0.5c-0.2-0.3-0.2-0.6-0.1-0.9l13-45.1c0.1-0.3,0.3-0.5,0.5-0.7 s0.5-0.2,0.8-0.1l2.2,0.6c0.3,0.1,0.5,0.3,0.7,0.5S40.8,10.3,40.7,10.6z M63.7,33.4L47.4,49.7c-0.2,0.2-0.5,0.3-0.8,0.3 c-0.3,0-0.6-0.1-0.8-0.3L44,47.9c-0.2-0.2-0.3-0.5-0.3-0.8c0-0.3,0.1-0.6,0.3-0.8l13.7-13.7L44,18.8c-0.2-0.2-0.3-0.5-0.3-0.8 s0.1-0.6,0.3-0.8l1.7-1.7c0.2-0.2,0.5-0.3,0.8-0.3c0.3,0,0.6,0.1,0.8,0.3l16.3,16.3c0.2,0.2,0.3,0.5,0.3,0.8S63.9,33.1,63.7,33.4z"/>
 				</svg>
 			</a>
-			<a href="javascript:;" class="neutron-button--qr" title="Show QR Code">
-				<span>QR Code</span>
+			<a href="javascript:;" class="neutron-button--qr" title="{{qr_code_description}}">
+				<span>{{qr_code}}</span>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
 					<path d="M17.5,47v5.8h-5.8V47H17.5z M17.5,12.1v5.8h-5.8v-5.8H17.5z M52.4,12.1v5.8h-5.8v-5.8H52.4z
 					M5.8,58.6h17.5V41.2H5.8V58.6z M5.8,23.7h17.5V6.2H5.8V23.7z M40.7,23.7h17.5V6.2H40.7V23.7z M29.1,35.3v29.1H0V35.3H29.1z M52.4,58.6v5.8h-5.8v-5.8H52.4z M64,58.6v5.8h-5.8v-5.8H64z M64,35.3v17.5H46.5V47h-5.8v17.5h-5.8V35.3h17.5v5.8h5.8v-5.8H64z M29.1,0.4v29.1H0V0.4H29.1z M64,0.4v29.1H34.9V0.4H64z"/>
 				</svg>
 			</a>
-			<a href="javascript:;" class="neutron-button--theme" title="Select Neutron Theme">
-				<span>Themes</span>
+			<a href="javascript:;" class="neutron-button--theme" title="{{themes_description}}">
+				<span>{{themes}}</span>
 				<svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
 					<path d="M1615 0q70 0 122.5 46.5t52.5 116.5q0 63-45 151-332 629-465 752-97 91-218 91-126 0-216.5-92.5t-90.5-219.5q0-128 92-212l638-579q59-54 130-54zm-909 1034q39 76 106.5 130t150.5 76l1 71q4 213-129.5 347t-348.5 134q-123 0-218-46.5t-152.5-127.5-86.5-183-29-220q7 5 41 30t62 44.5 59 36.5 46 17q41 0 55-37 25-66 57.5-112.5t69.5-76 88-47.5 103-25.5 125-10.5z"/>
 				</svg>
@@ -74,20 +74,20 @@
 <div class="neutron-code-frame">
 	<div class="neutron-code-frame--close">
 		<a href="javascript:;" class="neutron-button--close__link">
-			<span>Close</span>
+			<span>{{close}}</span>
 			<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"/></svg>
 		</a>
 	</div>
 	<div class="neutron-code-frame--patterns">
-		<p id="neutron-dependencies-list">Dependencies: <span></span></p>
-		<p id="neutron-reverse-dependencies-list">Reverse Dependencies: <span></span></p>
+		<p id="neutron-dependencies-list">{{dependencies}}: <span></span></p>
+		<p id="neutron-reverse-dependencies-list">{{reverse_dependencies}}: <span></span></p>
 	</div>
 
 	<div class="neutron-code">
 		<ul class="neutron-code--nav">
-			<li class="neutron-code--item"><a href="#html">HTML</a></li>
-			<li class="neutron-code--item"><a href="#handlebars">Handlebars</a></li>
-			<li class="neutron-code--item"><a href="#documentation">Documentation</a></li>
+			<li class="neutron-code--item"><a href="#html">{{html}}</a></li>
+			<li class="neutron-code--item"><a href="#handlebars">{{handlebars}}</a></li>
+			<li class="neutron-code--item"><a href="#documentation">{{documentation}}</a></li>
 		</ul>
 	</div>
 </div>
@@ -95,11 +95,11 @@
 <div class="neutron-lightbox neutron-qr-code-wrapper">
 	<div class="neutron-lightbox--content neutron-qr-code-frame">
 		<a href="javascript:;" class="neutron-button--close__link">
-			<span>Close</span>
+			<span>{{close}}</span>
 			<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"/></svg>
 		</a>
-		<h1 class="neutron-lightbox--content__headline">Export URL</h1>
-		<p class="neutron-lightbox--content__text">Exporting the following URL as QR Code: <span></span></p>
+		<h1 class="neutron-lightbox--content__headline">{{export_url}}</h1>
+		<p class="neutron-lightbox--content__text">{{export_message}}: <span></span></p>
 		<div id="qrcode"></div>
 	</div>
 </div>

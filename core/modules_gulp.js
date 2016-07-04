@@ -19,10 +19,12 @@ module.exports = function(gulp) {
 	});
 
 	gulp.task('js:navigation', ['jstemplate'], function() {
+		var language = settings.language || 'en';
 		var dest = u.getPath(settings.paths.src.styleguides, 'modules/navigation/js');
 
 		return gulp.src([
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/templates.js'),
+				u.getPath(settings.paths.core.root, 'modules/navigation/js/lang/'+ language + '.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/libs/**/*.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/components/**/*.js'),
 				u.getPath(settings.paths.core.root, 'modules/navigation/js/app.js')

@@ -10,11 +10,10 @@ Main.prototype = {
 	},
 
 	addPatternsInfo: function () {
-		var parent = this;
-		var template = NADTJST['index.html']();
+		var template = this.getTemplate();
 
-		parent.wrapper.append(template);
-		parent.buildDependenciesList();
+		this.wrapper.append(template);
+		this.buildDependenciesList();
 
 		new Menu();
 	},
@@ -46,5 +45,25 @@ Main.prototype = {
 
 		dependenciesTarget.find('span').append(d.join(', '));
 		reverseDependenciesTarget.find('span').append(rd.join(', '));
+	},
+
+	getTemplate: function () {
+		var template = this.translate(NADTJST['index.html']());
+
+		return template;
+	},
+
+	translate: function (source) {
+		for (var t in I18n) {
+			var str = '({{' + t + '}})';
+			var regex = new RegExp(str, "g");
+			var match = source.match(regex);
+
+			if (match) {
+				source = source.replace(regex, I18n[t]);
+			}
+		}
+
+		return source;
 	}
 }

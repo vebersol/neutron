@@ -1,6 +1,7 @@
 {
 	"fileExtension": ".hbs",
 	"encode": "utf8",
+	"language": "en",
 	"menuBehavior": "off-canvas",
 	"cssTheme": "default",
 	"defaultLayoutName": "application",

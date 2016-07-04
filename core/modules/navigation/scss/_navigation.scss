@@ -21,7 +21,7 @@ body.#{$prefix}-off-canvas {
 ##{$prefix} {
 	z-index: $z-index;
 
-	* {
+	*:not(.#{$prefix}-code--list > *) {
 		font-size: 14px;
 		font-family: Arial, sans-serif;
 	}
