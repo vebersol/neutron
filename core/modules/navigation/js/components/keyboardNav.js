@@ -9,7 +9,6 @@ KeyboardNav.prototype = {
 		this.buttons = buttons;
 		this.bar = Zepto(pcn('.sticky-nav'));
 		this.startBtn = Zepto(pcn('.button--start'));
-		this.menuBtn = Zepto(pcn('.button--menu'));
 		this.infoBtn = Zepto(pcn('.button--code'));
 		this.qrCodeBtn = Zepto(pcn('.button--qr'));
 		this.searchBtn = Zepto(pcn('.button--search'));
@@ -23,9 +22,7 @@ KeyboardNav.prototype = {
 		if (!Zepto(ev.target).is('input')) {
 			ev.preventDefault();
 
-			if (this.isKey(ev, 'm')) {
-				this.openMenu();
-			} else if (this.isKey(ev, 'c')) {
+			if (this.isKey(ev, 'c')) {
 				this.openInfoBar();
 			} else if (this.isKey(ev, 'q')) {
 				this.openQRCodeBar();
@@ -39,13 +36,6 @@ KeyboardNav.prototype = {
 
 	isKey: function (ev, key) {
 		return (ev.code == 'Key' + key.toUpperCase() || ev.key == key)
-	},
-
-	openMenu: function () {
-		this.menuBtn = Zepto(pcn('.button--menu'));
-
-		this.menuBtn.click();
-		this.checkStartBtn();
 	},
 
 	openInfoBar: function () {
