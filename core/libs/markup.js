@@ -12,11 +12,11 @@ var markup = function () {
 		html.push('<ul class="neutron-code--list">');
 
 		html.push('<li data-target="#html"><pre><code class="language-html">');
-		html.push(htmlEscape(compiled))
+		html.push(htmlEscape(compiled));
 		html.push('</code></pre></li>');
 
 		html.push('<li data-target="#handlebars"><pre><code class="language-handlebars">');
-		html.push(htmlEscape(source))
+		html.push(htmlEscape(source));
 		html.push('</code></pre></li>');
 
 		if (documentation) {
