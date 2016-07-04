@@ -20,6 +20,4 @@ function pcn(str) {
 	return prefixed;
 }
 
-window.onload = function () {
-	new Main();
-}
+new Main();
