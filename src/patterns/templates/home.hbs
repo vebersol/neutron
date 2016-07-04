@@ -3,11 +3,7 @@
 <div class="container">
 	{{ render "organisms/highlights/jumbotron" }}
 
-	<div class="row">
-		{{#each thumbnails}}
-			{{ render "molecules/blocks/thumbnail" }}
-		{{/each}}
-	</div>
+	{{ render "molecules/blocks/thumbnail" }}
 
 	<div class="row">
 		{{ render "organisms/blocks/media-box" collection=news boxTitle="News" }}

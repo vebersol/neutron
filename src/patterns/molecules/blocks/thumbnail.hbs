@@ -1,14 +1,22 @@
-<div class="col-sm-4 col-xs-12">
-	<div class="thumbnail">
-		{{ render "atoms/media/image" }}
-		<div class="caption">
-			{{#with headline}}
-			{{ render "atoms/text/headline" level=3 }}
-			{{/with}}
-			<p>{{text}}</p>
-			<p>
-				{{ render "atoms/text/link:btn btn-default" text="See more" url="#" }}
-			</p>
+<div class="row">
+	{{#each thumbnails }}
+	<div class="col-sm-4 col-xs-12">
+		<div class="thumbnail">
+			{{ render "atoms/media/image" }}
+			<div class="caption">
+				{{#with headline}}
+					{{ render "atoms/text/headline" level=3 }}
+				{{/with}}
+
+				<p>{{text}}</p>
+
+				{{#with button}}
+				<p>
+					{{ render "atoms/text/link" }}
+				</p>
+				{{/with}}
+			</div>
 		</div>
 	</div>
+	{{/each}}
 </div>

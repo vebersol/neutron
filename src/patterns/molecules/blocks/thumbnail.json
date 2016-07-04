@@ -1,4 +1,47 @@
 {
-	"headline": "Thumbnail Headline",
-	"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur odio praesentium, alias corrupti placeat recusandae!"
+	"thumbnails": [{
+		"headline": {
+			"text": "Proin vehicula ipsum quis"
+		},
+		"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur odio praesentium, alias corrupti placeat recusandae!",
+		"img": {
+			"src": "http://placehold.it/500x250",
+			"alt": "Image description"
+		},
+		"button": {
+			"text": "See more",
+			"url": "#see-more",
+			"styleModifier": "btn btn-default"
+		}
+	},
+	{
+		"headline": {
+			"text": "Phasellus quis enim ac ligula"
+		},
+		"text": "Vivamus nisl dolor, dictum non diam a, euismod gravida dolor. Vestibulum placerat tortor odio, egestas.",
+		"img": {
+			"src": "http://placehold.it/500x250",
+			"alt": "Image description"
+		},
+		"button": {
+			"text": "Visit",
+			"url": "http://github.com/vebersol/neutron",
+			"styleModifier": "btn btn-info"
+		}
+	},
+	{
+		"headline": {
+			"text": "Donec commodo nisl felis"
+		},
+		"text": "Nunc fringilla ante eget tempor venenatis. Morbi fringilla nibh at tellus mattis dignissim. Pellentesque augue.",
+		"img": {
+			"src": "http://placehold.it/500x250",
+			"alt": "Image description"
+		},
+		"button": {
+			"text": "Expand",
+			"url": "javascript:;",
+			"styleModifier": "btn btn-danger"
+		}
+	}]
 }

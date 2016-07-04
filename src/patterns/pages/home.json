@@ -1,26 +1,47 @@
 {
 	"thumbnails": [{
-		"headline": "Lorem ipsum dolor sit amet, consectetur",
+		"headline": {
+			"text": "Lorem ipsum dolor sit amet, consectetur 1"
+		},
 		"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit id placeat nesciunt, veritatis dignissimos amet.",
 		"img": {
-			"src": "http://lorempixel.com/242/200?1",
+			"src": "http://lorempixel.com/500/250?1",
 			"alt": "Lorem ipsum dolor sit amet."
+		},
+		"button": {
+			"text": "Read",
+			"url": "../../patterns/pages-article/index.html",
+			"styleModifier": "btn btn-info"
 		}
 	},
 	{
-		"headline": "Lorem ipsum dolor sit amet, consectetur",
+		"headline": {
+			"text": "Lorem ipsum dolor sit amet, consectetur"
+		},
 		"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit id placeat nesciunt, veritatis dignissimos amet.",
 		"img": {
-			"src": "http://lorempixel.com/242/200?2",
+			"src": "http://lorempixel.com/500/250?2",
 			"alt": "Lorem ipsum dolor sit amet."
+		},
+		"button": {
+			"text": "Read",
+			"url": "../../patterns/pages-article/index.html",
+			"styleModifier": "btn btn-info"
 		}
 	},
 	{
-		"headline": "Lorem ipsum dolor sit amet, consectetur",
+		"headline": {
+			"text": "Lorem ipsum dolor sit amet, consectetur"
+		},
 		"text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit id placeat nesciunt, veritatis dignissimos amet.",
 		"img": {
-			"src": "http://lorempixel.com/242/200?3",
+			"src": "http://lorempixel.com/500/250?3",
 			"alt": "Lorem ipsum dolor sit amet."
+		},
+		"button": {
+			"text": "Read",
+			"url": "../../patterns/pages-article/index.html",
+			"styleModifier": "btn btn-info"
 		}
 	}],
 	"twitter": [{
