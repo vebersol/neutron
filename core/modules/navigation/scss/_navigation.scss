@@ -101,7 +101,7 @@ body.#{$prefix}-off-canvas {
 			@include prefix(opacity, 1);
 		}
 
-		svg path {
+		.#{$prefix}-svg-icon {
 			fill: $txtcolor;
 		}
 
@@ -123,8 +123,9 @@ body.#{$prefix}-off-canvas {
 			margin-left: 2px;
 			text-decoration: none !important;
 			color: $txtcolor;
+			outline: none;
 
-			svg path {
+			.#{$prefix}-svg-icon {
 				fill: $txtcolor;
 			}
 
@@ -134,8 +135,14 @@ body.#{$prefix}-off-canvas {
 
 			&.disabled {
 				cursor: default;
-				svg path {
+				.#{$prefix}-svg-icon {
 					fill: $disabled-svg-fill;
+				}
+			}
+
+			&:focus {
+				.#{$prefix}-svg-icon {
+					fill: $link-color;
 				}
 			}
 		}
@@ -153,8 +160,10 @@ body.#{$prefix}-off-canvas {
 			width: 16px;
 		}
 
-		&.active svg path {
-			fill: $active-navigation;
+		&.active {
+			.#{$prefix}-svg-icon {
+				fill: $active-navigation;
+			}
 		}
 	}
 
@@ -183,7 +192,7 @@ body.#{$prefix}-off-canvas {
 
 	.#{$prefix}-menu--items {
 		margin: 0;
-		padding: 10px 0 0 5px !important;
+		padding: 10px 0 0 10px !important;
 		overflow: auto;
 		height: calc(100%);
 
@@ -199,9 +208,7 @@ body.#{$prefix}-off-canvas {
 				display: inline-block;
 				cursor: pointer;
 				position: relative;
-				padding-left: 12px;
-				padding-bottom: 5px;
-				margin: 0 !important;
+				margin: 0 0 5px 0 !important;
 				font-weight: bold;
 				line-height: 1.4;
 			}
@@ -235,7 +242,7 @@ body.#{$prefix}-off-canvas {
 		}
 
 		input[type=checkbox] {
-			display: none;
+			display: inline-block;
 			width: 0;
 			height: 0;
 
@@ -243,7 +250,7 @@ body.#{$prefix}-off-canvas {
 				box-sizing: border-box;
 				display: inline-block;
 				position: absolute;
-				left: -10px;
+				left: -17px;
 				top: 3px;
 				content: "\2795";
 				width: 12px;
@@ -264,6 +271,12 @@ body.#{$prefix}-off-canvas {
 
 				& + label::before, {
 					content: '\2796';
+				}
+			}
+
+			&:focus {
+				& + label {
+					color: $link-color;
 				}
 			}
 		}
@@ -578,9 +591,33 @@ body.#{$prefix}-off-canvas {
 		svg {
 			width: 100%;
 			height: 100%;
-			path {
+
+			.#{$prefix}-svg-icon {
 				fill: $bgcolor;
 			}
 		}
+
+	}
+}
+
+##{$prefix}-welcome-screen {
+	width: 60%;
+	padding: 20px;
+	margin: 0 auto;
+	background-color: rgba($bgcolor, 0.2);
+	font-size: 14px;
+	font-family: Arial, sans-serif;
+
+	* {
+		color: $bgcolor;
+	}
+
+	@media (max-width: 600px) {
+		width: 90%;
+	}
+
+	.#{$prefix}-svg-inline {
+		width: 14px;
+		height: 14px;
 	}
 }
