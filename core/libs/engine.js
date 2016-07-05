@@ -45,6 +45,7 @@ var engine = function (cb) {
 	}
 
 	function onEnd() {
+		partials.resetReverseDependencies();
 		if (cb) {
 			cb();
 		}

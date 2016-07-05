@@ -92,6 +92,10 @@ partials = function () {
 		}
 	}
 
+	function resetReverseDependencies () {
+		reverseDependencies = {};
+	}
+
 	return {
 		registeredPartials: registeredPartials,
 		reverseDependencies: reverseDependencies,
@@ -101,7 +105,8 @@ partials = function () {
 		setPartial: setPartial,
 		getPartialsData: getPartialsData,
 		getPatternFolder: getPatternFolder,
-		isHiddenPartial: isHiddenPartial
+		isHiddenPartial: isHiddenPartial,
+		resetReverseDependencies: resetReverseDependencies
 	}
 };
 
