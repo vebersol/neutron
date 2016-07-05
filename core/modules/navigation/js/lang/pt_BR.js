@@ -12,6 +12,7 @@ var I18n = {
 	"qr_code": "QR Code",
 	"qr_code_description": "Exibir QR Code (q)",
 	"close_qr_code": "Fechar QR Code (q)",
+	"close_info": "Fechar informações (i)",
 	"themes": "Temas",
 	"themes_description": "Selecione o tema do Neutron",
 	"dependencies": "Dependências",

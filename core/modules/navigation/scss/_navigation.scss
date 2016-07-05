@@ -450,6 +450,10 @@ body.#{$prefix}-off-canvas {
 			@include prefix(box-sizing, border-box);
 			color: $txtcolor;
 
+			a {
+				color: $txtcolor;
+			}
+
 			&__headline,
 			&__text {
 				color: $txtcolor;

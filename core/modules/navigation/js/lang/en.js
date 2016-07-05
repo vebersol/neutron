@@ -12,6 +12,7 @@ var I18n = {
 	"qr_code": "QR Code",
 	"qr_code_description": "Show QR Code (q)",
 	"close_qr_code": "Close QR Code (q)",
+	"close_info": "Close info (i)",
 	"themes": "Themes",
 	"themes_description": "Select Neutron Theme",
 	"dependencies": "Dependencies",

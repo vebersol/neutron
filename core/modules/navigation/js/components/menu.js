@@ -73,6 +73,7 @@ Menu.prototype = {
 				qrcode,
 				qrcodeEl = Zepto('#qrcode'),
 				qrCodeFrame = Zepto(pcn('.qr-code-wrapper')),
+				infoFrame = Zepto(pcn('.info-wrapper')),
 				codeBtn = Zepto(pcn('.button--code')),
 				menu = Zepto(pcn('.menu--items')),
 				classList = [pcn('.button--start'), pcn('.navigation'), pcn('.menu')],
@@ -200,6 +201,28 @@ Menu.prototype = {
 			var input = Zepto(this);
 
 			input.closest(pcn('.menu--theme')).removeClass(pcn('menu--theme__opened'));
+		});
+
+		Zepto(pcn('.button--info')).click(function () {
+			var el = Zepto(this);
+
+			if (!infoFrame.hasClass('active')) {
+				el.addClass('active');
+				infoFrame.addClass('active');
+				parent.storage.add('info');
+			}
+			else {
+				el.removeClass('active');
+				infoFrame.removeClass('active');
+				parent.storage.remove('info');
+			}
+		});
+
+		infoFrame.find(pcn('.button--close__link')).on('click', function () {
+			var infoClasses = [pcn('.info-wrapper'), pcn('.button--info')];
+
+			Zepto(infoClasses.join(', ')).removeClass('active');
+			parent.storage.remove('info');
 		});
 
 		parent.showCurrent(menu);
