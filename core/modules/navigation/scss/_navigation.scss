@@ -94,8 +94,8 @@ body.#{$prefix}-off-canvas {
 		z-index: $z-index;
 		text-decoration: none !important;
 
-		@include prefix(opacity, 0.8);
-		@include prefix(transition, "bottom 0.5s ease-out, left 0.5s ease-out");
+		opacity: 0.5;
+		@include prefix(transition, "bottom 0.5s ease-out, left 0.5s ease-out, opacity 0.5s ease-out");
 
 		&.active {
 			@include prefix(opacity, 1);
