@@ -1,6 +1,5 @@
 var Storage = function () {
 	this.namespace = 'neutronADT';
-	this.themeNamespace = this.namespace+'Theme';
 	this.privateMode = false;
 	this.data = window.localStorage.getItem(this.namespace);
 
@@ -96,11 +95,11 @@ Storage.prototype = {
 		return "";
 	},
 
-	setTheme: function (theme) {
-		window.localStorage.setItem(this.themeNamespace, theme);
+	setSettings: function (item, value) {
+		window.localStorage.setItem(item, value);
 	},
 
-	getTheme: function () {
-		return window.localStorage.getItem(this.themeNamespace);
+	getSettings: function (item) {
+		return window.localStorage.getItem(item);
 	}
 }

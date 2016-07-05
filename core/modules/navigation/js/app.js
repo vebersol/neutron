@@ -1,7 +1,8 @@
 var patternData = neutronADT,
 	PREFIX = 'neutron',
 	PATTERNS_PATH = patternData.i.assetsPath + 'patterns/',
-	menuBehavior = patternData.i.menuBehavior;
+	menuBehavior = patternData.i.menuBehavior,
+	cssTheme = patternData.i.cssTheme;
 
 /**
  * Add prefix to an usual string. Class or id selectors will also be replaced correctly.

@@ -1,9 +1,17 @@
 var Main = function () {
+	this.namespace = 'neutronADT';
+	this.themeNamespace = this.namespace+'Theme';
+	this.storage = new Storage();
+
 	this.init();
 };
 
 Main.prototype = {
 	init: function () {
+		var theme = this.storage.getSettings(this.themeNamespace) || cssTheme;
+
+		Zepto('head').append('<link rel="stylesheet" class="neutron-theme-stylesheet" href="'+patternData.i.assetsPath+'styleguide/modules/navigation/css/'+theme+'.css">')
+
 		this.wrapper = Zepto('<aside id="' + PREFIX + '"></aside>');
 		Zepto('body').append(this.wrapper);
 		this.addPatternsInfo();

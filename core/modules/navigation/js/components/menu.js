@@ -1,6 +1,7 @@
 var Menu = function () {
 	this.codeFrame = new CodeFrame();
-	this.menuBehavior = menuBehavior;
+	this.namespace = 'neutronADT';
+	this.menuBehaviorNamespace = this.namespace+'menuBehavior';
 
 	this.init();
 }
@@ -9,16 +10,16 @@ Menu.prototype = {
 	init: function () {
 		var parent = this;
 
-		if(this.menuBehavior === "off-canvas") {
-			Zepto('body').toggleClass(pcn('off-canvas'));
-		}
-
 		Zepto.ajax({
 			url: patternData.i.assetsPath + 'data/patterns.json',
 			dataType: "json",
 			success: function(data) {
 				parent.storage = new Storage();
 				parent.renderMenu(data);
+
+				parent.menuBehavior = parent.storage.getSettings(parent.menuBehaviorNamespace) || menuBehavior;
+				parent.changeMenuBehavior(parent.menuBehavior);
+				Zepto(pcn('.settings--menu-behavior input[type=radio][value='+parent.menuBehavior+']')).attr("checked", true);
 
 				new KeyboardNav();
 				new Search();
@@ -201,6 +202,13 @@ Menu.prototype = {
 			parent.storage.remove('info');
 		});
 
+		Zepto(pcn('.settings--menu-behavior input[type=radio]')).on('change', function () {
+			var el = Zepto(this),
+				value = el.val();
+
+			parent.changeMenuBehavior(value);
+		});
+
 		parent.showCurrent(menu);
 	},
 
@@ -252,5 +260,23 @@ Menu.prototype = {
 				}
 			});
 		}
+	},
+
+	changeMenuBehavior: function(behavior) {
+		var body = Zepto('body');
+
+		if(behavior === "off-canvas") {
+			body.addClass(pcn('off-canvas'));
+
+			if(Zepto(pcn('.sticky-nav')).hasClass('active')) {
+				body.addClass(pcn('off-canvas--active'));
+				body.addClass(pcn('off-canvas--overflow'));
+			}
+		} else {
+			body.removeClass(pcn('off-canvas', pcn('off-canvas--active'), pcn('off-canvas--overflow')));
+		}
+
+		this.menuBehavior = behavior;
+		this.storage.setSettings(this.menuBehaviorNamespace, behavior);
 	}
 }
