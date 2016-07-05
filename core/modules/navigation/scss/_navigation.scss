@@ -65,9 +65,17 @@ body.#{$prefix}-off-canvas {
 
 		a,
 		p,
-		label {
+		label,
+		h1, h2, h3, h4, h5, h6 {
 			font-family: Arial, sans-serif;
 		}
+
+		h1 { font-size: 1.75em; }
+		h2 { font-size: 1.4em; }
+		h3 { font-size: 1.2em; }
+		h4 { font-size: 1.15em; }
+		h5 { font-size: 1.05em; }
+		h6 { font-size: 1em; }
 
 		a {
 			text-decoration: none;
@@ -413,6 +421,11 @@ body.#{$prefix}-off-canvas {
 						color: $documentation-link-color;
 						text-decoration: underline;
 					}
+
+					pre {
+						font-size: 14px;
+						line-height: 1;
+					}
 				}
 			}
 
@@ -428,6 +441,33 @@ body.#{$prefix}-off-canvas {
 				word-break: normal;
 				word-wrap: normal;
 				line-height: 1.5;
+
+				h1 {
+					border-bottom: 1px solid $documentation-color-bold;
+				}
+
+				h1, h2, h3, h4, h5, h6 {
+					color: rgba($documentation-color, 0.5);
+				}
+
+				strong {
+					color: $documentation-color-bold;
+				}
+
+				em {
+					color: rgba($documentation-color, 0.75);
+					text-decoration: underline;
+				}
+
+				blockquote {
+					color: $documentation-color-block;
+					background-color: rgba($documentation-color-block, 0.1);
+					padding: 10px;
+
+					p {
+						margin: 0;
+					}
+				}
 			}
 		}
 	}
