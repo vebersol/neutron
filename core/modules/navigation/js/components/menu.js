@@ -22,6 +22,7 @@ Menu.prototype = {
 
 				new KeyboardNav();
 				new Search();
+				new Theme();
 			}
 		});
 	},
@@ -176,31 +177,6 @@ Menu.prototype = {
 				qrCodeFrame.removeClass('active');
 				parent.storage.remove('qr');
 			}
-		});
-
-		Zepto(pcn('.button--theme')).click(function () {
-			var themeInput = Zepto(pcn('.menu--theme select'));
-			themeInput.focus();
-		});
-
-		Zepto(pcn('.menu--theme__select select')).on('change', function () {
-			var el = Zepto(this),
-				value = el.val(),
-				stylesheet = Zepto(pcn('.theme-stylesheet')),
-				path = window.location.pathname,
-				assetsPath = (path === '/') ? '' : '../../';
-
-			stylesheet.attr('href', assetsPath+'styleguide/modules/navigation/css/'+value+'.css');
-		});
-
-		Zepto(pcn('.menu--theme__select select')).on('focus', function () {
-			Zepto(this).closest(pcn('.menu--theme')).addClass(pcn('menu--theme__opened'))
-		});
-
-		Zepto(pcn('.menu--theme__select select')).on('blur', function () {
-			var input = Zepto(this);
-
-			input.closest(pcn('.menu--theme')).removeClass(pcn('menu--theme__opened'));
 		});
 
 		Zepto(pcn('.button--info')).click(function () {
