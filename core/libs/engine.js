@@ -319,12 +319,12 @@ var engine = function (cb) {
 
 		var indexTemplate = handlebars.compile(indexSource);
 
-		var indexHTML = indexTemplate({
+		var indexHTML = layoutHandler.renderLayout({
 			assetsPath: settings.assetsPath,
 			cssTheme: settings.cssTheme,
 			dependencies: '[]',
 			menuBehavior: settings.menuBehavior || "overlay"
-		});
+		}, indexTemplate());
 
 		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}
