@@ -11,7 +11,7 @@ KeyboardNav.prototype = {
 		this.startBtn = Zepto(pcn('.button--start'));
 		this.infoBtn = Zepto(pcn('.button--code'));
 		this.qrCodeBtn = Zepto(pcn('.button--qr'));
-		this.aboutBtn = Zepto(pcn('.button--info'));
+		this.settingsBtn = Zepto(pcn('.button--info'));
 		this.searchBtn = Zepto(pcn('.button--search'));
 
 		Zepto(document).on('keyup', function (ev) {
@@ -31,8 +31,8 @@ KeyboardNav.prototype = {
 				this.toggleBar();
 			} else if (this.isKey(ev, 'f')) {
 				this.toggleSearch();
-			} else if (this.isKey(ev, 'i')) {
-				this.openAbout();
+			} else if (this.isKey(ev, 's')) {
+				this.openSettings();
 			}
 		}
 	},
@@ -69,8 +69,8 @@ KeyboardNav.prototype = {
 		this.searchBtn.click();
 	},
 
-	openAbout: function () {
+	openSettings: function () {
 		this.checkStartBtn();
-		this.aboutBtn.click();
+		this.settingsBtn.click();
 	},
 }
