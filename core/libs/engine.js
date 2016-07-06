@@ -321,7 +321,7 @@ var engine = function (cb) {
 
 		var indexHTML = layoutHandler.renderLayout({
 			partialClass: 'neutron-welcome-page',
-			assetsPath: settings.assetsPath,
+			assetsPath: './',
 			cssTheme: settings.cssTheme,
 			dependencies: '[]',
 			menuBehavior: settings.menuBehavior || "overlay"
