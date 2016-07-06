@@ -21,5 +21,7 @@ var I18n = {
 	"handlebars": "Handlebars",
 	"documentation": "Documentation",
 	"export_url": "Export URL",
-	"export_message": "Exporting the following URL as QR Code"
+	"export_message": "Exporting the following URL as QR Code",
+	"settings": "Settings",
+	"settings_description": "See information about Neutron and change settings"
 }
