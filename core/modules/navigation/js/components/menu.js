@@ -273,7 +273,7 @@ Menu.prototype = {
 				body.addClass(pcn('off-canvas--overflow'));
 			}
 		} else {
-			body.removeClass(pcn('off-canvas', pcn('off-canvas--active'), pcn('off-canvas--overflow')));
+			body.removeClass(pcn('off-canvas')).removeClass(pcn('off-canvas--active')).removeClass(pcn('off-canvas--overflow'));
 		}
 
 		this.menuBehavior = behavior;
