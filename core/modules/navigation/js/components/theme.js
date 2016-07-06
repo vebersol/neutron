@@ -24,11 +24,9 @@ Theme.prototype = {
 	},
 
 	changeTheme: function(theme) {
-		var stylesheet = Zepto(pcn('.theme-stylesheet')),
-			path = window.location.pathname,
-			assetsPath = (path === '/') ? '' : '../../';
+		var stylesheet = Zepto(pcn('.theme-stylesheet'));
 
-		stylesheet.attr('href', assetsPath+'styleguide/modules/navigation/css/'+theme+'.css');
+		stylesheet.attr('href', patternData.i.assetsPath+'styleguide/modules/navigation/css/'+theme+'.css');
 	},
 
 	setupTheme: function () {
