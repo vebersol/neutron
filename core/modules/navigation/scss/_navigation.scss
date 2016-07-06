@@ -4,6 +4,9 @@
 $prefix: neutron;
 $z-index: 99999;
 
+@import "page";
+@import "loader";
+
 body.#{$prefix}-off-canvas {
 	@include prefix(transition, left 0.5s ease-out);
 	left: 0;
@@ -585,51 +588,5 @@ body.#{$prefix}-off-canvas {
 			}
 		}
 
-	}
-}
-
-.#{$prefix}-welcome-page {
-	background-color: $txtcolor;
-}
-
-##{$prefix}-welcome-screen {
-	width: 60%;
-	padding: 20px;
-	margin: 0 auto;
-	background-color: rgba($bgcolor, 0.1);
-	font-size: 14px;
-	font-family: Arial, sans-serif;
-
-	* {
-		color: $bgcolor;
-	}
-
-	a {
-		text-decoration: underline;
-	}
-
-	@media (max-width: 600px) {
-		width: 90%;
-	}
-
-	.#{$prefix}-svg-inline {
-		width: 14px;
-		height: 14px;
-		fill: $bgcolor;
-	}
-
-	table {
-		width: 100%;
-		border-spacing: 0;
-		border-collapse: collapse;
-
-		th, td {
-			border: 1px solid $bgcolor;
-			padding: 10px;
-		}
-
-		th {
-			background-color: rgba($bgcolor, 0.2);
-		}
 	}
 }

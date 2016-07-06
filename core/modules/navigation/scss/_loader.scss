@@ -1,0 +1,26 @@
+// Based in https://codepen.io/joeyhoer/pen/aoiJt
+
+.#{$prefix}-code-loader-wrapper {
+	background-color: $documentation-bg-color;
+	padding: 20px;
+	text-align: center;
+}
+
+.#{$prefix}-loader {
+	display: inline-block;
+	height: 50px;
+	width:  50px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: rgba($txtcolor, 0.75)
+	rgba($txtcolor, 0.75) rgba($txtcolor, 0.25) rgba($txtcolor, 0.25);
+	border-radius: 100%;
+	animation: clockwise .5s linear infinite;
+}
+
+@keyframes clockwise
+{
+	to {
+		@include prefix(transform, rotate(360deg) translatez(0));
+	}
+}

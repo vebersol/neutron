@@ -12,15 +12,14 @@ CodeFrame.prototype =  {
 	addCode: function () {
 		var parent = this;
 		if (patternData.i.patternName) {
+			this.code = parent.wrapper.find(pcn('.code'));
 			Zepto.ajax({
 				url: PATTERNS_PATH + patternData.i.patternName.replace(/\//g, '-') + '/markups.html',
 				success: function (data) {
-					parent.code = parent.wrapper.find(pcn('.code'));
 					parent.code.append(data);
 
 					parent.code.find(pcn('.code--nav li:first-child')).addClass('active');
 					parent.code.find(pcn('.code--list li[data-target]')).slice(1).hide();
-
 
 					var codeList = Zepto(pcn('.code--list li'));
 
@@ -41,7 +40,13 @@ CodeFrame.prototype =  {
 						}
 					}
 
+					parent.loaderWrapper.remove();
+
 					parent.bindTabs();
+				},
+				beforeSend: function () {
+					parent.loaderWrapper = Zepto('<div class="neutron-code-loader-wrapper"><div class="neutron-loader"></div></div>');
+					parent.code.append(parent.loaderWrapper);
 				}
 			});
 		}
