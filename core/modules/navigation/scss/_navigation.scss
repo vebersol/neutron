@@ -568,14 +568,16 @@ body.#{$prefix}-off-canvas {
 		height: $buttonSize;
 		background-color: $txtcolor;
 		color: $bgcolor;
+		text-align: center;
+		line-height: 40px;
 
 		span {
 			display: none;
 		}
 
 		svg {
-			width: 100%;
-			height: 100%;
+			width: 20px;
+			height: 20px;
 
 			.#{$prefix}-svg-icon {
 				fill: $bgcolor;
@@ -589,12 +591,16 @@ body.#{$prefix}-off-canvas {
 	width: 60%;
 	padding: 20px;
 	margin: 0 auto;
-	background-color: rgba($bgcolor, 0.2);
+	background-color: rgba($bgcolor, 0.1);
 	font-size: 14px;
 	font-family: Arial, sans-serif;
 
 	* {
 		color: $bgcolor;
+	}
+
+	a {
+		text-decoration: underline;
 	}
 
 	@media (max-width: 600px) {
@@ -604,5 +610,19 @@ body.#{$prefix}-off-canvas {
 	.#{$prefix}-svg-inline {
 		width: 14px;
 		height: 14px;
+		fill: $bgcolor;
+	}
+
+	table {
+		width: 100%;
+
+		th, td {
+			border: 1px solid $bgcolor;
+			padding: 10px;
+		}
+
+		th {
+			background-color: rgba($bgcolor, 0.2);
+		}
 	}
 }
