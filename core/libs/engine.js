@@ -320,6 +320,7 @@ var engine = function (cb) {
 		var indexTemplate = handlebars.compile(indexSource);
 
 		var indexHTML = layoutHandler.renderLayout({
+			partialClass: 'neutron-welcome-page',
 			assetsPath: settings.assetsPath,
 			cssTheme: settings.cssTheme,
 			dependencies: '[]',

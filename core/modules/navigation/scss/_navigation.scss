@@ -587,6 +587,10 @@ body.#{$prefix}-off-canvas {
 	}
 }
 
+.#{$prefix}-welcome-page {
+	background-color: $txtcolor;
+}
+
 ##{$prefix}-welcome-screen {
 	width: 60%;
 	padding: 20px;
