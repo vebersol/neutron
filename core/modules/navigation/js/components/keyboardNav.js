@@ -33,6 +33,14 @@ KeyboardNav.prototype = {
 				this.toggleSearch();
 			} else if (this.isKey(ev, 's')) {
 				this.openSettings();
+			} else if (this.isKey(ev, 'm')) {
+				if(!this.bar.hasClass('active')) {
+					this.toggleBar();
+				}
+
+				var menu = Zepto(pcn('.menu--items'));
+				var firstItem = menu.children().find('input').first();
+				firstItem.focus().prop('checked', true);
 			}
 		}
 	},
