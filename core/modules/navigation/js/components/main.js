@@ -12,9 +12,7 @@ Main.prototype = {
 		var theme = this.storage.getSettings(this.themeNamespace) || cssTheme;
 
 		this.preloadStyles(theme, function () {
-			parent.wrapper = Zepto('<aside id="' + PREFIX + '"></aside>');
-			Zepto('body').append(parent.wrapper);
-			parent.addPatternsInfo();
+			parent.create();
 		});
 	},
 
@@ -23,6 +21,12 @@ Main.prototype = {
 		link.get(0).onload = callback;
 
 		Zepto('head').append(link);
+	},
+
+	create: function () {
+		this.wrapper = Zepto('<aside id="' + PREFIX + '"></aside>');
+		Zepto('body').append(this.wrapper);
+		this.addPatternsInfo();
 	},
 
 	addPatternsInfo: function () {

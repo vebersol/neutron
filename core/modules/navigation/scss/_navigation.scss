@@ -245,6 +245,7 @@ body.#{$prefix}-off-canvas {
 			display: inline-block;
 			width: 0;
 			height: 0;
+			opacity: 0;
 
 			& + label::before, {
 				box-sizing: border-box;
