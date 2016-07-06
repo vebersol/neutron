@@ -1,3 +1,13 @@
+{{!!
+  Media block is a smaller portion of Media box.
+
+  * **url** (String)
+  _Supported values:_ A valid URL.
+  * **headline** (String)
+  _Supported values:_ The text to be used in headline atom.
+  * **text** (String)
+  _Supported values:_ The description of media component.
+}}
 <div class="media">
 	<div class="media-left">
 		{{#if url}}<a href="{{url}}">
@@ -8,7 +18,7 @@
 		{{/if}}
 	</div>
 	<div class="media-body">
-		<h4 class="media-heading">{{headline}}</h4>
+		{{ render "atoms/text/headline:media-heading" level=4 text=headline }}
 		<p>{{text}}</p>
 	</div>
 </div>
