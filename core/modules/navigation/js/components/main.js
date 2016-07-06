@@ -8,13 +8,21 @@ var Main = function () {
 
 Main.prototype = {
 	init: function () {
+		var parent = this;
 		var theme = this.storage.getSettings(this.themeNamespace) || cssTheme;
 
-		Zepto('head').append('<link rel="stylesheet" class="neutron-theme-stylesheet" href="'+patternData.i.assetsPath+'styleguide/modules/navigation/css/'+theme+'.css">')
+		this.preloadStyles(theme, function () {
+			parent.wrapper = Zepto('<aside id="' + PREFIX + '"></aside>');
+			Zepto('body').append(parent.wrapper);
+			parent.addPatternsInfo();
+		});
+	},
 
-		this.wrapper = Zepto('<aside id="' + PREFIX + '"></aside>');
-		Zepto('body').append(this.wrapper);
-		this.addPatternsInfo();
+	preloadStyles: function (theme, callback) {
+		var link = Zepto('<link rel="stylesheet" class="neutron-theme-stylesheet" href="'+patternData.i.assetsPath+'styleguide/modules/navigation/css/'+theme+'.css">');
+		link.get(0).onload = callback;
+
+		Zepto('head').append(link);
 	},
 
 	addPatternsInfo: function () {
