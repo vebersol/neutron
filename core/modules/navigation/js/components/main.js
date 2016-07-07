@@ -18,7 +18,10 @@ Main.prototype = {
 
 	preloadStyles: function (theme, callback) {
 		var link = Zepto('<link rel="stylesheet" class="neutron-theme-stylesheet" href="'+patternData.i.assetsPath+'styleguide/modules/navigation/css/'+theme+'.css">');
-		link.get(0).onload = callback;
+		link.get(0).onload = function () {
+			callback();
+			link.get(0).onload = null;
+		};
 
 		Zepto('head').append(link);
 	},
