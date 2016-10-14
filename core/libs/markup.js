@@ -6,7 +6,7 @@ var markup = function () {
 	var documentationHandler = docs();
 
 	function addMarkup(source, compiled, data, documentation) {
-		var documentation = documentationHandler.getDocs(source);
+		var documentation = documentationHandler.getDocs(data.patternName);
 		var html = [];
 
 		html.push('<ul class="neutron-code--list">');

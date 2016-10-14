@@ -1,15 +1,20 @@
+var fse = require('fs-extra');
+var settings = require('../../neutron.json');
+var u = require('./utilities');
+
 var marked = require('marked');
 marked.setOptions({
 	breaks: true
 });
 
 var documentationHandler = function () {
-	function getDocs(partial) {
-		var regex = /{{!!([\s\S]*?)}}/;
-		var match = partial.match(regex);
+	function getDocs(patternName) {
+		var fileName = patternName + '.md';
+		var filePath = u.getPath(settings.paths.src.patterns, fileName);
 
-		if (match instanceof Array && match.length > 1) {
-			return marked(match[1]);
+		if (fse.existsSync(filePath)) {
+			var fileData = fse.readFileSync(filePath, settings.encode);
+			return marked(fileData);
 		}
 
 		return null
