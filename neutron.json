@@ -5,6 +5,8 @@
 	"menuBehavior": "default",
 	"cssTheme": "default",
 	"defaultLayoutName": "application",
+	"htmlComments": true,
+	"beautifyHTML": true,
 	"paths": {
 		"core": {
 			"root": "./core/",

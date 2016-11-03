@@ -4,6 +4,7 @@ var util = require('util');
 var handlebars = require('handlebars');
 var object_merge = require('object-merge');
 var sort_object = require('sort-object');
+var beautify_html = require('js-beautify').html;
 
 var settings = require('../../neutron.json');
 
@@ -223,7 +224,43 @@ var engine = function (cb) {
 
 	function getHtml(template, data) {
 		try {
-			return template(data);
+			var result = template(data);
+			if (settings.beautifyHTML) {
+				result = beautify_html(result, {
+					indent_size: 2,
+					type: ['html'],
+					brace_style: ['collapse'],
+					end_with_newline: true,
+					max_preserve_newlines: 1,
+					preserve_newlines: true,
+					unformatted: [
+						"span",
+						"img",
+						"code",
+						"pre",
+						"sub",
+						"sup",
+						"em",
+						"strong",
+						"b",
+						"i",
+						"u",
+						"strike",
+						"big",
+						"small",
+						"pre",
+						"h1",
+						"h2",
+						"h3",
+						"h4",
+						"h5",
+						"h6",
+						"meta"
+					]
+				});
+			}
+
+			return result;
 		}
 		catch(err) {
 			u.log(err.message, 'error');
@@ -335,6 +372,16 @@ var engine = function (cb) {
 		return regex.test(partial);
 	}
 
+	function wrapWithComments(html, patternName) {
+		var output = "";
+
+		output += "<!-- start " + patternName + " -->\n";
+		output += html;
+		output += "\n<!-- end " + patternName + " -->\n";
+
+		return output;
+	}
+
 	function setRenderHelper() {
 		handlebars.registerHelper('render', function (partial, params) {
 			var data;
@@ -356,6 +403,10 @@ var engine = function (cb) {
 
 			var template = handlebars.compile(source);
 			var result = template(data);
+
+			if (settings.htmlComments) {
+				result = wrapWithComments(result, partialName);
+			}
 
 			return new handlebars.SafeString(result);
 		});

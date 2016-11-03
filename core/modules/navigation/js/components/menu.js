@@ -67,7 +67,7 @@ Menu.prototype = {
 			return ul;
 		}
 
-		return false;
+		return "";
 	},
 
 	bind: function () {
