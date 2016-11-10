@@ -12,6 +12,7 @@ Neutron is an Atomic Design tool based in [Brad Frost's concept](http://bradfros
 * Multiple CSS themes
 * QRCode generator
 * Loads your markup in Handlebars, HTML output and documentation under user action - not attached to the code
+* Add status to patterns. Default: in progress, done, deprecated
 
 ## Getting Started
 
@@ -33,6 +34,7 @@ Check the items below to understand **Neutron's** functionalities and structure.
 * Document your patterns - TBD
 * Project structure - TBD
 * Keyboard shortcuts - TBD
+* Add status to a pattern - TBD
 
 ### Main gulp tasks
 
@@ -51,7 +53,7 @@ TODO
 
 ## Contributing
 
-We'd love to have you as a contributor! Before contribue, read the blog post [10 tips for better Pull Requests](http://blog.ploeh.dk/2015/01/15/10-tips-for-better-pull-requests/) to provide good Pull Requests.
+Please, contribute! We'd love to have you as a contributor! Before contribue, read the blog post [10 tips for better Pull Requests](http://blog.ploeh.dk/2015/01/15/10-tips-for-better-pull-requests/) to provide good Pull Requests.
 
 ## Authors
 
