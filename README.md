@@ -36,14 +36,41 @@ Check the items below to understand **Neutron's** functionalities and structure.
 * Keyboard shortcuts - TBD
 * Add status to a pattern - TBD
 
-### Main gulp tasks
+### Add status to a pattern
+
+It’s useful for team work to define the status of every particular pattern to allow/disallow usage by other team members. To add status to your pattern, simply do the following:
+
+1. Create a json file with the same name of your pattern. Example: atoms/text/headline.hbs should be atoms/text/headline.json 
+2. You may include everything you need as data to your pattern and include the property **_status**. Example:
+
+    ```json
+    {
+      "_status": "in-progress",
+      "...": "..."
+    }
+    ```
+3. The standard keywords included by default are: *in-progress*, *done* and *deprecated*. The tool automatically replaces the (-) by a whitespace.
+4. To customize your own keywords, just add your *custom-keyword* as *_status* in your json file and create the following css rules to add styles:
+    ```css
+	.neutron-custom-keyword::before {
+	  color: /* any color */;
+	  /* what ever you want to do */
+	}
+	
+	#neutron-status .neutron-custom-keyword {
+		background-color: /* any color */;
+		/* what ever you want to do */
+	}
+    ```
+
+## Main gulp tasks
 
 * **engine**: Renders your patterns
 * **navigation**: Generate all navigation module files and copy to your styleguide folders
 * **copy:all**: Copy all files (css, images, javascripts) aren't styleguides
 * **server**: Runs all previous tasks, watch your files and serve it using browsersync.
 
-### Prerequisities
+## Prerequisities
 
 **Neutron** requires [node.js](https://nodejs.org/) and [gulp.js](http://gulpjs.com/).
 
