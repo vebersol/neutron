@@ -276,6 +276,8 @@ var engine = function (cb) {
 	function addToTree(partial, end) {
 		var arr = partial.split('/');
 		var url = partials.getPatternFolder(partial) + '/index.html';
+		var status = patternsData[partial] &&
+			patternsData[partial].hasOwnProperty('_status') ? patternsData[partial]._status : null;
 
 		var tree = arr.reduceRight(function(previousValue, currentValue, currentIndex, array) {
 			var obj = {}
@@ -285,7 +287,10 @@ var engine = function (cb) {
 			}
 
 			if (array.length - 2 === currentIndex) {
-				obj[currentValue][previousValue] = url;
+				obj[currentValue][previousValue] = {
+					url: url,
+					status: status
+				}
 			}
 			else {
 				obj[currentValue] = previousValue;
@@ -303,7 +308,12 @@ var engine = function (cb) {
 
 	function renderData() {
 		for (var obj in patternsTree) {
-			patternsTree[obj] = sort_object(patternsTree[obj], {sortOrder: 'ASC'});
+			if (Object.keys(patternsTree[obj]).length > 0) {
+				patternsTree[obj] = sort_object(patternsTree[obj], {sortOrder: 'ASC'});
+			}
+			else {
+				delete patternsTree[obj];
+			}
 		}
 
 		fse.outputFileSync(u.getPath(settings.paths.public.data, 'patterns.json'), JSON.stringify(patternsTree));

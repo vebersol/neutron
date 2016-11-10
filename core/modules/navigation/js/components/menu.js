@@ -34,14 +34,17 @@ Menu.prototype = {
 				list;
 
 		for (var i = 0; i < menuArr.length; i++) {
-			list = Zepto('<li><input type="checkbox" id="'+menuArr[i]+'" /><label for="'+menuArr[i]+'">' + this.toTitle(menuArr[i]) + '</label></li>').data('item', menuArr[i]);
-			submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
-			list.append(submenu);
-			menu.append(list);
+			if (data.hasOwnProperty(menuArr[i])) {
+				list = Zepto('<li><input type="checkbox" id="'+menuArr[i]+'" /><label for="'+menuArr[i]+'">' + this.toTitle(menuArr[i]) + '</label></li>').data('item', menuArr[i]);
+				submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
+				list.append(submenu);
+				menu.append(list);
+			}
 		}
 
 		this.bind();
 		this.setupButtons();
+		this.setStatus();
 	},
 
 	createMenuItem: function (data, property) {
@@ -53,8 +56,11 @@ Menu.prototype = {
 		for (var item in data) {
 			objLen = this.getObjectSize(data[item]);
 
-			if (typeof data[item] === 'string') {
-				list = Zepto('<li><a href="' + PATTERNS_PATH + data[item] + '">' + this.toTitle(item) + '</a></li>');
+			if (data[item].hasOwnProperty('status') && data[item].hasOwnProperty('url')) {
+				list = Zepto('<li><a href="' + PATTERNS_PATH + data[item].url + '">' + this.toTitle(item) + '</a></li>');
+				if (data[item].status) {
+					list.find('a').addClass(pcn(data[item].status))
+				}
 			} else if (typeof data[item] === 'object' && objLen > 0) {
 				list = Zepto('<li><input type="checkbox" id="'+item+'-'+property+'" /><label for="'+item+'-'+property+'">' + this.toTitle(item) + '</label></li>').data('item', item);
 				list.append(this.createMenuItem(data[item], item));
@@ -278,5 +284,20 @@ Menu.prototype = {
 
 		this.menuBehavior = behavior;
 		this.storage.setSettings(this.menuBehaviorNamespace, behavior);
+	},
+
+	setStatus: function () {
+		var statusTarget = Zepto(pcn('#status'));
+		var activeMenuItem = Zepto(pcn('.menu--items .current a'));
+		var status = activeMenuItem.attr('class');
+
+		if (status) {
+			statusTarget.find('span')
+				.addClass(status)
+				.append(noPrefix(status).toUpperCase().replace('-', ' '));
+		}
+		else {
+			statusTarget.hide();
+		}
 	}
 }

@@ -21,4 +21,8 @@ function pcn(str) {
 	return prefixed;
 }
 
+function noPrefix(prefixedString) {
+	return prefixedString.replace(PREFIX + '-', '');
+}
+
 new Main();

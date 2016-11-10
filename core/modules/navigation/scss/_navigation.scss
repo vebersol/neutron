@@ -223,19 +223,35 @@ body.#{$prefix}-off-canvas {
 			}
 
 			a::before {
-				content: "\2023";
+				content: "\25A0";
 				position: absolute;
 				top: 0;
 				left: 0;
 				color: $txtcolor;
-				line-height: 1.2;
+				line-height: 1.1;
 				opacity: 0.3;
+			}
+
+			a[class]::before {
+				opacity: 0.5;
 			}
 
 			&.current {
 				a::before {
 					opacity: 1;
 				}
+			}
+
+			.#{$prefix}-in-progress::before {
+				color: $status-in-progress;
+			}
+
+			.#{$prefix}-done::before {
+				color: $status-done;
+			}
+
+			.#{$prefix}-deprecated::before {
+				color: $status-deprecated;
 			}
 		}
 
@@ -367,6 +383,30 @@ body.#{$prefix}-off-canvas {
 
 			p a {
 				text-decoration: underline;
+			}
+
+			##{$prefix}-status {
+				margin-top: -10px;
+
+				span {
+					text-transform: uppercase;
+					font-size: 0.8em;
+					padding: 2px;
+					background-color: $tab;
+					color: $documentation-bg-color;;
+
+					&.#{$prefix}-in-progress {
+						background-color: $status-in-progress;
+					}
+
+					&.#{$prefix}-done {
+						background-color: $status-done;
+					}
+
+					&.#{$prefix}-deprecated {
+						background-color: $status-deprecated;
+					}
+				}
 			}
 		}
 
