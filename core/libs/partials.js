@@ -24,7 +24,8 @@ partials = function () {
 
 	function getPartialsData(pattern) {
 		var regex = /{{\s?(>|render)(.*?)}}/g,
-			match = pattern.source.match(regex),
+			source = cleanSource(pattern.source),
+			match = source.match(regex),
 			newData = pattern.data ? pattern.data : {};
 
 		var partialName = getPartialName(pattern.file.path)
@@ -90,6 +91,10 @@ partials = function () {
 				}
 			});
 		}
+	}
+
+	function cleanSource(source) {
+		return source.replace(/\r?\n|\r|\t/g, '');
 	}
 
 	function resetReverseDependencies () {
