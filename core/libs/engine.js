@@ -13,7 +13,7 @@ var partials = require('./partials')();
 var layoutHandler = require('./layouts')();
 var markup = require('./markup')();
 
-var helpers = require(path.resolve(settings.paths.core.helpers))(handlebars);
+var helpers = require(u.getPath(settings.paths.core.helpers))(handlebars);
 
 var engine = function (cb) {
 	'use strict';
@@ -65,7 +65,7 @@ var engine = function (cb) {
 
 	function getPatterns() {
 		setRenderHelper();
-		return fse.walk(settings.paths.src.patterns)
+		return fse.walk(u.getPath(settings.paths.src.patterns))
 			.on('data', function (file) {
 				if (isPatternExtension(path.extname(file.path))) {
 					patternFiles.push(file);
@@ -269,8 +269,8 @@ var engine = function (cb) {
 	}
 
 	function cleanPaths() {
-		fse.mkdirsSync(settings.paths.public.patterns);
-		fse.mkdirsSync(settings.paths.public.data);
+		fse.mkdirsSync(u.getPath(settings.paths.public.patterns));
+		fse.mkdirsSync(u.getPath(settings.paths.public.data));
 	}
 
 	function addToTree(partial, end) {

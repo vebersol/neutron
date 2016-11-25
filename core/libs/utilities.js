@@ -20,10 +20,10 @@ module.exports = {
 	},
 	getPath: function (dir, filename) {
 		if (filename) {
-			return path.resolve(dir + filename);
+			return path.resolve(__dirname, '../../', dir + filename);
 		}
 
-		return path.resolve(dir);
+		return path.resolve(__dirname, '../../', dir);
 	}
 }
 

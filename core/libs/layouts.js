@@ -21,7 +21,7 @@ var layoutHandler = function () {
 	}
 
 	function getLayouts() {
-		fse.walk(settings.paths.src.layouts)
+		fse.walk(u.getPath(settings.paths.src.layouts))
 			.on('data', function(file) {
 				if (path.extname(file.path) === settings.fileExtension) {
 					var layoutName = path.basename(file.path, settings.fileExtension);
