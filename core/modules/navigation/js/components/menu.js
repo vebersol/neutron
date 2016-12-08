@@ -257,7 +257,7 @@ Menu.prototype = {
 		var parent = this,
 				path = window.location.pathname;
 
-		if(path !== '/') {
+		if(path != '/' && path != '/index.html') {
 			menu.find('a').each(function () {
 				var anchor = Zepto(this);
 				if (anchor.attr('href').match(path)) {

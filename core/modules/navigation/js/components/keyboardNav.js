@@ -46,6 +46,10 @@ KeyboardNav.prototype = {
 	},
 
 	isKey: function (ev, key) {
+		if (ev.ctrlKey === true || ev.shiftKey === true) {
+			return false;
+		}
+
 		return (ev.code == 'Key' + key.toUpperCase() || ev.key == key)
 	},
 
