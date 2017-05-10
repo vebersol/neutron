@@ -1,11 +1,13 @@
 {
   "name": "democritus",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "An atomic design based system!",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/gulp engine",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/jasmine/bin/jasmine.js"
+    "engine:build": "node scripts/neutron --verbose",
+    "navigation:build": "node scripts/navigation",
+    "navigation:watch": "chokidar core/modules/navigation/** ---ignore \"/core\\/modules\\/navigation\\/js\\/templates.js/\" --command \"npm run navigation:build\" --verbose",
+    "start": "npm-run-all --continue-on-error *:build --parallel *:watch"
   },
   "repository": {
     "type": "git",
@@ -37,11 +39,19 @@
     "sort-object": "^3.0.2"
   },
   "devDependencies": {
+    "browserify": "^14.3.0",
+    "chokidar": "^1.7.0",
+    "chokidar-cli": "^1.2.0",
     "gulp-batch": "^1.0.5",
     "gulp-connect": "^4.0.0",
     "gulp-watch": "^4.3.6",
     "istanbul": "^0.4.3",
     "jasmine": "^2.4.1",
-    "js-beautify": "^1.6.4"
+    "js-beautify": "^1.6.4",
+    "minifyify": "^7.3.5",
+    "node-sass": "^4.5.2",
+    "npm-run-all": "^4.0.2",
+    "uglify-js": "^3.0.3",
+    "universal-jst": "^1.0.5"
   }
 }
