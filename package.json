@@ -11,7 +11,7 @@
     "copy:build": "node scripts/copy",
     "copy:watch": "chokidar src/assets/** --ignore \"/src\\/assets\\/.keep/\" --command \"npm run copy:build\" --verbose",
     "start": "npm-run-all --continue-on-error *:build --parallel *:watch",
-    "test": "npm run start"
+    "test": "npm-run-all --continue-on-error *:build"
   },
   "repository": {
     "type": "git",
