@@ -1,19 +1,22 @@
 {
-  "name": "democritus",
+  "name": "Neutron Atomic Design Tool",
   "version": "0.1.0",
   "description": "An atomic design based system!",
   "main": "index.js",
   "scripts": {
-    "engine:build": "node scripts/neutron --verbose",
+    "neutron:build": "node scripts/neutron --verbose",
+    "neutron:watch": "chokidar src/{data,layouts,patterns}/** --command \"npm run neutron:build\" --verbose",
     "navigation:build": "node scripts/navigation",
-    "navigation:watch": "chokidar core/modules/navigation/** ---ignore \"/core\\/modules\\/navigation\\/js\\/templates.js/\" --command \"npm run navigation:build\" --verbose",
+    "navigation:watch": "chokidar core/modules/navigation/** --ignore \"/core\\/modules\\/navigation\\/js\\/templates.js/\" --command \"npm run navigation:build\" --verbose",
+    "copy:build": "node scripts/copy",
+    "copy:watch": "chokidar src/assets/** --ignore \"/src\\/assets\\/.keep/\" --command \"npm run copy:build\" --verbose",
     "start": "npm-run-all --continue-on-error *:build --parallel *:watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vebersol/democritus.git"
   },
-  "author": "",
+  "author": "Vinícius Ebersol",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/vebersol/democritus/issues"
@@ -23,35 +26,18 @@
     "browser-sync": "^2.13.0",
     "del": "^2.2.0",
     "fs-extra": "^0.30.0",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-load": "^0.1.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-template-compile": "^1.2.0",
-    "gulp-uglify": "^1.5.3",
-    "gulp-wrap": "^0.13.0",
     "handlebars": "^4.0.5",
     "html-escape": "^2.0.0",
     "marked": "^0.3.5",
     "object-merge": "^2.5.1",
-    "sort-object": "^3.0.2"
-  },
-  "devDependencies": {
+    "sort-object": "^3.0.2",
     "browserify": "^14.3.0",
     "chokidar": "^1.7.0",
     "chokidar-cli": "^1.2.0",
-    "gulp-batch": "^1.0.5",
-    "gulp-connect": "^4.0.0",
-    "gulp-watch": "^4.3.6",
-    "istanbul": "^0.4.3",
-    "jasmine": "^2.4.1",
     "js-beautify": "^1.6.4",
     "minifyify": "^7.3.5",
     "node-sass": "^4.5.2",
     "npm-run-all": "^4.0.2",
-    "uglify-js": "^3.0.3",
     "universal-jst": "^1.0.5"
   }
 }

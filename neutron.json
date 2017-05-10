@@ -18,20 +18,16 @@
 		},
 		"src": {
 			"root": "./src/",
-			"css": "./src/css/",
+			"assets": "./src/assets/",
 			"data": "./src/data/",
-			"images": "./src/images/",
-			"js": "./src/js/",
 			"layouts": "./src/layouts/",
-			"patterns": "./src/patterns/",
-			"styleguides": "./src/styleguide/"
+			"patterns": "./src/patterns/"
 		},
 		"public": {
 			"root": "./public/",
-			"css": "./public/css/",
+			"assets": "./public/assets/",
 			"data": "./public/data/",
 			"images": "./public/images/",
-			"js": "./public/js/",
 			"markups": "./public/markups/",
 			"patterns": "./public/patterns/",
 			"styleguides": "./public/styleguide/"
