@@ -6,8 +6,10 @@ var isTest = args.indexOf('-t') > -1;
 module.exports = {
 	log: function (message, type) {
 		var types = {
-				error: '\x1b[41m',
-				success: '\x1b[42m'
+				title: '\x1b[45m',
+				info: '\x1b[33m',
+				error: '\x1b[31m',
+				success: '\x1b[32m'
 			},
 			reset = '\x1b[0m',
 			color = reset;

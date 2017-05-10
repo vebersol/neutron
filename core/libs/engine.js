@@ -29,7 +29,7 @@ var engine = function (cb) {
 		pages: {}
 	};
 
-	console.log('\x1b[42m' + 'Start render' + '\x1b[0m');
+	u.log('Neutron: Start render', 'info');
 
 	function init () {
 		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
@@ -50,8 +50,8 @@ var engine = function (cb) {
 		if (cb) {
 			cb();
 		}
-		console.log('\x1b[42m')
-		console.timeEnd('render duration');
+		console.log('\x1b[32m')
+		console.timeEnd(' render duration');
 		console.log('\x1b[0m')
 	}
 
@@ -422,7 +422,7 @@ var engine = function (cb) {
 		});
 	}
 
-	console.time('render duration');
+	console.time(' render duration');
 	init();
 
 	return true;
