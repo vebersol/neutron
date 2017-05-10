@@ -1,3 +1,5 @@
+"use strict";
+
 const path = require('path');
 const settings = require('../neutron.json');
 const u = require('../core/libs/utilities');

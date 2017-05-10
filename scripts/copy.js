@@ -1,3 +1,5 @@
+"use strict";
+
 const settings = require('../neutron.json');
 const u = require('../core/libs/utilities');
 const fse = require('fs-extra');
