@@ -1,5 +1,5 @@
 {
-  "name": "Neutron Atomic Design Tool",
+  "name": "neutron",
   "version": "0.1.0",
   "description": "An atomic design based system!",
   "main": "index.js",
@@ -10,7 +10,8 @@
     "navigation:watch": "chokidar core/modules/navigation/** --ignore \"/core\\/modules\\/navigation\\/js\\/templates.js/\" --command \"npm run navigation:build\" --verbose",
     "copy:build": "node scripts/copy",
     "copy:watch": "chokidar src/assets/** --ignore \"/src\\/assets\\/.keep/\" --command \"npm run copy:build\" --verbose",
-    "start": "npm-run-all --continue-on-error *:build --parallel *:watch"
+    "start": "npm-run-all --continue-on-error *:build --parallel *:watch",
+    "test": "npm run start"
   },
   "repository": {
     "type": "git",
