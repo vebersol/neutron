@@ -1,4 +1,4 @@
-var I18n = {
+module.exports = {
 	"neutron_options": "Neutron options",
 	"neutron_options_description": "Toggle Neutron options (n)",
 	"search_placeholder": "Search patterns",
@@ -24,4 +24,4 @@ var I18n = {
 	"export_message": "Exporting the following URL as QR Code",
 	"settings": "Settings",
 	"settings_description": "See information about Neutron and change settings"
-}
+};

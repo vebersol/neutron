@@ -7,12 +7,12 @@ KeyboardNav.prototype = {
 		var parent = this;
 
 		this.buttons = buttons;
-		this.bar = Zepto(pcn('.sticky-nav'));
-		this.startBtn = Zepto(pcn('.button--start'));
-		this.infoBtn = Zepto(pcn('.button--code'));
-		this.qrCodeBtn = Zepto(pcn('.button--qr'));
-		this.settingsBtn = Zepto(pcn('.button--info'));
-		this.searchBtn = Zepto(pcn('.button--search'));
+		this.bar = Zepto(neutronADT.i.pcn('.sticky-nav'));
+		this.startBtn = Zepto(neutronADT.i.pcn('.button--start'));
+		this.infoBtn = Zepto(neutronADT.i.pcn('.button--code'));
+		this.qrCodeBtn = Zepto(neutronADT.i.pcn('.button--qr'));
+		this.settingsBtn = Zepto(neutronADT.i.pcn('.button--info'));
+		this.searchBtn = Zepto(neutronADT.i.pcn('.button--search'));
 
 		Zepto(document).on('keyup', function (ev) {
 			parent.keyUp(ev);
@@ -38,7 +38,7 @@ KeyboardNav.prototype = {
 					this.toggleBar();
 				}
 
-				var menu = Zepto(pcn('.menu--items'));
+				var menu = Zepto(neutronADT.i.pcn('.menu--items'));
 				var firstItem = menu.children().find('input').first();
 				firstItem.focus().prop('checked', true);
 			}
@@ -86,3 +86,5 @@ KeyboardNav.prototype = {
 		this.settingsBtn.click();
 	},
 }
+
+module.exports = KeyboardNav;

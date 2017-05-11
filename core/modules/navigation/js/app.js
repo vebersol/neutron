@@ -1,28 +1,26 @@
-var patternData = neutronADT,
-	PREFIX = 'neutron',
-	PATTERNS_PATH = patternData.i.assetsPath + 'patterns/',
-	menuBehavior = patternData.i.menuBehavior,
-	cssTheme = patternData.i.cssTheme;
+neutronADT.i.patternsPath = neutronADT.i.assetsPath + 'patterns/';
+neutronADT.i.prefix = 'neutron';
 
 /**
  * Add prefix to an usual string. Class or id selectors will also be replaced correctly.
- * Example: pcn('.button') -> '.neutron-button'
+ * Example: neutronADT.i.neutronADT.i.pcn('.button') -> '.neutron-button'
  *
  * @param {String} str
  * @return {String} prefixed str param
  */
-function pcn(str) {
-	var prefixed = (PREFIX + '-' + str).replace(/[\.#]/, '');
+neutronADT.i.pcn = function(str) {
+	var prefixed = (neutronADT.i.prefix + '-' + str).replace(/[\.#]/, '');
 
 	if (str[0] === '.' || str[0] === '#') {
-		return str[0] + prefixed;
+		 return str[0] + prefixed;
 	}
 
 	return prefixed;
 }
 
-function noPrefix(prefixedString) {
-	return prefixedString.replace(PREFIX + '-', '');
+neutronADT.i.noPrefix = function(prefixedString) {
+	return prefixedString.replace(neutronADT.i.prefix + '-', '');
 }
 
+var Main = require('./components/main');
 new Main();

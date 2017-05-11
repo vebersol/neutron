@@ -1,4 +1,7 @@
+QRCode = require('../libs/qrcode.min');
+
 var Menu = function () {
+	var CodeFrame = require('./codeFrame');
 	this.codeFrame = new CodeFrame();
 	this.namespace = 'neutronADT';
 	this.menuBehaviorNamespace = this.namespace+'menuBehavior';
@@ -11,18 +14,24 @@ Menu.prototype = {
 		var parent = this;
 
 		Zepto.ajax({
-			url: patternData.i.assetsPath + 'data/patterns.json',
+			url: neutronADT.i.assetsPath + 'data/patterns.json',
 			dataType: "json",
 			success: function(data) {
+				var Storage = require('./storage');
 				parent.storage = new Storage();
 				parent.renderMenu(data);
 
-				parent.menuBehavior = parent.storage.getSettings(parent.menuBehaviorNamespace) || menuBehavior;
+				parent.menuBehavior = parent.storage.getSettings(parent.menuBehaviorNamespace) || neutronADT.i.menuBehavior;
 				parent.changeMenuBehavior(parent.menuBehavior);
-				Zepto(pcn('.settings--menu-behavior input[type=radio][value='+parent.menuBehavior+']')).attr("checked", true);
+				Zepto(neutronADT.i.pcn('.settings--menu-behavior input[type=radio][value='+parent.menuBehavior+']')).attr("checked", true);
 
+				var KeyboardNav = require('./keyboardNav');
 				new KeyboardNav();
+
+				var Search = require('./search');
 				new Search();
+
+				var Theme = require('./theme');
 				new Theme();
 			}
 		});
@@ -30,7 +39,7 @@ Menu.prototype = {
 
 	renderMenu: function (data) {
 		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'],
-				menu = Zepto(pcn('.menu--items')),
+				menu = Zepto(neutronADT.i.pcn('.menu--items')),
 				list;
 
 		for (var i = 0; i < menuArr.length; i++) {
@@ -57,9 +66,9 @@ Menu.prototype = {
 			objLen = this.getObjectSize(data[item]);
 
 			if (data[item].hasOwnProperty('status') && data[item].hasOwnProperty('url')) {
-				list = Zepto('<li><a href="' + PATTERNS_PATH + data[item].url + '">' + this.toTitle(item) + '</a></li>');
+				list = Zepto('<li><a href="' + neutronADT.i.patternsPath + data[item].url + '">' + this.toTitle(item) + '</a></li>');
 				if (data[item].status) {
-					list.find('a').addClass(pcn(data[item].status))
+					list.find('a').addClass(neutronADT.i.pcn(data[item].status))
 				}
 			} else if (typeof data[item] === 'object' && objLen > 0) {
 				list = Zepto('<li><input type="checkbox" id="'+item+'-'+property+'" /><label for="'+item+'-'+property+'">' + this.toTitle(item) + '</label></li>').data('item', item);
@@ -80,34 +89,34 @@ Menu.prototype = {
 		var parent = this,
 				qrcode,
 				qrcodeEl = Zepto('#qrcode'),
-				qrCodeFrame = Zepto(pcn('.qr-code-wrapper')),
-				infoFrame = Zepto(pcn('.info-wrapper')),
-				codeBtn = Zepto(pcn('.button--code')),
-				menu = Zepto(pcn('.menu--items')),
-				classList = [pcn('.button--start'), pcn('.navigation'), pcn('.menu')],
+				qrCodeFrame = Zepto(neutronADT.i.pcn('.qr-code-wrapper')),
+				infoFrame = Zepto(neutronADT.i.pcn('.info-wrapper')),
+				codeBtn = Zepto(neutronADT.i.pcn('.button--code')),
+				menu = Zepto(neutronADT.i.pcn('.menu--items')),
+				classList = [neutronADT.i.pcn('.button--start'), neutronADT.i.pcn('.navigation'), neutronADT.i.pcn('.menu')],
 				movableFrames = Zepto(classList.join(', '));
 
 		if(parent.menuBehavior === "off-canvas") {
 			Zepto('body').on('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function() {
-				if(!Zepto(this).hasClass(pcn('off-canvas--active'))) {
-					Zepto(this).removeClass(pcn('off-canvas--overflow'));
+				if(!Zepto(this).hasClass(neutronADT.i.pcn('off-canvas--active'))) {
+					Zepto(this).removeClass(neutronADT.i.pcn('off-canvas--overflow'));
 				}
 			});
 		}
 
-		Zepto(pcn('.button--start')).click(function () {
+		Zepto(neutronADT.i.pcn('.button--start')).click(function () {
 			var element = Zepto(this),
 					body = Zepto('body');
 
 			element.toggleClass('active');
-			Zepto(pcn('.sticky-nav')).toggleClass('active');
+			Zepto(neutronADT.i.pcn('.sticky-nav')).toggleClass('active');
 
 			if(parent.menuBehavior === "off-canvas") {
-				if (body.hasClass(pcn('off-canvas--active'))) {
-					body.removeClass(pcn('off-canvas--active'));
+				if (body.hasClass(neutronADT.i.pcn('off-canvas--active'))) {
+					body.removeClass(neutronADT.i.pcn('off-canvas--active'));
 				} else {
-					body.addClass(pcn('off-canvas--active'));
-					body.addClass(pcn('off-canvas--overflow'));
+					body.addClass(neutronADT.i.pcn('off-canvas--active'));
+					body.addClass(neutronADT.i.pcn('off-canvas--overflow'));
 				}
 			}
 
@@ -118,51 +127,51 @@ Menu.prototype = {
 			}
 		});
 
-		if (patternData.i.patternName.length > 0) {
+		if (neutronADT.i.patternName.length > 0) {
 			codeBtn.click(function () {
 				if (!parent.codeFrame.loaded) {
 					parent.codeFrame.load();
 				}
 
 				Zepto(this).toggleClass('active');
-				var frame = Zepto(pcn('.code-frame'));
+				var frame = Zepto(neutronADT.i.pcn('.code-frame'));
 
 				frame.toggleClass('active');
 
 				if (frame.hasClass('active')) {
 					parent.storage.add('code');
-					movableFrames.addClass(pcn('frame-active'));
+					movableFrames.addClass(neutronADT.i.pcn('frame-active'));
 				} else {
 					parent.storage.remove('code');
-					movableFrames.removeClass(pcn('frame-active'));
+					movableFrames.removeClass(neutronADT.i.pcn('frame-active'));
 				}
 			});
 		} else {
 			codeBtn.addClass('disabled');
 		}
 
-		Zepto(pcn('.button--search')).click(function () {
-			var searchInput = Zepto(pcn('.menu--search input'));
+		Zepto(neutronADT.i.pcn('.button--search')).click(function () {
+			var searchInput = Zepto(neutronADT.i.pcn('.menu--search input'));
 			searchInput.focus();
 		});
 
-		var buttonClassPath = [pcn('.code-frame--close'), pcn('.button--close__link')];
+		var buttonClassPath = [neutronADT.i.pcn('.code-frame--close'), neutronADT.i.pcn('.button--close__link')];
 
 		Zepto(buttonClassPath.join(' ')).on('click', function () {
-			var codeFrameClasses = [pcn('.code-frame'), pcn('.button--code')];
+			var codeFrameClasses = [neutronADT.i.pcn('.code-frame'), neutronADT.i.pcn('.button--code')];
 			Zepto(codeFrameClasses.join(', ')).removeClass('active');
-			movableFrames.removeClass(pcn('frame-active'));
+			movableFrames.removeClass(neutronADT.i.pcn('frame-active'));
 			parent.storage.remove('code');
 		});
 
-		qrCodeFrame.find(pcn('.button--close__link')).on('click', function () {
-			var qrCodeClasses = [pcn('.qr-code-wrapper'), pcn('.button--qr')];
+		qrCodeFrame.find(neutronADT.i.pcn('.button--close__link')).on('click', function () {
+			var qrCodeClasses = [neutronADT.i.pcn('.qr-code-wrapper'), neutronADT.i.pcn('.button--qr')];
 
 			Zepto(qrCodeClasses.join(', ')).removeClass('active');
 			parent.storage.remove('qr');
 		});
 
-		Zepto(pcn('.button--qr')).click(function () {
+		Zepto(neutronADT.i.pcn('.button--qr')).click(function () {
 			var el = Zepto(this);
 
 			if (!qrCodeFrame.hasClass('active')) {
@@ -175,7 +184,7 @@ Menu.prototype = {
 					height: 256
 				});
 
-				qrCodeFrame.find(pcn('.lightbox--content__text span')).html(location.href);
+				qrCodeFrame.find(neutronADT.i.pcn('.lightbox--content__text span')).html(location.href);
 
 				parent.storage.add('qr');
 			}
@@ -186,7 +195,7 @@ Menu.prototype = {
 			}
 		});
 
-		Zepto(pcn('.button--info')).click(function () {
+		Zepto(neutronADT.i.pcn('.button--info')).click(function () {
 			var el = Zepto(this);
 
 			if (!infoFrame.hasClass('active')) {
@@ -201,14 +210,14 @@ Menu.prototype = {
 			}
 		});
 
-		infoFrame.find(pcn('.button--close__link')).on('click', function () {
-			var infoClasses = [pcn('.info-wrapper'), pcn('.button--info')];
+		infoFrame.find(neutronADT.i.pcn('.button--close__link')).on('click', function () {
+			var infoClasses = [neutronADT.i.pcn('.info-wrapper'), neutronADT.i.pcn('.button--info')];
 
 			Zepto(infoClasses.join(', ')).removeClass('active');
 			parent.storage.remove('info');
 		});
 
-		Zepto(pcn('.settings--menu-behavior input[type=radio]')).on('change', function () {
+		Zepto(neutronADT.i.pcn('.settings--menu-behavior input[type=radio]')).on('change', function () {
 			var el = Zepto(this),
 				value = el.val();
 
@@ -248,7 +257,7 @@ Menu.prototype = {
 			var btns = this.storage.data.split(',');
 
 			for (var i = 0; i < btns.length; i++) {
-				Zepto(pcn('.button--' + btns[i])).click();
+				Zepto(neutronADT.i.pcn('.button--' + btns[i])).click();
 			}
 		}
 	},
@@ -272,14 +281,14 @@ Menu.prototype = {
 		var body = Zepto('body');
 
 		if(behavior === "off-canvas") {
-			body.addClass(pcn('off-canvas'));
+			body.addClass(neutronADT.i.pcn('off-canvas'));
 
-			if(Zepto(pcn('.sticky-nav')).hasClass('active')) {
-				body.addClass(pcn('off-canvas--active'));
-				body.addClass(pcn('off-canvas--overflow'));
+			if(Zepto(neutronADT.i.pcn('.sticky-nav')).hasClass('active')) {
+				body.addClass(neutronADT.i.pcn('off-canvas--active'));
+				body.addClass(neutronADT.i.pcn('off-canvas--overflow'));
 			}
 		} else {
-			body.removeClass(pcn('off-canvas')).removeClass(pcn('off-canvas--active')).removeClass(pcn('off-canvas--overflow'));
+			body.removeClass(neutronADT.i.pcn('off-canvas')).removeClass(neutronADT.i.pcn('off-canvas--active')).removeClass(neutronADT.i.pcn('off-canvas--overflow'));
 		}
 
 		this.menuBehavior = behavior;
@@ -287,17 +296,19 @@ Menu.prototype = {
 	},
 
 	setStatus: function () {
-		var statusTarget = Zepto(pcn('#status'));
-		var activeMenuItem = Zepto(pcn('.menu--items .current a'));
+		var statusTarget = Zepto(neutronADT.i.pcn('#status'));
+		var activeMenuItem = Zepto(neutronADT.i.pcn('.menu--items .current a'));
 		var status = activeMenuItem.attr('class');
 
 		if (status) {
 			statusTarget.find('span')
 				.addClass(status)
-				.append(noPrefix(status).toUpperCase().replace('-', ' '));
+				.append(noneutronADT.i.prefix(status).toUpperCase().replace('-', ' '));
 		}
 		else {
 			statusTarget.hide();
 		}
 	}
 }
+
+module.exports = Menu;

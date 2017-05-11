@@ -1,7 +1,9 @@
 var Theme = function() {
+	var Storage = require('./storage');
 	this.storage = new Storage();
 	this.namespace = 'neutronADT';
 	this.themeNamespace = this.namespace+'Theme';
+
 	this.init();
 }
 
@@ -14,7 +16,7 @@ Theme.prototype = {
 	bind: function() {
 		var parent = this;
 
-		Zepto(pcn('.settings--theme input[type=radio]')).on('change', function () {
+		Zepto(neutronADT.i.pcn('.settings--theme input[type=radio]')).on('change', function () {
 			var el = Zepto(this),
 				value = el.val();
 
@@ -24,16 +26,18 @@ Theme.prototype = {
 	},
 
 	changeTheme: function(theme) {
-		var stylesheet = Zepto(pcn('.theme-stylesheet'));
+		var stylesheet = Zepto(neutronADT.i.pcn('.theme-stylesheet'));
 
-		stylesheet.attr('href', patternData.i.assetsPath+'styleguide/modules/navigation/css/'+theme+'.css');
+		stylesheet.attr('href', neutronADT.i.assetsPath+'styleguide/modules/navigation/css/'+theme+'.css');
 	},
 
 	setupTheme: function () {
 		var theme = this.storage.getSettings(this.themeNamespace) || false;
 		if(theme) {
-			Zepto(pcn('.settings--theme input[type=radio][value='+theme+']')).attr("checked", true);
+			Zepto(neutronADT.i.pcn('.settings--theme input[type=radio][value='+theme+']')).attr("checked", true);
 			/*this.changeTheme(theme);*/
 		}
 	}
 }
+
+module.exports = Theme;

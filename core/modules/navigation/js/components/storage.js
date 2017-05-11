@@ -27,8 +27,8 @@ Storage.prototype = {
 	},
 
 	getOpenedLayers: function () {
-		var wrapper = Zepto(pcn('.sticky-nav'));
-		var btnClass = pcn('button--');
+		var wrapper = Zepto(neutronADT.i.pcn('.sticky-nav'));
+		var btnClass = neutronADT.i.pcn('button--');
 		var buttons = wrapper.find('[class*="' + btnClass + '"]');
 		var openedLayers = [];
 
@@ -102,4 +102,6 @@ Storage.prototype = {
 	getSettings: function (item) {
 		return window.localStorage.getItem(item);
 	}
-}
+};
+
+module.exports = Storage;

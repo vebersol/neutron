@@ -1,6 +1,5 @@
 var Search = function () {
 	this.init();
-
 	this.firstSearch = true;
 };
 
@@ -12,25 +11,25 @@ Search.prototype = {
 	bindSearch: function () {
 		var parent = this,
 			timer,
-			input = Zepto(pcn('.menu--search input')),
-			clearBtn = Zepto(pcn('.menu--search__clear')),
-			menu = Zepto(pcn('.menu--items'));
+			input = Zepto(neutronADT.i.pcn('.menu--search input')),
+			clearBtn = Zepto(neutronADT.i.pcn('.menu--search__clear')),
+			menu = Zepto(neutronADT.i.pcn('.menu--items'));
 
 		input.on('keyup blur', function (ev) {
 			clearTimeout(timer);
 			timer = setTimeout(function () {
 				var value = Zepto(ev.target).val().toLowerCase(),
-					anchorsList = [pcn('.menu--items > li a'), pcn('.menu--items > li label')],
+					anchorsList = [neutronADT.i.pcn('.menu--items > li a'), neutronADT.i.pcn('.menu--items > li label')],
 					anchors = Zepto(anchorsList.join(', ')),
-					itemsList = [pcn('.menu--items li[data-item]'), pcn('.menu--items li a')];
+					itemsList = [neutronADT.i.pcn('.menu--items li[data-item]'), neutronADT.i.pcn('.menu--items li a')];
 
 				if(parent.firstSearch) {
-					parent.opened = Zepto(pcn('.menu--items input:checked'));
+					parent.opened = Zepto(neutronADT.i.pcn('.menu--items input:checked'));
 					parent.firstSearch = false;
 				}
 
 				Zepto(itemsList.join(', ')).hide();
-				Zepto(pcn('.menu--items li input')).prop('checked', false);
+				Zepto(neutronADT.i.pcn('.menu--items li input')).prop('checked', false);
 
 				if(value != ''){
 					anchors.each(function () {
@@ -60,13 +59,13 @@ Search.prototype = {
 					Zepto(itemsList.join(', ')).show();
 					parent.opened.prop('checked', true);
 					parent.firstSearch = true;
-					parent.opened = Zepto(pcn('.menu--items input:checked'));
+					parent.opened = Zepto(neutronADT.i.pcn('.menu--items input:checked'));
 				}
 			}, 500);
 		});
 
 		input.on('focus', function () {
-			Zepto(this).closest(pcn('.menu--search')).addClass(pcn('menu--search__opened'))
+			Zepto(this).closest(neutronADT.i.pcn('.menu--search')).addClass(neutronADT.i.pcn('menu--search__opened'))
 		});
 
 		input.on('blur', function () {
@@ -74,14 +73,16 @@ Search.prototype = {
 			var value = input.val();
 
 			if (value.length === 0) {
-				input.closest(pcn('.menu--search')).removeClass(pcn('menu--search__opened'))
+				input.closest(neutronADT.i.pcn('.menu--search')).removeClass(neutronADT.i.pcn('menu--search__opened'))
 			}
 		});
 
 		clearBtn.on('click', function () {
 			input.prop('value', '')
 			input.blur();
-			Zepto(pcn('.menu--search')).removeClass(pcn('menu--search__opened'));
+			Zepto(neutronADT.i.pcn('.menu--search')).removeClass(neutronADT.i.pcn('menu--search__opened'));
 		});
 	}
-}
+};
+
+module.exports = Search;

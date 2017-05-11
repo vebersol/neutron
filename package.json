@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "neutron:build": "node scripts/neutron --verbose",
-    "neutron:watch": "chokidar src/{data,layouts,patterns}/** --command \"npm run neutron:build\" --verbose",
+    "neutron:watch": "chokidar neutron.json src/{data,layouts,patterns}/** core/modules/templates/** --command \"npm run neutron:build\" --verbose",
     "navigation:build": "node scripts/navigation",
-    "navigation:watch": "chokidar core/modules/navigation/** --ignore \"/core\\/modules\\/navigation\\/js\\/templates.js/\" --command \"npm run navigation:build\" --verbose",
+    "navigation:watch": "chokidar core/modules/navigation/** neutron.json --ignore \"/core\\/modules\\/navigation\\/js\\/templates.js/\" --command \"npm run navigation:build\" --verbose",
     "copy:build": "node scripts/copy",
     "copy:watch": "chokidar src/assets/** --ignore \"/src\\/assets\\/.keep/\" --command \"npm run copy:build\" --verbose",
-    "start": "npm-run-all --continue-on-error *:build --parallel *:watch",
+    "server": "browser-sync start --config .browser-sync",
+    "start": "npm-run-all --continue-on-error *:build --parallel *:watch server",
     "test": "npm-run-all --continue-on-error *:build"
   },
   "repository": {

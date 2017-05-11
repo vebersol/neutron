@@ -3,7 +3,7 @@ require('./libs/qrcode.min');
 require('./libs/zepto');
 
 require('./templates');
-require('./lang/en');
+require('./lang/index');
 
 require('./components/codeFrame');
 require('./components/keyboardNav');
