@@ -4,7 +4,6 @@ const path = require('path');
 const settings = require('../neutron.json');
 const u = require('../core/libs/utilities');
 const sass = require('node-sass');
-const glob = require('glob');
 const fse = require('fs-extra');
 const jst = require('universal-jst');
 const browserify = require('browserify');
@@ -17,25 +16,33 @@ const init = () => {
 }
 
 const getStyles = () => {
-	const files = glob(u.getPath(settings.paths.core.root, 'modules/navigation/scss/[^_]*.scss'), (err, matches) => {
-		u.log("Start rendering Stylesheets\n", 'info');
-		matches.forEach((file, index) => {
-			renderStyles(file, index, matches.length);
+	let filesArr = [];
+
+	fse.walk(u.getPath(settings.paths.core.root, 'modules/navigation/scss/'))
+		.on('data', function (file) {
+			if (path.extname(file.path) && path.basename(file.path)[0] !== '_') {
+				filesArr.push(file);
+			}
+		})
+		.on('end', () => {
+			filesArr.forEach((file, index) => {
+				let fileContents = fse.readFileSync(file.path, settings.encode);
+				renderStyles(file, index, filesArr.length);
+			});
 		});
-	});
 }
 
 const renderStyles = (file, index, totalFiles) => {
-	let fileName = file.match(/([\w\d_\-\s\.]+\.[\w\d]+)[^\\]/g);
-	let cssFile = fileName[0] ? fileName[0].replace('scss', 'css') : null;
+	let fileName = path.basename(file.path);
+	let cssFile = fileName ? fileName.replace('scss', 'css') : null;
 	let cssPath = u.getPath(settings.paths.public.styleguides, 'modules/navigation/css');
-	let pathToOutput = cssPath + '/' + cssFile;
+	let pathToOutput = u.getPath(cssPath, '/' + cssFile);
 
 	fse.mkdirsSync(cssPath);
 
 	if (cssFile) {
 		sass.render({
-			file: file,
+			file: file.path,
 			outFile: pathToOutput,
 			outputStyle: 'compressed'
 		}, (err, result) => {
