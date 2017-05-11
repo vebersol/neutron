@@ -371,7 +371,8 @@ var engine = function (cb) {
 			assetsPath: '',
 			cssTheme: settings.cssTheme,
 			dependencies: '[]',
-			menuBehavior: settings.menuBehavior || "overlay"
+			menuBehavior: settings.menuBehavior || 'overlay',
+			language: settings.language || 'en'
 		}, indexTemplate());
 
 		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
