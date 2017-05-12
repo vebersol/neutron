@@ -4,15 +4,8 @@
   "description": "An atomic design based system!",
   "main": "index.js",
   "scripts": {
-    "neutron:build": "node scripts/neutron --verbose",
-    "neutron:watch": "chokidar neutron.json src/{data,layouts,patterns}/** core/modules/templates/** --command \"npm run neutron:build\" --verbose",
-    "navigation:build": "node scripts/navigation",
-    "navigation:watch": "chokidar core/modules/navigation/** neutron.json --ignore \"/core\\/modules\\/navigation\\/js\\/templates.js/\" --command \"npm run navigation:build\" --verbose",
-    "copy:build": "node scripts/copy",
-    "copy:watch": "chokidar src/assets/** --ignore \"/src\\/assets\\/.keep/\" --command \"npm run copy:build\" --verbose",
-    "server": "browser-sync start --config .browser-sync",
-    "start": "npm-run-all --continue-on-error *:build --parallel *:watch server",
-    "test": "npm-run-all --continue-on-error *:build"
+    "start": "node bin/neutron run",
+    "test": "node bin/neutron run"
   },
   "repository": {
     "type": "git",
@@ -40,6 +33,11 @@
     "minifyify": "^7.3.5",
     "node-sass": "^4.5.2",
     "npm-run-all": "^4.0.2",
-    "universal-jst": "^1.0.5"
-  }
+    "universal-jst": "^1.0.5",
+    "commander": "^2.9.0"
+  },
+  "bin": {
+    "neutron": "./bin/neutron"
+  },
+  "devDependencies": {}
 }

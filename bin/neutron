@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const pkg = require('../package.json');
+const program = require('commander');
+const exec = require('child_process').exec;
+const async = require('async');
+const neutron = require('../scripts/neutron');
+const navigation = require('../scripts/navigation');
+const copy = require('../scripts/copy');
+const server = require('../scripts/server');
+const watch = require('../scripts/watch');
+
+let run = (options) => {
+	if (options.watch) {
+		async.waterfall([
+			callback => {
+				watch(callback);
+			},
+			callback => {
+				if (options.server) {
+					server(callback);
+				}
+			}
+		]);
+	} else {
+		async.waterfall([
+			callback => {
+				neutron(callback);
+			},
+			callback => {
+				navigation(callback);
+			},
+			callback => {
+				copy(callback);
+			},
+			callback => {
+				if (options.server) {
+					server(callback);
+				}
+			}
+		])
+	}
+}
+
+let startServer = (options) => {
+	server();
+}
+
+let watchFiles = (options) => {
+	watch();
+}
+
+program
+	.command('run')
+	.description('Run neutron')
+	.option('-w, --watch', 'Watch files')
+	.option('-s, --server', 'Run server')
+	.action(run);
+
+program.parse(process.argv);

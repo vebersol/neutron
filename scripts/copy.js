@@ -4,7 +4,12 @@ const settings = require('../neutron.json');
 const u = require('../core/libs/utilities');
 const fse = require('fs-extra');
 
-const copy = () => {
+let cb;
+
+const copy = (callback) => {
+
+	cb = callback || null;
+
 	let publicAssets = u.getPath(settings.paths.public.assets);
 
 	u.log('Copy Assets', 'title');
@@ -27,7 +32,12 @@ const copy = () => {
 		}
 
 		u.log('Assets copy successfull!', 'success');
+		u.log('');
+
+		if (cb) {
+			cb();
+		}
 	});
 }
 
-copy();
+module.exports = copy;

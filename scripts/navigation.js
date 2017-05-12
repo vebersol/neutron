@@ -8,7 +8,12 @@ const fse = require('fs-extra');
 const jst = require('universal-jst');
 const browserify = require('browserify');
 
-const init = () => {
+let cb;
+
+const init = (callback) => {
+
+	cb = callback || null;
+
 	u.log('Start navigation build', 'title');
 	u.log('');
 
@@ -58,6 +63,11 @@ const renderStyles = (file, index, totalFiles) => {
 					if (totalFiles - 1 == index) {
 						u.log('');
 						u.log('Stylesheets successfully written', 'success');
+						u.log('');
+
+						if (cb) {
+							cb();
+						}
 					}
 				} else {
 					u.log(err, 'error');
@@ -109,4 +119,4 @@ const writeJS = () => {
 	});
 };
 
-init();
+module.exports = init;
