@@ -22,9 +22,9 @@ To run **Neutron** you just need to download it and run:
 
 After successfully load your own implementation, just run:
 
-    $ gulp server
+    $ npm run start -- -w -s
 
-It will compile your patterns, copy your assets and automatically load a [browsersync](https://www.browsersync.io/) server in *http://localhost:3000*
+It will compile your patterns, copy your assets and automatically load a [browsersync](https://www.browsersync.io/) server in *http://localhost:3000* and watch your changes
 
 ## Tips
 
@@ -63,16 +63,20 @@ It’s useful for team work to define the status of every particular pattern to 
 	}
     ```
 
-## Main gulp tasks
+## Command line
 
-* **engine**: Renders your patterns
-* **navigation**: Generate all navigation module files and copy to your styleguide folders
-* **copy:all**: Copy all files (css, images, javascripts) aren't styleguides
-* **server**: Runs all previous tasks, watch your files and serve it using browsersync.
+Neutron has a friendly command line setup.
+
+TODO: Add more documentation.
+
+* **neutron run**: Renders your patterns, generates the navigation module and copy your assets folder.
+* **neutron run -s**: Renders your patterns, generates the navigation module, copy your assets folder and runs a server.
+* **neutron run -w**: Renders your patterns, generates the navigation module, copy your assets folder and watch your files.
+* **neutron run -w -s**: Do everything as documented above.
 
 ## Prerequisities
 
-**Neutron** requires [node.js](https://nodejs.org/) and [gulp.js](http://gulpjs.com/).
+**Neutron** requires [node.js](https://nodejs.org/).
 
 ## Running the tests
 
