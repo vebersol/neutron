@@ -1,15 +1,15 @@
 "use strict";
 
 const path = require('path');
-const settings = require('../neutron.json');
 const u = require('../core/libs/utilities');
+const currentDir = u.getAppPath(process.cwd());
+const settings = require(u.getPath('core/libs', '/settings'));
 const del = require('del');
 const engine = require('../core/libs/engine.js');
 
 let cb;
 
 const init = function(callback) {
-
 	if (callback) {
 		cb = () => {
 			setTimeout(() => { callback(); }, 0);
@@ -28,9 +28,9 @@ const clean = (callback) => {
 	u.log('Neutron: Start cleaning up public folder', 'info');
 	u.log('');
 	del([
-		path.resolve(settings.paths.public.data, '*'),
-		path.resolve(settings.paths.public.markups, '*'),
-		path.resolve(settings.paths.public.patterns, '*')
+		u.getAppPath(path.resolve(settings.paths.public.data, '*')),
+		u.getAppPath(path.resolve(settings.paths.public.markups, '*')),
+		u.getAppPath(path.resolve(settings.paths.public.patterns, '*'))
 	], {
 		force: true
 	}).then(paths => {

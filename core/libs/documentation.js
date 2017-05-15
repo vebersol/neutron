@@ -1,5 +1,5 @@
 var fse = require('fs-extra');
-var settings = require('../../neutron.json');
+var settings = require('./settings');
 var u = require('./utilities');
 
 var marked = require('marked');

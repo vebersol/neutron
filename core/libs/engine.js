@@ -6,7 +6,7 @@ var object_merge = require('object-merge');
 var sort_object = require('sort-object');
 var beautify_html = require('js-beautify').html;
 
-var settings = require('../../neutron.json');
+var settings = require('./settings');
 
 var u = require('./utilities');
 var partials = require('./partials')();
@@ -32,7 +32,7 @@ var engine = function (cb) {
 	u.log('Neutron: Start render', 'info');
 
 	function init () {
-		globalData = JSON.parse(fse.readFileSync(u.getPath(settings.paths.src.data, 'global.json'), settings.encode));
+		globalData = JSON.parse(fse.readFileSync(u.getAppPath(settings.paths.src.data, 'global.json'), settings.encode));
 		registerHelpers();
 		cleanPaths();
 		walkPartials();
@@ -65,7 +65,7 @@ var engine = function (cb) {
 
 	function getPatterns() {
 		setRenderHelper();
-		return fse.walk(u.getPath(settings.paths.src.patterns))
+		return fse.walk(u.getAppPath(settings.paths.src.patterns))
 			.on('data', function (file) {
 				if (isPatternExtension(path.extname(file.path))) {
 					patternFiles.push(file);
@@ -86,6 +86,10 @@ var engine = function (cb) {
 	function writeFiles() {
 		try {
 			var totalFiles = patternFiles.length;
+
+			if (totalFiles === 0) {
+				return onEnd();
+			}
 
 			patternFiles.forEach(function (file, i) {
 				getData(file.path, function (data) {
@@ -211,8 +215,8 @@ var engine = function (cb) {
 	function renderFile(fileInfo, end) {
 		var DS = path.sep;
 		var partialName = partials.getPatternFolder(fileInfo.partialName);
-		var filePath = u.getPath(settings.paths.public.patterns + partialName, '/index.html');
-		var filePathMarkups = u.getPath(settings.paths.public.patterns + partialName, '/markups.html');
+		var filePath = u.getAppPath(settings.paths.public.patterns + partialName, '/index.html');
+		var filePathMarkups = u.getAppPath(settings.paths.public.patterns + partialName, '/markups.html');
 
 		fse.outputFileSync(filePath, fileInfo.html);
 		fse.outputFileSync(filePathMarkups, fileInfo.markup);
@@ -269,8 +273,8 @@ var engine = function (cb) {
 	}
 
 	function cleanPaths() {
-		fse.mkdirsSync(u.getPath(settings.paths.public.patterns));
-		fse.mkdirsSync(u.getPath(settings.paths.public.data));
+		fse.mkdirsSync(u.getAppPath(settings.paths.public.patterns));
+		fse.mkdirsSync(u.getAppPath(settings.paths.public.data));
 	}
 
 	function addToTree(partial, end) {
@@ -316,13 +320,13 @@ var engine = function (cb) {
 			}
 		}
 
-		fse.outputFileSync(u.getPath(settings.paths.public.data, 'patterns.json'), JSON.stringify(patternsTree));
+		fse.outputFileSync(u.getAppPath(settings.paths.public.data, 'patterns.json'), JSON.stringify(patternsTree));
 
 		renderTemplate();
 	}
 
 	function walkPartials() {
-		return fse.walk(u.getPath(settings.paths.src.patterns))
+		return fse.walk(u.getAppPath(settings.paths.src.patterns))
 			.on('data', function (file) {
 				if (isPatternExtension(path.extname(file.path))) {
 					partials.registeredPartials.push(file);
@@ -353,6 +357,8 @@ var engine = function (cb) {
 					}
 				});
 			});
+		} else {
+			getPatterns();
 		}
 
 		return renderData();
@@ -375,7 +381,7 @@ var engine = function (cb) {
 			language: settings.language || 'en'
 		}, indexTemplate());
 
-		fse.outputFileSync(u.getPath(settings.paths.public.root, 'index.html'), indexHTML);
+		fse.outputFileSync(u.getAppPath(settings.paths.public.root, 'index.html'), indexHTML);
 	}
 
 	function isTemplate(partial) {

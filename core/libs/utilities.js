@@ -26,6 +26,13 @@ module.exports = {
 		}
 
 		return path.resolve(__dirname, '../../', dir);
+	},
+	getAppPath: function (dir, filename) {
+		if (filename) {
+			return path.resolve(process.cwd(), dir + filename);
+		}
+
+		return path.resolve(process.cwd(), dir);
 	}
 }
 

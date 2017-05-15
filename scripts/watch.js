@@ -4,7 +4,7 @@ const chokidar = require('chokidar');
 const navigation = require('./navigation');
 const neutron = require('./neutron');
 const copy = require('./copy');
-const settings = require('../neutron.json');
+const settings = require('../core/libs/settings');
 const u = require('../core/libs/utilities');
 
 let cb;

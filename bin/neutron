@@ -2,6 +2,7 @@
 
 'use strict';
 
+const path = require('path');
 const pkg = require('../package.json');
 const program = require('commander');
 const exec = require('child_process').exec;
@@ -11,45 +12,111 @@ const navigation = require('../scripts/navigation');
 const copy = require('../scripts/copy');
 const server = require('../scripts/server');
 const watch = require('../scripts/watch');
+const settings = require('../core/libs/settings');
+const u = require('../core/libs/utilities');
+const fse = require('fs-extra');
+
+const currentDir = u.getPath(process.cwd())
 
 let run = (options) => {
-	if (options.watch) {
-		async.waterfall([
-			callback => {
-				watch(callback);
-			},
-			callback => {
-				if (options.server) {
-					server(callback);
-				}
+	async.waterfall([
+		callback => {
+			neutron(callback);
+		},
+		callback => {
+			navigation(callback);
+		},
+		callback => {
+			copy(callback);
+		},
+		callback => {
+			if (options.server) {
+				return server(callback);
 			}
-		]);
+
+			return callback();
+		},
+		callback => {
+			if (options.watch) {
+				return watch(callback);
+			}
+
+			return callback();
+		}
+	])
+}
+
+let install = (options) => {
+	let src = u.getPath(settings.paths.src.root);
+	let originalSettings = u.getPath('./neutron.json');
+	let sourceTarget = u.getPath(currentDir, '/src');
+	let settingsTarget = u.getPath(currentDir, '/neutron.json');
+
+	u.log('===============', 'title');
+	u.log('Install neutron', 'title');
+	u.log('===============', 'title');
+
+	if (!fse.existsSync(settingsTarget)) {
+		u.log('');
+		u.log('Start copying neutron settings file', 'info');
+		u.log('');
+
+		fse.copy(originalSettings, settingsTarget, err => {
+			if (err) {
+				return u.log(err, 'error');
+			}
+
+			u.log('');
+			u.log('Copying neutron settings file', 'success');
+			u.log('');
+		});
 	} else {
-		async.waterfall([
-			callback => {
-				neutron(callback);
-			},
-			callback => {
-				navigation(callback);
-			},
-			callback => {
-				copy(callback);
-			},
-			callback => {
-				if (options.server) {
-					server(callback);
-				}
-			}
-		])
+		u.log('');
+		u.log('Settings file already exists. Skip settings copy.', 'info');
+		u.log('');
 	}
-}
 
-let startServer = (options) => {
-	server();
-}
+	if (fse.existsSync(sourceTarget)) {
+		u.log('Fail to proceed, settings folder already exists', 'error');
+		return;
+	}
 
-let watchFiles = (options) => {
-	watch();
+	if (options.clean) {
+		u.log('');
+		u.log('Start creating a clean version of Neutron', 'info');
+		u.log('');
+
+		fse.mkdirsSync(u.getAppPath(settings.paths.src.assets));
+		fse.mkdirsSync(u.getAppPath(settings.paths.src.data));
+		fse.mkdirsSync(u.getAppPath(settings.paths.src.layouts));
+		fse.mkdirsSync(u.getAppPath(settings.paths.src.patterns));
+
+		fse.outputFileSync(u.getAppPath(settings.paths.src.data, 'global.json'), '{}');
+
+		fse.copy(u.getPath(settings.paths.src.layouts, '/clean.hbs'), u.getAppPath(settings.paths.src.layouts, settings.defaultLayoutName + '.hbs'), err => {
+			if (err) {
+				return u.log(err, 'error');
+			}
+		});
+
+		u.log('');
+		u.log('A clean version of Neutron has been created', 'success');
+		u.log('');
+	} else {
+		u.log('');
+		u.log('Start copying dummy source files', 'info');
+		u.log('');
+
+		fse.copy(u.getPath(src), sourceTarget, err => {
+			if (err) {
+				return u.log(err, 'error');
+			}
+
+			u.log('');
+			u.log('Dummy source files have been copy', 'success');
+			u.log('');
+		});
+	}
 }
 
 program
@@ -59,4 +126,11 @@ program
 	.option('-s, --server', 'Run server')
 	.action(run);
 
+program
+	.command('install')
+	.description('Install neutron')
+	.option('-c, --clean', 'Clean installation files')
+	.action(install);
+
 program.parse(process.argv);
+

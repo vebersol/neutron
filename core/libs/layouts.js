@@ -3,7 +3,7 @@ var path = require('path');
 var util = require('util');
 var handlebars = require('handlebars');
 
-var settings = require('../../neutron.json');
+var settings = require('./settings');
 
 var u = require('./utilities');
 
@@ -21,18 +21,20 @@ var layoutHandler = function () {
 	}
 
 	function getLayouts() {
-		fse.walk(u.getPath(settings.paths.src.layouts))
-			.on('data', function(file) {
-				if (path.extname(file.path) === settings.fileExtension) {
-					var layoutName = path.basename(file.path, settings.fileExtension);
-					fse.readFile(file.path, settings.encode, function(err, layoutSource) {
-						layouts[layoutName] = layoutSource;
-					});
-				}
-			});
+		fse.readdir(u.getAppPath(settings.paths.src.layouts), (err, files) => {
+			if (!err) {
+				files.forEach(file => {
+					if (path.extname(file) === settings.fileExtension) {
+						var layoutName = path.basename(file, settings.fileExtension);
 
+						layouts[layoutName] = fse.readFileSync(u.getAppPath(settings.paths.src.layouts, file), settings.encode);
+					}
+				});
+			}
 
-			return true;
+		});
+
+		return true;
 	}
 
 	function setHelpers() {

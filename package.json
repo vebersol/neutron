@@ -19,22 +19,21 @@
   "homepage": "https://github.com/vebersol/democritus#readme",
   "dependencies": {
     "browser-sync": "^2.13.0",
+    "browserify": "^14.3.0",
+    "chokidar": "^1.7.0",
+    "chokidar-cli": "^1.2.0",
+    "commander": "^2.9.0",
     "del": "^2.2.0",
     "fs-extra": "^0.30.0",
     "handlebars": "^4.0.5",
     "html-escape": "^2.0.0",
-    "marked": "^0.3.5",
-    "object-merge": "^2.5.1",
-    "sort-object": "^3.0.2",
-    "browserify": "^14.3.0",
-    "chokidar": "^1.7.0",
-    "chokidar-cli": "^1.2.0",
     "js-beautify": "^1.6.4",
-    "minifyify": "^7.3.5",
+    "marked": "^0.3.5",
     "node-sass": "^4.5.2",
     "npm-run-all": "^4.0.2",
-    "universal-jst": "^1.0.5",
-    "commander": "^2.9.0"
+    "object-merge": "^2.5.1",
+    "sort-object": "^3.0.2",
+    "universal-jst": "^1.0.5"
   },
   "bin": {
     "neutron": "./bin/neutron"

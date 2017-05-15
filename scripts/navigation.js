@@ -1,8 +1,9 @@
 "use strict";
 
 const path = require('path');
-const settings = require('../neutron.json');
 const u = require('../core/libs/utilities');
+const currentDir = u.getAppPath(process.cwd());
+const settings = require(u.getPath('core/libs', '/settings'));
 const sass = require('node-sass');
 const fse = require('fs-extra');
 const jst = require('universal-jst');
@@ -40,8 +41,8 @@ const getStyles = () => {
 const renderStyles = (file, index, totalFiles) => {
 	let fileName = path.basename(file.path);
 	let cssFile = fileName ? fileName.replace('scss', 'css') : null;
-	let cssPath = u.getPath(settings.paths.public.styleguides, 'modules/navigation/css');
-	let pathToOutput = u.getPath(cssPath, '/' + cssFile);
+	let cssPath = u.getAppPath(settings.paths.public.styleguides, 'modules/navigation/css');
+	let pathToOutput = u.getAppPath(cssPath, '/' + cssFile);
 
 	fse.mkdirsSync(cssPath);
 
@@ -102,13 +103,13 @@ const writeJS = () => {
 	let language = settings.language || 'en';
 	let b = browserify();
 	let jsSourcePath = u.getPath(settings.paths.core.root, 'modules/navigation/js/');
-	let jsOutputPath = u.getPath(settings.paths.public.styleguides, 'modules/navigation/js/');
+	let jsOutputPath = u.getAppPath(settings.paths.public.styleguides, 'modules/navigation/js/');
 
 	fse.mkdirsSync(jsOutputPath);
 
 	b.add(jsSourcePath + '/index.js');
 
-	b.plugin('minifyify', {map: false});
+	// b.plugin('minifyify', {map: false});
 
 	b.bundle(function (err, response) {
 		fse.writeFileSync(jsOutputPath + '/scripts.min.js', response);

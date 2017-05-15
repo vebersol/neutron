@@ -1,6 +1,6 @@
 "use strict";
 
-const settings = require('../neutron.json');
+const settings = require('../core/libs/settings');
 const u = require('../core/libs/utilities');
 const fse = require('fs-extra');
 
@@ -10,7 +10,7 @@ const copy = (callback) => {
 
 	cb = callback || null;
 
-	let publicAssets = u.getPath(settings.paths.public.assets);
+	let publicAssets = u.getAppPath(settings.paths.public.assets);
 
 	u.log('Copy Assets', 'title');
 	u.log('');
@@ -26,7 +26,7 @@ const copy = (callback) => {
 	u.log('Start copying assets', 'info');
 	u.log('');
 
-	fse.copy(u.getPath(settings.paths.src.assets), publicAssets, err => {
+	fse.copy(u.getAppPath(settings.paths.src.assets), publicAssets, err => {
 		if (err) {
 			return u.log(err, 'error');
 		}
