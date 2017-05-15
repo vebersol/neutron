@@ -16,13 +16,19 @@ Neutron is an Atomic Design tool based in [Brad Frost's concept](http://bradfros
 
 ## Getting Started
 
-To run **Neutron** you just need to download it and run:
+To run **Neutron** you just need:
 
-    $ npm install
+Install it globally
+
+    $ npm install neutron -g
+
+Install it in your development path
+
+    $ neutron install
 
 After successfully load your own implementation, just run:
 
-    $ npm run start -- -w -s
+    $ neutron run -w -s
 
 It will compile your patterns, copy your assets and automatically load a [browsersync](https://www.browsersync.io/) server in *http://localhost:3000* and watch your changes
 
@@ -73,6 +79,8 @@ TODO: Add more documentation.
 * **neutron run -s**: Renders your patterns, generates the navigation module, copy your assets folder and runs a server.
 * **neutron run -w**: Renders your patterns, generates the navigation module, copy your assets folder and watch your files.
 * **neutron run -w -s**: Do everything as documented above.
+* **neutron install**: Install neutron in your current path, including a dummy example.
+* **neutron install -c** Install neutron in your current path, without dummy contents. It's an empty run ready for development:
 
 ## Prerequisities
 
