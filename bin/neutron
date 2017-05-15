@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-'use strict';
+#!/usr/bin/env node --use_strict
 
 const path = require('path');
 const pkg = require('../package.json');
