@@ -1,3 +1,5 @@
+"use strict";
+
 const browserSync = require('browser-sync');
 const browserSyncConfig = require('../.browser-sync');
 const u = require('../core/libs/utilities');

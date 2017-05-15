@@ -1,4 +1,4 @@
-"use-strict";
+"use strict";
 
 const chokidar = require('chokidar');
 const navigation = require('./navigation');

@@ -1,9 +1,11 @@
-let fse = require('fs-extra');
-let u = require('./utilities');
+"use strict";
+
+const fse = require('fs-extra');
+const u = require('./utilities');
+const settingsTarget = u.getPath(process.cwd(), '/neutron.json');
 let settings;
 
 const getSettings = function () {
-	let settingsTarget = u.getPath(process.cwd(), '/neutron.json');
 
 	if (fse.existsSync(settingsTarget)) {
 		return require(u.getAppPath(process.cwd(), '/neutron.json'));

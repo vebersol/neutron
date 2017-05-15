@@ -1,6 +1,5 @@
-#!/usr/bin/env node --use_strict
-
-"use-strict";
+#!/usr/bin/env node
+"use strict";
 
 const path = require('path');
 const pkg = require('../package.json');
@@ -16,9 +15,9 @@ const settings = require('../core/libs/settings');
 const u = require('../core/libs/utilities');
 const fse = require('fs-extra');
 
-const currentDir = u.getPath(process.cwd())
+const currentDir = u.getPath(process.cwd());
 
-let run = (options) => {
+const run = (options) => {
 	async.waterfall([
 		callback => {
 			neutron(callback);
@@ -46,7 +45,7 @@ let run = (options) => {
 	])
 }
 
-let install = (options) => {
+const install = (options) => {
 	let src = u.getPath(settings.paths.src.root);
 	let originalSettings = u.getPath('./neutron.json');
 	let sourceTarget = u.getPath(currentDir, '/src');
