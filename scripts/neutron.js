@@ -10,11 +10,7 @@ const engine = require('../core/libs/engine.js');
 let cb;
 
 const init = function(callback) {
-	if (callback) {
-		cb = () => {
-			setTimeout(() => { callback(); }, 0);
-		}
-	}
+	cb = callback || null;
 
 	u.log('===========================', 'title');
 	u.log('Neutron: Atomic Design Tool', 'title');
@@ -24,7 +20,7 @@ const init = function(callback) {
 	clean(engine);
 }
 
-const clean = (callback) => {
+const clean = engine => {
 	u.log('Neutron: Start cleaning up public folder', 'info');
 	u.log('');
 	del([
@@ -36,7 +32,7 @@ const clean = (callback) => {
 	}).then(paths => {
 		u.log('Neutron: Clean up is done!', 'success');
 		u.log('');
-		callback(cb);
+		engine(cb);
 	});
 }
 

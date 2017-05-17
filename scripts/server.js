@@ -21,7 +21,7 @@ const init = (callback) => {
 		u.log('');
 
 		if (cb) {
-			cb();
+			return cb();
 		}
 	});
 }

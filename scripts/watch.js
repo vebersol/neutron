@@ -16,7 +16,7 @@ const init = (callback) => {
 	u.log('===================', 'title');
 	u.log('');
 
-	cb = callback || cb;
+	cb = callback || null;
 
 	u.log('');
 	u.log('Setting up files to watch...', 'info');
@@ -63,7 +63,7 @@ const init = (callback) => {
 	u.log('');
 
 	if (cb) {
-		cb();
+		return cb();
 	}
 }
 
