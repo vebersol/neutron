@@ -20,7 +20,7 @@ To run **Neutron** you just need:
 
 Install it globally
 
-    $ npm install neutron -g
+    $ npm install neutron-adt -g
 
 Install it in your development path
 
