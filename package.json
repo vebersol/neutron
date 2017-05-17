@@ -1,7 +1,7 @@
 {
-  "name": "neutron",
+  "name": "neutron-adt",
   "version": "0.1.0",
-  "description": "An atomic design based system!",
+  "description": "Neutron Atomic Design Tool",
   "main": "index.js",
   "scripts": {
     "start": "node bin/neutron run",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vebersol/democritus.git"
+    "url": "git+https://github.com/vebersol/neutron.git"
   },
   "author": "Vinícius Ebersol",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/vebersol/democritus/issues"
+    "url": "https://github.com/vebersol/neutron/issues"
   },
-  "homepage": "https://github.com/vebersol/democritus#readme",
+  "homepage": "https://github.com/vebersol/neutron#readme",
   "dependencies": {
     "browser-sync": "^2.13.0",
     "browserify": "^14.3.0",
