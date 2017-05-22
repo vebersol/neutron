@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Neutron Atomic Design Tool</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- NEUTRON HEADER-->
+	
+	<!-- /NEUTRON HEADER -->
+</head>
+<body class="organisms-navigation-main-navbar">
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <!-- start molecules/navigation/toggle-button -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- end molecules/navigation/toggle-button -->
+
+      <!-- start atoms/links/brand -->
+      <a class="navbar-brand" href="../../">Neutron</a>
+
+      <!-- end atoms/links/brand -->
+
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!-- start molecules/navigation/menu-items -->
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#">Link <span class="sr-only">(current)</span></a>
+        </li>
+        <li>
+          <a href="#">Link</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#">Action</a>
+            </li>
+            <li>
+              <a href="#">Another action</a>
+            </li>
+            <li>
+              <a href="#">Something else here</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">Separated link</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">One more separated link</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- end molecules/navigation/menu-items -->
+
+      <!-- start molecules/forms/search-bar -->
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <!-- start atoms/forms/input -->
+          <input type="text" class="form-control" placeholder="Search" value="">
+
+          <!-- end atoms/forms/input -->
+
+        </div>
+
+        <!-- start atoms/forms/button -->
+        <button type="submit" class="btn btn-default">Submit</button>
+
+        <!-- end atoms/forms/button -->
+
+      </form>
+
+      <!-- end molecules/forms/search-bar -->
+
+    </div>
+  </div>
+</nav>
+
+
+	<!-- NEUTRON FOOTER -->
+	<script>
+		window.neutronADT = {
+			i: {
+				dependencies: [{"partial":"molecules/navigation/toggle-button","path":"molecules-navigation-toggle-button/index.html"},{"partial":"atoms/links/brand","path":"atoms-links-brand/index.html"},{"partial":"molecules/navigation/menu-items","path":"molecules-navigation-menu-items/index.html"},{"partial":"molecules/forms/search-bar","path":"molecules-forms-search-bar/index.html"}],
+				reverseDependencies: [{"partial":"templates/article","path":"templates-article/index.html"},{"partial":"templates/home","path":"templates-home/index.html"}],
+				patternName: "organisms/navigation/main-navbar",
+				assetsPath: "../../",
+				menuBehavior: "default",
+				cssTheme: "default",
+				language: "en"
+			}
+		};
+	</script>
+	<script src="../../styleguide/modules/navigation/js/scripts.min.js" async></script>
+	<!-- /NEUTRON FOOTER -->
+</body>
+</html>

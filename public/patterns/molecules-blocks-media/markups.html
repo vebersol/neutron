@@ -1,0 +1,38 @@
+<ul class="neutron-code--list"><li data-target="#html"><pre><code class="language-html">&lt;div class=&quot;media&quot;>
+  &lt;div class=&quot;media-left&quot;>
+    &lt;!-- start atoms/media/image -->
+    &lt;img src=&quot;http://placehold.it/242x200&quot; alt=&quot;Image description&quot;>
+
+    &lt;!-- end atoms/media/image -->
+
+  &lt;/div>
+  &lt;div class=&quot;media-body&quot;>
+    &lt;!-- start atoms/text/headline -->
+    &lt;h4 class=&quot;media-heading&quot;>Lorem ipsum dolor sit.&lt;/h4>
+
+    &lt;!-- end atoms/text/headline -->
+
+    &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.&lt;/p>
+  &lt;/div>
+&lt;/div>
+</code></pre></li><li data-target="#handlebars"><pre><code class="language-handlebars">&lt;div class=&quot;media&quot;>
+	&lt;div class=&quot;media-left&quot;>
+		{{#if url}}&lt;a href=&quot;{{url}}&quot;>
+			{{ render &quot;atoms/media/image&quot; }}
+		&lt;/a>
+		{{else}}
+			{{ render &quot;atoms/media/image&quot; }}
+		{{/if}}
+	&lt;/div>
+	&lt;div class=&quot;media-body&quot;>
+		{{ render &quot;atoms/text/headline:media-heading&quot; level=4 text=headline }}
+		&lt;p>{{text}}&lt;/p>
+	&lt;/div>
+&lt;/div>
+</code></pre></li><li data-target="#documentation"><div class="neutron-code--documentation"><p>Media block is a smaller portion of Media box.</p>
+<ul>
+<li><strong>url</strong> (String)<br><em>Supported values:</em> A valid URL.  </li>
+<li><strong>headline</strong> (String)<br><em>Supported values:</em> The text to be used in headline atom.  </li>
+<li><strong>text</strong> (String)<br><em>Supported values:</em> The description of media component.</li>
+</ul>
+</div></li></ul>

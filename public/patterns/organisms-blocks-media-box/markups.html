@@ -1,0 +1,49 @@
+<ul class="neutron-code--list"><li data-target="#html"><pre><code class="language-html">&lt;div class=&quot;col-md-6&quot;>
+  &lt;div class=&quot;page-header&quot;>
+    &lt;!-- start atoms/text/headline -->
+    &lt;h2>Lorem ipsum dolor&lt;/h2>
+
+    &lt;!-- end atoms/text/headline -->
+
+  &lt;/div>
+
+  &lt;!-- start molecules/blocks/media -->
+  &lt;div class=&quot;media&quot;>
+    &lt;div class=&quot;media-left&quot;>
+      &lt;!-- start atoms/media/image -->
+      &lt;img src=&quot;http://placehold.it/242x200&quot; alt=&quot;Image description&quot;>
+
+      &lt;!-- end atoms/media/image -->
+
+    &lt;/div>
+    &lt;div class=&quot;media-body&quot;>
+      &lt;!-- start atoms/text/headline -->
+      &lt;h4 class=&quot;media-heading&quot;>Lorem ipsum dolor sit.&lt;/h4>
+
+      &lt;!-- end atoms/text/headline -->
+
+      &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.&lt;/p>
+    &lt;/div>
+  &lt;/div>
+
+  &lt;!-- end molecules/blocks/media -->
+
+&lt;/div>
+</code></pre></li><li data-target="#handlebars"><pre><code class="language-handlebars">&lt;div class=&quot;col-md-6&quot;>
+	&lt;div class=&quot;page-header&quot;>
+		{{ render &quot;atoms/text/headline&quot; level=2 text=boxTitle }}
+	&lt;/div>
+
+	{{#each collection}}
+		{{ render &quot;molecules/blocks/media&quot; }}
+	{{/each}}
+&lt;/div>
+</code></pre></li><li data-target="#documentation"><div class="neutron-code--documentation"><p>Media box organism to be used as a multiple option to 2 column content.  </p>
+<ul>
+<li><strong>boxTitle</strong> (String)<br><em>Supported values:</em> Text to be used as main title.  </li>
+<li><strong>collection</strong> (Array)<br><em>Supported values:</em> An object containing image atom object, headline text and description text.  </li>
+<li><strong>collection.image</strong> (Object)<br><em>Supported values:</em> Image supports all properties of <code>atoms/media/image</code>  atom.  </li>
+<li><strong>collection.headline</strong> (String)<br><em>Supported values:</em> Headline text  </li>
+<li><strong>collection.text</strong> (String)<br><em>Supported values:</em> Description text</li>
+</ul>
+</div></li></ul>

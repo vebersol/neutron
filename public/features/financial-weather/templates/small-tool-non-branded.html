@@ -1,0 +1,38 @@
+<div class="fw-inner-context">
+	<div id="fw-main-small" class="wrapper fw-clearfix">
+		<div class="panel fw-clearfix">
+			<div class="main left">
+				<div class="scalable-map gr-gray fw-clearfix">
+					<div id="map-small" class="svg-container">
+						<div class="draggable">
+						</div>
+					</div>
+					<span id="period" class="fw-period label label-top overmap">-</span>
+					<div class="zoom-buttons">
+						<button class="zoom-in bt-reset gr-active"><i class="icon icon-plus"></i></button>
+						<button class="zoom-out bt-reset bt-active" ><i class="icon icon-minus"></i></button>
+					</div>
+					<div class="group-vertical">
+						<a class="bt-reset gr-disable text-bt" data-value="week">{weathermap.scaleBar.timeSlotBtns.btn1}</a>
+						<a class="bt-reset gr-active text-bt" data-value="month">{weathermap.scaleBar.timeSlotBtns.btn2}</a>
+						<a class="bt-reset gr-disable text-bt" data-value="quarter">{weathermap.scaleBar.timeSlotBtns.btn3}</a>
+						<a class="bt-reset gr-disable text-bt" data-value="year">{weathermap.scaleBar.timeSlotBtns.btn4}</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- loading mask -->
+		<div class="mask-bg">
+			<div id="loading" class="fw-clearfix gr-default loading">
+			  <div class="rounded rotator left">
+				  <div class="bg rounded">
+				    <div class="rounded fw-inner"> </div>
+				  </div>
+			  </div>
+			  <span class="left text-loading">{weathermap.loading}</span>
+			</div>
+		</div>
+		<!-- end: loading mask -->
+	</div>
+	<div id="svg-help"></div>
+</div>

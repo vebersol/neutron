@@ -1,0 +1,53 @@
+<div class="fw-inner-context">
+	<div id="fw-main-small" class="wrapper fw-clearfix">
+		<header class="gr-dark-gray">
+			<a href="javascript:;" title="Deutsche Asset & Wealth Management" class="head-lk fw-clearfix">
+				<span class="ir spr-small-v dwa-text-logo left">Deutsche Asset & Wealth Management</span>
+				<i class="icon spr-small-v icon-dwa right"><!-- --></i>
+			</a>
+		</header>
+		<div class="panel fw-clearfix">
+			<div class="main left">
+				<div class="scalable-map gr-gray fw-clearfix">
+					<div id="map-small" class="svg-container">
+						<div class="draggable"></div>
+					</div>
+					<span id="period" class="fw-period label label-top">-</span>
+					<div class="zoom-buttons">
+						<button class="zoom-in bt-reset gr-active"><i class="icon icon-plus"></i></button>
+						<button class="zoom-out bt-reset bt-active" ><i class="icon icon-minus"></i></button>
+					</div>
+					<div class="group-vertical">
+						<a class="bt-reset gr-disable text-bt" data-value="week">{weathermap.scaleBar.timeSlotBtns.btn1}</a>
+						<a class="bt-reset text-bt" data-value="month">{weathermap.scaleBar.timeSlotBtns.btn2}</a>
+						<a class="bt-reset gr-disable text-bt" data-value="quarter">{weathermap.scaleBar.timeSlotBtns.btn3}</a>
+						<a class="bt-reset gr-disable text-bt" data-value="year">{weathermap.scaleBar.timeSlotBtns.btn4}</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="gr-dark-gray fw-clearfix">
+			<a href="javascript:;" class="left footer-lk" title="Zum DWS Marktausblick">
+				<i class="icon spr-small-v icon-fw"><!-- --></i>
+				Zum DWS Marktausblick
+			</a>
+			<a href="javascript:;" class="right footer-lk" title="Zum DWS Finanzwetter">
+				<i class="icon spr-small-v icon-fw"><!-- --></i>
+				Zum DWS Finanzwetter
+			</a>
+		</footer>
+		<!-- loading mask -->
+		<div class="mask-bg">
+			<div id="loading" class="fw-clearfix gr-default loading">
+			  <div class="rounded rotator left">
+				  <div class="bg rounded">
+				    <div class="rounded fw-inner"> </div>
+				  </div>
+			  </div>
+			  <span class="left text-loading">{weathermap.loading}</span>
+			</div>
+		</div>
+		<!-- end: loading mask -->
+	</div>
+	<div id="svg-help"></div>
+</div>

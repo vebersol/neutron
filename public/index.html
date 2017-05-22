@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Neutron - Atomic Design Tool</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- NEUTRON HEADER-->
+	
+	<!-- /NEUTRON HEADER -->
+</head>
+<body class="neutron-welcome-page">
+	<section id="neutron-welcome-screen">
+	<h1>Hello Neutron!</h1>
+
+	<p>Welcome to <a href="https://github.com/vebersol/neutron/">Neutron</a> Atomic Design Tool. These pages are automatically generated as a static site.</p>
+
+	<h2>How to use Neutron?</h2>
+
+	<p>To use <strong>Neutron</strong> is quite simple. At the left/right corner you may see a button, the <svg viewBox="0 0 64 64" class="neutron-svg-inline"><use class="neutron-svg-icon" xlink:href="#neutron-logo"></use></svg> button. To activate <strong>Neutron</strong> Navigation, you just need to press the key <strong>n</strong> or click/touch on this button.</p>
+
+	<p>The <strong>Neutron</strong> navigation bar consists in:</p>
+
+	<ul>
+		<li>
+			<svg viewBox="0 0 64 64" class="neutron-svg-inline">
+				<use class="neutron-svg-icon" xlink:href="#neutron-search"></use>
+			</svg>
+			Search Button - opens the search input and find your desired pattern
+		</li>
+		<li>
+			<svg viewBox="0 0 64 64" class="neutron-svg-inline">
+				<use class="neutron-svg-icon" xlink:href="#neutron-code-frame"></use>
+			</svg>
+			Code Frame Button - opens a frame below containing your HTML and Handlebars markup, including the pattern documentation. It also shows the dependencies and reverse dependencies list.
+		</li>
+		<li>
+			<svg viewBox="0 0 64 64" class="neutron-svg-inline">
+				<use class="neutron-svg-icon" xlink:href="#neutron-qr-code"></use>
+			</svg>
+			QR Code Button - opens a lightbox with QR Code to easily load it in your mobile device.
+		</li>
+		<li>
+			<svg viewBox="0 0 1792 1792" class="neutron-svg-inline">
+				<use class="neutron-svg-icon" xlink:href="#neutron-settings"></use>
+			</svg>
+			Settings Button - opens a lightbox with basic information and settings.
+		</li>
+		<li>Main menu including all patterns: Atoms, Molecules, Organisms, Templates, Pages</li>
+	</ul>
+
+	<h2>Shortcuts</h2>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Key</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><strong>n</strong></td>
+				<td>Show <strong>Neutron</strong> navigation bar</td>
+			</tr>
+			<tr>
+				<td><strong>f</strong></td>
+				<td>Find patterns</td>
+			</tr>
+			<tr>
+				<td><strong>c</strong></td>
+				<td>Toggle code frame (when in a pattern)</td>
+			</tr>
+			<tr>
+				<td><strong>q</strong></td>
+				<td>Toggle QR Code window</td>
+			</tr>
+			<tr>
+				<td><strong>s</strong></td>
+				<td>Toggle settings window</td>
+			</tr>
+			<tr>
+				<td><strong>m</strong></td>
+				<td>Focus first menu item to enable keyboard navigation</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>Read More</h2>
+
+	<p>To read more about <strong>Neutron</strong>, please check our <a href="https://github.com/vebersol/neutron/blob/master/README.md">README</a>.</p>
+
+	<p><em><strong>Neutron</strong> is attached by default in all generated pages as a standalone script, it means you must have Javascript enabled by default.</em></p>
+</section>
+
+
+	<!-- NEUTRON FOOTER -->
+	<script>
+		window.neutronADT = {
+			i: {
+				dependencies: [],
+				reverseDependencies: [],
+				patternName: "",
+				assetsPath: "",
+				menuBehavior: "default",
+				cssTheme: "default",
+				language: "en"
+			}
+		};
+	</script>
+	<script src="styleguide/modules/navigation/js/scripts.min.js" async></script>
+	<!-- /NEUTRON FOOTER -->
+</body>
+</html>

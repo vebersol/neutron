@@ -1,0 +1,171 @@
+<div class="fw-inner-context">
+	<div id="fw-main" class="wrapper fw-clearfix">
+		<div class="fw-brand-bar fw-brand-bar-header gr-dark-gray">
+			<a href="javascript:;" title="Deutsche Asset & Wealth Management" class="head-lk fw-clearfix">
+				<span class="ir spr-small-v dwa-text-logo left">Deutsche Asset & Wealth Management</span>
+				<i class="icon spr-small-v icon-dwa right"><!-- --></i>
+			</a>
+			<span class="break"></span>
+		</div>
+		<button class="bt-reset bt-slide" title="{weathermap.quickTipps.title}"><i class="icon icon-help"><!-- --></i></button>
+		<div class="slide-box slide-left gr-left-gray slide-in">
+			<button id="bt-slide-close" class="bt-reset bt-close right" data-role="close"><i class="icon icon-close"></i></button>
+			<ul class="list-slide">
+				{weathermap.quickTipps.tip}
+			</ul>
+		</div>
+		<div class="panel">
+			<div class="main left">
+				<div id="pp-model" class="pp-wrapper">
+					<button id="bt-close-popup" class="bt-reset bt-close right" data-role="close"><i class="icon icon-close"></i></button>
+					<div class="tabs-info-country">
+						<a href="#keyfacts" class="active tabs-info-link">{weathermap.labels.keyFacts}</a>
+						<a href="#marketopinions" class="tabs-info-link">{weathermap.labels.marketOpinions}</a>
+						<input type="hidden" name="country_code">
+					</div>
+
+					<div data-tab="#keyfacts">
+						<header class="fw-clearfix">
+							<div class="left">
+								<i class=""></i>
+								<div class="left m-10 mb-08">
+									<h4 title=""></h4>
+									<div class="fw-clearfix">
+										<span class="lt index-name"></span>
+										<span class="legend-positive percentage"></span>
+									</div>
+								</div>
+							</div>
+						</header>
+						<div id="country-layer" class="scroll-pane scroll-pane-country">
+							<ul class="list-doble-items">
+							</ul>
+						</div>
+					</div>
+
+					<div data-tab="#marketopinions" class="sentifi-tab">
+
+					</div>
+				</div>
+				<div class="scalable-map gr-gray fw-clearfix">
+					<div id="map" class="svg-container">
+						<div class="draggable"></div>
+					</div>
+
+					<span class="fw-period label label-bottom">-</span>
+
+					<div id="mask-background"></div>
+				</div>
+
+				<div class="tab-bar">
+					<div class="indices gr-light"></div>
+					<ul class="tab-month fw-clearfix">
+						<li class="box-sizing first">
+							<span class="invisible">Apr. 12</span>
+						</li>
+						<li class="box-sizing">May. 12</li>
+						<li class="box-sizing">
+							<span class="invisible">Jun. 12</span>
+						</li>
+						<li class="box-sizing">
+							<span class="invisible">Jul. 12</span>
+						</li>
+						<li class="box-sizing">Aug. 12</li>
+						<li class="box-sizing">
+							<span class="invisible">Sep. 12</span>
+						</li>
+						<li class="box-sizing">
+							<span class="invisible">Oct. 12</span>
+						</li>
+						<li class="box-sizing">Nov. 12</li>
+						<li class="box-sizing">
+							<span class="invisible">Dec. 12</span>
+						</li>
+						<li class="box-sizing">
+							<span class="invisible">Jan. 13</span>
+						</li>
+						<li class="box-sizing">Feb. 13</li>
+						<li class="box-sizing">
+							<span class="invisible">Mar. 13</span>
+						</li>
+						<li class="box-sizing last">
+							<span class="invisible">Abr. 13</span>
+						</li>
+					</ul>
+				</div>
+				<div class="timeline">
+					<button class="bt-reset gr-dark-blue left bt-prev"><i class="icon icon-prev"></i></button>
+					<div id="slider-range" class="left gray-bar">
+						<div id="special-shadow"></div>
+					</div>
+					<button class="bt-reset gr-dark-blue left bt-next"><i class="icon icon-next"></i></button>
+				</div>
+			</div>
+			<div class="left sidebar">
+				<div class="board">
+					<div class="small-view fw-clearfix">
+						<div id="map-handler" class="map-handler"></div>
+						<a href="javascript:;" class="navigation-map ui-draggable">
+							<img src="img/minimap2.png" />
+						</a>
+						<button class="zoom-in bt-reset"><i class="icon icon-plus"></i></button>
+						<button class="zoom-out bt-reset bt-active"><i class="icon icon-minus"></i></button>
+					</div>
+				</div>
+				<div class="performance-board board fw-clearfix">
+					<h2 class="m-10">{weathermap.labels.performance}</span></h2>
+					<div class="color-graph fw-clearfix m-10">
+						<button class="bt-reset gr-dark-blue left bt-prev"><i class="icon icon-prev"></i></button>
+						<div id="slider-range-color" class="left gr-colors box-sizing">
+							<img src="img/pattern/colors.jpg" />
+							<a href="javascript:;" class="range-handle"></a>
+						</div>
+						<button class="bt-reset gr-dark-blue left bt-next"><i class="icon icon-next"></i></button>
+					</div>
+					<div class="fw-clearfix m-10">
+						<span class="left legend-text legend-negative">-</span>
+						<span class="right legend-text legend-positive">+</span>
+					</div>
+					<h2 class="m-10">{weathermap.labels.countryList}</h2>
+					<div class="scroll-pane m-10">
+						<ul class="list-doble-items performance-list">
+						</ul>
+					</div>
+				</div>
+				<div class="animation-buttons fw-clearfix gray-bar">
+					<button class="bt-reset gr-dark-blue bt-rewind"><i class="icon icon-rewind"></i></button>
+					{weathermap.labels.animation}
+					<button class="bt-reset gr-dark-blue bt-play"><i class="icon icon-play"></i></button>
+				</div>
+			</div>
+		</div>
+
+		<span class="break"></span>
+
+		<div class="fw-brand-bar fw-brand-bar-footer gr-dark-gray fw-clearfix">
+			<a href="javascript:;" class="left footer-lk" title="Zum DWS Marktausblick">
+				<i class="icon spr-small-v icon-fw"><!-- --></i>
+				Zum DWS Marktausblick
+			</a>
+			<a href="javascript:;" class="right footer-lk" title="Zum DWS Finanzwetter">
+				<i class="icon spr-small-v icon-fw"><!-- --></i>
+				Zum DWS Finanzwetter
+			</a>
+		</div>
+
+		<!-- loading mask -->
+		<div class="mask-bg">
+			<div id="loading" class="fw-clearfix gr-default loading">
+			  <div class="rounded rotator left">
+				  <div class="bg rounded">
+				    <div class="rounded fw-inner"> </div>
+				  </div>
+			  </div>
+			  <span class="left text-loading">{weathermap.loading}</span>
+			</div>
+		</div>
+		<!-- end: loading mask -->
+	</div>
+	<div id="svg-help"></div>
+</div>
+

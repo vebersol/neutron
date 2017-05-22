@@ -1,0 +1,24 @@
+<ul class="neutron-code--list"><li data-target="#html"><pre><code class="language-html">&lt;form class=&quot;navbar-form navbar-left&quot; role=&quot;search&quot;>
+  &lt;div class=&quot;form-group&quot;>
+    &lt;!-- start atoms/forms/input -->
+    &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;Search&quot; value=&quot;&quot;>
+
+    &lt;!-- end atoms/forms/input -->
+
+  &lt;/div>
+
+  &lt;!-- start atoms/forms/button -->
+  &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;>Submit&lt;/button>
+
+  &lt;!-- end atoms/forms/button -->
+
+&lt;/form>
+</code></pre></li><li data-target="#handlebars"><pre><code class="language-handlebars">&lt;form class=&quot;navbar-form navbar-left&quot; role=&quot;search&quot;>
+	&lt;div class=&quot;form-group&quot;>
+		{{ render &quot;atoms/forms/input:form-control&quot; type=&quot;text&quot; placeholder=&quot;Search&quot; }}
+	&lt;/div>
+
+	{{ render &quot;atoms/forms/button:btn-default&quot; type=&quot;submit&quot; text=&quot;Submit&quot;}}
+&lt;/form>
+</code></pre></li><li data-target="#documentation"><div class="neutron-code--documentation"><p>Search form molecule with a search input and a submit button.</p>
+</div></li></ul>

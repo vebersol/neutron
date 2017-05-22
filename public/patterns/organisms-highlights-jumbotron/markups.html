@@ -1,0 +1,38 @@
+<ul class="neutron-code--list"><li data-target="#html"><pre><code class="language-html">&lt;div class=&quot;jumbotron&quot;>
+  &lt;!-- start atoms/text/headline -->
+  &lt;h1>Hello Neutron!&lt;/h1>
+
+  &lt;!-- end atoms/text/headline -->
+
+  &lt;!-- start atoms/text/paragraph -->
+  &lt;p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, veniam quia reprehenderit distinctio, mollitia rerum dignissimos quidem, minus possimus natus sunt placeat eaque sit tempora. Corrupti consectetur veritatis, voluptas, distinctio sunt aliquid
+    tempore, dolorem iste incidunt debitis modi minima nam! Tempore nostrum molestiae perspiciatis quam mollitia aliquid nobis, blanditiis culpa.&lt;/p>
+
+  &lt;!-- end atoms/text/paragraph -->
+
+  &lt;p>
+    &lt;!-- start atoms/text/link -->
+    &lt;a class=&quot;btn btn-primary btn-lg&quot; href=&quot;#&quot;>Learn more&lt;/a>
+
+    &lt;!-- end atoms/text/link -->
+
+  &lt;/p>
+&lt;/div>
+</code></pre></li><li data-target="#handlebars"><pre><code class="language-handlebars">&lt;div class=&quot;jumbotron&quot;>
+	{{#with headline}}
+	{{ render &quot;atoms/text/headline&quot; }}
+	{{/with}}
+
+	{{#with intro}}
+	{{ render &quot;atoms/text/paragraph&quot; }}
+	{{/with}}
+	&lt;p>
+		{{ render &quot;atoms/text/link:btn btn-primary btn-lg&quot; url=&quot;#&quot; text=&quot;Learn more&quot;}}
+	&lt;/p>
+&lt;/div>
+</code></pre></li><li data-target="#documentation"><div class="neutron-code--documentation"><p>Jumbotron is highlight box.</p>
+<ul>
+<li><strong>headline</strong> (Object)<br><em>Supported values:</em> headline receives an object that contains all properties that can be used in <code>atoms/text/headline</code>.</li>
+<li><strong>intro</strong> (Object)<br><em>Supported values:</em> intro receives an object that contains all properties that can be used in <code>atoms/text/paragraph</code>.</li>
+</ul>
+</div></li></ul>

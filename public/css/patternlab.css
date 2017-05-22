@@ -1,0 +1,70 @@
+[class^="atoms-"], [class^="molecules-"], [class^="organisms-"], [id^="atoms-"], [id^="molecules-"], [id^="organisms-"] {
+  max-width: 1020px;
+  padding: 0 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto; }
+
+[class^="flyout-"] ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.sg-table-colors th, .sg-table-colors td {
+  border: 1px solid #b8c0c6;
+  text-align: center; }
+
+.sg-table-colors th {
+  background-color: #d0d5d9; }
+
+.sg-table-colors td {
+  vertical-align: middle; }
+  .sg-table-colors td:first-child {
+    vertical-align: top;
+    text-align: left; }
+  .sg-table-colors td p:last-child {
+    margin-bottom: 0; }
+
+.sg-table-colors .sg-swatch {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto !important; }
+
+[class^="molecules-"] .table-tips .drag-tip {
+  opacity: 0; }
+
+.sg-icons-list a {
+  display: block;
+  color: #4f5356;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  cursor: pointer; }
+  .sg-icons-list a i {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 22px;
+    color: #4f5356; }
+    .sg-icons-list a i:before {
+      font-size: 1em; }
+  .sg-icons-list a:hover {
+    background-color: #e29317;
+    color: white;
+    text-decoration: none; }
+    .sg-icons-list a:hover i {
+      transform: scale(2);
+      -webkit-transform: scale(2);
+      -moz-transform: scale(2);
+      -ms-transform: scale(2);
+      -o-transform: scale(2);
+      margin-right: 10px;
+      color: white; }
+    .sg-icons-list a:hover span {
+      text-decoration: none; }
+
+.organisms-worldwide-websites {
+  max-width: 100%;
+  padding: 0; }
+
+/*# sourceMappingURL=patternlab.css.map */

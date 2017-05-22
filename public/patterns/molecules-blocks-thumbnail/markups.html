@@ -1,0 +1,109 @@
+<ul class="neutron-code--list"><li data-target="#html"><pre><code class="language-html">&lt;div class=&quot;row&quot;>
+  &lt;div class=&quot;col-sm-4 col-xs-12&quot;>
+    &lt;div class=&quot;thumbnail&quot;>
+      &lt;!-- start atoms/media/image -->
+      &lt;img src=&quot;http://placehold.it/500x250&quot; alt=&quot;Image description&quot;>
+
+      &lt;!-- end atoms/media/image -->
+
+      &lt;div class=&quot;caption&quot;>
+        &lt;!-- start atoms/text/headline -->
+        &lt;h3>Proin vehicula ipsum quis&lt;/h3>
+
+        &lt;!-- end atoms/text/headline -->
+
+        &lt;p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur odio praesentium, alias corrupti placeat recusandae!&lt;/p>
+
+        &lt;p>
+          &lt;!-- start atoms/text/link -->
+          &lt;a class=&quot;btn btn-default&quot; href=&quot;#see-more&quot;>See more&lt;/a>
+
+          &lt;!-- end atoms/text/link -->
+
+        &lt;/p>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+  &lt;div class=&quot;col-sm-4 col-xs-12&quot;>
+    &lt;div class=&quot;thumbnail&quot;>
+      &lt;!-- start atoms/media/image -->
+      &lt;img src=&quot;http://placehold.it/500x250&quot; alt=&quot;Image description&quot;>
+
+      &lt;!-- end atoms/media/image -->
+
+      &lt;div class=&quot;caption&quot;>
+        &lt;!-- start atoms/text/headline -->
+        &lt;h3>Phasellus quis enim ac ligula&lt;/h3>
+
+        &lt;!-- end atoms/text/headline -->
+
+        &lt;p>Vivamus nisl dolor, dictum non diam a, euismod gravida dolor. Vestibulum placerat tortor odio, egestas.&lt;/p>
+
+        &lt;p>
+          &lt;!-- start atoms/text/link -->
+          &lt;a class=&quot;btn btn-info&quot; href=&quot;http://github.com/vebersol/neutron&quot;>Visit&lt;/a>
+
+          &lt;!-- end atoms/text/link -->
+
+        &lt;/p>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+  &lt;div class=&quot;col-sm-4 col-xs-12&quot;>
+    &lt;div class=&quot;thumbnail&quot;>
+      &lt;!-- start atoms/media/image -->
+      &lt;img src=&quot;http://placehold.it/500x250&quot; alt=&quot;Image description&quot;>
+
+      &lt;!-- end atoms/media/image -->
+
+      &lt;div class=&quot;caption&quot;>
+        &lt;!-- start atoms/text/headline -->
+        &lt;h3>Donec commodo nisl felis&lt;/h3>
+
+        &lt;!-- end atoms/text/headline -->
+
+        &lt;p>Nunc fringilla ante eget tempor venenatis. Morbi fringilla nibh at tellus mattis dignissim. Pellentesque augue.&lt;/p>
+
+        &lt;p>
+          &lt;!-- start atoms/text/link -->
+          &lt;a class=&quot;btn btn-danger&quot; href=&quot;javascript:;&quot;>Expand&lt;/a>
+
+          &lt;!-- end atoms/text/link -->
+
+        &lt;/p>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/div>
+</code></pre></li><li data-target="#handlebars"><pre><code class="language-handlebars">&lt;div class=&quot;row&quot;>
+	{{#each thumbnails }}
+	&lt;div class=&quot;col-sm-4 col-xs-12&quot;>
+		&lt;div class=&quot;thumbnail&quot;>
+			{{ render &quot;atoms/media/image&quot; }}
+			&lt;div class=&quot;caption&quot;>
+				{{#with headline}}
+					{{ render &quot;atoms/text/headline&quot; level=3 }}
+				{{/with}}
+
+				{{#if text}}
+				&lt;p>{{text}}&lt;/p>
+				{{/if}}
+
+				{{#with button}}
+				&lt;p>
+					{{ render &quot;atoms/text/link&quot; }}
+				&lt;/p>
+				{{/with}}
+			&lt;/div>
+		&lt;/div>
+	&lt;/div>
+	{{/each}}
+&lt;/div>
+</code></pre></li><li data-target="#documentation"><div class="neutron-code--documentation"><p>Thumbnail molecule to print boxes with image, headline, text and button.</p>
+<ul>
+<li><strong>thumbnails</strong> (Array)<br><em>Supported values:</em> An array containing headline atom object, text and button object.</li>
+<li><strong>thubnails.headline</strong> (Object)<br><em>Supported values:</em> The headline object supports the <code>text</code> property containing the headline content.</li>
+<li><strong>thubnails.text</strong> (String)<br><em>Supported values:</em> The text to be added to thumbnail molecule.</li>
+<li><strong>thubnails.button</strong> (Object)<br><em>Supported values:</em> The button object has the same properties supported by <code>atoms/text/link</code>.</li>
+</ul>
+</div></li></ul>

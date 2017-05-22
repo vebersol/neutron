@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Neutron Atomic Design Tool</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- NEUTRON HEADER-->
+	
+	<!-- /NEUTRON HEADER -->
+</head>
+<body class="molecules-blocks-thumbnail">
+	<div class="row">
+  <div class="col-sm-4 col-xs-12">
+    <div class="thumbnail">
+      <!-- start atoms/media/image -->
+      <img src="http://placehold.it/500x250" alt="Image description">
+
+      <!-- end atoms/media/image -->
+
+      <div class="caption">
+        <!-- start atoms/text/headline -->
+        <h3>Proin vehicula ipsum quis</h3>
+
+        <!-- end atoms/text/headline -->
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur odio praesentium, alias corrupti placeat recusandae!</p>
+
+        <p>
+          <!-- start atoms/text/link -->
+          <a class="btn btn-default" href="#see-more">See more</a>
+
+          <!-- end atoms/text/link -->
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <div class="thumbnail">
+      <!-- start atoms/media/image -->
+      <img src="http://placehold.it/500x250" alt="Image description">
+
+      <!-- end atoms/media/image -->
+
+      <div class="caption">
+        <!-- start atoms/text/headline -->
+        <h3>Phasellus quis enim ac ligula</h3>
+
+        <!-- end atoms/text/headline -->
+
+        <p>Vivamus nisl dolor, dictum non diam a, euismod gravida dolor. Vestibulum placerat tortor odio, egestas.</p>
+
+        <p>
+          <!-- start atoms/text/link -->
+          <a class="btn btn-info" href="http://github.com/vebersol/neutron">Visit</a>
+
+          <!-- end atoms/text/link -->
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <div class="thumbnail">
+      <!-- start atoms/media/image -->
+      <img src="http://placehold.it/500x250" alt="Image description">
+
+      <!-- end atoms/media/image -->
+
+      <div class="caption">
+        <!-- start atoms/text/headline -->
+        <h3>Donec commodo nisl felis</h3>
+
+        <!-- end atoms/text/headline -->
+
+        <p>Nunc fringilla ante eget tempor venenatis. Morbi fringilla nibh at tellus mattis dignissim. Pellentesque augue.</p>
+
+        <p>
+          <!-- start atoms/text/link -->
+          <a class="btn btn-danger" href="javascript:;">Expand</a>
+
+          <!-- end atoms/text/link -->
+
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<!-- NEUTRON FOOTER -->
+	<script>
+		window.neutronADT = {
+			i: {
+				dependencies: [{"partial":"atoms/media/image","path":"atoms-media-image/index.html"},{"partial":"atoms/text/headline","path":"atoms-text-headline/index.html"},{"partial":"atoms/text/link","path":"atoms-text-link/index.html"}],
+				reverseDependencies: [{"partial":"templates/home","path":"templates-home/index.html"}],
+				patternName: "molecules/blocks/thumbnail",
+				assetsPath: "../../",
+				menuBehavior: "default",
+				cssTheme: "default",
+				language: "en"
+			}
+		};
+	</script>
+	<script src="../../styleguide/modules/navigation/js/scripts.min.js" async></script>
+	<!-- /NEUTRON FOOTER -->
+</body>
+</html>

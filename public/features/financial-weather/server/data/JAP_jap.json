@@ -1,0 +1,962 @@
+{
+    "weathermap": {
+        "urlMapping": {
+            "indexData": "getWeatherMapData.aspx",
+            "countryData": "getCountryInformationData.aspx"
+        },
+        "colors": [
+            "0xc14a4e",
+            "0xd9735f",
+            "0xf0b388",
+            "0xfcd693",
+            "0xfde6b9",
+            "0xedf9c7",
+            "0xcfefbb",
+            "0xb4e3ad",
+            "0x99d49d",
+            "0X83b78b"
+        ],
+        "mapScale": {
+            "small": {
+                "value": "27"
+            },
+            "large": {
+                "value": "500"
+            },
+            "largePos": {
+                "xPos": 315,
+                "yPos": 105
+            }
+        },
+        "components": {
+            "title": {
+                "color": "0xFFFFFF"
+            },
+            "largeWorld": {
+                "coordinates": {
+                    "textColor": "0x3A6B9E",
+                    "textSize": 9,
+                    "lineColor": "0x99CCCC"
+                }
+            },
+            "performance": {
+                "title": {
+                    "color": "0x4b70a7",
+                    "size": 12,
+                    "bold": true
+                },
+                "min": {
+                    "color": "0xDB0505",
+                    "size": 11,
+                    "bold": false
+                },
+                "max": {
+                    "color": "0x03B003",
+                    "size": 11,
+                    "bold": false
+                },
+                "section": {
+                    "min": 0,
+                    "max": 9,
+                    "start": 5
+                }
+            },
+            "countryList": {
+                "title": {
+                    "color": "0x4b70a7",
+                    "size": 12,
+                    "bold": true
+                },
+                "link": {
+                    "color": "0x4b70a7",
+                    "size": 11,
+                    "bold": false
+                },
+                "value": {
+                    "color": "0x7e868f",
+                    "size": 10,
+                    "bold": false
+                }
+            },
+            "navigator": {
+                "title": {
+                    "color": "0x4b70a7",
+                    "size": 12,
+                    "bold": true
+                },
+                "button": {
+                    "activeAlpha": 50
+                }
+            },
+            "animation": {
+                "title": {
+                    "color": "0x4b70a7",
+                    "size": 12,
+                    "bold": true
+                },
+                "button": {
+                    "activeAlpha": 50
+                }
+            },
+            "controller": {
+                "totalRangeInDays": 365,
+                "defaultRangeInDays": 90,
+                "numValuesLowResTotalRange": 300,
+                "delayHighResView": 0.1,
+                "numValuesHighResCurrentRange": 2
+            },
+            "layer": {
+                "smallLayer": {
+                    "showTime": 400
+                },
+                "country": {
+                    "color": "0x0A3D79"
+                },
+                "index": {
+                    "color": "0x666666"
+                },
+                "min": {
+                    "color": "0xDB0505"
+                },
+                "max": {
+                    "color": "0x03B003"
+                },
+                "link": {
+                    "color": "0x006699",
+                    "size": 12
+                },
+                "button": {
+                    "visible": "false",
+                    "color": "0xFFFFFF",
+                    "window": "_self",
+                    "text": "https://www.dws.de/Produkte/Fonds-Finder/Fonds/"
+                },
+                "buttonDefaultTagType": "Country",
+                "defaultButton": "https://www.dws.de/Produkte/Fonds-Finder/Fonds/",
+                "text": {
+                    "color": "0x666666",
+                    "size": 12
+                },
+                "line": {
+                    "color": "0xEEEEEE"
+                }
+            },
+            "currentDate": {
+                "text": {
+                    "color": "0xffffff",
+                    "size": 10,
+                    "align": "right"
+                }
+            }
+        },
+        "links": {
+            "linkLogo": {
+                "href": "#headlogo",
+                "target": "_self"
+            },
+            "linkLeftExtern": {
+                "light": true,
+                "href": "#Zum DWS Marktausblick",
+                "target": "_self",
+                "text": "Zum DWS Marktausblick"
+            },
+            "linkRightExtern": {
+                "href": "#Zum DWS Finanzwetter",
+                "target": "_self",
+                "text": "Zum DWS Finanzwetter"
+            },
+            "linkLeftIntern": {
+                "light": true,
+                "href": "#Zum Finanzwetter",
+                "target": "_self",
+                "text": "Zum Finanzwetter"
+            },
+            "linkRightIntern": {
+                "href": "#Weitere Tools",
+                "target": "_self",
+                "text": "Weitere Tools"
+            }
+        },
+        "loading": {
+            "totalRange": "データをロード中…"
+        },
+        "labels": {
+            "title": "世界株式騰落率マップ",
+            "performance": "パフォーマンス（%)",
+            "countryList": "国",
+            "navigator": "ナビゲータ",
+            "animation": "再生",
+            "sign": "%",
+            "keyFacts": "Key Facts",
+            "marketOpinions": "Market Opinions"
+        },
+        "quickTipps": {
+            "title": "地図の見方",
+            "tip": [
+                "緑色は株価指数の上昇を示し、赤色は下落を示します。色が濃い程、上昇率・下落率が大きいことを意味します。",
+                "地図下のスライダーで指定期間を変更できます。",
+                "「再生」をクリックして騰落率の推移をアニメーション表示します。",
+                "地図上の国をクリックして国別統計データや関連商品を確認できます。",
+                "色の変化が頻繁な国ほど騰落率の変動度合いが高いことを意味します。"
+            ]
+        },
+        "scaleBar": {
+            "slider": {
+                "years": "{years}年間{days}d",
+                "days": "{days}日"
+            },
+            "timeSlotBtns": {
+                "btn1": "7日",
+                "btn2": "1カ月",
+                "btn3": "3カ月",
+                "btn4": "1年"
+            }
+        },
+        "layer": {
+            "link": "国の概要",
+            "button": {
+                "visible": "false",
+                "name": "関連商品"
+            }
+        },
+        "currentDate": {
+            "range": {
+                "dateFormat": "yyyy年 mm月 dd日",
+                "text": "{startdate} - {enddate}"
+            }
+        },
+        "timeline": {
+            "weekdayDayAndMonth": {
+                "dateFormat": "dd日 mmm"
+            },
+            "dayAndMonth": {
+                "dateFormat": "dd日 mmm"
+            },
+            "day": {
+                "dateFormat": "dd日"
+            },
+            "month": {
+                "dateFormat": "mmm yy年"
+            },
+            "year": {
+                "dateFormat": "yyyy年"
+            }
+        },
+        "countries": {
+            "country": [
+                {
+                    "id": 27,
+                    "xPos": 169,
+                    "yPos": 241,
+                    "name": "アルゼンチン",
+                    "countryGuid": "B142A600-C646-42EA-AD8B-3446C02E68A6",
+                    "countryFlag": "argentina",
+                    "tagGuid": "",
+                    "indexId": 27,
+                    "code": "AR"
+                },
+                {
+                    "id": 18,
+                    "xPos": 190,
+                    "yPos": 196,
+                    "name": "ブラジル",
+                    "countryGuid": "6A9D0DB7-DAE2-467A-952F-AD8C835AC191",
+                    "countryFlag": "brazil",
+                    "tagGuid": "",
+                    "indexId": 18,
+                    "code": "BR"
+                },
+                {
+                    "id": 14,
+                    "xPos": 115,
+                    "yPos": 73,
+                    "name": "カナダ",
+                    "countryGuid": "73B6C57F-37F6-46E8-9AB8-A9902CABB434",
+                    "countryFlag": "canada",
+                    "tagGuid": "",
+                    "indexId": 14,
+                    "code": "CA"
+                },
+                {
+                    "id": 53,
+                    "xPos": 163,
+                    "yPos": 213,
+                    "name": "チリ",
+                    "countryGuid": "E228B172-7FD5-4CAF-A702-202B2AB3D1A6",
+                    "countryFlag": "chile",
+                    "tagGuid": "",
+                    "indexId": 53,
+                    "code": "CL"
+                },
+                {
+                    "id": 40,
+                    "xPos": 119,
+                    "yPos": 138,
+                    "name": "メキシコ",
+                    "countryGuid": "735541CA-0AC8-446A-8A27-3D3AF37828F3",
+                    "countryFlag": "mexico",
+                    "tagGuid": "",
+                    "indexId": 40,
+                    "code": "MX"
+                },
+                {
+                    "id": 13,
+                    "xPos": 124,
+                    "yPos": 105,
+                    "name": "米国",
+                    "countryGuid": "4BB85518-B551-4253-A839-631D2C86096B",
+                    "countryFlag": "usa",
+                    "tagGuid": "",
+                    "indexId": 13,
+                    "code": "US"
+                },
+                {
+                    "id": 25,
+                    "xPos": 453,
+                    "yPos": 221,
+                    "name": "オーストラリア",
+                    "countryGuid": "E52CAD72-421E-47FB-9757-A7331B1C56DE",
+                    "countryFlag": "australia",
+                    "tagGuid": "",
+                    "indexId": 25,
+                    "code": "AU"
+                },
+                {
+                    "id": 16,
+                    "xPos": 404,
+                    "yPos": 114,
+                    "name": "中国",
+                    "countryGuid": "8F3BE462-B936-490E-B283-5A1BC35D4ADD",
+                    "countryFlag": "china",
+                    "tagGuid": "",
+                    "indexId": 16,
+                    "code": "CN"
+                },
+                {
+                    "id": 38,
+                    "xPos": 409,
+                    "yPos": 141,
+                    "name": "香港",
+                    "countryGuid": "A380EDE2-39B3-473D-A89C-B64223FD1014",
+                    "countryFlag": "hongkong",
+                    "tagGuid": "",
+                    "indexId": 38,
+                    "code": "HK"
+                },
+                {
+                    "id": 49,
+                    "xPos": 412,
+                    "yPos": 180,
+                    "name": "インドネシア",
+                    "countryGuid": "C87987F0-E43E-432B-B7F3-BA7AA9ADA634",
+                    "countryFlag": "indonesia",
+                    "tagGuid": "",
+                    "indexId": 49,
+                    "code": "ID"
+                },
+                {
+                    "id": 15,
+                    "xPos": 441,
+                    "yPos": 118,
+                    "name": "日本",
+                    "countryGuid": "6C53E1E5-A5DC-4D53-8DCE-D19CC6FA5DEC",
+                    "countryFlag": "japan",
+                    "tagGuid": "",
+                    "indexId": 15,
+                    "code": "JP"
+                },
+                {
+                    "id": 39,
+                    "xPos": 393,
+                    "yPos": 171,
+                    "name": "マレーシア",
+                    "countryGuid": "29EA7890-E902-49CC-AE24-A872B6C86E24",
+                    "countryFlag": "malaysia",
+                    "tagGuid": "",
+                    "indexId": 39,
+                    "code": "MY"
+                },
+                {
+                    "id": 33,
+                    "xPos": 395,
+                    "yPos": 176,
+                    "name": "シンガポール",
+                    "countryGuid": "529FB07A-CA66-4D41-AAF8-D82AEFE98B2F",
+                    "countryFlag": "singapore",
+                    "tagGuid": "",
+                    "indexId": 33,
+                    "code": "SG"
+                },
+                {
+                    "id": 21,
+                    "xPos": 428,
+                    "yPos": 116,
+                    "name": "韓国",
+                    "countryGuid": "33E3CF79-E501-4463-82F0-C8CBC5F9128F",
+                    "countryFlag": "southkorea",
+                    "tagGuid": "",
+                    "indexId": 21,
+                    "code": "KR"
+                },
+                {
+                    "id": 37,
+                    "xPos": 391,
+                    "yPos": 151,
+                    "name": "タイ",
+                    "countryGuid": "6813E586-DECE-46B3-ACD0-97CE71762690",
+                    "countryFlag": "thailand",
+                    "tagGuid": "",
+                    "indexId": 37,
+                    "code": "TH"
+                },
+                {
+                    "id": 22,
+                    "xPos": 418,
+                    "yPos": 138,
+                    "name": "台湾",
+                    "countryGuid": "D0483930-10CC-4EF6-9695-CC0F66D27D45",
+                    "countryFlag": "taiwan",
+                    "tagGuid": "",
+                    "indexId": 22,
+                    "code": "TW"
+                },
+                {
+                    "id": 4,
+                    "xPos": 276,
+                    "yPos": 94,
+                    "name": "オーストリアa",
+                    "countryGuid": "2B3C0932-AD5D-4D5B-8048-A5C96AB98A87",
+                    "countryFlag": "austria",
+                    "tagGuid": "",
+                    "indexId": 4,
+                    "code": "AT"
+                },
+                {
+                    "id": 23,
+                    "xPos": 262,
+                    "yPos": 89,
+                    "name": "ベルギー",
+                    "countryGuid": "5FD42B66-34BF-4140-B8C1-B560D7215160",
+                    "countryFlag": "belgium",
+                    "tagGuid": "",
+                    "indexId": 23,
+                    "code": "BE"
+                },
+                {
+                    "id": 46,
+                    "xPos": 276,
+                    "yPos": 89,
+                    "name": "チェコ",
+                    "countryGuid": "02912EC6-EBC1-47F0-B4AC-225C9E3B249F",
+                    "countryFlag": "czech",
+                    "tagGuid": "",
+                    "indexId": 46,
+                    "code": "CZ"
+                },
+                {
+                    "id": 20,
+                    "xPos": 269,
+                    "yPos": 77,
+                    "name": "デンマーク",
+                    "countryGuid": "6200A34C-915B-4551-93EB-3D274F10A387",
+                    "countryFlag": "denmark",
+                    "tagGuid": "",
+                    "indexId": 20,
+                    "code": "DK"
+                },
+                {
+                    "id": 11,
+                    "xPos": 293,
+                    "yPos": 60,
+                    "name": "フィンランド",
+                    "countryGuid": "10423FFC-5979-40A0-8FB4-DFDBDC0FF675",
+                    "countryFlag": "finland",
+                    "tagGuid": "",
+                    "indexId": 11,
+                    "code": "FI"
+                },
+                {
+                    "id": 7,
+                    "xPos": 260,
+                    "yPos": 93,
+                    "name": "フランス",
+                    "countryGuid": "8B075C37-B040-41B4-B4DD-D171D235D2BD",
+                    "countryFlag": "france",
+                    "tagGuid": "",
+                    "indexId": 7,
+                    "code": "FR"
+                },
+                {
+                    "id": 1,
+                    "xPos": 270,
+                    "yPos": 85,
+                    "name": "ドイツ",
+                    "countryGuid": "A2277B23-4F85-425F-A2E1-13A3081EE818",
+                    "countryFlag": "germany",
+                    "tagGuid": "",
+                    "indexId": 1,
+                    "code": "DE"
+                },
+                {
+                    "id": 10,
+                    "xPos": 286,
+                    "yPos": 114,
+                    "name": "ギリシャ",
+                    "countryGuid": "52B792BA-9849-414B-BC48-C685C5647A8D",
+                    "countryFlag": "greece",
+                    "tagGuid": "",
+                    "indexId": 10,
+                    "code": "GR"
+                },
+                {
+                    "id": 45,
+                    "xPos": 283,
+                    "yPos": 96,
+                    "name": "ハンガリー",
+                    "countryGuid": "BB647A4F-72F3-483D-9BC0-9739A2C96C34",
+                    "countryFlag": "hungary",
+                    "tagGuid": "",
+                    "indexId": 45,
+                    "code": "HU"
+                },
+                {
+                    "id": 3,
+                    "xPos": 274,
+                    "yPos": 106,
+                    "name": "イタリア",
+                    "countryGuid": "52E510C9-5C4E-4910-9DFF-46B330733294",
+                    "countryFlag": "italy",
+                    "tagGuid": "",
+                    "indexId": 3,
+                    "code": "IT"
+                },
+                {
+                    "id": 24,
+                    "xPos": 245,
+                    "yPos": 85,
+                    "name": "アイルランド",
+                    "countryGuid": "83F5E878-2B53-4985-92A3-2F4417299B4D",
+                    "countryFlag": "ireland",
+                    "tagGuid": "",
+                    "indexId": 24,
+                    "code": "IE"
+                },
+                {
+                    "id": 12,
+                    "xPos": 264,
+                    "yPos": 85,
+                    "name": "オランダ",
+                    "countryGuid": "77B72228-A493-4380-84F3-89EC64DA0DA8",
+                    "countryFlag": "netherlands",
+                    "tagGuid": "",
+                    "indexId": 12,
+                    "code": "NL"
+                },
+                {
+                    "id": 8,
+                    "xPos": 268,
+                    "yPos": 64,
+                    "name": "ノルウェー",
+                    "countryGuid": "D313F86D-3BB1-479C-B432-B55AD99ADDB4",
+                    "countryFlag": "norway",
+                    "tagGuid": "",
+                    "indexId": 8,
+                    "code": "NO"
+                },
+                {
+                    "id": 43,
+                    "xPos": 280,
+                    "yPos": 85,
+                    "name": "ポーランド",
+                    "countryGuid": "68CE29F3-FA9D-441C-A243-EF7194DB5BB2",
+                    "countryFlag": "poland",
+                    "tagGuid": "",
+                    "indexId": 43,
+                    "code": "PL"
+                },
+                {
+                    "id": 32,
+                    "xPos": 245,
+                    "yPos": 110,
+                    "name": "ポルトガル",
+                    "countryGuid": "8A59BD49-C5C2-4B1C-B0C5-BFBB50B78470",
+                    "countryFlag": "portugal",
+                    "tagGuid": "",
+                    "indexId": 32,
+                    "code": "PT"
+                },
+                {
+                    "id": 26,
+                    "xPos": 330,
+                    "yPos": 64,
+                    "name": "ロシア",
+                    "countryGuid": "0347406B-2A37-4393-AC7E-F3D89F93697E",
+                    "countryFlag": "russia",
+                    "tagGuid": "",
+                    "indexId": 26,
+                    "code": "RU"
+                },
+                {
+                    "id": 17,
+                    "xPos": 251,
+                    "yPos": 110,
+                    "name": "スペイン",
+                    "countryGuid": "B751135A-5967-4C88-AA16-AD3B9ED5448E",
+                    "countryFlag": "spain",
+                    "tagGuid": "",
+                    "indexId": 17,
+                    "code": "ES"
+                },
+                {
+                    "id": 19,
+                    "xPos": 276,
+                    "yPos": 68,
+                    "name": "スウェーデン",
+                    "countryGuid": "A7073277-7E12-42EE-AA0A-3E70F2AC1A19",
+                    "countryFlag": "sweden",
+                    "tagGuid": "",
+                    "indexId": 19,
+                    "code": "SE"
+                },
+                {
+                    "id": 5,
+                    "xPos": 268,
+                    "yPos": 96,
+                    "name": "スイス",
+                    "countryGuid": "1FE3467E-E04E-49E4-AAA4-9B202C18773A",
+                    "countryFlag": "switzerland",
+                    "tagGuid": "",
+                    "indexId": 5,
+                    "code": "CH"
+                },
+                {
+                    "id": 44,
+                    "xPos": 305,
+                    "yPos": 110,
+                    "name": "トルコ",
+                    "countryGuid": "E8B3587F-D0C1-4ED9-B88D-ECE3367869F8",
+                    "countryFlag": "turkey",
+                    "tagGuid": "",
+                    "indexId": 44,
+                    "code": "TR"
+                },
+                {
+                    "id": 9,
+                    "xPos": 255,
+                    "yPos": 85,
+                    "name": "トルコ",
+                    "countryGuid": "4B7DDF22-5723-4BC5-97DD-B39F58E0FA84",
+                    "countryFlag": "uk",
+                    "tagGuid": "",
+                    "indexId": 9,
+                    "code": "UK"
+                },
+                {
+                    "id": 58,
+                    "xPos": 297,
+                    "yPos": 130,
+                    "name": "トルコ",
+                    "countryGuid": "94B9B7C7-107F-4E78-93EC-317B097FD487",
+                    "countryFlag": "egypt",
+                    "tagGuid": "",
+                    "indexId": 58,
+                    "code": "EG"
+                },
+                {
+                    "id": 34,
+                    "xPos": 303,
+                    "yPos": 125,
+                    "name": "イスラエル",
+                    "countryGuid": "96996A72-CFF8-4261-A5C5-1D18CA4D5708",
+                    "countryFlag": "israel",
+                    "tagGuid": "",
+                    "indexId": 34,
+                    "code": "IL"
+                },
+                {
+                    "id": 41,
+                    "xPos": 288,
+                    "yPos": 229,
+                    "name": "南アフリカ",
+                    "countryGuid": "9214CABF-18DE-4E57-8E20-2F280D502B10",
+                    "countryFlag": "southafrica",
+                    "tagGuid": "",
+                    "indexId": 41,
+                    "code": "ZA"
+                },
+                {
+                    "id": 188,
+                    "xPos": 249,
+                    "yPos": 123,
+                    "name": "モロッコ王国",
+                    "countryGuid": "46830158-EC52-477D-9734-D0D8EE720082",
+                    "countryFlag": "marocco",
+                    "tagGuid": "",
+                    "indexId": 188,
+                    "code": "MA"
+                },
+                {
+                    "id": 231,
+                    "xPos": 266,
+                    "yPos": 161,
+                    "name": "ナイジェリア連邦共和国",
+                    "countryGuid": "8638D015-795D-470F-90BB-1B37F9802FBD",
+                    "countryFlag": "nigeria",
+                    "tagGuid": "",
+                    "indexId": 231,
+                    "code": "NG"
+                },
+                {
+                    "id": 239,
+                    "xPos": 286,
+                    "yPos": 106,
+                    "name": "セルビア共和国",
+                    "countryGuid": "71F46432-DF65-4D01-80EF-E6AD421EC27E",
+                    "countryFlag": "serbia",
+                    "tagGuid": "",
+                    "indexId": 239,
+                    "code": "RS"
+                },
+                {
+                    "id": 276,
+                    "xPos": 296,
+                    "yPos": 91,
+                    "name": "ウクライナ",
+                    "countryGuid": "5B5FD533-C50F-4557-AB0C-D7BBD5C51138",
+                    "countryFlag": "ukraine",
+                    "tagGuid": "",
+                    "indexId": 276,
+                    "code": "UA"
+                },
+                {
+                    "id": 230,
+                    "xPos": 290,
+                    "yPos": 99,
+                    "name": "ルーマニア",
+                    "countryGuid": "0E0177CE-DB06-40F5-AD4F-A0522BA57BBD",
+                    "countryFlag": "romania",
+                    "tagGuid": "",
+                    "indexId": 230,
+                    "code": "RO"
+                },
+                {
+                    "id": 96,
+                    "xPos": 291,
+                    "yPos": 105,
+                    "name": "ブルガリア共和国",
+                    "countryGuid": "523FDD8B-A40D-41B9-9D21-C39A29315352",
+                    "countryFlag": "bulgaria",
+                    "tagGuid": "",
+                    "indexId": 96,
+                    "code": "BG"
+                },
+                {
+                    "id": 146,
+                    "xPos": 231,
+                    "yPos": 57,
+                    "name": "アイスランド共和国",
+                    "countryGuid": "EF12EE6E-CF00-4538-9C2F-E0690AB784EE",
+                    "countryFlag": "iceland",
+                    "tagGuid": "",
+                    "indexId": 146,
+                    "code": "IS"
+                },
+                {
+                    "id": 244,
+                    "xPos": 283,
+                    "yPos": 92,
+                    "name": "スロバキア共和国",
+                    "countryGuid": "5C472E67-F2C0-4ABF-BCC6-763A3B83A836",
+                    "countryFlag": "slovakia",
+                    "tagGuid": "",
+                    "indexId": 244,
+                    "code": "SK"
+                },
+                {
+                    "id": 219,
+                    "xPos": 351,
+                    "yPos": 127,
+                    "name": "パキスタン・イスラム共和国",
+                    "countryGuid": "10BEEB92-1877-4524-BDDD-DBD3C911DEB5",
+                    "countryFlag": "pakistan",
+                    "tagGuid": "",
+                    "indexId": 219,
+                    "code": "PK"
+                },
+                {
+                    "id": 50,
+                    "xPos": 420,
+                    "yPos": 155,
+                    "name": "フィリピン共和国",
+                    "countryGuid": "382BDBE4-D4A2-40B5-8473-E9CD3188172F",
+                    "countryFlag": "philippines",
+                    "tagGuid": "",
+                    "indexId": 50,
+                    "code": "PH"
+                },
+                {
+                    "id": 125,
+                    "xPos": 255,
+                    "yPos": 165,
+                    "name": "ガーナ共和国",
+                    "countryGuid": "80FA236A-AEE1-4735-B558-DF2AED1A717C",
+                    "countryFlag": "ghana",
+                    "tagGuid": "",
+                    "indexId": 125,
+                    "code": "GH"
+                },
+                {
+                    "id": 237,
+                    "xPos": 315,
+                    "yPos": 136,
+                    "name": "サウジアラビア王国",
+                    "countryGuid": "159D91CF-4D54-4953-855E-C76B7211CD5D",
+                    "countryFlag": "uae",
+                    "tagGuid": "",
+                    "indexId": 237,
+                    "code": "SA"
+                },
+                {
+                    "id": 172,
+                    "xPos": 279,
+                    "yPos": 98,
+                    "name": "クロアチア共和国",
+                    "countryGuid": "9B756FF9-6D15-4A8C-95BF-A21CEBDECA9E",
+                    "countryFlag": "croatia",
+                    "tagGuid": "",
+                    "indexId": 172,
+                    "code": "HR"
+                },
+                {
+                    "id": 177,
+                    "xPos": 288,
+                    "yPos": 75,
+                    "name": "ラトビア共和国",
+                    "countryGuid": "069D152E-A64E-49AC-907B-7259AAB60AC1",
+                    "countryFlag": "latvia",
+                    "tagGuid": "",
+                    "indexId": 177,
+                    "code": "LV"
+                },
+                {
+                    "id": 56,
+                    "xPos": 291,
+                    "yPos": 71,
+                    "name": "エストニア共和国",
+                    "countryGuid": "0F6167E9-B404-4637-8AD2-0C42CB816E0D",
+                    "countryFlag": "estonia",
+                    "tagGuid": "",
+                    "indexId": 56,
+                    "code": "EE"
+                },
+                {
+                    "id": 181,
+                    "xPos": 289,
+                    "yPos": 80,
+                    "name": "リトアニア共和国",
+                    "countryGuid": "7EC516C3-EE4B-410B-9064-AE91DE0325D0",
+                    "countryFlag": "lithuania",
+                    "tagGuid": "",
+                    "indexId": 181,
+                    "code": "LT"
+                },
+                {
+                    "id": 286,
+                    "xPos": 401,
+                    "yPos": 154,
+                    "name": "ベトナム社会主義共和国",
+                    "countryGuid": "D502B172-B52B-48A6-B1D3-B4EBFB8E1FD9",
+                    "countryFlag": "vietnam",
+                    "tagGuid": "",
+                    "indexId": 286,
+                    "code": "VN"
+                },
+                {
+                    "id": 42,
+                    "xPos": 152,
+                    "yPos": 192,
+                    "name": "ペルー共和国",
+                    "countryGuid": "588E1A1C-9D98-4D7A-BBEE-8F518C5B32FE",
+                    "countryFlag": "peru",
+                    "tagGuid": "",
+                    "indexId": 42,
+                    "code": "PE"
+                },
+                {
+                    "id": 54,
+                    "xPos": 157,
+                    "yPos": 171,
+                    "name": "コロンビア共和国",
+                    "countryGuid": "1A08A524-3978-4A45-BFC7-68EC5623EADA",
+                    "countryFlag": "colombia",
+                    "tagGuid": "",
+                    "indexId": 54,
+                    "code": "CO"
+                },
+                {
+                    "id": 35,
+                    "xPos": 363,
+                    "yPos": 138,
+                    "name": "インド",
+                    "countryGuid": "46C5B62D-71E5-4548-8C30-6E283E864D4C",
+                    "countryFlag": "india",
+                    "tagGuid": "",
+                    "indexId": 35,
+                    "code": "IN"
+                }
+            ]
+        }
+    },
+    "date": {
+        "month": {
+            "mmm": [
+                "1月",
+                "2月",
+                "3月",
+                "4月",
+                "5月",
+                "6月",
+                "7月",
+                "8月",
+                "9月",
+                "10月",
+                "11月",
+                "12月"
+            ],
+            "mmmm": [
+                "1月",
+                "2月",
+                "3月",
+                "4月",
+                "5月",
+                "6月",
+                "7月",
+                "8月",
+                "9月",
+                "10月",
+                "11月",
+                "12月"
+            ]
+        },
+        "day": {
+            "ddd": [
+                "日",
+                "月",
+                "火",
+                "水",
+                "木",
+                "金",
+                "土"
+            ],
+            "dddd": [
+                "日曜日",
+                "月曜日",
+                "火曜日",
+                "水曜日",
+                "木曜日",
+                "金曜日",
+                "土曜日"
+            ]
+        }
+    }
+}

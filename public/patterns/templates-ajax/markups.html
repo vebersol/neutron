@@ -1,0 +1,33 @@
+<ul class="neutron-code--list"><li data-target="#html"><pre><code class="language-html">&lt;!-- start atoms/text/headline -->
+&lt;h1>Lorem ipsum dolor sit amet&lt;/h1>
+
+&lt;!-- end atoms/text/headline -->
+
+&lt;p>This is a clean layout version. In Neutron you&apos;re able to create many layout styles letting you decide the layout you want to use in your templates!&lt;/p>
+</code></pre></li><li data-target="#handlebars"><pre><code class="language-handlebars">{{ render &quot;atoms/text/headline&quot; }}
+
+&lt;p>This is a clean layout version. In Neutron you&apos;re able to create many layout styles letting you decide the layout you want to use in your templates!&lt;/p>
+
+{{# contentFor &quot;css&quot;}}
+&lt;!-- This block is instantiated in pattern page, but this element will be rendered wherever you decide by adding the **outputFor** helper. In this case the result is the header element. -->
+&lt;style>
+	body > p {
+		font-size: 18px;
+		color: red;
+	}
+&lt;/style>
+{{/contentFor}}
+</code></pre></li><li data-target="#documentation"><div class="neutron-code--documentation"><h1 id="multiple-layouts-support">Multiple layouts support</h1>
+<p>  Neutron supports multiple layouts. You just need to add a layout property in your json file related to the partial and it will render in your template file.</p>
+<h1 id="contentfor-helper">contentFor helper</h1>
+<p>When you want to print something from your pattern in your layout, you can do it using the <code>contentFor</code> helper. After that, just add the helper <code>outputFor</code> in your layout.</p>
+<h2 id="example-">Example:</h2>
+<p><em>Pattern file:</em></p>
+<blockquote>
+<p>&lbrace;&lbrace;contentFor &quot;ruleName&quot;&rbrace;&rbrace;<br>  ... content or markup goes here<br>&lbrace;&lbrace;/contentFor&rbrace;&rbrace;</p>
+</blockquote>
+<p><em>Layout file:</em></p>
+<blockquote>
+<p>&lbrace;&lbrace;outputFor &quot;ruleName&quot;&rbrace;&rbrace;</p>
+</blockquote>
+</div></li></ul>

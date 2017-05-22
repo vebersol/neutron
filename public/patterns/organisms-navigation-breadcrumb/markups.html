@@ -1,0 +1,33 @@
+<ul class="neutron-code--list"><li data-target="#html"><pre><code class="language-html">&lt;ol class=&quot;breadcrumb&quot;>
+  &lt;!-- start molecules/links/breadcrumb-item -->
+  &lt;li>
+    &lt;a href=&quot;{{assetsPath}}&quot;>Home&lt;/a>
+  &lt;/li>
+
+  &lt;!-- end molecules/links/breadcrumb-item -->
+
+  &lt;!-- start molecules/links/breadcrumb-item -->
+  &lt;li>
+    &lt;a href=&quot;{{assetsPath}}&quot;>Library&lt;/a>
+  &lt;/li>
+
+  &lt;!-- end molecules/links/breadcrumb-item -->
+
+  &lt;!-- start molecules/links/breadcrumb-item -->
+  &lt;li>
+    &lt;a href=&quot;#&quot;>Article&lt;/a>
+  &lt;/li>
+
+  &lt;!-- end molecules/links/breadcrumb-item -->
+
+&lt;/ol>
+</code></pre></li><li data-target="#handlebars"><pre><code class="language-handlebars">&lt;ol class=&quot;breadcrumb&quot;>
+  {{#each breadcrumbItems}}
+	{{ render &quot;molecules/links/breadcrumb-item&quot;}}
+  {{/each}}
+&lt;/ol>
+</code></pre></li><li data-target="#documentation"><div class="neutron-code--documentation"><p>Breadcrumb organism is used to generate a breadcrumb based in desired configuration.</p>
+<ul>
+<li><strong>breadcrumbItems</strong> (Array)<br><em>Supported values:</em> The <code>breadcrumbItems</code> array will receive an object with all propertyes that can be used in <code>molecules/links/breadcrumb-item</code>.</li>
+</ul>
+</div></li></ul>

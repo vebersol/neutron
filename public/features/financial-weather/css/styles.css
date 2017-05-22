@@ -1,0 +1,2131 @@
+/*! normalize.css v1.1.1 | MIT License | git.io/normalize */
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+.fw-regular.fwt-tool-c {
+  background: #fff;
+  /* 1 */
+  color: #000;
+  /* 2 */
+  font-size: 100%;
+  /* 3 */
+  -webkit-text-size-adjust: 100%;
+  /* 4 */
+  -ms-text-size-adjust: 100%;
+  /* 4 */
+  font-family: sans-serif;
+  margin: 0; }
+  .fw-regular.fwt-tool-c article, .fw-regular.fwt-tool-c aside, .fw-regular.fwt-tool-c details, .fw-regular.fwt-tool-c figcaption, .fw-regular.fwt-tool-c figure, .fw-regular.fwt-tool-c footer, .fw-regular.fwt-tool-c header, .fw-regular.fwt-tool-c hgroup, .fw-regular.fwt-tool-c main, .fw-regular.fwt-tool-c nav, .fw-regular.fwt-tool-c section, .fw-regular.fwt-tool-c summary {
+    display: block; }
+  .fw-regular.fwt-tool-c audio, .fw-regular.fwt-tool-c canvas, .fw-regular.fwt-tool-c video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1; }
+  .fw-regular.fwt-tool-c audio:not([controls]) {
+    display: none;
+    height: 0; }
+  .fw-regular.fwt-tool-c [hidden] {
+    display: none; }
+  .fw-regular.fwt-tool-c button, .fw-regular.fwt-tool-c input, .fw-regular.fwt-tool-c select, .fw-regular.fwt-tool-c textarea {
+    font-family: sans-serif; }
+  .fw-regular.fwt-tool-c a:focus {
+    outline: thin dotted transparent; }
+  .fw-regular.fwt-tool-c a:active, .fw-regular.fwt-tool-c a:hover {
+    outline: 0; }
+  .fw-regular.fwt-tool-c h1 {
+    font-size: 2em;
+    margin: 0.67em 0; }
+  .fw-regular.fwt-tool-c h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0; }
+  .fw-regular.fwt-tool-c h3 {
+    font-size: 1.17em;
+    margin: 1em 0; }
+  .fw-regular.fwt-tool-c h4 {
+    font-size: 1em;
+    margin: 1.33em 0; }
+  .fw-regular.fwt-tool-c h5 {
+    font-size: 0.83em;
+    margin: 1.67em 0; }
+  .fw-regular.fwt-tool-c h6 {
+    font-size: 0.67em;
+    margin: 2.33em 0; }
+  .fw-regular.fwt-tool-c abbr[title] {
+    border-bottom: 1px dotted; }
+  .fw-regular.fwt-tool-c b, .fw-regular.fwt-tool-c strong {
+    font-weight: bold; }
+  .fw-regular.fwt-tool-c blockquote {
+    margin: 1em 40px; }
+  .fw-regular.fwt-tool-c dfn {
+    font-style: italic; }
+  .fw-regular.fwt-tool-c hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0; }
+  .fw-regular.fwt-tool-c mark {
+    background: #ff0;
+    color: #000; }
+  .fw-regular.fwt-tool-c p, .fw-regular.fwt-tool-c pre {
+    margin: 1em 0; }
+  .fw-regular.fwt-tool-c code, .fw-regular.fwt-tool-c kbd, .fw-regular.fwt-tool-c pre, .fw-regular.fwt-tool-c samp {
+    font-family: monospace, serif;
+    _font-family: 'courier new', monospace;
+    font-size: 1em; }
+  .fw-regular.fwt-tool-c pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word; }
+  .fw-regular.fwt-tool-c q {
+    quotes: none; }
+    .fw-regular.fwt-tool-c q:before, .fw-regular.fwt-tool-c q:after {
+      content: '';
+      content: none; }
+  .fw-regular.fwt-tool-c small {
+    font-size: 80%; }
+  .fw-regular.fwt-tool-c sub {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline; }
+  .fw-regular.fwt-tool-c sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    top: -0.5em; }
+  .fw-regular.fwt-tool-c sub {
+    bottom: -0.25em; }
+  .fw-regular.fwt-tool-c dl, .fw-regular.fwt-tool-c menu, .fw-regular.fwt-tool-c ol, .fw-regular.fwt-tool-c ul {
+    margin: 1em 0; }
+  .fw-regular.fwt-tool-c dd {
+    margin: 0 0 0 40px; }
+  .fw-regular.fwt-tool-c menu, .fw-regular.fwt-tool-c ol, .fw-regular.fwt-tool-c ul {
+    padding: 0 0 0 40px; }
+  .fw-regular.fwt-tool-c nav ul, .fw-regular.fwt-tool-c nav ol {
+    list-style: none;
+    list-style-image: none; }
+  .fw-regular.fwt-tool-c img {
+    border: 0;
+    /* 1 */
+    -ms-interpolation-mode: bicubic;
+    /* 2 */ }
+  .fw-regular.fwt-tool-c svg:not(:root) {
+    overflow: hidden; }
+  .fw-regular.fwt-tool-c figure, .fw-regular.fwt-tool-c form {
+    margin: 0; }
+  .fw-regular.fwt-tool-c fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em; }
+  .fw-regular.fwt-tool-c legend {
+    border: 0;
+    /* 1 */
+    padding: 0;
+    white-space: normal;
+    /* 2 */
+    *margin-left: -7px;
+    /* 3 */ }
+  .fw-regular.fwt-tool-c button, .fw-regular.fwt-tool-c input, .fw-regular.fwt-tool-c select, .fw-regular.fwt-tool-c textarea {
+    font-size: 100%;
+    /* 1 */
+    margin: 0;
+    /* 2 */
+    vertical-align: baseline;
+    /* 3 */
+    *vertical-align: middle;
+    /* 3 */ }
+  .fw-regular.fwt-tool-c button, .fw-regular.fwt-tool-c input {
+    line-height: normal; }
+  .fw-regular.fwt-tool-c button, .fw-regular.fwt-tool-c select {
+    text-transform: none; }
+  .fw-regular.fwt-tool-c button {
+    -webkit-appearance: button;
+    /* 2 */
+    cursor: pointer;
+    /* 3 */
+    *overflow: visible;
+    /* 4 */ }
+  .fw-regular.fwt-tool-c input[type="button"], .fw-regular.fwt-tool-c input[type="reset"], .fw-regular.fwt-tool-c input[type="submit"] {
+    -webkit-appearance: button;
+    /* 2 */
+    cursor: pointer;
+    /* 3 */
+    *overflow: visible;
+    /* 4 */ }
+  .fw-regular.fwt-tool-c button[disabled] {
+    cursor: default; }
+  .fw-regular.fwt-tool-c input[disabled] {
+    cursor: default; }
+  .fw-regular.fwt-tool-c input[type="checkbox"], .fw-regular.fwt-tool-c input[type="radio"] {
+    box-sizing: border-box;
+    /* 1 */
+    padding: 0;
+    /* 2 */
+    *height: 13px;
+    /* 3 */
+    *width: 13px;
+    /* 3 */ }
+  .fw-regular.fwt-tool-c input[type="search"] {
+    -webkit-appearance: textfield;
+    /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    /* 2 */
+    box-sizing: content-box; }
+    .fw-regular.fwt-tool-c input[type="search"]::-webkit-search-cancel-button, .fw-regular.fwt-tool-c input[type="search"]::-webkit-search-decoration {
+      -webkit-appearance: none; }
+  .fw-regular.fwt-tool-c button::-moz-focus-inner, .fw-regular.fwt-tool-c input::-moz-focus-inner {
+    border: 0;
+    padding: 0; }
+  .fw-regular.fwt-tool-c textarea {
+    overflow: auto;
+    /* 1 */
+    vertical-align: top;
+    /* 2 */ }
+  .fw-regular.fwt-tool-c table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+/**
+ * Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/**
+ * Address styling not present in IE 7/8/9, Firefox 3, and Safari 4.
+ * Known issue: no IE 6 support.
+ */
+/* ==========================================================================
+   Base
+   ========================================================================== */
+/**
+ * 1. Prevent system color scheme's background color being used in Firefox, IE,
+ *    and Opera.
+ * 2. Prevent system color scheme's text color being used in Firefox, IE, and
+ *    Opera.
+ * 3. Correct text resizing oddly in IE 6/7 when body `font-size` is set using
+ *    `em` units.
+ * 4. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+/**
+ * Address `font-family` inconsistency between `textarea` and other form
+ * elements.
+ */
+/**
+ * Address margins handled incorrectly in IE 6/7.
+ */
+/* ==========================================================================
+   Links
+   ========================================================================== */
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/**
+ * Address font sizes and margins set differently in IE 6/7.
+ * Address font sizes within `section` and `article` in Firefox 4+, Safari 5,
+ * and Chrome.
+ */
+/**
+ * Address styling not present in IE 7/8/9, Safari 5, and Chrome.
+ */
+/**
+ * Address style set to `bolder` in Firefox 3+, Safari 4/5, and Chrome.
+ */
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+/**
+ * Address differences between Firefox and other browsers.
+ * Known issue: no IE 6/7 normalization.
+ */
+/**
+ * Address styling not present in IE 6/7/8/9.
+ */
+/**
+ * Address margins set differently in IE 6/7.
+ */
+/**
+ * Correct font family set oddly in IE 6, Safari 4/5, and Chrome.
+ */
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+/**
+ * Address CSS quotes not supported in IE 6/7.
+ */
+/**
+ * Address `quotes` property not supported in Safari 4.
+ */
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+/**
+ * Address margins set differently in IE 6/7.
+ */
+/**
+ * Address paddings set differently in IE 6/7.
+ */
+/**
+ * Correct list images handled incorrectly in IE 7.
+ */
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+/**
+ * 1. Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.
+ * 2. Improve image quality when scaled in IE 7.
+ */
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+/**
+ * Address margin not present in IE 6/7/8/9, Safari 5, and Opera 11.
+ */
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+/**
+ * Correct margin displayed oddly in IE 6/7.
+ */
+/**
+ * Define consistent border, margin, and padding.
+ */
+/**
+ * 1. Correct color not being inherited in IE 6/7/8/9.
+ * 2. Correct text not wrapping in Firefox 3.
+ * 3. Correct alignment displayed oddly in IE 6/7.
+ */
+/**
+ * 1. Correct font size not being inherited in all browsers.
+ * 2. Address margins set differently in IE 6/7, Firefox 3+, Safari 5,
+ *    and Chrome.
+ * 3. Improve appearance and consistency in all browsers.
+ */
+/**
+ * Address Firefox 3+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 6+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
+ *    Known issue: inner spacing remains in IE 6.
+ */
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/**
+ * 1. Address box sizing set to content-box in IE 8/9.
+ * 2. Remove excess padding in IE 8/9.
+ * 3. Remove excess padding in IE 7.
+ *    Known issue: excess padding remains in IE 6.
+ */
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+/**
+ * Remove inner padding and border in Firefox 3+.
+ */
+/**
+ * 1. Remove default vertical scrollbar in IE 6/7/8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+@font-face {
+  font-family: 'UniversDeutscheBank';
+  font-style: normal;
+  src: url("../fonts/universdeutschebank-regular.eot");
+  src: url("../fonts/universdeutschebank-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/universdeutschebank-regular.woff") format("woff"), url("../fonts/universdeutschebank-regular.ttf") format("truetype"), url("../fonts/universdeutschebank-regular.svg#UniversDeutscheBankRegular") format("svg"); }
+
+/* ==========================================================================
+   Base styles
+   ========================================================================== */
+.fw-regular.fwt-tool-c {
+  line-height: 16px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #666666; }
+  .fw-regular.fwt-tool-c svg {
+    width: 100%;
+    height: 100%;
+    cursor: pointer; }
+  .fw-regular.fwt-tool-c ::-moz-selection, .fw-regular.fwt-tool-c ::selection {
+    background: #b3d4fc;
+    text-shadow: none; }
+  .fw-regular.fwt-tool-c img {
+    vertical-align: middle; }
+  .fw-regular.fwt-tool-c li {
+    list-style-type: none; }
+  .fw-regular.fwt-tool-c .chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0; }
+  .fw-regular.fwt-tool-c h2 {
+    font-size: 11px; }
+  .fw-regular.fwt-tool-c h4 {
+    margin: 0;
+    padding: 0; }
+  .fw-regular.fwt-tool-c .list-slide {
+    padding-right: 20px; }
+  .fw-regular.fwt-tool-c .break {
+    display: block;
+    clear: both; }
+  .fw-regular.fwt-tool-c .wrapper {
+    max-width: 900px;
+    min-width: 600px;
+    margin: 2px auto 3px;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+    z-index: 999; }
+  .fw-regular.fwt-tool-c .main {
+    width: 81%;
+    position: relative;
+    height: 100%; }
+  .fw-regular.fwt-tool-c .sidebar {
+    width: 19%;
+    border-top: 1px solid #FFF; }
+  .fw-regular.fwt-tool-c .slide-box {
+    position: absolute;
+    z-index: 9999;
+    margin-top: 8px;
+    width: 70%;
+    background-color: #ffffff;
+    -webkit-filter: drop-shadow(2px 1px 5px #666);
+    left: -72.5%;
+    /* was 70% but a change to work on chrome is necessary */ }
+    .fw-regular.fwt-tool-c .slide-box ul {
+      margin: 0 0 20px; }
+  .fw-regular.fwt-tool-c .slide-open {
+    left: 0; }
+  .fw-regular.fwt-tool-c .list-item {
+    margin: 0 0 10px; }
+  .fw-regular.fwt-tool-c .bt-reset {
+    border: none;
+    display: block;
+    text-decoration: none !important; }
+  .fw-regular.fwt-tool-c .bt-slide {
+    padding: 4px 6px;
+    background: #ffffff;
+    margin-left: 100%; }
+  .fw-regular.fwt-tool-c .bt-close {
+    background: transparent;
+    padding-right: 0; }
+  .fw-regular.fwt-tool-c .scalable-map {
+    width: 100.2%;
+    height: 100%;
+    margin-bottom: 2px;
+    margin-left: -1px;
+    position: relative;
+    z-index: 0;
+    overflow: hidden; }
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+/* ==========================================================================
+   Chrome Frame prompt
+   ========================================================================== */
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+/* slide elements */
+/*.list-item:before {
+	content:"-";
+	padding-right: 10px;
+	}*/
+.svg-container {
+  border: 1px solid #fff;
+  /*fix ie8 bug*/
+  height: 458px;
+  min-height: 272px;
+  min-width: 425px;
+  overflow: hidden;
+  position: relative;
+  -webkit-backface-visibility: hidden;
+  cursor: pointer; }
+  .svg-container .ui-state-disabled {
+    cursor: pointer !important; }
+
+.fw-regular.fwt-tool-c .ipad .svg-container {
+  -webkit-transform: translate3d(0, 0, 0); }
+
+.svg-container .draggable, .svg-container .extra-div {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  /*border:1px solid #000;*/
+  /*-webkit-backface-visibility: hidden;*/ }
+
+#mask-background {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  height: 437px;
+  min-height: 272px;
+  width: 100%;
+  background: url("../img/pattern/bg-transparent.gif") repeat; }
+
+div#svg_fw_map, div#svg_fw_map_small {
+  position: relative;
+  margin: 0 auto;
+  z-index: -1;
+  cursor: pointer; }
+
+.fw-regular.fwt-tool-c .ipad #svg_fw_map, .fw-regular.fwt-tool-c .ipad #svg_fw_map_small {
+  -webkit-backface-visibility: hidden; }
+.fw-regular.fwt-tool-c .dual-element-map .svg-container {
+  border: 1px solid #fff;
+  /*fix ie8 bug*/
+  height: 458px;
+  min-height: 272px;
+  min-width: 425px;
+  overflow: hidden;
+  position: relative; }
+  .fw-regular.fwt-tool-c .dual-element-map .svg-container .draggable {
+    display: block;
+    position: absolute;
+    margin: 0 auto;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    /*border:1px solid #000;*/
+    background: url("../img/pattern/bg-transparent.gif") repeat;
+    /*z-index:2;*/ }
+.fw-regular.fwt-tool-c .dual-element-map #svg_fw_map, .fw-regular.fwt-tool-c .dual-element-map #svg_fw_map2, .fw-regular.fwt-tool-c .dual-element-map #svg_fw_map_small, .fw-regular.fwt-tool-c .dual-element-map #svg_fw_map_small2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; }
+.fw-regular.fwt-tool-c .label {
+  background: #8f8f8f;
+  background: rgba(143, 143, 143, 0.7);
+  color: #ffffff;
+  font-size: 10px;
+  padding: 2px 5px;
+  margin: 5px;
+  position: absolute; }
+.fw-regular.fwt-tool-c .fw-period {
+  z-index: 2; }
+.fw-regular.fwt-tool-c .label-top {
+  top: 5px;
+  right: 9px; }
+.fw-regular.fwt-tool-c .label-bottom {
+  bottom: 5px;
+  right: 5px; }
+.fw-regular.fwt-tool-c .tab-bar {
+  position: relative;
+  overflow: hidden;
+  padding: 0 19px;
+  height: 21px;
+  border-right: 1px solid #fff; }
+  .fw-regular.fwt-tool-c .tab-bar > div {
+    height: 21px;
+    opacity: .5;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; }
+.fw-regular.fwt-tool-c .board {
+  margin: 0 0 3px 2px; }
+.fw-regular.fwt-tool-c .performance-board {
+  padding-left: 0;
+  padding-bottom: 6px; }
+  .fw-regular.fwt-tool-c .performance-board h2 ~ h2 {
+    margin-bottom: 5px;
+    margin-top: 0; }
+.fw-regular.fwt-tool-c .tt-wrapper {
+  position: absolute;
+  border-left: 50px solid transparent;
+  display: none;
+  background: url("../img/pattern/bg-transparent.gif") repeat; }
+.fw-regular.fwt-tool-c .tt-action {
+  position: absolute;
+  z-index: 1;
+  width: 20px;
+  height: 25px;
+  background: url(../img/tt-action.png) no-repeat;
+  padding: 0 15px;
+  outline: none;
+  border: none; }
+.fw-regular.fwt-tool-c .tt-1 {
+  top: 100px;
+  left: 100px; }
+.fw-regular.fwt-tool-c .tt-box {
+  padding: 10px;
+  width: 231px;
+  margin-top: 0;
+  z-index: 9999;
+  background: #fff;
+  -webkit-box-shadow: 1px 1px 3px #666;
+  box-shadow: 1px 1px 3px #666;
+  /*opacity: 0;*/
+  display: none;
+  position: absolute;
+  z-index: 3; }
+  .fw-regular.fwt-tool-c .tt-box h4 {
+    font-size: 14px;
+    line-height: 20px;
+    color: #666; }
+  .fw-regular.fwt-tool-c .tt-box span {
+    color: #999; }
+.fw-regular.fwt-tool-c .ch-right-bt .tt-box {
+  right: 10px;
+  bottom: 0; }
+.fw-regular.fwt-tool-c .ch-right-tp .tt-box {
+  right: 10px;
+  top: 0; }
+.fw-regular.fwt-tool-c .ch-left-bt .tt-box {
+  left: 30px;
+  bottom: 0; }
+.fw-regular.fwt-tool-c .ch-left-tp .tt-box {
+  left: 30px;
+  top: 0; }
+.fw-regular.fwt-tool-c .tt-box .legend {
+  margin-left: 20px; }
+.fw-regular.fwt-tool-c .touch * {
+  -webkit-tap-highlight-color: transparent; }
+.fw-regular.fwt-tool-c .tt-wrapper:hover > .tt-action {
+  padding: 0 15px 100px; }
+.fw-regular.fwt-tool-c .pp-wrapper {
+  z-index: -1;
+  width: 422px;
+  position: absolute;
+  left: 50%;
+  margin-left: -225px;
+  background: #fff;
+  padding: 10px 14px; }
+  .fw-regular.fwt-tool-c .pp-wrapper .icon-flag {
+    /*margin-left: 10px;*/ }
+.fw-regular.fwt-tool-c .lt {
+  color: #999999;
+  margin-right: 5px; }
+.fw-regular.fwt-tool-c .tab-month {
+  margin: 0;
+  padding: 0;
+  border-right: 1px solid #b7b7b7;
+  border-left: 1px solid #b7b7b7; }
+  .fw-regular.fwt-tool-c .tab-month li {
+    display: block;
+    width: 8.33%;
+    font-size: 10px;
+    text-align: center;
+    float: left;
+    line-height: 21px;
+    margin: 0;
+    border-left: 1px solid #b7b7b7;
+    overflow: hidden;
+    height: 21px; }
+    .fw-regular.fwt-tool-c .tab-month li:first-child {
+      margin-left: 0;
+      border: none; }
+.fw-regular.fwt-tool-c .bt-next, .fw-regular.fwt-tool-c .bt-prev, .fw-regular.fwt-tool-c .bt-play, .fw-regular.fwt-tool-c .bt-rewind, .fw-regular.fwt-tool-c .bt-pause, .fw-regular.fwt-tool-c .bt-rewind {
+  padding: 0 7px;
+  height: 20px; }
+.fw-regular.fwt-tool-c .map-handler {
+  width: 36px;
+  height: 21px;
+  position: absolute;
+  z-index: 5;
+  border: 3px solid #002244;
+  left: 67px;
+  top: 37px;
+  display: none;
+  background: url("../img/pattern/bg-transparent.gif") repeat;
+  cursor: pointer; }
+.fw-regular.fwt-tool-c .small-view {
+  width: 100%;
+  position: relative;
+  text-align: right;
+  padding: 0 0 25px 0;
+  overflow: hidden; }
+.fw-regular.fwt-tool-c .small-view-wrapper {
+  margin: 0 0 3px 3px; }
+.fw-regular.fwt-tool-c .small-view img {
+  width: 100%;
+  margin-top: 3px;
+  display: none; }
+.fw-regular.fwt-tool-c .zoom-in, .fw-regular.fwt-tool-c .zoom-out {
+  display: inline-block;
+  margin: -20px 0 0;
+  padding: 3px;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  z-index: 1; }
+.fw-regular.fwt-tool-c .ie7 .zoom-in, .fw-regular.fwt-tool-c .ie7 .zoom-out {
+  padding-top: 3px;
+  padding-bottom: 4px; }
+.fw-regular.fwt-tool-c .zoom-in {
+  right: 33px; }
+
+/*dual-element-map: css for browsers that use the 2 elements draggable solution*/
+/*dual-element map end*/
+/* tooltip structure */
+/*position countries tooltips */
+/*end:position countries tooltips */
+/* end: tooltips */
+/* popup structure */
+/* end: popup structure */
+/* svg month range */
+.bt-active {
+  background: url("../img/pattern/btn-active.jpg") repeat-x; }
+
+/*background-color: #AEB0B6;*/
+/*#002244*/
+#slider-range-color {
+  float: left;
+  /*width:110px;*/
+  padding: 0;
+  margin: 0;
+  height: 20px;
+  position: relative; }
+
+.fw-regular.fwt-tool-c .range-handle {
+  cursor: w-resize;
+  top: 0px;
+  position: absolute;
+  width: 10%;
+  height: 100%;
+  outline-color: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-shadow: #333333 0px 0px 5px, rgba(255, 255, 255, 0.49804) 0px 5px 5px inset;
+  background-image: none; }
+.fw-regular.fwt-tool-c .no-boxshadow .range-handle {
+  background: url(../img/pattern/range.png) no-repeat -2px 0;
+  width: 10px;
+  top: -5px;
+  height: 120%;
+  padding: 2px 2px 3px;
+  margin-left: -2px; }
+.fw-regular.fwt-tool-c .no-cssgradients #slider-range-color {
+  z-index: 999;
+  position: relative; }
+.fw-regular.fwt-tool-c .gr-colors {
+  *width: 73%;
+  width: calc(100% - 42px);
+  width: -webkit-calc(100% - 42px);
+  width: -moz-calc(100% - 42px);
+  height: 20px;
+  position: relative; }
+  .fw-regular.fwt-tool-c .gr-colors img {
+    position: absolute;
+    top: 0;
+    *top: -1px;
+    z-index: 0;
+    width: 100%;
+    height: 20px; }
+.fw-regular.fwt-tool-c .legend-text {
+  font-size: 10px;
+  margin: 2px 0 10px; }
+.fw-regular.fwt-tool-c .legend-negative {
+  color: #e00034 !important; }
+.fw-regular.fwt-tool-c .legend-positive {
+  color: #7ab800 !important; }
+.fw-regular.fwt-tool-c .list-doble-items {
+  margin: 0;
+  padding: 0;
+  font-size: 11px; }
+.fw-regular.fwt-tool-c .sidebar .list-doble-items {
+  width: 138px;
+  overflow: hidden; }
+.fw-regular.fwt-tool-c .list-doble-items li {
+  line-height: 2;
+  border-top: 1px solid #e2e2e2;
+  box-shadow: 0 -1px 2px #fff;
+  overflow: hidden;
+  padding: 0 0px; }
+
+/* labels green or red */
+/* list with children elements floated */
+#country-layer .r-item {
+  line-height: 1.5;
+  margin-top: 2px; }
+
+.fw-regular.fwt-tool-c .l-item {
+  display: block;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 65%; }
+.fw-regular.fwt-tool-c a {
+  color: #888888;
+  text-decoration: none; }
+  .fw-regular.fwt-tool-c a:hover {
+    text-decoration: underline; }
+.fw-regular.fwt-tool-c .r-item {
+  float: right; }
+.fw-regular.fwt-tool-c .last-item {
+  border-bottom: 1px solid #e2e2e2;
+  box-shadow: 0 0px 5px #fff !important; }
+
+#country-layer .l-item, #country-layer .r-item {
+  width: 50%;
+  white-space: normal; }
+
+/* end: list with children elements floated */
+.fw-regular.fwt-tool-c .list-items {
+  margin: 0;
+  padding: 0; }
+.fw-regular.fwt-tool-c .link-item {
+  color: #0018a8;
+  text-decoration: underline; }
+  .fw-regular.fwt-tool-c .link-item .icon {
+    margin-right: 5px; }
+.fw-regular.fwt-tool-c .animation-buttons {
+  text-align: center;
+  font-size: 11px;
+  color: #fff;
+  line-height: 20px;
+  margin: 0 0 0 2px;
+  position: relative; }
+  .fw-regular.fwt-tool-c .animation-buttons button {
+    position: absolute;
+    top: 0; }
+  .fw-regular.fwt-tool-c .animation-buttons .bt-rewind {
+    left: 0; }
+  .fw-regular.fwt-tool-c .animation-buttons .bt-play, .fw-regular.fwt-tool-c .animation-buttons .bt-pause {
+    right: 0; }
+.fw-regular.fwt-tool-c .gray-bar {
+  background: #b6babf; }
+.fw-regular.fwt-tool-c .m-10 {
+  margin-left: 10px;
+  margin-right: 9px; }
+  .fw-regular.fwt-tool-c .m-10.scroll-pane {
+    margin-left: 9px;
+    margin-right: 10px; }
+.fw-regular.fwt-tool-c .mb-10 {
+  margin-bottom: 10px; }
+
+#slider-range {
+  width: calc(100% - 41px);
+  width: -webkit-calc(100% - 41px);
+  width: -moz-calc(100% - 41px);
+  height: 20px; }
+
+.fwt-tool-c .loading {
+  width: auto;
+  padding: 0 40px;
+  float: left;
+  /*width: 171px;*/
+  height: 75px;
+  border: 1px solid #838484;
+  position: absolute;
+  top: 50%;
+  /*left: 50%;*/
+  /*top: -webkit-calc(50% - 75px/2);*/
+  /*left:-webkit-calc(50% - 171px/2);*/
+  /*top: calc(50% - 75px/2);*/
+  /*left: calc(50% - 171px/2);*/ }
+.fwt-tool-c .left {
+  float: left; }
+.fwt-tool-c .right {
+  float: right; }
+
+.fw-regular.fwt-tool-c .ui-slider-range {
+  text-align: center;
+  line-height: 20px !important;
+  /*1.5*/
+  font-family: arial, sans-serif;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  cursor: pointer; }
+.fw-regular.fwt-tool-c .ui-widget-header {
+  background-image: -webkit-linear-gradient(bottom, #002244, #003f8a, #0050b2); }
+.fw-regular.fwt-tool-c .ui-slider-handle {
+  outline: none;
+  cursor: w-resize;
+  height: 42px;
+  border: none;
+  position: absolute;
+  top: -22px;
+  width: 10px;
+  margin: 0;
+  background: url(../img/gr-bar-blue.png) no-repeat left top; }
+  .fw-regular.fwt-tool-c .ui-slider-handle:last-child {
+    margin-left: -1px; }
+.fw-regular.fwt-tool-c .timeline {
+  z-index: 9;
+  position: relative; }
+  .fw-regular.fwt-tool-c .timeline p {
+    position: absolute; }
+.fw-regular.fwt-tool-c .icon {
+  display: block;
+  background: url(../img/spr-icons.png) no-repeat transparent; }
+.fw-regular.fwt-tool-c .icon-close {
+  background-position: 0 0;
+  width: 9px;
+  height: 11px; }
+.fw-regular.fwt-tool-c .icon-help {
+  background-position: 0 -11px;
+  width: 9px;
+  height: 11px; }
+.fw-regular.fwt-tool-c .icon-next {
+  background-position: 0 -22px;
+  width: 6px;
+  height: 10px; }
+.fw-regular.fwt-tool-c .icon-prev {
+  background-position: 0 -32px;
+  width: 6px;
+  height: 10px; }
+.fw-regular.fwt-tool-c .icon-play {
+  background-position: 0 -52px;
+  width: 5px;
+  height: 9px; }
+.fw-regular.fwt-tool-c .icon-pause {
+  background-position: 0 -119px;
+  width: 5px;
+  height: 8px; }
+.fw-regular.fwt-tool-c .icon-rewind {
+  background-position: 0 -43px;
+  width: 7px;
+  height: 9px; }
+.fw-regular.fwt-tool-c .icon-forward {
+  background-position: 0 -59px;
+  width: 7px;
+  height: 9px; }
+.fw-regular.fwt-tool-c .icon-plus {
+  width: 10px;
+  height: 10px;
+  background-position: 0 -68px; }
+.fw-regular.fwt-tool-c .icon-minus {
+  width: 10px;
+  height: 10px;
+  background-position: 0 -78px; }
+.fw-regular.fwt-tool-c .ie7 .zoom-in, .fw-regular.fwt-tool-c .ie7 .zoom-out {
+  padding: 4px 5px 3px; }
+.fw-regular.fwt-tool-c .icon-bullet {
+  background-position: 0 -88px;
+  width: 10px;
+  height: 9px;
+  display: inline-block; }
+.fw-regular.fwt-tool-c .icon-blue-bullet {
+  background-position: 0 -97px;
+  width: 6px;
+  height: 9px;
+  display: inline-block; }
+.fw-regular.fwt-tool-c .icon-flag {
+  width: 44px;
+  height: 27px;
+  background: url(../img/spr-flags.jpg) no-repeat transparent; }
+.fw-regular.fwt-tool-c .icon-flag-ukraine {
+  background-position: 0 0; }
+.fw-regular.fwt-tool-c .icon-flag-finland {
+  background-position: 0 -27px; }
+.fw-regular.fwt-tool-c .icon-flag-egypt {
+  background-position: 0 -54px; }
+.fw-regular.fwt-tool-c .icon-flag-denmark {
+  background-position: 0 -81px; }
+.fw-regular.fwt-tool-c .icon-flag-czech {
+  background-position: 0 -108px; }
+.fw-regular.fwt-tool-c .icon-flag-chile {
+  background-position: 0 -135px; }
+.fw-regular.fwt-tool-c .icon-flag-canada {
+  background-position: 0 -162px; }
+.fw-regular.fwt-tool-c .icon-flag-brazil {
+  background-position: 0 -189px; }
+.fw-regular.fwt-tool-c .icon-flag-belgium {
+  background-position: 0 -216px; }
+.fw-regular.fwt-tool-c .icon-flag-austria {
+  background-position: 0 -243px; }
+.fw-regular.fwt-tool-c .icon-flag-australia {
+  background-position: 0 -270px; }
+.fw-regular.fwt-tool-c .icon-flag-argentina {
+  background-position: 0 -297px; }
+.fw-regular.fwt-tool-c .icon-flag-usa {
+  background-position: 0 -324px; }
+.fw-regular.fwt-tool-c .icon-flag-uk {
+  background-position: 0 -351px; }
+.fw-regular.fwt-tool-c .icon-flag-uae {
+  background-position: 0 -378px; }
+.fw-regular.fwt-tool-c .icon-flag-turkey {
+  background-position: 0 -405px; }
+.fw-regular.fwt-tool-c .icon-flag-thailand {
+  background-position: 0 -432px; }
+.fw-regular.fwt-tool-c .icon-flag-thaiwan {
+  background-position: 0 -459px; }
+.fw-regular.fwt-tool-c .icon-flag-switzerland {
+  background-position: 0 -486px; }
+.fw-regular.fwt-tool-c .icon-flag-sweden {
+  background-position: 0 -513px; }
+.fw-regular.fwt-tool-c .icon-flag-spain {
+  background-position: 0 -540px; }
+.fw-regular.fwt-tool-c .icon-flag-southafrica {
+  background-position: 0 -567px; }
+.fw-regular.fwt-tool-c .icon-flag-singapore {
+  background-position: 0 -594px; }
+.fw-regular.fwt-tool-c .icon-flag-russia {
+  background-position: 0 -621px; }
+.fw-regular.fwt-tool-c .icon-flag-portugal {
+  background-position: 0 -648px; }
+.fw-regular.fwt-tool-c .icon-flag-poland {
+  background-position: 0 -675px; }
+.fw-regular.fwt-tool-c .icon-flag-peru {
+  background-position: 0 -702px; }
+.fw-regular.fwt-tool-c .icon-flag-norway {
+  background-position: 0 -729px; }
+.fw-regular.fwt-tool-c .icon-flag-netherlands {
+  background-position: 0 -756px; }
+.fw-regular.fwt-tool-c .icon-flag-mexico {
+  background-position: 0 -783px; }
+.fw-regular.fwt-tool-c .icon-flag-malaysia {
+  background-position: 0 -810px; }
+.fw-regular.fwt-tool-c .icon-flag-southkorea {
+  background-position: 0 -837px; }
+.fw-regular.fwt-tool-c .icon-flag-japan {
+  background-position: 0 -864px; }
+.fw-regular.fwt-tool-c .icon-flag-italy {
+  background-position: 0 -891px; }
+.fw-regular.fwt-tool-c .icon-flag-israel {
+  background-position: 0 -918px; }
+.fw-regular.fwt-tool-c .icon-flag-ireland {
+  background-position: 0 -945px; }
+.fw-regular.fwt-tool-c .icon-flag-indonesia {
+  background-position: 0 -972px; }
+.fw-regular.fwt-tool-c .icon-flag-india {
+  background-position: 0 -999px; }
+.fw-regular.fwt-tool-c .icon-flag-hungary {
+  background-position: 0 -1026px; }
+.fw-regular.fwt-tool-c .icon-flag-hongkong {
+  background-position: 0 -1053px; }
+.fw-regular.fwt-tool-c .icon-flag-greece {
+  background-position: 0 -1080px; }
+.fw-regular.fwt-tool-c .icon-flag-ghana {
+  background-position: 0 -1107px; }
+.fw-regular.fwt-tool-c .icon-flag-germany {
+  background-position: 0 -1134px; }
+.fw-regular.fwt-tool-c .icon-flag-france {
+  background-position: 0 -1161px; }
+.fw-regular.fwt-tool-c .icon-flag-china {
+  background-position: 0 -1188px; }
+.fw-regular.fwt-tool-c .icon-flag-latvia {
+  background-position: 0 -1215px; }
+.fw-regular.fwt-tool-c .icon-flag-lithuania {
+  background-position: 0 -1242px; }
+.fw-regular.fwt-tool-c .icon-flag-marocco {
+  background-position: 0 -1269px; }
+.fw-regular.fwt-tool-c .icon-flag-nigeria {
+  background-position: 0 -1296px; }
+.fw-regular.fwt-tool-c .icon-flag-pakistan {
+  background-position: 0 -1323px; }
+.fw-regular.fwt-tool-c .icon-flag-philippines {
+  background-position: 0 -1350px; }
+.fw-regular.fwt-tool-c .icon-flag-romania {
+  background-position: 0 -1377px; }
+.fw-regular.fwt-tool-c .icon-flag-serbia {
+  background-position: 0 -1404px; }
+.fw-regular.fwt-tool-c .icon-flag-slovakia {
+  background-position: 0 -1431px; }
+.fw-regular.fwt-tool-c .icon-flag-vietnam {
+  background-position: 0 -1458px; }
+.fw-regular.fwt-tool-c .icon-flag-bulgaria {
+  background-position: 0 -1485px; }
+.fw-regular.fwt-tool-c .icon-flag-colombia {
+  background-position: 0 -1512px; }
+.fw-regular.fwt-tool-c .icon-flag-croatia {
+  background-position: 0 -1539px; }
+.fw-regular.fwt-tool-c .icon-flag-estonia {
+  background-position: 0 -1566px; }
+.fw-regular.fwt-tool-c .icon-flag-iceland {
+  background-position: 0 -1593px; }
+.fw-regular.fwt-tool-c .icon-flag-taiwan {
+  background-position: 0 -459px; }
+.fw-regular.fwt-tool-c .ir {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  /* IE 6/7 fallback */
+  *text-indent: -9999px; }
+  .fw-regular.fwt-tool-c .ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%; }
+.fw-regular.fwt-tool-c .box-sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+.fw-regular.fwt-tool-c .hidden {
+  display: none !important;
+  visibility: hidden; }
+.fw-regular.fwt-tool-c .visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+  .fw-regular.fwt-tool-c .visuallyhidden.focusable:active, .fw-regular.fwt-tool-c .visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto; }
+.fw-regular.fwt-tool-c .invisible {
+  visibility: hidden; }
+.fw-regular.fwt-tool-c .fw-clearfix {
+  *zoom: 1; }
+  .fw-regular.fwt-tool-c .fw-clearfix:before {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .fw-regular.fwt-tool-c .fw-clearfix:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+    clear: both; }
+.fw-regular.fwt-tool-c .mask-bg {
+  background: url('../img/pattern/rgba-gray.png') repeat;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999; }
+.fw-regular.fwt-tool-c .rotator {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  margin: 25px 0; }
+.fw-regular.fwt-tool-c .text-loading {
+  margin-top: 30px;
+  margin-left: 10px; }
+.fw-regular.fwt-tool-c .map-trans {
+  transition: all 2s;
+  -webkit-transition: all 2s;
+  -moz-transition: all 2s;
+  -ms-transition: all 2s;
+  -webkit-backface-visibility: visible !important; }
+.fw-regular.fwt-tool-c .bg {
+  background-image: -webkit-linear-gradient(bottom right, #003578, #003f8a, #3678c9);
+  background-image: -moz-linear-gradient(bottom right, #003578, #003f8a, #3678c9);
+  background-image: -o-linear-gradient(bottom right, #003578, #003f8a, #3678c9);
+  background-image: -ms-linear-gradient(bottom right, #003578, #003f8a, #3678c9);
+  background-image: linear-gradient(bottom right, #003578, #003f8a, #3678c9);
+  width: 28px;
+  height: 28px;
+  -webkit-animation: spin 1s infinite linear;
+  -moz-animation: spin 1s infinite linear;
+  -ms-animation: spin 1s infinite linear;
+  -o-animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear; }
+.fw-regular.fwt-tool-c .bg-gray {
+  background-color: #9DA1A6; }
+.fw-regular.fwt-tool-c .no-cssanimations .bg, .fw-regular.fwt-tool-c .no-cssanimations .rotator {
+  border-radius: 0; }
+.fw-regular.fwt-tool-c .rounded {
+  border-radius: 50%;
+  position: relative; }
+.fw-regular.fwt-tool-c .fw-inner {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: #F2F2F2;
+  width: 18px;
+  height: 18px; }
+.fw-regular.fwt-tool-c .no-cssanimations .fw-inner {
+  display: none; }
+.fw-regular.fwt-tool-c .no-cssanimations .closed-circle {
+  background: transparent; }
+.fw-regular.fwt-tool-c .no-cssanimations .rotator {
+  background: url(../img/loader.gif);
+  width: 32px;
+  height: 32px;
+  background-size: 28px 28px;
+  -ms-background-size: 28px 28px;
+  background-repeat: no-repeat; }
+  .fw-regular.fwt-tool-c .no-cssanimations .rotator .sweep-left, .fw-regular.fwt-tool-c .no-cssanimations .rotator .sweep-right {
+    display: none; }
+.fw-regular.fwt-tool-c .scroll-pane {
+  overflow: hidden;
+  position: relative;
+  height: 231px;
+  /*214px */
+  outline: none; }
+.fw-regular.fwt-tool-c .scroll-pane-country {
+  height: 140px;
+  overflow: hidden;
+  position: relative; }
+
+/* ICONS
+   usage: <i class="icon icon-close"></i>
+   */
+/* Helper classes */
+/* Image replacement */
+/* apply box-sizing to specific elements */
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+/* ie8 fallback */
+/*.maskie7 {
+	background: url('../img/pattern/rgba-gray.png') repeat;
+	display:block;
+	width:100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	}*/
+/* loading */
+@media all and (min-width: 0) {
+  .fw-regular.fwt-tool-c .text-loading {
+    margin-top: 32px; } }
+
+/* Print styles. */
+@media print {
+  .fw-regular.fwt-tool-c {
+    margin: 0.5cm; }
+    .fw-regular.fwt-tool-c * {
+      background: transparent !important;
+      color: #000 !important;
+      box-shadow: none !important;
+      text-shadow: none !important; }
+    .fw-regular.fwt-tool-c a {
+      text-decoration: underline; }
+      .fw-regular.fwt-tool-c a:visited {
+        text-decoration: underline; }
+      .fw-regular.fwt-tool-c a[href]:after {
+        content: " (" attr(href) ")"; }
+    .fw-regular.fwt-tool-c abbr[title]:after {
+      content: " (" attr(title) ")"; }
+    .fw-regular.fwt-tool-c .ir a:after {
+      content: ""; }
+    .fw-regular.fwt-tool-c a[href^="javascript:"]:after, .fw-regular.fwt-tool-c a[href^="#"]:after {
+      content: ""; }
+    .fw-regular.fwt-tool-c pre, .fw-regular.fwt-tool-c blockquote {
+      border: 1px solid #999;
+      page-break-inside: avoid; }
+    .fw-regular.fwt-tool-c thead {
+      display: table-header-group;
+      /* h5bp.com/t */ }
+    .fw-regular.fwt-tool-c tr {
+      page-break-inside: avoid; }
+    .fw-regular.fwt-tool-c img {
+      page-break-inside: avoid;
+      max-width: 100% !important; }
+    .fw-regular.fwt-tool-c p, .fw-regular.fwt-tool-c h2, .fw-regular.fwt-tool-c h3 {
+      orphans: 3;
+      widows: 3; }
+    .fw-regular.fwt-tool-c h2, .fw-regular.fwt-tool-c h3 {
+      page-break-after: avoid; }
+  /* Don't show links for images, or javascript/internal links */ }
+
+/* use this file only for css3 animations */
+/* from side, slide in */
+.fw-regular.fwt-tool-c .slide-in {
+  -webkit-transition: all .5s ease-in .1s;
+  -moz-transition: all .5s ease-in .1s;
+  -o-transition: all .5s ease-in .1s;
+  -ms-transition: all .5s ease-in .1s;
+  transition: all .5s ease-in .1s;
+  /* GPU active hack*/
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0); }
+
+.svg-container {
+  /* GPU active hack*/
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0); }
+
+/* jumps up and down */
+.fw-regular.fwt-tool-c .jumpUpDown {
+  -webkit-animation: jumpUpDown .5s ease-in-out;
+  -moz-animation: jumpUpDown .5s ease-in-out;
+  -ms-animation: jumpUpDown .5s ease-in-out;
+  -o-animation: jumpUpDown .5s ease-in-out;
+  animation: jumpUpDown .5s ease-in-out;
+  -webkit-transition: all .5s ease-in .5s;
+  -moz-transition: all .5s ease-in .5s;
+  -o-transition: all .5s ease-in .5s;
+  -ms-transition: all .5s ease-in .5s;
+  transition: all .5s ease-in .5s; }
+.fw-regular.fwt-tool-c .fadeIn {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
+  z-index: 999;
+  -webkit-transition: all .2s linear .2s;
+  -moz-transition: all .2s linear .2s;
+  -o-transition: all .2s linear .2s;
+  -ms-transition: all .2s linear .2s;
+  transition: all .2s linear .2s; }
+.fw-regular.fwt-tool-c .fadeOut {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  z-index: -1;
+  -webkit-transition: all .2s linear 2s;
+  -moz-transition: all .2s linear 2s;
+  -o-transition: all .2s linear 2s;
+  -ms-transition: all .2s linear 2s;
+  transition: all .2s linear 2s; }
+
+@-webkit-keyframes jumpUpDown {
+  0% {
+    margin-top: 0px; }
+
+  25% {
+    margin-top: -10px; }
+
+  50% {
+    margin-top: 0px; }
+
+  75% {
+    margin-top: -5px; }
+
+  100% {
+    margin-top: 0px; } }
+
+@-moz-keyframes jumpUpDown {
+  0% {
+    margin-top: 0px; }
+
+  25% {
+    margin-top: -10px; }
+
+  50% {
+    margin-top: 0px; }
+
+  75% {
+    margin-top: -5px; }
+
+  100% {
+    margin-top: 0px; } }
+
+@-o-keyframes jumpUpDown {
+  0% {
+    margin-top: 0px; }
+
+  25% {
+    margin-top: -10px; }
+
+  50% {
+    margin-top: 0px; }
+
+  75% {
+    margin-top: -5px; }
+
+  100% {
+    margin-top: 0px; } }
+
+@keyframes jumpUpDown {
+  0% {
+    margin-top: 0px; }
+
+  25% {
+    margin-top: -10px; }
+
+  50% {
+    margin-top: 0px; }
+
+  75% {
+    margin-top: -5px; }
+
+  100% {
+    margin-top: 0px; } }
+
+/* loading */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg), translateZ(0deg); }
+
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg), translateZ(0deg); }
+
+  100% {
+    -moz-transform: rotate(360deg); } }
+
+@-o-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg), translateZ(0deg); }
+
+  100% {
+    -moz-transform: rotate(360deg); } }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg), translateZ(0deg); }
+
+  100% {
+    transform: rotate(360deg); } }
+
+/* usefull fadein and fadeout */
+/* css gradients */
+.fw-regular.fwt-tool-c .gr-left-gray {
+  background-image: -webkit-linear-gradient(left, #333333 -30%, white 5%);
+  background-image: -moz-linear-gradient(left, #333333 -30%, white 5%);
+  background-image: -o-linear-gradient(left, #333333 -30%, white 5%);
+  background-image: linear-gradient(left, #333333 -30%, white 5%); }
+.fw-regular.fwt-tool-c .gr-light {
+  background-image: -webkit-linear-gradient(top, #e5e5e5, #f2f2f2, #f7f7f7);
+  background-image: -moz-linear-gradient(top, #e5e5e5, #f2f2f2, #f7f7f7);
+  background-image: -o-linear-gradient(top, #e5e5e5, #f2f2f2, #f7f7f7);
+  background-image: linear-gradient(top, #e5e5e5, #f2f2f2, #f7f7f7); }
+.fw-regular.fwt-tool-c .gr-dark-blue {
+  background-color: #003b76; }
+.fw-regular.fwt-tool-c .gr-default {
+  background: #f2f2f2; }
+.fw-regular.fwt-tool-c .gr-colors {
+  height: 20px;
+  -webkit-box-shadow: inset 0px 1px 5px #999999; }
+.fw-regular.fwt-tool-c .gr-dark-gray {
+  background-color: #4c4e52;
+  background-image: -webkit-linear-gradient(bottom, #4c4e52, #808386);
+  background-image: -moz-linear-gradient(bottom, #4c4e52, #808386);
+  background-image: -o-linear-gradient(bottom, #4c4e52, #808386);
+  background-image: linear-gradient(bottom, #4c4e52, #808386); }
+.fw-regular.fwt-tool-c .gr-disable {
+  background: url("../img/pattern/btn-active.jpg") repeat-x; }
+
+/*! jQuery UI - v1.10.4 - 2014-01-28
+* http://jqueryui.com
+* Includes: jquery.ui.core.css, jquery.ui.accordion.css, jquery.ui.slider.css
+* Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */
+.ui-helper-hidden {
+  display: none; }
+
+.ui-helper-hidden-accessible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.ui-helper-reset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  line-height: 1.3;
+  text-decoration: none;
+  font-size: 100%;
+  list-style: none; }
+
+.ui-helper-clearfix {
+  min-height: 0; }
+  .ui-helper-clearfix:before {
+    content: "";
+    display: table;
+    border-collapse: collapse; }
+  .ui-helper-clearfix:after {
+    content: "";
+    display: table;
+    border-collapse: collapse;
+    clear: both; }
+
+.ui-helper-zfix {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0;
+  filter: Alpha(Opacity=0); }
+
+.ui-front {
+  z-index: 100; }
+
+.ui-state-disabled {
+  cursor: default !important; }
+
+.ui-icon {
+  display: block;
+  text-indent: -99999px;
+  overflow: hidden;
+  background-repeat: no-repeat; }
+
+.ui-widget-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.ui-accordion .ui-accordion-header {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  margin-top: 2px;
+  padding: .5em .5em .5em .7em;
+  min-height: 0; }
+.ui-accordion .ui-accordion-icons {
+  padding-left: 2.2em; }
+.ui-accordion .ui-accordion-noicons {
+  padding-left: .7em; }
+.ui-accordion .ui-accordion-icons .ui-accordion-icons {
+  padding-left: 2.2em; }
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+  position: absolute;
+  left: .5em;
+  top: 50%;
+  margin-top: -8px; }
+.ui-accordion .ui-accordion-content {
+  padding: 1em 2.2em;
+  border-top: 0;
+  overflow: auto; }
+
+.ui-slider {
+  position: relative;
+  text-align: left; }
+  .ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 1.2em;
+    height: 1.2em;
+    cursor: default; }
+  .ui-slider .ui-slider-range {
+    position: absolute;
+    z-index: 1;
+    font-size: .7em;
+    display: block;
+    border: 0;
+    background-position: 0 0; }
+  .ui-slider.ui-state-disabled .ui-slider-handle, .ui-slider.ui-state-disabled .ui-slider-range {
+    filter: inherit; }
+
+.ui-slider-horizontal {
+  height: .8em; }
+  .ui-slider-horizontal .ui-slider-handle {
+    top: -.3em;
+    margin-left: -.6em; }
+  .ui-slider-horizontal .ui-slider-range {
+    top: 0;
+    height: 100%; }
+  .ui-slider-horizontal .ui-slider-range-min {
+    left: 0; }
+  .ui-slider-horizontal .ui-slider-range-max {
+    right: 0; }
+
+.ui-slider-vertical {
+  width: .8em;
+  height: 100px; }
+  .ui-slider-vertical .ui-slider-handle {
+    left: -.3em;
+    margin-left: 0;
+    margin-bottom: -.6em; }
+  .ui-slider-vertical .ui-slider-range {
+    left: 0;
+    width: 100%; }
+  .ui-slider-vertical .ui-slider-range-min {
+    bottom: 0; }
+  .ui-slider-vertical .ui-slider-range-max {
+    top: 0; }
+
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+.fw-regular.fwt-tool-c .jspContainer {
+  overflow: hidden;
+  position: relative; }
+.fw-regular.fwt-tool-c .jspPane {
+  position: absolute; }
+.fw-regular.fwt-tool-c .jspVerticalBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 100%;
+  background: #DDE;
+  box-shadow: inset 0 0 10px #666; }
+.fw-regular.fwt-tool-c .jspHorizontalBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  /*background: red;*/ }
+.fw-regular.fwt-tool-c .jspVerticalBar *, .fw-regular.fwt-tool-c .jspHorizontalBar * {
+  margin: 0;
+  padding: 0; }
+.fw-regular.fwt-tool-c .jspCap {
+  display: none; }
+.fw-regular.fwt-tool-c .jspHorizontalBar .jspCap {
+  float: left; }
+.fw-regular.fwt-tool-c .jspTrack {
+  background: #dde;
+  position: relative; }
+.fw-regular.fwt-tool-c .jspDrag {
+  position: relative;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  -webkit-background-size: 8px 20px;
+  -moz-background-size: 8px 20px;
+  background-size: 8px 20px; }
+.fw-regular.fwt-tool-c .jspHorizontalBar .jspTrack, .fw-regular.fwt-tool-c .jspHorizontalBar .jspDrag {
+  float: left;
+  height: 100%; }
+.fw-regular.fwt-tool-c .jspArrow {
+  background: #50506d;
+  text-indent: -20000px;
+  display: block;
+  cursor: pointer; }
+  .fw-regular.fwt-tool-c .jspArrow.jspDisabled {
+    cursor: default;
+    background: #80808d; }
+.fw-regular.fwt-tool-c .jspVerticalBar .jspArrow {
+  height: 16px; }
+.fw-regular.fwt-tool-c .jspHorizontalBar .jspArrow {
+  width: 16px;
+  float: left;
+  height: 100%; }
+.fw-regular.fwt-tool-c .jspVerticalBar .jspArrow:focus {
+  outline: none; }
+.fw-regular.fwt-tool-c .jspCorner {
+  background: #eeeef4;
+  float: left;
+  height: 100%; }
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( 
+ * .fw-regular.fwt-tool-c .jspCorner
+{
+	margin: 0 -3px 0 0;
+}
+*/
+/* exclusive small version style */
+.fw-regular.fwt-tool-c .fw-brand-bar-header {
+  margin: 1px 0px 1px 0;
+  display: none;
+  height: 59px;
+  width: 100%;
+  background: url("../img/pattern/bg-header.jpg") repeat-x !important; }
+.fw-regular.fwt-tool-c .fw-brand-bar-footer {
+  height: 24px;
+  background-image: url('../img/pattern/bg-footer.jpg') !important;
+  margin-top: 2px;
+  position: relative;
+  z-index: 999;
+  display: none; }
+.fw-regular.fwt-tool-c .head-lk .spr-small-v {
+  margin: 10px 4px 10px 8px; }
+.fw-regular.fwt-tool-c .footer-lk {
+  color: #d4d4d4;
+  font-size: 10px;
+  padding: 4px 9px; }
+.fw-regular.fwt-tool-c .spr-small-v {
+  background-image: url(../img/spr-small-version.png);
+  background-repeat: no-repeat;
+  background-color: transparent; }
+.fw-regular.fwt-tool-c .dwa-text-logo {
+  background-position: 0 -88px;
+  width: 170px;
+  height: 31px; }
+.fw-regular.fwt-tool-c .icon-dwa {
+  background-position: 0 -119px;
+  width: 45px;
+  height: 39px; }
+.fw-regular.fwt-tool-c .icon-fw {
+  background: url(../img/small-version-arrows.png);
+  background-position: 0px 0px;
+  width: 4px;
+  height: 7px;
+  display: inline-block; }
+.fw-regular.fwt-tool-c .branded .scroll-pane {
+  height: 119px; }
+.fw-regular.fwt-tool-c .branded .dual-element-map .svg-container {
+  height: 337px; }
+  .fw-regular.fwt-tool-c .branded .dual-element-map .svg-container .draggable {
+    height: 337px; }
+.fw-regular.fwt-tool-c .branded .tab-month li {
+  font-size: 9px; }
+
+.fw-regular.fwt-tool-c .performance-board h1, .fw-regular.fwt-tool-c .performance-board h2 {
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  color: #666666;
+  padding-top: 0;
+  line-height: 16px; }
+.fw-regular.fwt-tool-c .list-doble-items a, .fw-regular.fwt-tool-c .list-doble-items span {
+  line-height: 2; }
+
+.fw-regular.fwt-tool-c .gr-dark-blue {
+  background: url("../img/pattern/btn-active-dark.jpg") repeat-x; }
+
+#slider-range .gr-dark-blue {
+  background-color: #cd8515;
+  background: #fea001;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #fea001 0%, #cd8515 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fea001), color-stop(100%, #cd8515));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #fea001 0%, #cd8515 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #fea001 0%, #cd8515 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #fea001 0%, #cd8515 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #fea001 0%, #cd8515 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fea001', endColorstr='#cd8515',GradientType=0 );
+  /* IE6-9 */ }
+
+.fw-regular.fwt-tool-c .ui-slider-handle {
+  background: url("../img/gr-bar-orange.png") no-repeat; }
+.fw-regular.fwt-tool-c .icon-bullet {
+  background-position: 0 -128px; }
+
+.ui-slider-horizontal .ui-slider-range {
+  box-shadow: 0 0 70px #dcd8d3; }
+
+.fw-regular.fwt-tool-c {
+  background: #373c43; }
+  .fw-regular.fwt-tool-c .bt-active {
+    background-color: #000;
+    background-image: none; }
+  .fw-regular.fwt-tool-c .wrapper {
+    background: #373c43; }
+  .fw-regular.fwt-tool-c .sidebar {
+    border-top: 1px solid #373c43;
+    margin-top: 0; }
+  .fw-regular.fwt-tool-c .dual-element-map .svg-container {
+    border: 1px solid #373c43;
+    /*fix ie8 bug*/ }
+  .fw-regular.fwt-tool-c .tab-bar {
+    border-right: 1px solid #373c43;
+    background-color: #fff; }
+  .fw-regular.fwt-tool-c .map-handler {
+    border-color: #ed8e11; }
+  .fw-regular.fwt-tool-c .performance-board {
+    margin-bottom: 0; }
+  .fw-regular.fwt-tool-c .scroll-pane {
+    height: 240px; }
+  .fw-regular.fwt-tool-c .wrapper {
+    margin: 2px auto 0; }
+  .fw-regular.fwt-tool-c .tt-action {
+    background-image: url(../img/tt-action-gray.png); }
+  .fw-regular.fwt-tool-c .link-item {
+    color: #ed8e11; }
+  .fw-regular.fwt-tool-c .icon-blue-bullet {
+    background-position: 0 -128px; }
+  .fw-regular.fwt-tool-c .bg {
+    background-image: -webkit-linear-gradient(bottom right, #b6b6b8, #999b9e, #7d8186);
+    background-image: -moz-linear-gradient(bottom right, #b6b6b8, #999b9e, #7d8186);
+    background-image: -o-linear-gradient(bottom right, #b6b6b8, #999b9e, #7d8186);
+    background-image: -ms-linear-gradient(bottom right, #b6b6b8, #999b9e, #7d8186);
+    background-image: linear-gradient(bottom right, #b6b6b8, #999b9e, #7d8186);
+    width: 28px;
+    height: 28px;
+    -webkit-animation: spin 1s infinite linear;
+    -moz-animation: spin 1s infinite linear;
+    -ms-animation: spin 1s infinite linear;
+    -o-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear; }
+  .fw-regular.fwt-tool-c .bg-gray {
+    background-color: #9DA1A6; }
+  .fw-regular.fwt-tool-c .square {
+    background: url('../img/loader-grey.png') no-repeat; }
+  .fw-regular.fwt-tool-c .no-cssanimations .rotator {
+    background-image: url(../img/loader-grey.gif); }
+
+/*dual-element-map: css for browsers that use the 2 elements draggable solution*/
+.fw-regular.fwt-tool-c .wrapper {
+  max-width: 980px;
+  background: transparent;
+  margin-top: 0; }
+.fw-regular.fwt-tool-c .map-handler {
+  border-color: #e29317; }
+.fw-regular.fwt-tool-c .small-view {
+  background: #f4f6f7; }
+.fw-regular.fwt-tool-c .board {
+  margin-bottom: 2px; }
+.fw-regular.fwt-tool-c .performance-board {
+  background: #f5f6f8;
+  margin-left: 4px;
+  margin-bottom: 0 !important; }
+.fw-regular.fwt-tool-c .dual-element-map .svg-container {
+  height: 490px;
+  border-color: transparent;
+  border-top: none;
+  border-bottom: none; }
+.fw-regular.fwt-tool-c .tab-bar {
+  height: 40px;
+  background-color: #dcdcdc;
+  border-right: 1px solid transparent;
+  *border-right: none; }
+.fw-regular.fwt-tool-c .jspVerticalBar {
+  width: 2px; }
+.fw-regular.fwt-tool-c .jspTrack {
+  background: #dcdee0; }
+.fw-regular.fwt-tool-c .jspDrag {
+  background: #e29317; }
+.fw-regular.fwt-tool-c .gray-bar {
+  background: #dbdde0; }
+
+#slider-range {
+  width: -webkit-calc(100% - 40px);
+  width: calc(100% - 40px); }
+  #slider-range .gr-dark-blue {
+    background: #646D77;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); }
+
+.fw-regular.fwt-tool-c {
+  background: transparent; }
+  .fw-regular.fwt-tool-c .legend-positive {
+    color: #7ab800 !important; }
+  .fw-regular.fwt-tool-c .icon-minus {
+    width: 23px;
+    height: 23px;
+    background-position: 0 -205px; }
+  .fw-regular.fwt-tool-c .icon-plus {
+    width: 23px;
+    height: 23px;
+    background-position: 0 -182px; }
+  .fw-regular.fwt-tool-c .bt-active {
+    background: none; }
+  .fw-regular.fwt-tool-c .zoom-in, .fw-regular.fwt-tool-c .zoom-out {
+    background: none;
+    bottom: 4px; }
+  .fw-regular.fwt-tool-c .zoom-in {
+    right: 5px; }
+  .fw-regular.fwt-tool-c .zoom-out {
+    right: 38px; }
+  .fw-regular.fwt-tool-c .ui-slider-horizontal .ui-slider-handle {
+    margin-left: 0; }
+  .fw-regular.fwt-tool-c .ui-slider-handle {
+    /*background:#000;*/
+    background: #646D77;
+    width: 2px;
+    height: 60px;
+    top: -40px; }
+  .fw-regular.fwt-tool-c .gr-dark-blue {
+    background: #646D77;
+    color: white; }
+  .fw-regular.fwt-tool-c .tab-bar > div {
+    height: 40px; }
+  .fw-regular.fwt-tool-c .tab-month li {
+    height: 40px;
+    border-color: #c7c7c7; }
+  .fw-regular.fwt-tool-c .tab-bar {
+    border-bottom: 1px solid #caccce;
+    height: 39px; }
+  .fw-regular.fwt-tool-c .animation-buttons {
+    color: #787d82;
+    margin-left: 4px; }
+  .fw-regular.fwt-tool-c .label {
+    background: none;
+    color: #787d82;
+    font-size: 11px; }
+  .fw-regular.fwt-tool-c .gr-gray {
+    background: #f4f6f7;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); }
+  .fw-regular.fwt-tool-c .label-bottom {
+    top: 10px;
+    bottom: auto;
+    right: 14px;
+    background-color: #e4e5e7; }
+  .fw-regular.fwt-tool-c .scalable-map {
+    margin-bottom: 0; }
+
+#special-shadow {
+  height: 40px;
+  background-color: #fff;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+  position: absolute;
+  top: -40px; }
+
+.fw-regular.fwt-tool-c .range-handle {
+  box-shadow: none;
+  border: 2px solid #fff;
+  width: 8%;
+  height: 80%; }
+.fw-regular.fwt-tool-c .no-boxshadow .range-handle {
+  background: none;
+  width: 8%;
+  height: 80%;
+  top: auto;
+  padding: 0;
+  margin: 0; }
+
+.scroll-pane {
+  margin-bottom: 20px; }
+
+.fw-regular.fwt-tool-c .sidebar .list-doble-items {
+  width: 200px; }
+.fw-regular.fwt-tool-c .slide-box {
+  margin-top: 10px; }
+.fw-regular.fwt-tool-c .slide-open {
+  left: 10px; }
+.fw-regular.fwt-tool-c .gr-left-gray {
+  background-image: none; }
+
+.list-slide {
+  /*list-style: disc;
+  padding-right: 27px;*/
+  font-size: 13px;
+  color: #787d82; }
+
+.fw-regular.fwt-tool-c .slide-box ul {
+  margin-top: 15px; }
+.fw-regular.fwt-tool-c .bt-slide {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #a0a4aa;
+  /*background: url("../img/pattern/spr-icons.png") no-repeat 0 -237px;*/
+  /*position: absolute;
+	    top: 0;
+	    right: 0;*/
+  top: 10px;
+  left: 10px;
+  background-color: #e4e5e7;
+  position: absolute;
+  z-index: 9999;
+  margin: 0; }
+.fw-regular.fwt-tool-c .icon-help {
+  background-position: 6px -237px;
+  width: 12px;
+  height: 12px; }
+.fw-regular.fwt-tool-c .icon-close {
+  background-position: 0 -228px;
+  height: 9px; }
+.fw-regular.fwt-tool-c .slide-box .bt-close {
+  top: 15px;
+  right: 15px;
+  position: absolute; }
+
+#country-layer {
+  margin-bottom: 0; }
+
+.fw-regular.fwt-tool-c #pp-model .index-name {
+  font-size: 13px; }
+.fw-regular.fwt-tool-c #pp-model h4 {
+  font-weight: normal; }
+.fw-regular.fwt-tool-c #pp-model .percentage {
+  font-weight: bold; }
+
+#country-layer .list-doble-items {
+  width: 405px;
+  color: #787d82; }
+
+.fw-regular.fwt-tool-c .lt {
+  color: #787d82; }
+.fw-regular.fwt-tool-c h4 {
+  color: #010101;
+  font-size: 13px; }
+.fw-regular.fwt-tool-c #country-layer {
+  height: 185px; }
+.fw-regular.fwt-tool-c .pp-wrapper {
+  padding: 15px; }
+.fw-regular.fwt-tool-c .mb-06 {
+  margin-bottom: 6px; }
+.fw-regular.fwt-tool-c .mb-08 {
+  margin-bottom: 8px; }
+.fw-regular.fwt-tool-c h2 {
+  font-size: 12px; }
+.fw-regular.fwt-tool-c .performance-board h2 {
+  font-size: 13px; }
+.fw-regular.fwt-tool-c .percentage-symbol {
+  color: #787d82;
+  font-weight: normal; }
+.fw-regular.fwt-tool-c .performance-board h1, .fw-regular.fwt-tool-c .performance-board h2 {
+  color: #000; }
+
+.color-graph {
+  margin: 0 16px; }
+
+.fw-regular.fwt-tool-c .tt-box {
+  padding: 10px 15px 13px; }
+  .fw-regular.fwt-tool-c .tt-box h4 {
+    color: #000;
+    font-family: Arial;
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: normal; }
+  .fw-regular.fwt-tool-c .tt-box .indexName {
+    font-family: Arial;
+    font-size: 13px;
+    color: #787d82; }
+  .fw-regular.fwt-tool-c .tt-box span {
+    margin-bottom: 0;
+    color: #999; }
+.fw-regular.fwt-tool-c .legend-negative {
+  color: #e00034 !important; }
+.fw-regular.fwt-tool-c .tt-box .legend-positive {
+  color: #7ab800 !important;
+  font-weight: bold; }
+.fw-regular.fwt-tool-c .tt-box .legend {
+  font-weight: bold;
+  font-size: 13px;
+  margin-left: 20px; }
+
+.tab-month {
+  color: #000; }
+
+.fw-regular.fwt-tool-c .legend-text {
+  font-size: 11px;
+  font-weight: bold; }
+.fw-regular.fwt-tool-c .sidebar {
+  border-top: none; }
+.fw-regular.fwt-tool-c .board {
+  margin-left: 4px;
+  margin-bottom: 4px; }
+.fw-regular.fwt-tool-c .sidebar .l-item {
+  font-family: 'UniversDeutscheBank';
+  color: #787d82 !important;
+  /* important for ie7 */ }
+.fw-regular.fwt-tool-c .link-item {
+  color: #787d82;
+  font-family: 'UniversDeutscheBank';
+  font-size: 13px;
+  text-decoration: none; }
+.fw-regular.fwt-tool-c .sidebar .l-item:hover, .fw-regular.fwt-tool-c .link-item:hover {
+  text-decoration: none;
+  color: #e29317 !important;
+  /* important for ie7 */ }
+.fw-regular.fwt-tool-c .tt-box {
+  font-size: 13px; }
+.fw-regular.fwt-tool-c .list-doble-items li {
+  border-color: #ececec;
+  box-shadow: none; }
+.fw-regular.fwt-tool-c .sidebar .list-doble-items li {
+  border-top: 1px solid #cfd1d4; }
+.fw-regular.fwt-tool-c .list-slide li {
+  list-style-type: disc; }
+
+.tabs-info-country {
+  list-style: none;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #DDDEDF;
+  padding: 0 !important;
+  position: relative;
+  height: 29px;
+  margin-left: 10px; }
+  .tabs-info-country a {
+    border: 1px solid #DDDEDF;
+    -webkit-box-shadow: 2px -2px 4px #DCDCDC;
+    -moz-box-shadow: 2px -2px 4px #DCDCDC;
+    -ms-box-shadow: 2px -3px 4px #DCDCDC;
+    -o-box-shadow: 2px -2px 4px #DCDCDC;
+    box-shadow: 2px -2px 4px #DCDCDC;
+    -webkit-background-image: linear-gradient(to bottom, #fff, #eee);
+    -moz-background-image: linear-gradient(to bottom, #fff, #eee);
+    -ms-background-image: linear-gradient(to bottom, #fff, #eee);
+    -o-background-image: linear-gradient(to bottom, #fff, #eee);
+    background-image: linear-gradient(to bottom, #fff, #eee);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#eeeeee');
+    /*For IE7-8-9*/
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 6px 15px;
+    margin-left: -10px;
+    display: inline-block;
+    font-size: 14px; }
+    .tabs-info-country a.active {
+      border-bottom: none;
+      background-color: #fff;
+      background-image: none;
+      filter: none;
+      position: relative;
+      top: 0;
+      height: 18px;
+      z-index: 2; }
+    .tabs-info-country a:hover {
+      text-decoration: none !important; }
+
+.pp-wrapper .sentifi-tab {
+  width: 400px !important;
+  height: 223px !important; }
+.pp-wrapper .bt-close {
+  position: relative;
+  z-index: 3 !important; }
+
+/*# sourceMappingURL=styles.css.map */

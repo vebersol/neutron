@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Neutron Atomic Design Tool</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- NEUTRON HEADER-->
+	
+	<!-- /NEUTRON HEADER -->
+</head>
+<body class="templates-home">
+	<!-- start organisms/navigation/main-navbar -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <!-- start molecules/navigation/toggle-button -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- end molecules/navigation/toggle-button -->
+
+      <!-- start atoms/links/brand -->
+      <a class="navbar-brand" href="../../">Neutron</a>
+
+      <!-- end atoms/links/brand -->
+
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!-- start molecules/navigation/menu-items -->
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#">Link <span class="sr-only">(current)</span></a>
+        </li>
+        <li>
+          <a href="#">Link</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#">Action</a>
+            </li>
+            <li>
+              <a href="#">Another action</a>
+            </li>
+            <li>
+              <a href="#">Something else here</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">Separated link</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">One more separated link</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- end molecules/navigation/menu-items -->
+
+      <!-- start molecules/forms/search-bar -->
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <!-- start atoms/forms/input -->
+          <input type="text" class="form-control" placeholder="Search" value="">
+
+          <!-- end atoms/forms/input -->
+
+        </div>
+
+        <!-- start atoms/forms/button -->
+        <button type="submit" class="btn btn-default">Submit</button>
+
+        <!-- end atoms/forms/button -->
+
+      </form>
+
+      <!-- end molecules/forms/search-bar -->
+
+    </div>
+  </div>
+</nav>
+
+<!-- end organisms/navigation/main-navbar -->
+
+<div class="container">
+  <!-- start organisms/highlights/jumbotron -->
+  <div class="jumbotron">
+    <!-- start atoms/text/headline -->
+    <h1>Hello Neutron!</h1>
+
+    <!-- end atoms/text/headline -->
+
+    <!-- start atoms/text/paragraph -->
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, veniam quia reprehenderit distinctio, mollitia rerum dignissimos quidem, minus possimus natus sunt placeat eaque sit tempora. Corrupti consectetur veritatis, voluptas, distinctio sunt
+      aliquid tempore, dolorem iste incidunt debitis modi minima nam! Tempore nostrum molestiae perspiciatis quam mollitia aliquid nobis, blanditiis culpa.</p>
+
+    <!-- end atoms/text/paragraph -->
+
+    <p>
+      <!-- start atoms/text/link -->
+      <a class="btn btn-primary btn-lg" href="#">Learn more</a>
+
+      <!-- end atoms/text/link -->
+
+    </p>
+  </div>
+
+  <!-- end organisms/highlights/jumbotron -->
+
+  <!-- start molecules/blocks/thumbnail -->
+  <div class="row">
+    <div class="col-sm-4 col-xs-12">
+      <div class="thumbnail">
+        <!-- start atoms/media/image -->
+        <img src="http://placehold.it/500x250" alt="Image description">
+
+        <!-- end atoms/media/image -->
+
+        <div class="caption">
+          <!-- start atoms/text/headline -->
+          <h3>Proin vehicula ipsum quis</h3>
+
+          <!-- end atoms/text/headline -->
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur odio praesentium, alias corrupti placeat recusandae!</p>
+
+          <p>
+            <!-- start atoms/text/link -->
+            <a class="btn btn-default" href="#see-more">See more</a>
+
+            <!-- end atoms/text/link -->
+
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      <div class="thumbnail">
+        <!-- start atoms/media/image -->
+        <img src="http://placehold.it/500x250" alt="Image description">
+
+        <!-- end atoms/media/image -->
+
+        <div class="caption">
+          <!-- start atoms/text/headline -->
+          <h3>Phasellus quis enim ac ligula</h3>
+
+          <!-- end atoms/text/headline -->
+
+          <p>Vivamus nisl dolor, dictum non diam a, euismod gravida dolor. Vestibulum placerat tortor odio, egestas.</p>
+
+          <p>
+            <!-- start atoms/text/link -->
+            <a class="btn btn-info" href="http://github.com/vebersol/neutron">Visit</a>
+
+            <!-- end atoms/text/link -->
+
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      <div class="thumbnail">
+        <!-- start atoms/media/image -->
+        <img src="http://placehold.it/500x250" alt="Image description">
+
+        <!-- end atoms/media/image -->
+
+        <div class="caption">
+          <!-- start atoms/text/headline -->
+          <h3>Donec commodo nisl felis</h3>
+
+          <!-- end atoms/text/headline -->
+
+          <p>Nunc fringilla ante eget tempor venenatis. Morbi fringilla nibh at tellus mattis dignissim. Pellentesque augue.</p>
+
+          <p>
+            <!-- start atoms/text/link -->
+            <a class="btn btn-danger" href="javascript:;">Expand</a>
+
+            <!-- end atoms/text/link -->
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- end molecules/blocks/thumbnail -->
+
+  <div class="row">
+    <!-- start organisms/blocks/media-box -->
+    <div class="col-md-6">
+      <div class="page-header">
+        <!-- start atoms/text/headline -->
+        <h2>News</h2>
+
+        <!-- end atoms/text/headline -->
+
+      </div>
+
+      <!-- start molecules/blocks/media -->
+      <div class="media">
+        <div class="media-left">
+          <!-- start atoms/media/image -->
+          <img src="http://placehold.it/242x200" alt="Image description">
+
+          <!-- end atoms/media/image -->
+
+        </div>
+        <div class="media-body">
+          <!-- start atoms/text/headline -->
+          <h4 class="media-heading">Lorem ipsum dolor sit.</h4>
+
+          <!-- end atoms/text/headline -->
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+        </div>
+      </div>
+
+      <!-- end molecules/blocks/media -->
+
+      <!-- start molecules/blocks/media -->
+      <div class="media">
+        <div class="media-left">
+          <!-- start atoms/media/image -->
+          <img src="http://placehold.it/242x200" alt="Image description">
+
+          <!-- end atoms/media/image -->
+
+        </div>
+        <div class="media-body">
+          <!-- start atoms/text/headline -->
+          <h4 class="media-heading">Lorem ipsum dolor sit.</h4>
+
+          <!-- end atoms/text/headline -->
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+        </div>
+      </div>
+
+      <!-- end molecules/blocks/media -->
+
+      <!-- start molecules/blocks/media -->
+      <div class="media">
+        <div class="media-left">
+          <!-- start atoms/media/image -->
+          <img src="http://placehold.it/242x200" alt="Image description">
+
+          <!-- end atoms/media/image -->
+
+        </div>
+        <div class="media-body">
+          <!-- start atoms/text/headline -->
+          <h4 class="media-heading">Lorem ipsum dolor sit.</h4>
+
+          <!-- end atoms/text/headline -->
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+        </div>
+      </div>
+
+      <!-- end molecules/blocks/media -->
+
+    </div>
+
+    <!-- end organisms/blocks/media-box -->
+
+    <!-- start organisms/blocks/media-box -->
+    <div class="col-md-6">
+      <div class="page-header">
+        <!-- start atoms/text/headline -->
+        <h2>Twitter</h2>
+
+        <!-- end atoms/text/headline -->
+
+      </div>
+
+      <!-- start molecules/blocks/media -->
+      <div class="media">
+        <div class="media-left">
+          <!-- start atoms/media/image -->
+          <img src="http://placehold.it/242x200" alt="Image description">
+
+          <!-- end atoms/media/image -->
+
+        </div>
+        <div class="media-body">
+          <!-- start atoms/text/headline -->
+          <h4 class="media-heading">Lorem ipsum dolor sit.</h4>
+
+          <!-- end atoms/text/headline -->
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+        </div>
+      </div>
+
+      <!-- end molecules/blocks/media -->
+
+      <!-- start molecules/blocks/media -->
+      <div class="media">
+        <div class="media-left">
+          <!-- start atoms/media/image -->
+          <img src="http://placehold.it/242x200" alt="Image description">
+
+          <!-- end atoms/media/image -->
+
+        </div>
+        <div class="media-body">
+          <!-- start atoms/text/headline -->
+          <h4 class="media-heading">Lorem ipsum dolor sit.</h4>
+
+          <!-- end atoms/text/headline -->
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+        </div>
+      </div>
+
+      <!-- end molecules/blocks/media -->
+
+      <!-- start molecules/blocks/media -->
+      <div class="media">
+        <div class="media-left">
+          <!-- start atoms/media/image -->
+          <img src="http://placehold.it/242x200" alt="Image description">
+
+          <!-- end atoms/media/image -->
+
+        </div>
+        <div class="media-body">
+          <!-- start atoms/text/headline -->
+          <h4 class="media-heading">Lorem ipsum dolor sit.</h4>
+
+          <!-- end atoms/text/headline -->
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+        </div>
+      </div>
+
+      <!-- end molecules/blocks/media -->
+
+    </div>
+
+    <!-- end organisms/blocks/media-box -->
+
+  </div>
+</div>
+
+<!-- start organisms/navigation/footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="text-right">© Neutron Atomic Design Tool</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- end organisms/navigation/footer -->
+
+
+	<!-- NEUTRON FOOTER -->
+	<script>
+		window.neutronADT = {
+			i: {
+				dependencies: [{"partial":"organisms/navigation/main-navbar","path":"organisms-navigation-main-navbar/index.html"},{"partial":"organisms/highlights/jumbotron","path":"organisms-highlights-jumbotron/index.html"},{"partial":"molecules/blocks/thumbnail","path":"molecules-blocks-thumbnail/index.html"},{"partial":"organisms/blocks/media-box","path":"organisms-blocks-media-box/index.html"},{"partial":"organisms/navigation/footer","path":"organisms-navigation-footer/index.html"}],
+				reverseDependencies: [{"partial":"pages/home","path":"pages-home/index.html"}],
+				patternName: "templates/home",
+				assetsPath: "../../",
+				menuBehavior: "default",
+				cssTheme: "default",
+				language: "en"
+			}
+		};
+	</script>
+	<script src="../../styleguide/modules/navigation/js/scripts.min.js" async></script>
+	<!-- /NEUTRON FOOTER -->
+</body>
+</html>

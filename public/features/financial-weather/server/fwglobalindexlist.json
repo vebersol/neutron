@@ -1,0 +1,304 @@
+﻿{ 
+	"indexes": [
+		{ 
+			"id": "27", 
+			"indexGuid": "F5B6B820-12B6-48CA-AA8A-C47FE3383325", 
+			"index": "MerVal" 
+		},
+		{ 
+			"id": "18", 
+			"indexGuid": "D78469D3-BB98-4444-85D8-46FE8570DB7C", 
+			"index": "Bovespa"
+		},
+		{ 
+			"id": "14", 
+			"indexGuid": "6A4778E7-31CC-4002-A99F-E9548346D0C9", 
+			"index": "S&P TSX Composite" 
+		},
+		{ 
+			"id": "53", 
+			"indexGuid": "A30C83B6-073B-444A-A9F6-AF27152DCE14", 
+			"index": "IGPA Index" 
+		},
+		{ 
+			"id": "40", 
+			"indexGuid": "005C56B1-D99D-4BE9-98B6-FBE137DE4C56", 
+			"index": "IPC" 
+		},
+		{ 
+			"id": "13", 
+			"indexGuid": "8105F628-2CCA-4319-8CA1-983F65103240", 
+			"index": "S&P 500" 
+		},
+		{ 
+			"id": "25", 
+			"indexGuid": "90080C3A-EBA3-465D-950F-372AB87A4EDF", 
+			"index": "All Ordinaries" 
+		},
+		{ 
+			"id": "16", 
+			"indexGuid": "113E71E5-5051-401E-9D1C-F4A20F2316F2", 
+			"index": "Shanghai Composite" 
+		},
+		{ 
+			"id": "38", 
+			"indexGuid": "DDD07C7A-F529-47C2-ABEE-0CC2AD6F2ADE", 
+			"index": "Hang Seng" 
+		},
+		{ 
+			"id": "49", 
+			"indexGuid": "952A861D-29AC-47E6-987E-050974898C64", 
+			"index": "Jakarta Composite" 
+		},
+		{ 
+			"id": "15", 
+			"indexGuid": "83A761C3-05D8-4402-A9CC-96B3C59FD89F", 
+			"index": "Nikkei 225" 
+		},
+		{ 
+			"id": "39", 
+			"indexGuid": "934EDA52-C72E-4DCB-A8BB-C830B1C7BF4F", 
+			"index": "KLSE Composite" 
+		},
+		{ 
+			"id": "33", 
+			"indexGuid": "9833E790-ED25-43D6-B190-533443D38755", 
+			"index": "Straits Times" 
+		},
+		{ 
+			"id": "21", 
+			"indexGuid": "012b5fe3-7ce1-4af8-88af-935490316555", 
+			"index": "KOSPI" 
+		},
+		{ 
+			"id": "37", 
+			"indexGuid": "94A255C9-22D4-4DB7-BC94-E5A79CF69B78", 
+			"index": "Stock Exch of Thailand (SETI)" 
+		},
+		{ 
+			"id": "22", 
+			"indexGuid": "C25AE24E-9E3F-441A-BA56-9BDF9CC3592A", 
+			"index": "Taiwan Weighted" 
+		},
+		{ 
+			"id": "4", 
+			"indexGuid": "74C238D7-0EC6-4B13-9692-A4476E934C8E", 
+			"index": "ATX" 
+		},
+		{ 
+			"id": "23", 
+			"indexGuid": "94005106-832D-4E24-8D73-1CE8A65C5A21", 
+			"index": "BEL-20" 
+		},
+		{ 
+			"id": "46", 
+			"indexGuid": "993F4C9D-AF5A-41EE-94D4-857808EEE157", 
+			"index": "PRAGUE STOCK EXCH" 
+		},
+		{ 
+			"id": "20", 
+			"indexGuid": "962E6306-6AEC-4FC3-A04C-B7931E2A6806", 
+			"index": "OMX COPENHAGEN" 
+		},
+		{ 
+			"id": "11", 
+			"indexGuid": "62B77E86-8A0F-465A-BEA5-435CFFC0EC64", 
+			"index": "OMX HELSINKI" 
+		},
+		{ 
+			"id": "7", 
+			"indexGuid": "8798206F-8202-4CB7-9C35-6EE14E1B0F2A", 
+			"index": "CAC 40" 
+		},
+		{ 
+			"id": "1", 
+			"indexGuid": "0A07CCAF-153F-4424-A964-AEDE307F611C", 
+			"index": "DAX" 
+		},
+		{ 
+			"id": "10", 
+			"indexGuid": "C3AB299E-6D1E-49A9-8D7B-EB2E721E5695", 
+			"index": "Athen Index Composl" 
+		},
+		{ 
+			"id": "45", 
+			"indexGuid": "B7A95A58-B319-445A-A777-C6F755348340", 
+			"index": "BUDAPEST STOCK EXCH" 
+		},
+		{ 
+			"id": "3", 
+			"indexGuid": "B7F63E4B-BB46-448A-ADAE-2D9BB3DFD919", 
+			"index": "S&P MIB" 
+		},
+		{ 
+			"id": "24", 
+			"indexGuid": "1DC88731-3B47-4880-883A-C265F6838D3B", 
+			"index": "IRISH OVERALL" 
+		},
+		{ 
+			"id": "12", 
+			"indexGuid": "8A20444E-5D6B-49EA-AE82-8721DCD8ECA7", 
+			"index": "AEX General" 
+		},
+		{ 
+			"id": "8", 
+			"indexGuid": "A56827E6-B56E-4C0A-BDEF-63F17E606E05", 
+			"index": "OSE All Share" 
+		},
+		{ 
+			"id": "43", 
+			"indexGuid": "9A910540-FE7F-49ED-A065-4A3EF28FA221", 
+			"index": "WSE WIG" 
+		},
+		{ 
+			"id": "32", 
+			"indexGuid": "EA82E0F0-BFE5-4A8D-A3BD-ADFB0DD89217", 
+			"index": "PSI GENERAL" 
+		},
+		{ 
+			"id": "26", 
+			"indexGuid": "3B3A00C7-648B-470E-9402-12AB80A559BE", 
+			"index": "RTX" 
+		},
+		{ 
+			"id": "17", 
+			"indexGuid": "4267B232-F202-4C77-84AE-1A694809B8D9", 
+			"index": "IBEX 35" 
+		},
+		{ 
+			"id": "19", 
+			"indexGuid": "2FA81F64-67F5-4DA4-B7DC-780AD7A3CD38", 
+			"index": "OMX Stockholm 30" 
+		},
+		{ 
+			"id": "5", 
+			"indexGuid": "1A128398-B6E0-4139-8DB1-CF58565FB0DA", 
+			"index": "Swiss Market" 
+		},
+		{ 
+			"id": "44", 
+			"indexGuid": "6A0BAE8F-5B20-48FF-A8CA-E5D14A384862", 
+			"index": "ISE National-100" 
+		},
+		{ 
+			"id": "9", 
+			"indexGuid": "739B46CF-C01E-453F-8C2A-B1B67F3351EC", 
+			"index": "FTSE 100" 
+		},
+		{ 
+			"id": "58", 
+			"indexGuid": "e95ca757-c41d-4750-830c-600f2810b512", 
+			"index": "EGX 30 Index" 
+		},
+		{ 
+			"id": "34", 
+			"indexGuid": "1DAADB25-2E9C-4443-9E44-731A41926762", 
+			"index": "TA-100" 
+		},
+		{ 
+			"id": "41", 
+			"indexGuid": "E14AE990-36EF-4BDF-9229-A4EA906C5044", 
+			"index": "FTSE/JSE Africa" 
+		},
+		{ 
+			"id": "188", 
+			"indexGuid": "8A7F89B5-646C-46EF-859D-ACBB47212BA5", 
+			"index": "INDICE MASI" 
+		},
+		{ 
+			"id": "231", 
+			"indexGuid": "09383152-7FDD-4F71-A5E9-76D8C789DF4D", 
+			"index": "NSX A-B Index" 
+		},
+		{ 
+			"id": "239", 
+			"indexGuid": "D748D509-1159-4115-92DA-5F662F75C40B", 
+			"index": "BELEX 15" 
+		},
+		{ 
+			"id": "276", 
+			"indexGuid": "6A9404DC-2291-4775-8639-48C11B6E14BB", 
+			"index": "PFTS Ind" 
+		},
+		{ 
+			"id": "230", 
+			"indexGuid": "B5844A1C-D26C-4D22-A611-84EDBDC36A4D", 
+			"index": "BET 10" 
+		},
+		{ 
+			"id": "96", 
+			"indexGuid": "053B4764-C1C4-4E70-A814-D42A657F40D5", 
+			"index": "SOFIX Ind" 
+		},
+		{ 
+			"id": "146", 
+			"indexGuid": "07C42E81-40D0-4719-83B3-5D8E7811130F", 
+			"index": "OMX Iceland 15" 
+		},
+		{ 
+			"id": "244", 
+			"indexGuid": "2F98A47B-735B-42F8-A606-4F2CF5DEF975", 
+			"index": "SAX Index" 
+		},
+		{ 
+			"id": "219", 
+			"indexGuid": "99CAAD31-E803-4F97-9CC5-B1BF0129DF44", 
+			"index": "KSE 100 Indices" 
+		},
+		{ 
+			"id": "50", 
+			"indexGuid": "D8DFAEA4-988C-4D8F-867A-8D0784B666B4", 
+			"index": "PSEI" 
+		},
+		{ 
+			"id": "125", 
+			"indexGuid": "AD7F251A-0DEA-4447-9D4B-FE41F03D7554", 
+			"index": "GSE Composite Index" 
+		},
+		{ 
+			"id": "237", 
+			"indexGuid": "94F394C8-13CF-4614-B4A4-6E71397D83CC", 
+			"index": "TASI" 
+		},
+		{ 
+			"id": "172", 
+			"indexGuid": "2376ACE9-FC96-4905-9EB3-6C0AA8B48BD1", 
+			"index": "CROBEX" 
+		},
+		{ 
+			"id": "177", 
+			"indexGuid": "91BB7A74-775B-4E75-9517-0451A14AC6E1", 
+			"index": "OMX Riga" 
+		},
+		{ 
+			"id": "56", 
+			"indexGuid": "EB084B33-A92E-445E-882B-3F3FC8203F96", 
+			"index": "OMX Tallin" 
+		},
+		{ 
+			"id": "181", 
+			"indexGuid": "FBAAFF17-8722-4D77-B39E-99EABDB1691F", 
+			"index": "OMX Vilnius Index" 
+		},
+		{ 
+			"id": "286", 
+			"indexGuid": "5BBA55DC-A0A9-49F4-BC32-38A616E3A92A", 
+			"index": "Vietnam Stock Index" 
+		},
+		{ 
+			"id": "42", 
+			"indexGuid": "81821E1D-9D8E-40BC-BB34-29EBA64A9693", 
+			"index": "INDICE SELECTIVO PERU-15" 
+		},
+		{ 
+			"id": "54", 
+			"indexGuid": "3D4FFD98-DE80-47DE-A99C-1C99257B6751", 
+			"index": "IGBC Index" 
+		},
+		{ 
+			"id": "35", 
+			"indexGuid": "B3260B56-66B7-4796-B04E-2ACCCCB8D5A1", 
+			"index": "Sensex" 
+		}
+	]
+}

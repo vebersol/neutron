@@ -1,0 +1,13 @@
+<ul class="neutron-code--list"><li data-target="#html"><pre><code class="language-html">&lt;h1>Lorem ipsum dolor sit amet&lt;/h1>
+</code></pre></li><li data-target="#handlebars"><pre><code class="language-handlebars">{{#if level}}
+&lt;h{{level}}{{#if styleModifier}} class=&quot;{{styleModifier}}&quot;{{/if}}>{{text}}&lt;/h{{level}}>
+{{else}}
+&lt;h1{{#if styleModifier}} class=&quot;{{styleModifier}}&quot;{{/if}}>{{text}}&lt;/h1>
+{{/if}}
+</code></pre></li><li data-target="#documentation"><div class="neutron-code--documentation"><p>Headline atom to allow multiple ways to add a headline.  </p>
+<ul>
+<li><strong>level</strong> (Integer)<br><em>Supported values:</em> An integer between 1 and 6.  </li>
+<li><strong>text</strong> (String)<br><em>Supported values:</em> Headline text.  </li>
+<li><strong>styleModifier</strong> (String)<br><em>Supported values:</em> If necessary to add classes to image atom, add it using style modifier.</li>
+</ul>
+</div></li></ul>

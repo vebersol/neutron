@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Neutron Atomic Design Tool</title>
+	<!-- NEUTRON HEADER-->
+	
+	<!-- /NEUTRON HEADER -->
+	<!-- This block is instantiated in pattern page, but this element will be rendered wherever you decide by adding the **outputFor** helper. In this case the result is the header element. -->
+<style>
+	body > p {
+		font-size: 18px;
+		color: red;
+	}
+</style>
+
+</head>
+<body class="templates-ajax">
+	<!-- start atoms/text/headline -->
+<h1>Lorem ipsum dolor sit amet</h1>
+
+<!-- end atoms/text/headline -->
+
+<p>This is a clean layout version. In Neutron you're able to create many layout styles letting you decide the layout you want to use in your templates!</p>
+
+
+	<!-- NEUTRON FOOTER -->
+	<script>
+		window.neutronADT = {
+			i: {
+				dependencies: [{"partial":"atoms/text/headline","path":"atoms-text-headline/index.html"}],
+				reverseDependencies: [{"partial":"pages/server/response","path":"pages-server-response/index.html"}],
+				patternName: "templates/ajax",
+				assetsPath: "../../",
+				menuBehavior: "default",
+				cssTheme: "default",
+				language: "en"
+			}
+		};
+	</script>
+	<script src="../../styleguide/modules/navigation/js/scripts.min.js" async></script>
+	<!-- /NEUTRON FOOTER -->
+
+</body>
+</html>
