@@ -1,6 +1,6 @@
 {
   "name": "neutron-adt",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Neutron Atomic Design Tool",
   "keywords": [
     "neutron",
