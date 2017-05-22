@@ -10,15 +10,10 @@ const init = (callback) => {
 
 	cb = callback || null;
 
-	u.log('==================', 'title');
 	u.log('Starting webserver', 'title');
-	u.log('==================', 'title');
-	u.log('');
 
 	browserSync(browserSyncConfig, () => {
-		u.log('');
 		u.log('Webserver started', 'success');
-		u.log('');
 
 		if (cb) {
 			cb();

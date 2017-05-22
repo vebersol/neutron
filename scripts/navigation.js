@@ -16,7 +16,6 @@ const init = (callback) => {
 	cb = callback || null;
 
 	u.log('Start navigation build', 'title');
-	u.log('');
 
 	renderTemplate();
 }
@@ -62,9 +61,7 @@ const renderStyles = (file, index, totalFiles) => {
 				if (!err) {
 
 					if (totalFiles - 1 == index) {
-						u.log('');
 						u.log('Stylesheets successfully written', 'success');
-						u.log('');
 
 						if (cb) {
 							cb();
@@ -79,7 +76,7 @@ const renderStyles = (file, index, totalFiles) => {
 }
 
 const renderTemplate = () => {
-	u.log("Start HTML conversion to javascript.\n", 'info');
+	u.log("Start HTML conversion to javascript.", 'info');
 
 	let jsOutputPath = u.getPath(settings.paths.core.root, 'modules/navigation/js/');
 	let templateSourcePath = u.getPath(settings.paths.core.root, 'modules/navigation/template/');
@@ -93,13 +90,13 @@ const renderTemplate = () => {
 
 		fse.writeFileSync(jsOutputPath + '/templates.js', output, settings.encode);
 
-		u.log("HTML conversion to javascript successfully done!.\n", 'success');
+		u.log("HTML conversion to javascript successfully done!.", 'success');
 		writeJS();
 	});
 }
 
 const writeJS = () => {
-	u.log("Start javascript concatenation.\n", 'info');
+	u.log("Start javascript concatenation.", 'info');
 	let language = settings.language || 'en';
 	let b = browserify();
 	let jsSourcePath = u.getPath(settings.paths.core.root, 'modules/navigation/js/');
@@ -114,7 +111,7 @@ const writeJS = () => {
 	b.bundle(function (err, response) {
 		fse.writeFileSync(jsOutputPath + '/scripts.min.js', response);
 
-		u.log("End javascript concatenation.\n", 'success');
+		u.log("End javascript concatenation.", 'success');
 
 		getStyles();
 	});

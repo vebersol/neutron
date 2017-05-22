@@ -51,28 +51,20 @@ const install = (options) => {
 	let sourceTarget = u.getPath(currentDir, '/src');
 	let settingsTarget = u.getPath(currentDir, '/neutron.json');
 
-	u.log('===============', 'title');
 	u.log('Install neutron', 'title');
-	u.log('===============', 'title');
 
 	if (!fse.existsSync(settingsTarget)) {
-		u.log('');
 		u.log('Start copying neutron settings file', 'info');
-		u.log('');
 
 		fse.copy(originalSettings, settingsTarget, err => {
 			if (err) {
 				return u.log(err, 'error');
 			}
 
-			u.log('');
 			u.log('Copying neutron settings file', 'success');
-			u.log('');
 		});
 	} else {
-		u.log('');
 		u.log('Settings file already exists. Skip settings copy.', 'info');
-		u.log('');
 	}
 
 	if (fse.existsSync(sourceTarget)) {
@@ -81,9 +73,7 @@ const install = (options) => {
 	}
 
 	if (options.clean) {
-		u.log('');
 		u.log('Start creating a clean version of Neutron', 'info');
-		u.log('');
 
 		fse.mkdirsSync(u.getAppPath(settings.paths.src.assets));
 		fse.mkdirsSync(u.getAppPath(settings.paths.src.data));
@@ -98,22 +88,16 @@ const install = (options) => {
 			}
 		});
 
-		u.log('');
 		u.log('A clean version of Neutron has been created', 'success');
-		u.log('');
 	} else {
-		u.log('');
 		u.log('Start copying dummy source files', 'info');
-		u.log('');
 
 		fse.copy(u.getPath(src), sourceTarget, err => {
 			if (err) {
 				return u.log(err, 'error');
 			}
 
-			u.log('');
 			u.log('Dummy source files have been copy', 'success');
-			u.log('');
 		});
 	}
 }

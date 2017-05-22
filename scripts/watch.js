@@ -11,16 +11,11 @@ let cb;
 
 const init = (callback) => {
 
-	u.log('===================', 'title');
 	u.log('Watch neutron files', 'title');
-	u.log('===================', 'title');
-	u.log('');
 
 	cb = callback || cb;
 
-	u.log('');
 	u.log('Setting up files to watch...', 'info');
-	u.log('');
 
 	chokidar.watch([
 		'neutron.json',
@@ -58,9 +53,7 @@ const init = (callback) => {
 		copy();
 	});
 
-	u.log('');
 	u.log('Watching files...', 'success');
-	u.log('');
 
 	if (cb) {
 		cb();

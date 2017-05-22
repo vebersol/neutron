@@ -19,6 +19,10 @@ module.exports = {
 		}
 
 		console.log(color, message, reset);
+
+		if (type === 'title') {
+			console.log('');
+		}
 	},
 	getPath: function (dir, filename) {
 		if (filename) {

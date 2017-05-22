@@ -16,17 +16,13 @@ const init = function(callback) {
 		}
 	}
 
-	u.log('===========================', 'title');
 	u.log('Neutron: Atomic Design Tool', 'title');
-	u.log('===========================', 'title');
-	u.log('');
 
 	clean(engine);
 }
 
 const clean = (callback) => {
 	u.log('Neutron: Start cleaning up public folder', 'info');
-	u.log('');
 	del([
 		u.getAppPath(path.resolve(settings.paths.public.data, '*')),
 		u.getAppPath(path.resolve(settings.paths.public.markups, '*')),
@@ -35,7 +31,6 @@ const clean = (callback) => {
 		force: true
 	}).then(paths => {
 		u.log('Neutron: Clean up is done!', 'success');
-		u.log('');
 		callback(cb);
 	});
 }
