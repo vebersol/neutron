@@ -1,5 +1,6 @@
 "use strict";
 
+const fse = require('fs-extra');
 const chokidar = require('chokidar');
 const navigation = require('./navigation');
 const neutron = require('./neutron');
@@ -37,8 +38,7 @@ const init = (callback) => {
 	});
 
 	chokidar.watch([
-		'neutron.json',
-		'core/modules/navigation/**/*'
+		'core/modules/navigation/**'
 	], {
 		ignored: 'core/modules/navigation/js/templates.js',
 		persistent: true,
@@ -48,14 +48,21 @@ const init = (callback) => {
 	});
 
 	chokidar.watch([
-		'neutron.json',
-		'src/assets'
+		settings.paths.src.assets + '**'
 	], {
-		ignored: 'core/modules/navigation/js/templates.js',
 		persistent: true,
 		ignoreInitial: true
-	}).on('all', (event, path) => {
-		copy();
+	}).on('all', (event, filePath) => {
+		let target = filePath.replace('web', 'public');
+
+		fse.copy(u.getAppPath(filePath), target, err => {
+			if (err) {
+				return u.log(err, 'error');
+			}
+
+			u.log(filePath + ' copy successfull!', 'success');
+			u.log('');
+		});
 	});
 
 	u.log('');
