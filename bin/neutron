@@ -17,6 +17,9 @@ const fse = require('fs-extra');
 
 const currentDir = u.getPath(process.cwd());
 
+let runningServer = false;
+let watching = false;
+
 const run = (options) => {
 	async.waterfall([
 		callback => {
@@ -29,14 +32,16 @@ const run = (options) => {
 			copy(callback);
 		},
 		callback => {
-			if (options.server) {
+			if (options.server && !runningServer) {
+				runningServer = true;
 				return server(callback);
 			}
 
 			return callback();
 		},
 		callback => {
-			if (options.watch) {
+			if (options.watch && !watching) {
+				watching = true;
 				return watch(callback);
 			}
 

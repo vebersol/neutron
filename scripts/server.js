@@ -16,7 +16,7 @@ const init = (callback) => {
 		u.log('Webserver started', 'success');
 
 		if (cb) {
-			cb();
+			return cb();
 		}
 	});
 }

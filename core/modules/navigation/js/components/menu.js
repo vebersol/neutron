@@ -303,7 +303,7 @@ Menu.prototype = {
 		if (status) {
 			statusTarget.find('span')
 				.addClass(status)
-				.append(noneutronADT.i.prefix(status).toUpperCase().replace('-', ' '));
+				.append(neutronADT.i.noPrefix(status).toUpperCase().replace('-', ' '));
 		}
 		else {
 			statusTarget.hide();

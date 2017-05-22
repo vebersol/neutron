@@ -127,6 +127,7 @@ var engine = function (cb) {
 		newData.patternName = partialName;
 		newData.dependencies = addEngineSnippets(partialsList);
 		newData.menuBehavior = settings.menuBehavior || "overlay";
+		newData.language = settings.language || "en";
 
 		helpers.resetHelpers();
 		try {
