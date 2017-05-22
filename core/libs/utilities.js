@@ -18,6 +18,10 @@ module.exports = {
 			color = types[type];
 		}
 
+		if (type === 'title') {
+			console.log('');
+		}
+
 		console.log(color, message, reset);
 
 		if (type === 'title') {
