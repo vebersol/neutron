@@ -1,4 +1,5 @@
 var fse = require('fs-extra');
+var klaw = require('klaw');
 var path = require('path');
 var util = require('util');
 var handlebars = require('handlebars');
@@ -65,7 +66,7 @@ var engine = function (cb) {
 
 	function getPatterns() {
 		setRenderHelper();
-		return fse.walk(u.getAppPath(settings.paths.src.patterns))
+		return klaw(u.getAppPath(settings.paths.src.patterns))
 			.on('data', function (file) {
 				if (isPatternExtension(path.extname(file.path))) {
 					patternFiles.push(file);
@@ -327,7 +328,7 @@ var engine = function (cb) {
 	}
 
 	function walkPartials() {
-		return fse.walk(u.getAppPath(settings.paths.src.patterns))
+		return klaw(u.getAppPath(settings.paths.src.patterns))
 			.on('data', function (file) {
 				if (isPatternExtension(path.extname(file.path))) {
 					partials.registeredPartials.push(file);
