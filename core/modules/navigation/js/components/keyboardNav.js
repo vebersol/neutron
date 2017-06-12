@@ -20,7 +20,7 @@ KeyboardNav.prototype = {
 	},
 
 	keyUp: function (ev) {
-		if (!Zepto(ev.target).is('input')) {
+		if (!Zepto(ev.target).is('input, textarea')) {
 			ev.preventDefault();
 
 			if (this.isKey(ev, 'c')) {
