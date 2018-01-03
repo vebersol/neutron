@@ -65,7 +65,7 @@ var engine = function (cb) {
 	}
 
 	function getPatterns() {
-		setRenderHelper();
+		// setRenderHelper();
 		return klaw(u.getAppPath(settings.paths.src.patterns))
 			.on('data', function (file) {
 				if (isPatternExtension(path.extname(file.path))) {
@@ -130,31 +130,76 @@ var engine = function (cb) {
 		newData.menuBehavior = settings.menuBehavior || "overlay";
 		newData.language = settings.language || "en";
 
-		helpers.resetHelpers();
+		// helpers.resetHelpers();
 		try {
-			var source = handlebars.compile(pattern.source);
-			var compiledSource = getHtml(source, newData);
+			// console.log(pattern.source);
+			// console.log(pattern)
+			var source = renderPartials(pattern, newData);
+			// u.log(source);
+			u.log(">>>>>>>>>>", "success");
+			// var source = handlebars.compile(pattern.source);
+			// var compiledSource = getHtml(source, newData);
 
-			var fullLayout = layoutHandler.renderLayout(newData, compiledSource);
-			var markups = markup.addMarkup(pattern.source, compiledSource, newData);
+			// var fullLayout = layoutHandler.renderLayout(newData, compiledSource);
+			// var markups = markup.addMarkup(pattern.source, compiledSource, newData);
 
-			var output = {
-				partialName: partialName,
-				html: fullLayout,
-				markup: markups
-			};
+			// var output = {
+			// 	partialName: partialName,
+			// 	html: fullLayout,
+			// 	markup: markups
+			// };
 
-			outputCache.push(output);
+			// outputCache.push(output);
 
-			if (end) {
-				saveToDisk();
-			}
+			// if (end) {
+			// 	saveToDisk();
+			// }
 		} catch(e) {
 			u.log('Error in ' + partialName, 'error');
+			console.log(e)
 			console.log(e.message)
 			process.exit();
 		}
 	}
+
+	// function handlePattern(pattern, end) {
+	// 	var partialData = partials.getPartialsData(pattern);
+	// 	var newData = partialData.data;
+	// 	var partialsList = partialData.partials;
+	// 	var partialName = partials.getPartialName(pattern.file.path);
+
+	// 	newData.cssTheme = settings.cssTheme;
+	// 	newData.partialClass = partials.getPatternFolder(partialName);
+	// 	newData.patternName = partialName;
+	// 	newData.dependencies = addEngineSnippets(partialsList);
+	// 	newData.menuBehavior = settings.menuBehavior || "overlay";
+	// 	newData.language = settings.language || "en";
+
+	// 	helpers.resetHelpers();
+	// 	try {
+	// 		var source = handlebars.compile(pattern.source);
+	// 		var compiledSource = getHtml(source, newData);
+
+	// 		var fullLayout = layoutHandler.renderLayout(newData, compiledSource);
+	// 		var markups = markup.addMarkup(pattern.source, compiledSource, newData);
+
+	// 		var output = {
+	// 			partialName: partialName,
+	// 			html: fullLayout,
+	// 			markup: markups
+	// 		};
+
+	// 		outputCache.push(output);
+
+	// 		if (end) {
+	// 			saveToDisk();
+	// 		}
+	// 	} catch(e) {
+	// 		u.log('Error in ' + partialName, 'error');
+	// 		console.log(e.message)
+	// 		process.exit();
+	// 	}
+	// }
 
 	function saveToDisk() {
 		outputCache.forEach(function (file, i) {
@@ -399,6 +444,41 @@ var engine = function (cb) {
 		output += "\n<!-- end " + patternName + " -->\n";
 
 		return output;
+	}
+
+	function renderPartials(partial, data) {
+		var partialData = {};
+		while(hasPartial(partial.source) !== false) {
+			var partialObj = replacePartials(hasPartial(partial.source), partial);
+			// console.log(partialObj.data);
+			partial.source = partialObj.source;
+			// console.log(Object.assign({}, partialObj.data, partial.data));
+			// console.log(partial.data)
+			// console.log('????????')
+		}
+
+		return partial.source;
+	}
+
+	function replacePartials(includes, partial) {
+		for (var i = 0; i < includes.length; i++) {
+			var partialObj = partials.getPartial(includes[i]);
+			// console.log(partialObj);
+			// var output = partial.source.replace(includes[i], patternSource.source);
+		}
+
+		return partialObj;
+	}
+
+	function hasPartial(source) {
+		var regex = /{{>(.*?)(:.*)?(\(.*\))?}}/g;
+		var match = source.match(regex);
+
+		if (match) {
+			return match;
+		}
+
+		return false;
 	}
 
 	function setRenderHelper() {

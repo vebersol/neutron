@@ -1,4 +1,5 @@
 var handlebars = require('handlebars');
+var mustache = require('mustache');
 var fse = require('fs-extra');
 var path = require('path');
 
@@ -16,6 +17,50 @@ partials = function () {
 		return breakPath[1]
 			.replace(settings.fileExtension, '')
 			.replace(/\\/g, '/');
+	}
+
+	function getPartial(p) {
+		var data = {};
+		var match = p.match(/{{>(.*?)(:.*)?(\(.*\))?}}/);
+		var partialName = match && match.length > 1 ? match[1].replace(/[\s'"]/g, '') : false;
+		var styleModifier = match && match.length > 2 && match[2] ? match[2].replace(/[:]/g, '').replace(/\(.*\)?/, '').split('|').join(' ') : false;
+		var params = match && match.length > 3 && match[3] ? match[3].replace(/[\(\)]/g, '') : false;
+		var splitParams = params ? params.split(',') : false;
+
+		if (styleModifier) {
+			data['styleModifier'] = styleModifier;
+		}
+
+		if (params) {
+			for (var i = 0; i < splitParams.length; i++) {
+				var kv = splitParams[i].trim().replace(/:/, '```').split('```');
+				data[kv[0]] = kv[1].replace(/[\s'"]/g, '');
+			}
+		}
+
+		// console.log(p, styleModifier == true);
+
+		if(styleModifier) {
+			console.log(p);
+			console.log(123, splitParams);
+			console.log(456, match);
+		}
+
+
+		if (partialName) {
+			var partialPath = partialName + settings.fileExtension;
+			var source = fse.readFileSync(u.getAppPath(settings.paths.src.patterns, partialPath), settings.encode);
+
+			console.log(1, data);
+
+			return {
+				partialName: partialName,
+				source: source,
+				data: data
+			}
+		}
+
+		return 'error rendering partial ' + p;
 	}
 
 	function setPartial(name, source) {
@@ -107,6 +152,7 @@ partials = function () {
 		hiddenPartials: hiddenPartials,
 		getPartialName: getPartialName,
 		getPartialsNames: getPartialsNames,
+		getPartial: getPartial,
 		setPartial: setPartial,
 		getPartialsData: getPartialsData,
 		getPatternFolder: getPatternFolder,
