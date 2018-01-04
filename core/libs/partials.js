@@ -21,29 +21,28 @@ partials = function () {
 
 	function getPartial(p) {
 		var data = {};
-		var match = p.match(/{{>(.*?)(:.*)?(\(.*\))?}}/);
+		var match = p.match(/{{>\s?(('|").*?('|"))(.*)}}/);
 		var partialName = match && match.length > 1 ? match[1].replace(/[\s'"]/g, '') : false;
-		var styleModifier = match && match.length > 2 && match[2] ? match[2].replace(/[:]/g, '').replace(/\(.*\)?/, '').split('|').join(' ') : false;
-		var params = match && match.length > 3 && match[3] ? match[3].replace(/[\(\)]/g, '') : false;
-		var splitParams = params ? params.split(',') : false;
+		var isStyleModifier = match && match.length > 4 && match[4] && match[4][0] === ':' ? true : false;
+		var attr;
+		var params;
 
-		if (styleModifier) {
+		if (isStyleModifier) {
+			attr = match[4].replace(':', '').split("(");
+			var styleModifier = attr[0].split('|').join(' ');
 			data['styleModifier'] = styleModifier;
+			params = attr.length > 1 ? attr[1].replace(/[\(\)]/g, '') : false;
+		} else {
+			attr = match && match.length > 4 && match[4].trim().length > 0 ? match[4] : false;
+			params = attr ? attr.replace(/[\(\)]/g, '') : false;
 		}
 
+		var splitParams = params ? params.split(',') : false;
 		if (params) {
 			for (var i = 0; i < splitParams.length; i++) {
 				var kv = splitParams[i].trim().replace(/:/, '```').split('```');
-				data[kv[0]] = kv[1].replace(/[\s'"]/g, '');
+				data[kv[0].replace(/['"]/g, '')] = kv[1].replace(/['"]/g, '').trim();
 			}
-		}
-
-		// console.log(p, styleModifier == true);
-
-		if(styleModifier) {
-			console.log(p);
-			console.log(123, splitParams);
-			console.log(456, match);
 		}
 
 
@@ -51,7 +50,11 @@ partials = function () {
 			var partialPath = partialName + settings.fileExtension;
 			var source = fse.readFileSync(u.getAppPath(settings.paths.src.patterns, partialPath), settings.encode);
 
-			console.log(1, data);
+			u.log({
+				partialName: partialName,
+				source: source,
+				data: data
+			}, 'success');
 
 			return {
 				partialName: partialName,

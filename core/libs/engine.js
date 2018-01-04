@@ -3,6 +3,7 @@ var klaw = require('klaw');
 var path = require('path');
 var util = require('util');
 var handlebars = require('handlebars');
+var mustache = require('mustache');
 var object_merge = require('object-merge');
 var sort_object = require('sort-object');
 var beautify_html = require('js-beautify').html;
@@ -135,7 +136,7 @@ var engine = function (cb) {
 			// console.log(pattern.source);
 			// console.log(pattern)
 			var source = renderPartials(pattern, newData);
-			// u.log(source);
+			u.log(source);
 			u.log(">>>>>>>>>>", "success");
 			// var source = handlebars.compile(pattern.source);
 			// var compiledSource = getHtml(source, newData);
@@ -446,30 +447,6 @@ var engine = function (cb) {
 		return output;
 	}
 
-	function renderPartials(partial, data) {
-		var partialData = {};
-		while(hasPartial(partial.source) !== false) {
-			var partialObj = replacePartials(hasPartial(partial.source), partial);
-			// console.log(partialObj.data);
-			partial.source = partialObj.source;
-			// console.log(Object.assign({}, partialObj.data, partial.data));
-			// console.log(partial.data)
-			// console.log('????????')
-		}
-
-		return partial.source;
-	}
-
-	function replacePartials(includes, partial) {
-		for (var i = 0; i < includes.length; i++) {
-			var partialObj = partials.getPartial(includes[i]);
-			// console.log(partialObj);
-			// var output = partial.source.replace(includes[i], patternSource.source);
-		}
-
-		return partialObj;
-	}
-
 	function hasPartial(source) {
 		var regex = /{{>(.*?)(:.*)?(\(.*\))?}}/g;
 		var match = source.match(regex);
@@ -479,6 +456,30 @@ var engine = function (cb) {
 		}
 
 		return false;
+	}
+
+	function renderPartials(partial, data) {
+		while(hasPartial(partial.source) !== false) {
+			partial.source = replacePartials(hasPartial(partial.source), partial);
+			// console.log(partial.source);
+		}
+
+		return partial.source;
+	}
+
+	function replacePartials(includes, partial) {
+		for (var i = 0; i < includes.length; i++) {
+			var partialObj = partials.getPartial(includes[i]);
+			partial.source = partial.source.replace(includes[i], mustache.render(partialObj.source, partialObj.data));
+		}
+
+		// var stillPartial = hasPartial(partial.source);
+		// if (stillPartial) {
+		// 	console.log(stillPartial);rt
+		// 	// partial.source = replacePartials(stillPartial, partial);
+		// }
+
+		return partial.source;
 	}
 
 	function setRenderHelper() {
