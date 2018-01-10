@@ -11,6 +11,7 @@ partials = function () {
 	var registeredPartials = [];
 	var reverseDependencies = {};
 	var hiddenPartials = [];
+	var mustachePartials = {};
 
 	function getPartialName(filePath) {
 		var breakPath = filePath.split('patterns' + path.sep);
@@ -19,55 +20,83 @@ partials = function () {
 			.replace(/\\/g, '/');
 	}
 
-	function getPartial(p) {
-		var data = {};
-		var match = p.match(/{{>\s?(('|").*?('|"))(.*)}}/);
-		var partialName = match && match.length > 1 ? match[1].replace(/[\s'"]/g, '') : false;
-		var isStyleModifier = match && match.length > 4 && match[4] && match[4][0] === ':' ? true : false;
-		var attr;
-		var params;
+	function _getNameByPattern(match) {
+		if (match.length > 1) {
+			var mArr = match[1].split(/(:|\()(.+)/);
 
-		if (isStyleModifier) {
-			attr = match[4].replace(':', '').split("(");
-			var styleModifier = attr[0].split('|').join(' ');
-			data['styleModifier'] = styleModifier;
-			params = attr.length > 1 ? attr[1].replace(/[\(\)]/g, '') : false;
-		} else {
-			attr = match && match.length > 4 && match[4].trim().length > 0 ? match[4] : false;
-			params = attr ? attr.replace(/[\(\)]/g, '') : false;
+			if (mArr.length >= 1) {
+				return mArr[0];
+			}
 		}
+
+		return '#{error}';
+	}
+
+	function _getStyleModifierByPattern(match) {
+		if (match.length > 1) {
+			var mArr = match[1].split(/:(.+)/);
+
+			if (mArr.length > 1) {
+				var hasParams = mArr[1].match(/(\(.*\))/);
+				if (hasParams && hasParams.length > 0) {
+					return mArr[1].replace(hasParams[0], '');
+				}
+
+				return mArr[1];
+			}
+		}
+
+		return false;
+	}
+
+	function _getParamsByPattern(match) {
+		if (match.length > 1) {
+			var params = match[1].match(/\((.*)\)/);
+
+			if (params && params.length > 1) {
+				return _paramsToObject(params[1]);
+			}
+		}
+
+		return false;
+	}
+
+	function _paramsToObject(params) {
+		var pArr = params.split(',');
+		var obj = {};
 
 		var splitParams = params ? params.split(',') : false;
-		if (params) {
+
+		if (splitParams) {
 			for (var i = 0; i < splitParams.length; i++) {
 				var kv = splitParams[i].trim().replace(/:/, '```').split('```');
-				data[kv[0].replace(/['"]/g, '')] = kv[1].replace(/['"]/g, '').trim();
+				obj[kv[0].replace(/['"]/g, '')] = kv[1].replace(/['"]/g, '').trim();
 			}
 		}
 
+		return obj;
+	}
 
-		if (partialName) {
-			var partialPath = partialName + settings.fileExtension;
-			var source = fse.readFileSync(u.getAppPath(settings.paths.src.patterns, partialPath), settings.encode);
+	function getPartial(p) {
+		var match = p.match(/{{>\s?.*?(?=:?)(?=\(?)(.*)}}/);
+		var partialName = _getNameByPattern(match).trim();
+		var styleModifier = _getStyleModifierByPattern(match);
+		var params = _getParamsByPattern(match);
 
-			u.log({
-				partialName: partialName,
-				source: source,
-				data: data
-			}, 'success');
-
-			return {
-				partialName: partialName,
-				source: source,
-				data: data
-			}
+		if (styleModifier) {
+			params[styleModifier] = styleModifier.split('|').join(' ');
 		}
 
-		return 'error rendering partial ' + p;
+		return {
+			name: partialName,
+			source: '{{> ' + partialName + ' }}',
+			data: params
+		}
 	}
 
 	function setPartial(name, source) {
-		handlebars.registerPartial(name, source);
+		mustachePartials[name] = source;
+		// handlebars.registerPartial(name, source);
 	}
 
 	function getPartialsData(pattern) {
@@ -160,6 +189,7 @@ partials = function () {
 		getPartialsData: getPartialsData,
 		getPatternFolder: getPatternFolder,
 		isHiddenPartial: isHiddenPartial,
+		mustachePartials: mustachePartials,
 		resetReverseDependencies: resetReverseDependencies
 	}
 };

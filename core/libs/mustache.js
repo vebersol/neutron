@@ -35,7 +35,7 @@ var engine = function (cb) {
 
 	function init () {
 		globalData = JSON.parse(fse.readFileSync(u.getAppPath(settings.paths.src.data, 'global.json'), settings.encode));
-		registerHelpers();
+		// registerHelpers();
 		cleanPaths();
 		walkPartials();
 	}
@@ -135,7 +135,7 @@ var engine = function (cb) {
 		try {
 			// console.log(pattern.source);
 			// console.log(pattern)
-			var source = renderPartials(pattern, newData);
+			var source = renderMustache(pattern, newData);
 			// u.log(source);
 			u.log(">>>>>>>>>>", "success");
 			// var source = handlebars.compile(pattern.source);
@@ -448,25 +448,21 @@ var engine = function (cb) {
 	}
 
 	function hasPartial(source) {
-		console.log('has partial?');
 		var regex = /{{>(.*?)(:.*)?(\(.*\))?}}/g;
-		console.log(1111, source)
 		var match = source.match(regex);
 
 		if (match) {
-			console.log(2222, "MATCH")
 			return match;
 		}
 
 		return false;
 	}
 
-	function renderPartials(partial, data) {
-		console.log('first call');
+	function renderMustache(partial, data) {
 		while(hasPartial(partial.source) !== false) {
 			// var partialObj = replacePartials(hasPartial(partial.source), partial);
 			partial.source = replacePartials(hasPartial(partial.source), partial);
-			console.log("while", partial.source);
+			// console.log("while", partial.source);
 		}
 
 		console.log('done render partials');
@@ -475,16 +471,23 @@ var engine = function (cb) {
 	}
 
 	function replacePartials(includes, partial) {
-		console.log('call replace partials');
+		// console.log(includes, partial)
 		for (var i = 0; i < includes.length; i++) {
 			var partialObj = partials.getPartial(includes[i]);
-			console.log(33333333,partialObj.partialName);
-			if (hasPartial(partialObj.source)) {
-				partial.source  = partialObj.source;
-				console.log('source:', partial.source)
-				return renderPartials(partial, partialObj.data);
+			// console.log(partialObj);
+			// console.log(partial.source);
+			if (partialObj.source) {
+				u.log('///////////////////: ' + includes[i], 'success')
+				console.log(partialObj.source, partialObj.data ? partialObj.data : {}, partials.mustachePartials[partialObj.name]);
+				// console.log(1, mustache.to_html(partialObj.source, partialObj.data, partials.mustachePartials));
 			}
-			partial.source = partial.source.replace(includes[i], mustache.render(partialObj.source, partialObj.data));
+			// console.log(partial.source.replace(includes[i], );
+		// 	if (hasPartial(partialObj.source)) {
+		// 		partial.source  = partialObj.source;
+		// 		return renderMustache(partial, partialObj.data);
+		// 	}
+		// 	partial.source = partial.source.replace(includes[i], mustache.render(partialObj.source, partialObj.data));
+			partial.source = "#{temp}"
 		}
 
 		return partial.source;
