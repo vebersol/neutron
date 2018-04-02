@@ -1,6 +1,7 @@
 "use strict";
 
 const fse = require('fs-extra');
+const path = require('path');
 const chokidar = require('chokidar');
 const navigation = require('./navigation');
 const neutron = require('./neutron');
@@ -26,39 +27,43 @@ const init = (callback) => {
 		settings.paths.core.templates + '**',
 		settings.paths.core.helpers + '**'
 	], {
-		persistent: true,
-		ignoreInitial: true
-	}).on('all', () => {
-		neutron();
-	});
+			persistent: true,
+			ignoreInitial: true
+		}).on('all', () => {
+			neutron();
+		});
 
 	chokidar.watch([
 		'core/modules/navigation/**'
 	], {
-		ignored: 'core/modules/navigation/js/templates.js',
-		persistent: true,
-		ignoreInitial: true
-	}).on('all', (event, path) => {
-		navigation();
-	});
+			ignored: 'core/modules/navigation/js/templates.js',
+			persistent: true,
+			ignoreInitial: true
+		}).on('all', (event, path) => {
+			navigation();
+		});
 
 	chokidar.watch([
 		settings.paths.src.assets + '**'
 	], {
-		persistent: true,
-		ignoreInitial: true
-	}).on('all', (event, filePath) => {
-		let target = filePath.replace('web', 'public');
+			persistent: true,
+			ignoreInitial: true
+		}).on('all', (event, filePath) => {
+			const target = path.resolve(filePath)
+				.replace(
+					path.resolve(settings.paths.src.assets),
+					path.resolve(settings.paths.public.assets)
+				);
 
-		fse.copy(u.getAppPath(filePath), target, err => {
-			if (err) {
-				return u.log(err, 'error');
-			}
+			fse.copy(u.getAppPath(filePath), target, err => {
+				if (err) {
+					return u.log(err, 'error');
+				}
 
-			u.log(filePath + ' copy successfull!', 'success');
-			u.log('');
+				u.log(filePath + ' copy successfull!', 'success');
+				u.log('');
+			});
 		});
-	});
 
 	u.log('Watching files...', 'success');
 
