@@ -7,7 +7,7 @@ module.exports = function(Handlebars) {
 		contentFor(name, options) {
 			var blocks = this._blocks || (this._blocks = {});
 			var block  = blocks[name] || (blocks[name] = []);
-			
+
 			block.push(options.fn(this));
 		},
 
