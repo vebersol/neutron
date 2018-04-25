@@ -10,7 +10,7 @@ marked.setOptions({
 var documentationHandler = function () {
 	function getDocs(patternName) {
 		var fileName = patternName + '.md';
-		var filePath = u.getPath(settings.paths.src.patterns, fileName);
+		var filePath = u.getAppPath(settings.paths.src.patterns, fileName);
 
 		if (fse.existsSync(filePath)) {
 			var fileData = fse.readFileSync(filePath, settings.encode);
