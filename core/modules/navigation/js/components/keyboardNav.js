@@ -32,8 +32,9 @@ class KeyboardNav {
 					this.toggleBar();
 				}
 
-				var menu = Zepto(neutronADT.i.pcn('.menu--items'));
-				var firstItem = menu.children().find('input').first();
+				const menu = Zepto(neutronADT.i.pcn('.menu--items'));
+				const firstItem = menu.children().find('input').first();
+
 				firstItem.focus().prop('checked', true);
 			}
 		}

@@ -1,11 +1,12 @@
+const  Storage = require('./storage');
+
 class Main {
 	constructor() {
-		var Storage = require('./storage');
 		this.namespace = 'neutronADT';
 		this.themeNamespace = this.namespace + 'Theme';
 		this.storage = new Storage();
 
-		var theme = this.storage.getSettings(this.themeNamespace) || neutronADT.i.cssTheme;
+		const  theme = this.storage.getSettings(this.themeNamespace) || neutronADT.i.cssTheme;
 
 		this.preloadStyles(theme, () => {
 			this.create();
@@ -13,7 +14,8 @@ class Main {
 	}
 
 	preloadStyles(theme, callback) {
-		var link = Zepto('<link rel="stylesheet" class="neutron-theme-stylesheet" href="' + neutronADT.i.assetsPath + 'styleguide/modules/navigation/css/' + theme + '.css">');
+		const  link = Zepto(`<link rel="stylesheet" class="neutron-theme-stylesheet" href="${neutronADT.i.assetsPath}styleguide/modules/navigation/css/${theme}.css">`);
+
 		link.get(0).onload = function() {
 			callback();
 			link.get(0).onload = null;
@@ -23,43 +25,43 @@ class Main {
 	}
 
 	create() {
-		this.wrapper = Zepto('<aside id="' + neutronADT.i.prefix + '"></aside>');
+		this.wrapper = Zepto(`<aside id="${neutronADT.i.prefix}"></aside>`);
 		Zepto('body').append(this.wrapper);
 		this.addPatternsInfo();
 	}
 
 	addPatternsInfo() {
-		var template = this.getTemplate();
+		const template = this.getTemplate();
 
 		this.wrapper.append(template);
 		this.buildDependenciesList();
 
-		var Menu = require('./menu');
+		const Menu = require('./menu');
 		new Menu();
 	}
 
 	buildDependenciesList() {
-		var dependencies = neutronADT.i.dependencies;
-		var dependenciesTarget = Zepto(neutronADT.i.pcn('#dependencies-list'));
-		var reverseDependencies = neutronADT.i.reverseDependencies;
-		var reverseDependenciesTarget = Zepto(neutronADT.i.pcn('#reverse-dependencies-list'));
+		const dependencies = neutronADT.i.dependencies;
+		const dependenciesTarget = Zepto(neutronADT.i.pcn('#dependencies-list'));
+		const reverseDependencies = neutronADT.i.reverseDependencies;
+		const reverseDependenciesTarget = Zepto(neutronADT.i.pcn('#reverse-dependencies-list'));
 
-		var d = [];
-		var rd = [];
+		let d = [];
+		let rd = [];
 
 		if (dependencies.length === 0) {
 			dependenciesTarget.hide();
 		} else {
-			for (var i = 0; i < dependencies.length; i++) {
-				d.push('<a href="' + neutronADT.i.patternsPath + dependencies[i].path + '">' + dependencies[i].partial + '</a>');
+			for (let i = 0; i < dependencies.length; i++) {
+				d.push(`<a href="${neutronADT.i.patternsPath + dependencies[i].path}">${dependencies[i].partial}</a>`);
 			}
 		}
 
 		if (reverseDependencies.length === 0) {
 			reverseDependenciesTarget.hide();
 		} else {
-			for (var i = 0; i < reverseDependencies.length; i++) {
-				rd.push('<a href="' + neutronADT.i.patternsPath + reverseDependencies[i].path + '">' + reverseDependencies[i].partial + '</a>');
+			for (let i = 0; i < reverseDependencies.length; i++) {
+				rd.push(`<a href="${neutronADT.i.patternsPath + reverseDependencies[i].path}">${reverseDependencies[i].partial}</a>`);
 			}
 		}
 
@@ -68,19 +70,17 @@ class Main {
 	}
 
 	getTemplate() {
-		var template = this.translate(NADTJST['index']);
-
-		return template;
+		return this.translate(NADTJST['index']);
 	}
 
 	translate(source) {
-		var languages = require('../lang/index');
-		var I18n = languages[neutronADT.i.language];
+		const languages = require('../lang/index');
+		const I18n = languages[neutronADT.i.language];
 
-		for (var t in I18n) {
-			var str = '({{' + t + '}})';
-			var regex = new RegExp(str, "g");
-			var match = source.match(regex);
+		for (let t in I18n) {
+			const str = `({{${t}}})`;
+			const regex = new RegExp(str, "g");
+			const match = source.match(regex);
 
 			if (match) {
 				source = source.replace(regex, I18n[t]);
