@@ -88,14 +88,14 @@ class Menu {
 
 	bind () {
 		var parent = this,
-				qrcode,
-				qrcodeEl = Zepto('#qrcode'),
-				qrCodeFrame = Zepto(neutronADT.i.pcn('.qr-code-wrapper')),
-				infoFrame = Zepto(neutronADT.i.pcn('.info-wrapper')),
-				codeBtn = Zepto(neutronADT.i.pcn('.button--code')),
-				menu = Zepto(neutronADT.i.pcn('.menu--items')),
-				classList = [neutronADT.i.pcn('.button--start'), neutronADT.i.pcn('.navigation'), neutronADT.i.pcn('.menu')],
-				movableFrames = Zepto(classList.join(', '));
+			qrcode,
+			qrcodeEl = Zepto('#qrcode'),
+			qrCodeFrame = Zepto(neutronADT.i.pcn('.qr-code-wrapper')),
+			infoFrame = Zepto(neutronADT.i.pcn('.info-wrapper')),
+			codeBtn = Zepto(neutronADT.i.pcn('.button--code')),
+			menu = Zepto(neutronADT.i.pcn('.menu--items')),
+			classList = [neutronADT.i.pcn('.button--start'), neutronADT.i.pcn('.navigation'), neutronADT.i.pcn('.menu')],
+			movableFrames = Zepto(classList.join(', '));
 
 		if(parent.menuBehavior === "off-canvas") {
 			Zepto('body').on('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function() {
