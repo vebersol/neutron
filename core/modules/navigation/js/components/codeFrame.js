@@ -1,6 +1,6 @@
 class CodeFrame {
 	constructor() {
-		this.wrapper = Zepto('#' + neutronADT.i.prefix);
+		this.wrapper = Zepto(`#${neutronADT.i.prefix}`);
 		this.loaded = false;
 	}
 
@@ -29,6 +29,7 @@ class CodeFrame {
 
 						const documentationItem = this.code.find(neutronADT.i.pcn('.code--list li[data-target="#documentation"]'));
 						const documentationNavItem = this.code.find(neutronADT.i.pcn('.code--nav li a[href="#documentation"]'));
+
 						if (documentationItem.length > 0) {
 							const docsCode = codeList.find(neutronADT.i.pcn('.code--documentation code'));
 							docsCode.addClass('language-html');
@@ -64,7 +65,7 @@ class CodeFrame {
 				this.code.find('[data-target]').hide();
 
 				list.addClass('active');
-				this.code.find(neutronADT.i.pcn('.code--list li[data-target="' + element.attr('href') + '"]')).show();
+				this.code.find(neutronADT.i.pcn(`.code--list li[data-target="${element.attr('href')}"]`)).show();
 
 				return false;
 			});
