@@ -1,19 +1,15 @@
-var Storage = function () {
-	this.namespace = 'neutronADT';
-	this.privateMode = false;
-	this.data = window.localStorage.getItem(this.namespace);
+class Storage {
+	constructor() {
+		this.namespace = 'neutronADT';
+		this.privateMode = false;
+		this.data = window.localStorage.getItem(this.namespace);
 
-	this.init();
-};
-
-Storage.prototype = {
-	init: function () {
 		if (!this.data) {
 			return this.setData();
 		}
-	},
+	}
 
-	setData: function () {
+	setData() {
 		var layers = this.getOpenedLayers();
 		var store = this.setItemsToStore(layers);
 
@@ -24,9 +20,9 @@ Storage.prototype = {
 		} catch(e) {
 			this.privateMode = true;
 		}
-	},
+	}
 
-	getOpenedLayers: function () {
+	getOpenedLayers() {
 		var wrapper = Zepto(neutronADT.i.pcn('.sticky-nav'));
 		var btnClass = neutronADT.i.pcn('button--');
 		var buttons = wrapper.find('[class*="' + btnClass + '"]');
@@ -39,9 +35,9 @@ Storage.prototype = {
 		}
 
 		return openedLayers;
-	},
+	}
 
-	add: function (name) {
+	add(name) {
 		if (this.privateMode) {
 			return false;
 		}
@@ -65,9 +61,9 @@ Storage.prototype = {
 		}
 
 		return false;
-	},
+	}
 
-	remove: function (name) {
+	remove(name) {
 		if (this.privateMode) {
 			return false;
 		}
@@ -85,23 +81,23 @@ Storage.prototype = {
 		}
 
 		return false;
-	},
+	}
 
-	setItemsToStore: function (items) {
+	setItemsToStore(items) {
 		if (items.length > 0) {
 			return items.join(',');
 		}
 
 		return "";
-	},
+	}
 
-	setSettings: function (item, value) {
+	setSettings(item, value) {
 		window.localStorage.setItem(item, value);
-	},
+	}
 
-	getSettings: function (item) {
+	getSettings(item) {
 		return window.localStorage.getItem(item);
 	}
-};
+}
 
 module.exports = Storage;

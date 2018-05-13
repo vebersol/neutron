@@ -1,18 +1,20 @@
-var CodeFrame = function() {
-	this.wrapper = Zepto('#' + neutronADT.i.prefix);
-	this.loaded = false;
-}
+class CodeFrame {
+	constructor() {
+		this.wrapper = Zepto('#' + neutronADT.i.prefix);
+		this.loaded = false;
+	}
 
-CodeFrame.prototype =  {
-	load: function () {
+	load() {
 		this.loaded = true;
 		this.addCode();
-	},
+	}
 
-	addCode: function () {
+	addCode() {
 		var parent = this;
+
 		if (neutronADT.i.patternName) {
 			this.code = parent.wrapper.find(neutronADT.i.pcn('.code'));
+
 			Zepto.ajax({
 				url: neutronADT.i.patternsPath + neutronADT.i.patternName.replace(/\//g, '-') + '/markups.html',
 				success: function (data) {
@@ -50,9 +52,9 @@ CodeFrame.prototype =  {
 				}
 			});
 		}
-	},
+	}
 
-	bindTabs: function () {
+	bindTabs() {
 		var parent = this,
 			tabs = this.code.find(neutronADT.i.pcn('.code--nav li a'));
 

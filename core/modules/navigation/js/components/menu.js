@@ -1,22 +1,22 @@
-QRCode = require('../libs/qrcode.min');
+const QRCode = require('../libs/qrcode.min');
 
-var Menu = function () {
-	var CodeFrame = require('./codeFrame');
-	this.codeFrame = new CodeFrame();
-	this.namespace = 'neutronADT';
-	this.menuBehaviorNamespace = this.namespace+'menuBehavior';
+class Menu {
+	constructor() {
+		var CodeFrame = require('./codeFrame');
+		this.codeFrame = new CodeFrame();
+		this.namespace = 'neutronADT';
+		this.menuBehaviorNamespace = this.namespace+'menuBehavior';
 
-	this.init();
-}
+		this.init();
+	}
 
-Menu.prototype = {
-	init: function () {
+	init () {
 		var parent = this;
 
 		Zepto.ajax({
 			url: neutronADT.i.assetsPath + 'data/patterns.json',
 			dataType: "json",
-			success: function(data) {
+			success(data) {
 				var Storage = require('./storage');
 				parent.storage = new Storage();
 				parent.renderMenu(data);
@@ -35,17 +35,18 @@ Menu.prototype = {
 				new Theme();
 			}
 		});
-	},
+	}
 
-	renderMenu: function (data) {
+	renderMenu(data) {
 		var menuArr = ['atoms', 'molecules', 'organisms', 'templates', 'pages'],
 				menu = Zepto(neutronADT.i.pcn('.menu--items')),
 				list;
 
 		for (var i = 0; i < menuArr.length; i++) {
 			if (data.hasOwnProperty(menuArr[i])) {
+				const submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
+
 				list = Zepto('<li><input type="checkbox" id="'+menuArr[i]+'" /><label for="'+menuArr[i]+'">' + this.toTitle(menuArr[i]) + '</label></li>').data('item', menuArr[i]);
-				submenu = this.createMenuItem(data[menuArr[i]], menuArr[i]);
 				list.append(submenu);
 				menu.append(list);
 			}
@@ -54,13 +55,13 @@ Menu.prototype = {
 		this.bind();
 		this.setupButtons();
 		this.setStatus();
-	},
+	}
 
-	createMenuItem: function (data, property) {
+	createMenuItem(data, property) {
 		var list,
-				objLen,
-				menuItem = Zepto('[data-item="' + property + '"]'),
-				ul = Zepto('<ul></ul>');
+			objLen,
+			menuItem = Zepto('[data-item="' + property + '"]'),
+			ul = Zepto('<ul></ul>');
 
 		for (var item in data) {
 			objLen = this.getObjectSize(data[item]);
@@ -83,9 +84,9 @@ Menu.prototype = {
 		}
 
 		return "";
-	},
+	}
 
-	bind: function () {
+	bind () {
 		var parent = this,
 				qrcode,
 				qrcodeEl = Zepto('#qrcode'),
@@ -225,14 +226,14 @@ Menu.prototype = {
 		});
 
 		parent.showCurrent(menu);
-	},
+	}
 
-	showElement: function (element) {
+	showElement(element) {
 		var checkboxes = element.parents('li[data-item]').children('input');
 		checkboxes.prop('checked', true);
-	},
+	}
 
-	toTitle: function (slug) {
+	toTitle(slug) {
 		var words = slug.split('-');
 
 		for (var i = 0; i < words.length; i++) {
@@ -241,18 +242,18 @@ Menu.prototype = {
 		}
 
 		return words.join(' ');
-	},
+	}
 
-	getObjectSize: function(obj) {
+	getObjectSize(obj) {
 		var size = 0,
 			key;
 		for (key in obj) {
 			if (obj.hasOwnProperty(key)) size++;
 		}
 		return size;
-	},
+	}
 
-	setupButtons: function () {
+	setupButtons() {
 		if (!this.storage.privateMode) {
 			var btns = this.storage.data.split(',');
 
@@ -260,9 +261,9 @@ Menu.prototype = {
 				Zepto(neutronADT.i.pcn('.button--' + btns[i])).click();
 			}
 		}
-	},
+	}
 
-	showCurrent: function(menu) {
+	showCurrent(menu) {
 		var parent = this,
 				path = window.location.pathname;
 
@@ -275,9 +276,9 @@ Menu.prototype = {
 				}
 			});
 		}
-	},
+	}
 
-	changeMenuBehavior: function(behavior) {
+	changeMenuBehavior(behavior) {
 		var body = Zepto('body');
 
 		if(behavior === "off-canvas") {
@@ -293,9 +294,9 @@ Menu.prototype = {
 
 		this.menuBehavior = behavior;
 		this.storage.setSettings(this.menuBehaviorNamespace, behavior);
-	},
+	}
 
-	setStatus: function () {
+	setStatus() {
 		var statusTarget = Zepto(neutronADT.i.pcn('#status'));
 		var activeMenuItem = Zepto(neutronADT.i.pcn('.menu--items .current a'));
 		var status = activeMenuItem.attr('class');

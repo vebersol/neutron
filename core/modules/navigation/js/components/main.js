@@ -1,23 +1,18 @@
-var Main = function() {
-	var Storage = require('./storage');
-	this.namespace = 'neutronADT';
-	this.themeNamespace = this.namespace + 'Theme';
-	this.storage = new Storage();
+class Main {
+	constructor() {
+		var Storage = require('./storage');
+		this.namespace = 'neutronADT';
+		this.themeNamespace = this.namespace + 'Theme';
+		this.storage = new Storage();
 
-	this.init();
-}
-
-Main.prototype = {
-	init: function() {
-		var parent = this;
 		var theme = this.storage.getSettings(this.themeNamespace) || neutronADT.i.cssTheme;
 
-		this.preloadStyles(theme, function() {
-			parent.create();
+		this.preloadStyles(theme, () => {
+			this.create();
 		});
-	},
+	}
 
-	preloadStyles: function(theme, callback) {
+	preloadStyles(theme, callback) {
 		var link = Zepto('<link rel="stylesheet" class="neutron-theme-stylesheet" href="' + neutronADT.i.assetsPath + 'styleguide/modules/navigation/css/' + theme + '.css">');
 		link.get(0).onload = function() {
 			callback();
@@ -25,15 +20,15 @@ Main.prototype = {
 		};
 
 		Zepto('head').append(link);
-	},
+	}
 
-	create: function() {
+	create() {
 		this.wrapper = Zepto('<aside id="' + neutronADT.i.prefix + '"></aside>');
 		Zepto('body').append(this.wrapper);
 		this.addPatternsInfo();
-	},
+	}
 
-	addPatternsInfo: function() {
+	addPatternsInfo() {
 		var template = this.getTemplate();
 
 		this.wrapper.append(template);
@@ -41,9 +36,9 @@ Main.prototype = {
 
 		var Menu = require('./menu');
 		new Menu();
-	},
+	}
 
-	buildDependenciesList: function() {
+	buildDependenciesList() {
 		var dependencies = neutronADT.i.dependencies;
 		var dependenciesTarget = Zepto(neutronADT.i.pcn('#dependencies-list'));
 		var reverseDependencies = neutronADT.i.reverseDependencies;
@@ -70,15 +65,15 @@ Main.prototype = {
 
 		dependenciesTarget.find('span').append(d.join(', '));
 		reverseDependenciesTarget.find('span').append(rd.join(', '));
-	},
+	}
 
-	getTemplate: function() {
+	getTemplate() {
 		var template = this.translate(NADTJST['index']);
 
 		return template;
-	},
+	}
 
-	translate: function(source) {
+	translate(source) {
 		var languages = require('../lang/index');
 		var I18n = languages[neutronADT.i.language];
 

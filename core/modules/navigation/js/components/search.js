@@ -1,14 +1,10 @@
-var Search = function () {
-	this.init();
-	this.firstSearch = true;
-};
-
-Search.prototype = {
-	init: function() {
+class Search {
+	constructor() {
 		this.bindSearch();
-	},
+		this.firstSearch = true;
+	}
 
-	bindSearch: function () {
+	bindSearch() {
 		var parent = this,
 			timer,
 			input = Zepto(neutronADT.i.pcn('.menu--search input')),
@@ -83,6 +79,6 @@ Search.prototype = {
 			Zepto(neutronADT.i.pcn('.menu--search')).removeClass(neutronADT.i.pcn('menu--search__opened'));
 		});
 	}
-};
+}
 
 module.exports = Search;

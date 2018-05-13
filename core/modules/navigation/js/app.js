@@ -8,7 +8,7 @@ neutronADT.i.prefix = 'neutron';
  * @param {String} str
  * @return {String} prefixed str param
  */
-neutronADT.i.pcn = function(str) {
+neutronADT.i.pcn = str => {
 	var prefixed = (neutronADT.i.prefix + '-' + str).replace(/[\.#]/, '');
 
 	if (str[0] === '.' || str[0] === '#') {
@@ -18,9 +18,10 @@ neutronADT.i.pcn = function(str) {
 	return prefixed;
 }
 
-neutronADT.i.noPrefix = function(prefixedString) {
+neutronADT.i.noPrefix = prefixedString => {
 	return prefixedString.replace(neutronADT.i.prefix + '-', '');
 }
 
-var Main = require('./components/main');
+const Main = require('./components/main');
+
 new Main();

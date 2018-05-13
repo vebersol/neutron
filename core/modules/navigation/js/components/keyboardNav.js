@@ -1,11 +1,5 @@
-var KeyboardNav = function () {
-	this.init();
-}
-
-KeyboardNav.prototype = {
-	init: function (buttons) {
-		var parent = this;
-
+class KeyboardNav {
+	constructor (buttons) {
 		this.buttons = buttons;
 		this.bar = Zepto(neutronADT.i.pcn('.sticky-nav'));
 		this.startBtn = Zepto(neutronADT.i.pcn('.button--start'));
@@ -14,12 +8,12 @@ KeyboardNav.prototype = {
 		this.settingsBtn = Zepto(neutronADT.i.pcn('.button--info'));
 		this.searchBtn = Zepto(neutronADT.i.pcn('.button--search'));
 
-		Zepto(document).on('keyup', function (ev) {
-			parent.keyUp(ev);
+		Zepto(document).on('keyup', ev => {
+			this.keyUp(ev);
 		});
-	},
+	}
 
-	keyUp: function (ev) {
+	keyUp (ev) {
 		if (!Zepto(ev.target).is('input, textarea')) {
 			ev.preventDefault();
 
@@ -43,48 +37,48 @@ KeyboardNav.prototype = {
 				firstItem.focus().prop('checked', true);
 			}
 		}
-	},
+	}
 
-	isKey: function (ev, key) {
+	isKey (ev, key) {
 		if (ev.ctrlKey === true || ev.shiftKey === true) {
 			return false;
 		}
 
 		return (ev.code == 'Key' + key.toUpperCase() || ev.key == key)
-	},
+	}
 
-	openInfoBar: function () {
+	openInfoBar () {
 		this.infoBtn.click();
 		this.checkStartBtn();
-	},
+	}
 
-	openQRCodeBar: function () {
+	openQRCodeBar () {
 		this.qrCodeBtn.click();
 		this.checkStartBtn();
-	},
+	}
 
-	toggleBar: function () {
+	toggleBar () {
 		this.startBtn.click();
-	},
+	}
 
-	checkStartBtn: function () {
+	checkStartBtn () {
 		if (!this.startBtn.hasClass('active')) {
 			this.startBtn.addClass('active');
 		}
-	},
+	}
 
-	toggleSearch: function () {
+	toggleSearch () {
 		if(!this.bar.hasClass('active')) {
 			this.toggleBar();
 		}
 		this.checkStartBtn();
 		this.searchBtn.click();
-	},
+	}
 
-	openSettings: function () {
+	openSettings () {
 		this.checkStartBtn();
 		this.settingsBtn.click();
-	},
+	}
 }
 
 module.exports = KeyboardNav;
