@@ -6,6 +6,7 @@ var handlebars = require('handlebars');
 var path = require('path');
 
 module.exports = (function() {
+	'use strict';
 	let importedHelpers = {};
 
 	if (fse.existsSync(u.getPath(settings.paths.src.helpers))) {
