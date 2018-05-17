@@ -1,9 +1,9 @@
-const fse = require('fs-extra');
-const klawSync = require('klaw-sync')
-const u = require('./utilities');
-const settings = require('./settings');
-const handlebars = require('handlebars');
-const path = require('path');
+var fse = require('fs-extra');
+var klawSync = require('klaw-sync')
+var u = require('./utilities');
+var settings = require('./settings');
+var handlebars = require('handlebars');
+var path = require('path');
 
 module.exports = (function() {
 	let importedHelpers = {};
