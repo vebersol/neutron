@@ -14,7 +14,7 @@ var partials = require('./partials')();
 var layoutHandler = require('./layouts')();
 var markup = require('./markup')();
 
-var helpers = require(u.getPath(settings.paths.core.helpers))(handlebars);
+var helpers = require('./helpers');
 
 var engine = function (cb) {
 	'use strict';

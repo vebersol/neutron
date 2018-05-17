@@ -69,6 +69,20 @@ It’s useful for team work to define the status of every particular pattern to 
 	}
     ```
 
+### Using helpers
+
+Neutron has some native helpers:
+
+**contentFor:** It allows you to write a block in a pattern and print directly in layout through **outputFor** helper. Example [here](https://github.com/vebersol/neutron/blob/master/src/patterns/templates/ajax.hbs#L5) and [here](https://github.com/vebersol/neutron/blob/master/src/layouts/clean.hbs#L10).
+
+**outputFor:** It prints the block that has been created in contentFor.
+
+#### Creating custom helpers
+
+Handlebars suports custom helpers natively, and there's a way to create these custom helpers in Neutron. In your source folder, there might be a folder named _helpers_. All javascript files that follows the correct structure will be loaded as helpers. Check the sample file [here](https://github.com/vebersol/neutron/tree/master/src/helpers/index.js).
+
+Read in Handlebars page how to create custom helpers [here](http://handlebarsjs.com/expressions.html#helpers) and [here](http://handlebarsjs.com/block_helpers.html).
+
 ## Command line
 
 Neutron has a friendly command line setup.

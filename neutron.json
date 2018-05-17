@@ -10,8 +10,7 @@
 	"paths": {
 		"core": {
 			"root": "./core/",
-			"templates": "./core/modules/templates/",
-			"helpers": "./core/modules/helpers/"
+			"templates": "./core/modules/templates/"
 		},
 		"libs": {
 			"root": "./core/libs/"
@@ -20,6 +19,7 @@
 			"root": "./src/",
 			"assets": "./src/assets/",
 			"data": "./src/data/",
+			"helpers": "./src/helpers/",
 			"layouts": "./src/layouts/",
 			"patterns": "./src/patterns/"
 		},
