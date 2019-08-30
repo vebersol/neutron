@@ -29,6 +29,10 @@ module.exports = {
 		}
 	},
 	getPath: function (dir, filename) {
+		if (!dir) {
+			throw("A directory is not defined. Please, check if all paths are defined in your neutron.json file. Check https://github.com/vebersol/neutron/blob/master/neutron.json for more information.");
+		}
+
 		if (filename) {
 			return path.resolve(__dirname, '../../', dir + filename);
 		}
@@ -36,6 +40,10 @@ module.exports = {
 		return path.resolve(__dirname, '../../', dir);
 	},
 	getAppPath: function (dir, filename) {
+		if (!dir) {
+			throw("A directory is not defined. Please, check if all paths are defined in your neutron.json file. Check https://github.com/vebersol/neutron/blob/master/neutron.json for more information.");
+		}
+
 		if (filename) {
 			return path.resolve(process.cwd(), dir + filename);
 		}
