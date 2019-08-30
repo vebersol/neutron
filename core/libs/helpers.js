@@ -9,8 +9,8 @@ module.exports = (function() {
 	'use strict';
 	let importedHelpers = {};
 
-	if (fse.existsSync(u.getPath(settings.paths.src.helpers))) {
-		let paths = klawSync(u.getPath(settings.paths.src.helpers))
+	if (fse.existsSync(u.getAppPath(settings.paths.src.helpers))) {
+		let paths = klawSync(u.getAppPath(settings.paths.src.helpers))
 
 		paths.forEach(file => {
 			if (path.extname(file.path) === '.js') {
