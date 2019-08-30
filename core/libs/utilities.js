@@ -1,3 +1,4 @@
+var pkg = require('../../package.json');
 var path = require('path');
 var util = require('util');
 var args = process.argv;
@@ -30,7 +31,7 @@ module.exports = {
 	},
 	getPath: function (dir, filename) {
 		if (!dir) {
-			throw("A directory is not defined. Please, check if all paths are defined in your neutron.json file. Check https://github.com/vebersol/neutron/blob/master/neutron.json for more information.");
+			throw("A directory is not defined. Please, check if all paths are defined in your neutron.json file. Check https://github.com/vebersol/neutron/blob/" +pkg.version + "/neutron.json for more information.");
 		}
 
 		if (filename) {
@@ -41,7 +42,7 @@ module.exports = {
 	},
 	getAppPath: function (dir, filename) {
 		if (!dir) {
-			throw("A directory is not defined. Please, check if all paths are defined in your neutron.json file. Check https://github.com/vebersol/neutron/blob/master/neutron.json for more information.");
+			throw("A directory is not defined. Please, check if all paths are defined in your neutron.json file. Check https://github.com/vebersol/neutron/blob/" + pkg.version + "/neutron.json for more information.");
 		}
 
 		if (filename) {

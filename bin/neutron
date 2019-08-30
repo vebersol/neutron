@@ -107,6 +107,8 @@ const install = (options) => {
 	}
 }
 
+program.version(pkg.version);
+
 program
 	.command('run')
 	.description('Run neutron')
